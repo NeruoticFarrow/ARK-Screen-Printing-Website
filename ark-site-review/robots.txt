@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /thank-you
+Disallow: /thank-you.html
+Disallow: /service-areas-old-backup
+Disallow: /service-areas-old-backup.html
+
+Sitemap: https://arkscreenprinting.com/sitemap.xml

@@ -1,0 +1,272 @@
+/* Service Area Page Enhancements - Additional CSS */
+
+/* Trust Stack Section */
+.trust-stack {
+    background-color: #f4f4f2;
+    padding: 2rem 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.trust-items {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.trust-icon {
+    font-size: 2rem;
+    color: var(--accent-color);
+}
+
+.trust-content {
+    text-align: left;
+}
+
+.trust-rating {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--dark-color);
+    line-height: 1.2;
+}
+
+.trust-label {
+    font-size: 0.875rem;
+    color: var(--gray);
+    line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+    .trust-items {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .trust-item {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Services Section */
+.services-section {
+    padding: 4rem 0;
+    background-color: #ffffff;
+}
+
+.services-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.125rem;
+    color: var(--gray);
+    margin-bottom: 3rem;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.service-card {
+    background: #f8f8f8;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.service-icon {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    color: var(--dark-color);
+    margin-bottom: 1rem;
+}
+
+.service-card p {
+    color: var(--gray);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.btn-link {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.btn-link:hover {
+    color: var(--accent-color);
+}
+
+/* Reviews Section */
+.reviews-section {
+    padding: 4rem 0;
+    background-color: #f4f4f2;
+}
+
+.reviews-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 3rem;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.review-card {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.review-stars {
+    color: #ffc107;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.review-text {
+    color: var(--dark-color);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.review-author {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.review-author strong {
+    color: var(--dark-color);
+    font-size: 1rem;
+}
+
+.review-author span {
+    color: var(--gray);
+    font-size: 0.875rem;
+}
+
+/* Guarantee Banner */
+.guarantee-banner {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    padding: 3rem 0;
+    color: #ffffff;
+}
+
+.guarantee-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.guarantee-icon {
+    font-size: 4rem;
+    opacity: 0.9;
+}
+
+.guarantee-text {
+    flex: 1;
+    min-width: 250px;
+}
+
+.guarantee-text h3 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+}
+
+.guarantee-text p {
+    font-size: 1.125rem;
+    opacity: 0.95;
+    color: #ffffff;
+}
+
+.btn-white {
+    background-color: #ffffff;
+    color: var(--primary-color);
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-white:hover {
+    background-color: var(--light-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .guarantee-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .guarantee-icon {
+        font-size: 3rem;
+    }
+    
+    .guarantee-text h3 {
+        font-size: 1.5rem;
+    }
+    
+    .guarantee-text p {
+        font-size: 1rem;
+    }
+}
+
+/* Quote Form Section Adjustments */
+.quote-form {
+    padding: 4rem 0;
+    background-color: #ffffff;
+}
+
+.quote-form h2 {
+    font-size: 2.5rem;
+}
+
+/* Placeholder Image Styling */
+.hero-image img[src*="placeholder"] {
+    background: linear-gradient(135deg, #e0e0e0, #f0f0f0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+}

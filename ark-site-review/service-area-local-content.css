@@ -1,0 +1,80 @@
+/* Local Content Section for Service Area Pages */
+
+.local-content {
+    padding: 4rem 0;
+    background-color: #ffffff;
+}
+
+.local-content h2 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.local-content p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--dark-color);
+    margin-bottom: 1.5rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.local-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.highlight-item {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.highlight-item i {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.highlight-item h3 {
+    font-size: 1.5rem;
+    color: var(--dark-color);
+    margin-bottom: 0.75rem;
+}
+
+.highlight-item p {
+    font-size: 1rem;
+    color: var(--gray);
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .local-content {
+        padding: 3rem 0;
+    }
+    
+    .local-content h2 {
+        font-size: 2rem;
+    }
+    
+    .local-content p {
+        font-size: 1rem;
+    }
+    
+    .local-highlights {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .highlight-item i {
+        font-size: 2.5rem;
+    }
+    
+    .highlight-item h3 {
+        font-size: 1.25rem;
+    }
+}

@@ -1,0 +1,146 @@
+/* Local Content Section for Service Area Pages - Professional Card Design */
+
+.local-content {
+    padding: 4rem 0;
+    background-color: #ffffff;
+}
+
+.local-content .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.local-content h2 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.local-intro {
+    max-width: 900px;
+    margin: 0 auto 3rem;
+    text-align: center;
+}
+
+.local-intro p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--dark-color);
+    margin-bottom: 1.5rem;
+}
+
+/* Local Highlights Cards - Matching testimonial card style */
+.local-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.highlight-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(58, 124, 165, 0.1);
+    text-align: center;
+}
+
+.highlight-card:hover {
+    transform: translate3d(0, -8px, 0);
+    box-shadow: 0 30px 60px rgba(58, 124, 165, 0.15);
+    border-color: rgba(58, 124, 165, 0.3);
+}
+
+.highlight-card .icon-wrapper {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.highlight-card:hover .icon-wrapper {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.highlight-card .icon-wrapper i {
+    font-size: 2.5rem;
+    color: var(--white);
+}
+
+.highlight-card h3 {
+    font-size: 1.5rem;
+    color: var(--dark-color);
+    margin-bottom: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.highlight-card p {
+    font-size: 1rem;
+    color: var(--gray);
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .local-content {
+        padding: 3rem 0;
+    }
+    
+    .local-content h2 {
+        font-size: 2rem;
+    }
+    
+    .local-intro p {
+        font-size: 1rem;
+    }
+    
+    .local-highlights {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .highlight-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .highlight-card .icon-wrapper {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .highlight-card .icon-wrapper i {
+        font-size: 2rem;
+    }
+    
+    .highlight-card h3 {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .local-content {
+        padding: 2.5rem 0;
+    }
+    
+    .local-content h2 {
+        font-size: 1.75rem;
+    }
+    
+    .highlight-card {
+        padding: 1.5rem 1rem;
+    }
+}
