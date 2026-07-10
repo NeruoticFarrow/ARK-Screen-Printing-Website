@@ -880,14 +880,15 @@ footer {
     margin-bottom: 1rem;
 }
 
-/* Center the footer on desktop. The shared .container is max-width:100vw (full
-   width), which stretches the 5-column grid edge-to-edge and flings the logo
-   and "Get Started" CTA to the screen corners. Scoping a max-width to the
-   footer's container only (the global .container is left untouched) brings them
-   in to bookend the middle columns. Only constrains above 1200px, so the mobile
-   grid-collapse (<=992px) is unaffected; margin:0 auto is inherited. */
+/* Center the footer on desktop so the logo and "Get Started" CTA bookend the
+   middle columns instead of being flung to the screen corners. !important is
+   required to beat the later global reset ".container { max-width: none
+   !important; width: 100% !important; }" (~L3238) — without it, that rule wins
+   despite this selector being more specific. width:100% stays (from that reset)
+   but is now capped at 1200px. margin:0 auto (base .container) centers it. Only
+   constrains above 1200px, so the mobile grid-collapse (<=992px) is unaffected. */
 footer .container {
-    max-width: 1200px;
+    max-width: 1200px !important;
 }
 
 .footer-logo {
