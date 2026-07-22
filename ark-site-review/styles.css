@@ -182,6 +182,28 @@ img[width][height] {
     color: var(--dark-color);
 }
 
+/* Nav CTA pair: two compact buttons side by side, occupying roughly the
+   footprint of the old single nav button. Pink button matches logo text. */
+.nav-cta-group {
+    display: inline-flex;
+    gap: 0.35rem;
+    align-items: center;
+}
+.right-links .btn-nav {
+    padding: 0.45rem 0.8rem;
+    font-size: 0.8rem;
+    line-height: 1.15;
+    white-space: nowrap;
+}
+.right-links .btn-nav-pink {
+    background-color: #d97b90; /* pink from logo "Screen Printing Studio" text */
+    color: var(--dark-color);
+}
+.right-links .btn-nav-pink:hover {
+    background-color: #cf6a82;
+    color: var(--white);
+}
+
 .btn-large {
     padding: 1rem 2rem;
     font-size: 1.1rem;
