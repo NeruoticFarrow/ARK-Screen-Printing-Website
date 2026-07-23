@@ -4341,3 +4341,70 @@ body .quote-form .btn-primary:hover {
 .areas-strip-text a:hover {
     text-decoration: underline;
 }
+
+/* ============================================================
+   NAV RESPONSIVE FIX
+   The nav is a grid: [left-links] [logo] [right-links].
+   1fr columns default to min-width:auto, so the side columns
+   refused to shrink and squeezed the centre column instead —
+   which made the logo scale down at mid widths (769px-~1500px).
+   minmax(0,1fr) lets the side columns yield so the logo keeps
+   its natural size, and the nav now collapses to the hamburger
+   while there is still room for a full-size logo.
+   ============================================================ */
+.centered-nav {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+}
+
+/* Tighten the desktop nav before it runs out of room */
+@media (max-width: 1500px) {
+    .centered-nav {
+        gap: 1rem;
+    }
+    /* If the links still can't fit, wrap them rather than let them
+       overflow the column and collide with the logo. */
+    .left-links, .right-links {
+        flex-wrap: wrap;
+    }
+    .left-links li, .right-links li {
+        margin: 0 0.5rem;
+    }
+    .nav-links a {
+        font-size: 0.9rem;
+    }
+    .right-links .btn-nav {
+        padding: 0.4rem 0.7rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* Collapse to the hamburger while a full-size logo still fits */
+@media (max-width: 1200px) {
+    .left-links, .right-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem 0;
+    }
+    .left-links.active, .right-links.active {
+        display: flex;
+    }
+    .left-links li, .right-links li {
+        margin: 0.5rem 0;
+    }
+    .nav-links a {
+        font-size: 1rem;
+    }
+    .right-links .btn-nav {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+    .mobile-nav-toggle {
+        display: flex;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translate3d(0, -50%, 0);
+    }
+}
