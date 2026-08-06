@@ -5,3 +5,4 @@ Disallow: /service-areas-old-backup
 Disallow: /service-areas-old-backup.html
 
 Sitemap: https://arkscreenprinting.com/sitemap.xml
+Sitemap: https://arkscreenprinting.com/shop/sitemap.xml

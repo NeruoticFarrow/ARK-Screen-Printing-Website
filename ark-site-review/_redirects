@@ -1,0 +1,22 @@
+# ─── Storefront proxy ────────────────────────────────────────────────────────
+# Drop product pages are server-rendered by the ARK app on Railway, but they must
+# be SERVED from this apex domain, because that is where the site's search
+# authority lives. Every drop page's canonical tag already says
+# arkscreenprinting.com/shop/<slug>; these two rules are what make that URL real.
+#
+# Status 200 makes it a REWRITE, not a redirect: the visitor and Googlebot both
+# see the apex URL in the address bar and never learn the app subdomain exists.
+# A 301 here would hand the authority straight back to the subdomain and defeat
+# the point.
+#
+# The trailing "!" is force, which makes these win over any static file that might
+# later be added at /shop. Nothing shadows them today.
+#
+# Both lines are needed: "/shop/*" does not reliably match the bare "/shop", and
+# bare /shop is the storefront hub — the only URL in the drop sitemap and the
+# target of every drop page's breadcrumb.
+#
+# Rollback: delete this file. The pages keep working on the subdomain.
+
+/shop      https://design.arkscreenprinting.com/shop         200!
+/shop/*    https://design.arkscreenprinting.com/shop/:splat   200!
