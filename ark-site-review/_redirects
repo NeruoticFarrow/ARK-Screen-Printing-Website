@@ -16,7 +16,27 @@
 # bare /shop is the storefront hub — the only URL in the drop sitemap and the
 # target of every drop page's breadcrumb.
 #
+# ⚠️ ?arkSurface=apex is LOAD-BEARING — do not drop it when editing these rules.
+#
+# The app must know it is being served at the apex, because it withholds pages
+# from the index when it believes it is answering on the app subdomain. It used
+# to infer that from X-Forwarded-Host. That was measured against this very proxy
+# and it does not work: with the rewrite live and no marker, the apex answered
+#
+#     X-Ark-Surface: app     X-Robots-Tag: noindex
+#
+# — i.e. every product page at the apex would have been withheld from Google,
+# silently, with nothing visibly wrong in the HTML. Netlify's status-200 proxy
+# does not deliver a usable X-Forwarded-Host here.
+#
+# So the proxy tags its own requests instead. The app checks this marker first
+# and strips it from any redirect, so it never reaches a visitor's address bar.
+# Verify after any change to this file:
+#
+#     curl -sI https://arkscreenprinting.com/shop | grep -i x-ark-surface
+#     → apex  correct.   → app  STOP, pages will not be indexed.
+#
 # Rollback: delete this file. The pages keep working on the subdomain.
 
-/shop      https://design.arkscreenprinting.com/shop         200!
-/shop/*    https://design.arkscreenprinting.com/shop/:splat   200!
+/shop      https://design.arkscreenprinting.com/shop?arkSurface=apex         200!
+/shop/*    https://design.arkscreenprinting.com/shop/:splat?arkSurface=apex   200!
