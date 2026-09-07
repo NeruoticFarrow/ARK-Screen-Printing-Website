@@ -276,7 +276,7 @@
 </div>
 <div class="quote-form-container" style="min-height: 700px;">
 <iframe
-  src="https://arkquote-spfx98c9.manus.space/embed"
+  src="https://ark-quote-form-production.up.railway.app/embed"
   width="100%"
   height="700"
   frameborder="0"
@@ -368,7 +368,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var params = new URLSearchParams(window.location.search);
     var gclid = params.get('gclid');
     if (gclid) {
-      var iframes = document.querySelectorAll('iframe[src*="arkquote-spfx98c9.manus.space"]');
+      var iframes = document.querySelectorAll('iframe[src*="/embed"]');
       iframes.forEach(function(iframe) {
         var src = iframe.src;
         var sep = src.indexOf('?') !== -1 ? '&' : '?';
