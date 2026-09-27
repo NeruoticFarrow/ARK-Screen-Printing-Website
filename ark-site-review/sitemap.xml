@@ -81,7 +81,7 @@
   </url>
   <url>
     <loc>https://arkscreenprinting.com/service-areas</loc>
-    <lastmod>2025-10-21</lastmod>
+    <lastmod>2026-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -159,7 +159,7 @@
   </url>
   <url>
     <loc>https://arkscreenprinting.com/screen-printing-fountain</loc>
-    <lastmod>2025-10-21</lastmod>
+    <lastmod>2026-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -195,7 +195,7 @@
   </url>
   <url>
     <loc>https://arkscreenprinting.com/screen-printing-monument</loc>
-    <lastmod>2025-10-21</lastmod>
+    <lastmod>2026-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -231,7 +231,7 @@
   </url>
   <url>
     <loc>https://arkscreenprinting.com/screen-printing-security-widefield</loc>
-    <lastmod>2025-10-21</lastmod>
+    <lastmod>2026-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -258,5 +258,53 @@
     <lastmod>2025-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://arkscreenprinting.com/screen-printing-gleneagle</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arkscreenprinting.com/screen-printing-flying-horse</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arkscreenprinting.com/screen-printing-northgate-interquest</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arkscreenprinting.com/screen-printing-briargate</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arkscreenprinting.com/screen-printing-downtown-colorado-springs</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arkscreenprinting.com/screen-printing-old-colorado-city</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arkscreenprinting.com/screen-printing-broadmoor-colorado-springs</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://arkscreenprinting.com/screen-printing-ivywild</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
