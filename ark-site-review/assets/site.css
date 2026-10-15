@@ -637,3 +637,22 @@ a.rating-line:hover{text-decoration:underline;color:var(--navy)}
 @media (prefers-reduced-motion:reduce){.rt-track{animation:none!important}}
 .ways{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
 .ways .checklist{margin-bottom:22px}
+/* Starwall live Google reviews (Reviews page). Its stylesheet loads after
+ours, so every rule is scoped a class deeper; its buttons and brand colour
+use !important, so those rules do too. The page's score tile already shows
+the rating and the footer the phone, so the widget's copies are hidden. */
+.reviews-embed .reviews-widget{--widget-primary-color:var(--blue)!important;--widget-primary-hover:var(--blue-deep)!important;--widget-primary-focus:var(--blue)!important;--widget-text-color:var(--ink);--widget-muted-color:var(--muted);--widget-subtle-color:var(--line);--widget-surface-color:var(--parchment);--widget-surface-muted:var(--surface);--widget-border-color:var(--hairline);--widget-border-strong:var(--line);--widget-star-color:var(--brown);--widget-card-shadow:none;--widget-card-shadow-hover:var(--lift);--widget-focus-ring:rgba(0,112,186,.28)}
+.reviews-embed .reviews-widget .reviews-widget__rating,.reviews-embed .reviews-widget .reviews-widget__business-info{display:none}
+.reviews-embed .reviews-widget .reviews-widget__review{background:var(--parchment);border:1px solid var(--hairline);border-radius:18px;padding:16px 18px;box-shadow:none}
+.reviews-embed .reviews-widget .reviews-widget__author-name{font-weight:600;font-size:.9375rem;color:var(--ink)}
+.reviews-embed .reviews-widget .reviews-widget__date{font-size:.8125rem;color:var(--muted)}
+.reviews-embed .reviews-widget .reviews-widget__review-text{font-size:.9375rem;line-height:1.5;color:var(--ink);margin-top:6px;padding-left:0;border-left:0;-webkit-line-clamp:4}
+.reviews-embed .reviews-widget:not(.reviews-widget--carousel) .reviews-widget__review-text{display:block;-webkit-line-clamp:unset;overflow:visible}
+.reviews-embed .reviews-widget .reviews-widget__source-link{color:var(--blue);font-size:.8125rem;font-weight:600}
+.reviews-embed .reviews-widget .reviews-widget__leave-review-btn{background:transparent!important;color:var(--ink)!important;border:1px solid var(--line)!important;border-radius:var(--pill)!important;padding:11px 20px!important;font-weight:600!important}
+.reviews-embed .reviews-widget .reviews-widget__leave-review-btn:hover{background:var(--parchment)!important;border-color:var(--ink)!important}
+.reviews-embed .reviews-widget .reviews-widget__carousel-btn{background:var(--surface)!important;color:var(--ink)!important;border:1px solid var(--hairline)!important;width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;max-width:40px!important;max-height:40px!important}
+.reviews-embed .reviews-widget .reviews-widget__carousel-btn svg{color:var(--ink)!important;width:20px!important;height:20px!important}
+.reviews-embed .reviews-widget .reviews-widget__carousel-btn:not(:disabled):hover{background:var(--parchment)!important;border-color:var(--ink)!important}
+.reviews-embed .reviews-widget .reviews-widget__carousel-btn:disabled{background:var(--surface)!important;border-color:var(--hairline)!important;opacity:.4!important}
+.reviews-embed .reviews-widget a:focus-visible,.reviews-embed .reviews-widget button:focus-visible{outline:2px solid var(--blue)!important;outline-offset:2px!important}
