@@ -2,7 +2,7 @@
   "file": "dtf-vs-screen-printing.html",
   "slug": "dtf-vs-screen-printing",
   "title": "DTF vs Screen Printing | ARK Screen Printing",
-  "description": "DTF vs screen printing: under 6 shirts, DTF wins on price and flexibility. 6 or more, screen printing is better value. ARK does both in-house.",
+  "description": "DTF vs screen printing: under 24 shirts, DTF wins on price and flexibility. 24 or more, screen printing is better value. ARK does both in-house.",
   "canonical": "https://arkscreenprinting.com/dtf-vs-screen-printing",
   "robots": null,
   "jsonLd": [
@@ -34,7 +34,7 @@
     {
       "kind": "quick-answer",
       "variant": null,
-      "html": "<p>DTF vs screen printing: under 6 shirts, DTF is the right choice — no setup fees, no minimums, full color. For 6 or more, screen printing delivers better per-shirt value and durability. At ARK, we do both in-house.</p>",
+      "html": "<p>DTF vs screen printing: under 24 shirts, DTF is the right choice — no setup fees, no minimums, full color. For 24 or more, screen printing delivers better per-shirt value and durability. At ARK, we do both in-house.</p>",
       "faq": []
     },
     {
@@ -46,13 +46,13 @@
     {
       "kind": "compare-section",
       "variant": null,
-      "html": "<h2>DTF vs. Screen Printing: Side by Side</h2> <table> <thead> <tr> <th>Factor</th> <th>DTF Printing</th> <th>Screen Printing</th> </tr> </thead> <tbody> <tr> <td>Minimum order</td> <td>1 shirt — no minimum</td> <td>6+ shirts at ARK</td> </tr> <tr> <td>Setup cost</td> <td>None</td> <td>Screen fees per color (amortized across order)</td> </tr> <tr> <td>Color complexity</td> <td>Unlimited — gradients, photos, fine detail</td> <td>Best for 1–6 solid colors</td> </tr> <tr> <td>Best for</td> <td>Small orders, complex designs, samples</td> <td>Bulk orders, simpler designs, teams &amp; events</td> </tr> <tr> <td>Durability</td> <td>High — flexible, wash-resistant</td> <td>Very high — ink bonds with fabric fibers</td> </tr> <tr> <td>Turnaround (at ARK)</td> <td>3–5 business days</td> <td>7–14 business days</td> </tr> <tr> <td>Ships nationally</td> <td>Yes</td> <td>Yes</td> </tr> </tbody> </table>",
+      "html": "<h2>DTF vs. Screen Printing: Side by Side</h2> <table> <thead> <tr> <th>Factor</th> <th>DTF Printing</th> <th>Screen Printing</th> </tr> </thead> <tbody> <tr> <td>Minimum order</td> <td>1 shirt — no minimum</td> <td>24+ shirts at ARK</td> </tr> <tr> <td>Setup cost</td> <td>None</td> <td>Screen fees per color (amortized across order)</td> </tr> <tr> <td>Color complexity</td> <td>Unlimited — gradients, photos, fine detail</td> <td>Best for 1–6 solid colors</td> </tr> <tr> <td>Best for</td> <td>Small orders, complex designs, samples</td> <td>Bulk orders, simpler designs, teams &amp; events</td> </tr> <tr> <td>Durability</td> <td>High — flexible, wash-resistant</td> <td>Very high — ink bonds with fabric fibers</td> </tr> <tr> <td>Turnaround (at ARK)</td> <td>3–5 business days</td> <td>Most orders 5–7 business days</td> </tr> <tr> <td>Ships nationally</td> <td>Yes</td> <td>Yes</td> </tr> </tbody> </table>",
       "faq": []
     },
     {
       "kind": "compare-section",
       "variant": null,
-      "html": "<article> <article> <h3>Choose DTF When…</h3> <ul> <li>You need fewer than 6 shirts</li> <li>Your design has many colors, gradients, or photographic elements</li> <li>You want a prototype before committing to a larger run</li> <li>It's a one-time event (birthday, family reunion, small team)</li> <li>You need a single custom shirt</li> <li>You want to test a design before bulk ordering</li> </ul> </article> <article> <h3>Choose Screen Printing When…</h3> <ul> <li>You're ordering 6 or more shirts</li> <li>Your design uses 1–4 solid colors</li> <li>You want maximum cost-efficiency on bulk</li> <li>You need team uniforms, event shirts, or merch runs</li> <li>Long-term durability is a top priority</li> <li>You're ordering the same design repeatedly</li> </ul> </article> </article>",
+      "html": "<article> <article> <h3>Choose DTF When…</h3> <ul> <li>You need fewer than 24 shirts</li> <li>Your design has many colors, gradients, or photographic elements</li> <li>You want a prototype before committing to a larger run</li> <li>It's a one-time event (birthday, family reunion, small team)</li> <li>You need a single custom shirt</li> <li>You want to test a design before bulk ordering</li> </ul> </article> <article> <h3>Choose Screen Printing When…</h3> <ul> <li>You're ordering 24 or more shirts</li> <li>Your design uses 1–4 solid colors</li> <li>You want maximum cost-efficiency on bulk</li> <li>You need team uniforms, event shirts, or merch runs</li> <li>Long-term durability is a top priority</li> <li>You're ordering the same design repeatedly</li> </ul> </article> </article>",
       "faq": []
     },
     {

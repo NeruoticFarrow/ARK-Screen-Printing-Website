@@ -50,7 +50,7 @@
           "name": "What is the minimum order for DTF printing?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "There is no minimum order for DTF printing at ARK. We print as few as 1 shirt. DTF is ideal for orders of 1 to 5 shirts."
+            "text": "There is no minimum order for DTF printing at ARK. We print as few as 1 shirt. DTF is ideal for orders of 1 to 23 shirts."
           }
         },
         {
@@ -74,7 +74,7 @@
           "name": "Is DTF printing better than screen printing?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "DTF and screen printing each have a sweet spot. DTF is best for small orders (under 6 shirts) and full-color designs. Screen printing is better value for orders of 6 or more shirts. ARK does both in-house."
+            "text": "DTF and screen printing each have a sweet spot. DTF is best for small orders (under 24 shirts) and full-color designs. Screen printing is better value for orders of 24 or more shirts. ARK does both in-house."
           }
         }
       ]
@@ -92,7 +92,7 @@
     {
       "kind": "dtf-section",
       "variant": null,
-      "html": "<p>DTF printing Colorado Springs — no minimums. Need just 1 shirt? ARK does Direct to Film printing in-house. Small orders, fast turnaround, full color.</p> <h2>DTF Printing in Colorado Springs</h2> <p>Most print shops won't touch an order under 12 shirts — the setup cost makes it impractical. At ARK, we use DTF printing for small orders, which means <em>no minimums, no setup fees, and no compromises on quality</em>.</p> <p>DTF stands for Direct to Film. Your design is printed onto a special transfer film, then heat-pressed directly onto the garment. The result is a vibrant, full-color print with crisp detail that holds up wash after wash — and it works on just about any fabric.</p> <p>Whether you need one custom shirt for a birthday, five jerseys for a small team, or a quick sample before placing a larger order, ARK has you covered in Colorado Springs.</p> <article> <h4>No Minimum Order</h4> <p>Print as few as 1 shirt. No setup fees, no minimums.</p> </article> <article> <h4>Full Color Prints</h4> <p>Unlimited colors, gradients, and photographic designs.</p> </article> <article> <h4>Fast Turnaround</h4> <p>3–5 business days from artwork approval.</p> </article>",
+      "html": "<p>DTF printing Colorado Springs — no minimums. Need just 1 shirt? ARK does Direct to Film printing in-house. Small orders, fast turnaround, full color.</p> <h2>DTF Printing in Colorado Springs</h2> <p>Most print shops won't touch a small order — the setup cost makes it impractical. At ARK, we use DTF printing for small orders, which means <em>no minimums, no setup fees, and no compromises on quality</em>.</p> <p>DTF stands for Direct to Film. Your design is printed onto a special transfer film, then heat-pressed directly onto the garment. The result is a vibrant, full-color print with crisp detail that holds up wash after wash — and it works on just about any fabric.</p> <p>Whether you need one custom shirt for a birthday, five jerseys for a small team, or a quick sample before placing a larger order, ARK has you covered in Colorado Springs.</p> <article> <h4>No Minimum Order</h4> <p>Print as few as 1 shirt. No setup fees, no minimums.</p> </article> <article> <h4>Full Color Prints</h4> <p>Unlimited colors, gradients, and photographic designs.</p> </article> <article> <h4>Fast Turnaround</h4> <p>3–5 business days from artwork approval.</p> </article>",
       "faq": []
     },
     {
@@ -104,7 +104,7 @@
     {
       "kind": "dtf-section",
       "variant": null,
-      "html": "<h3>DTF vs. Screen Printing: When We Use Each</h3> <p>At ARK, we use the right method for your order size so you always get the best value:</p> <ul> <li><strong>1–5 shirts → DTF printing.</strong> No setup cost makes DTF the clear choice for small orders.</li> <li><strong>6+ shirts → screen printing.</strong> At higher quantities, screen printing's per-shirt cost drops significantly and delivers exceptional durability.</li> </ul> <p>You don't have to figure this out yourself — just tell us your quantity and we'll recommend the right method and give you a quote.</p> <p>Want the full breakdown? Read our guide: <a href=\"/dtf-vs-screen-printing\">DTF vs. Screen Printing — Which Is Right for Your Order?</a></p>",
+      "html": "<h3>DTF vs. Screen Printing: When We Use Each</h3> <p>At ARK, we use the right method for your order size so you always get the best value:</p> <ul> <li><strong>1–23 shirts → DTF printing.</strong> No setup cost makes DTF the clear choice for small orders.</li> <li><strong>24+ shirts → screen printing.</strong> At higher quantities, screen printing's per-shirt cost drops significantly and delivers exceptional durability.</li> </ul> <p>You don't have to figure this out yourself — just tell us your quantity and we'll recommend the right method and give you a quote.</p> <p>Want the full breakdown? Read our guide: <a href=\"/dtf-vs-screen-printing\">DTF vs. Screen Printing — Which Is Right for Your Order?</a></p>",
       "faq": []
     },
     {
@@ -116,7 +116,7 @@
     {
       "kind": "dtf-section",
       "variant": null,
-      "html": "<h3>Common Questions About DTF Printing</h3> <article> <h4>What is the minimum order for DTF printing?</h4> <p>There is no minimum. We print as few as 1 shirt. DTF is specifically designed to be cost-effective at any quantity.</p> </article> <article> <h4>How long does DTF printing take?</h4> <p>Standard turnaround is 3–5 business days from artwork approval. Rush services are available — contact us to discuss your timeline.</p> </article> <article> <h4>What file formats do you need?</h4> <p>We prefer vector files (AI, EPS, PDF) for best results, but we can work with high-resolution PNG or JPG files as well. When in doubt, send us what you have and we'll let you know.</p> </article> <article> <h4>Does ARK ship DTF orders?</h4> <p>Yes — we ship orders nationwide. Local Colorado Springs customers are also welcome to pick up in-shop at 1755 Telstar Dr, Suite 300.</p> </article>",
+      "html": "<h3>Common Questions About DTF Printing</h3> <article> <h4>What is the minimum order for DTF printing?</h4> <p>There is no minimum. We print as few as 1 shirt. DTF is specifically designed to be cost-effective at any quantity.</p> </article> <article> <h4>How long does DTF printing take?</h4> <p>Standard turnaround is 3–5 business days from artwork approval. Rush services are available — contact us to discuss your timeline.</p> </article> <article> <h4>What file formats do you need?</h4> <p>We prefer vector files (AI, EPS, PDF) for best results, but we can work with high-resolution PNG or JPG files as well. When in doubt, send us what you have and we'll let you know.</p> </article> <article> <h4>Does ARK ship DTF orders?</h4> <p>Yes — we ship orders nationwide. Local pickup is also available in Colorado Springs.</p> </article>",
       "faq": []
     }
   ],

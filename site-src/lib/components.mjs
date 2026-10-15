@@ -35,7 +35,7 @@ export function textLink(href, label, placement) {
 /** The primary action: the quote form (on the page when it has one). */
 export function quoteButton(placement, o = {}) {
   const href = o.onPage ? "#quote" : "/get-a-quote#quote";
-  return `<a class="btn ${o.onDark ? "btn--accent" : "btn--primary"} btn--lg" href="${href}" data-cta="${esc(placement)}">${esc(o.label ?? "Get an instant quote")} ${icon("arrowRight")}</a>`;
+  return `<a class="btn ${o.onDark ? "btn--accent" : "btn--primary"} btn--lg" href="${href}" data-cta="${esc(placement)}">${esc(o.label ?? "Get an Instant Quote")} ${icon("arrowRight")}</a>`;
 }
 
 export function callButton(placement, o = {}) {
@@ -51,7 +51,16 @@ export function reassure(lines) {
 }
 
 /** The risk reducers under every primary CTA — each one true (facts.mjs). */
-export const REASSURANCE = ["No minimum order", `A reply within ${FACTS.replyWithin}`, "You approve a proof before we print"];
+export const REASSURANCE = ["No minimum order", `A reply within ${FACTS.replyWithin}, 7:30am–7pm`, "You approve a proof before we print"];
+
+/** A compact call to action placed between sections (strategic repeats of the
+ *  one action: after proof, after the offer, after the page's own content). */
+export function ctaBand(placement, o = {}) {
+  return `<section class="section--tight" aria-label="Get an Instant Quote"><div class="container"><div class="cta-band" data-appear>
+  <p><b>${esc(o.title ?? "Ready when you are.")}</b> ${esc(o.text ?? `Get a price in about two minutes — we reply within ${FACTS.replyWithin} (${FACTS.replyHours}).`)}</p>
+  <div class="cta-band-actions">${quoteButton(placement, { onPage: o.onPage })}<a class="text-link" href="${esc(SHOP.phoneHref)}" data-cta="${esc(placement)}_call">${icon("phone")}Call or text ${esc(SHOP.phoneDisplay)}</a></div>
+</div></div></section>`;
+}
 
 export function stars(className = "stars", value = GOOGLE.rating) {
   return `<span class="${className}" aria-hidden="true">${Array.from({ length: Math.round(value) }, () => icon("starFill")).join("")}</span>`;
@@ -97,9 +106,9 @@ function orderCard() {
   <span class="oc-title">How your order goes <span class="badge badge--sky">4 steps</span></span>
   <ol>
     <li>${icon("chatCircleText")}<span><b>Quote</b> — about two minutes</span></li>
-    <li>${icon("phone")}<span><b>We confirm</b> — within ${esc(FACTS.replyWithin)}</span></li>
+    <li>${icon("phone")}<span><b>We reply</b> — within 10 min, 7:30am–7pm</span></li>
     <li>${icon("sealCheck")}<span><b>Proof</b> — you approve it first</span></li>
-    <li>${icon("printer")}<span><b>Printed here</b> — pick up or we ship</span></li>
+    <li>${icon("printer")}<span><b>Printed here</b> — local pickup or we ship</span></li>
   </ol>
 </div>`;
 }
@@ -122,7 +131,7 @@ export function heroArt() {
   <div class="hero-tile on-dark">
     ${SEAL}
     <div class="hero-photo">${picture(PHOTOS.press.src, { alt: PHOTOS.press.alt, sizes: "(min-width: 960px) 380px, 80vw", priority: true })}</div>
-    <span class="chip chip--tan hero-tag">${icon("printer")}On our press in ${esc(SHOP.city)}</span>
+    <span class="chip chip--tan hero-tag">${icon("printer")}On our press</span>
   </div>
   <div class="collage collage--front" aria-hidden="true">
     ${doodle("strokes", "cl-strokes", layer(0.18, 7))}
@@ -137,18 +146,18 @@ export function heroArt() {
 /** The rules, stated plainly with the reason (navy tile, big numbers). */
 export function rulesTile(id = "rules-title", o = {}) {
   const stats = [
-    { figure: "1+", label: "pieces: no minimum order (DTF, full colour)" },
-    { figure: `${FACTS.screenFrom}+`, label: "pieces: screen printing available" },
-    { figure: `${FACTS.screenBestValueFrom}+`, label: "pieces: screen printing's best value" },
+    { figure: "1+", label: "shirts: no minimum order (DTF, full colour)" },
+    { figure: `${FACTS.screenFrom}+`, label: "shirts: screen printing" },
     { figure: FACTS.turnaround.screen.replace(" business days", ""), label: "business days: most screen-print orders" },
+    { figure: "10 min", label: "a reply, 7:30am–7pm every day" },
   ];
   return `<div class="tile tile--navy on-dark" data-appear>
   ${SEAL}
   <div class="rule">
     <div>
       <h2 id="${esc(id)}" class="h2">${accent(o.title ?? "One shirt or a thousand — *no* minimum.")}</h2>
-      <p>Screen printing needs a screen made for each ink colour, so it pays off as the quantity grows. DTF needs no screens, so it's the better buy for a handful of shirts or full-colour art. Tell us your quantity and we'll recommend the cheaper method — you don't need to know which one you want.</p>
-      <div class="cta-row">${o.onPage ? `<a class="btn btn--accent" href="#quote" data-cta="rules_quote">Get a quote ${icon("arrowRight")}</a>` : `<a class="btn btn--accent" href="/get-a-quote#quote" data-cta="rules_quote">Get a quote ${icon("arrowRight")}</a>`}${textLink("/dtf-vs-screen-printing", "DTF vs screen printing", "rules_compare")}</div>
+      <p>Screen printing needs a screen made for each ink colour, so it starts at ${FACTS.screenFrom} shirts — that's where it pays off. Under ${FACTS.screenFrom}, we print with DTF: no screens, no setup, full colour, even for a single shirt. Tell us your quantity and we'll recommend the right method — you don't need to know which one you want.</p>
+      <div class="cta-row">${quoteButton("rules_quote", { onDark: true, onPage: o.onPage })}${textLink("/dtf-vs-screen-printing", "DTF vs screen printing", "rules_compare")}</div>
     </div>
     <ul class="stats">${stats.map((s) => `<li><span class="stat-figure">${esc(s.figure)}</span><span class="stat-label">${esc(s.label)}</span></li>`).join("")}</ul>
   </div>
@@ -160,9 +169,9 @@ export function rulesTile(id = "rules-title", o = {}) {
  *  we invoice and print. The proof comes before anything is printed. */
 export const PROCESS = [
   { title: "Request your quote", text: "Tell us the garment, the quantity, where it's printed and the date you need it. The quote form takes about two minutes — or call or text and talk it through." },
-  { title: "We confirm the details", text: `Within ${FACTS.replyWithin} we call — or email if we miss you — to confirm sizes, artwork and timing.` },
+  { title: "We reply fast", text: `We call or text within ${FACTS.replyWithin} (${FACTS.replyHours}) — or email if we miss you — to confirm sizes, artwork and timing.` },
   { title: "Approve your proof", text: "You see your design on the garment, with the price, before anything is printed." },
-  { title: "Printed here, then it's yours", text: `Printed in our ${SHOP.city} shop — most screen-print orders in ${FACTS.turnaround.screen}. Pick up on ${SHOP.street.replace(/, Suite.*/, "")} or we ship.` },
+  { title: "Printed here, then it's yours", text: `Printed in our ${SHOP.city} shop — most screen-print orders in ${FACTS.turnaround.screen}. ${FACTS.pickup}, or we ship anywhere in the US.` },
 ];
 
 export function stepsList(steps = PROCESS) {
@@ -192,13 +201,13 @@ export function proofSection(id, title, o = {}) {
     <span class="label">${esc(SHOP.name)} on Google</span>
     <span class="score-figure">${GOOGLE.rating.toFixed(1)}</span>
     ${stars()}
-    <p>From ${GOOGLE.count} Google reviews of the shop. Every one is a real customer.${GOOGLE.live ? " Synced from Google each week." : ""}</p>
+    <p>From ${GOOGLE.count} Google reviews of the shop, as of ${new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${GOOGLE.checked}T00:00:00Z`))}.${GOOGLE.live ? " Synced from Google each week." : ""}</p>
     <a class="btn btn--ghost" href="${esc(GOOGLE.url)}" target="_blank" rel="noopener" data-cta="reviews_google">Read them on Google ${icon("arrowUpRight")}<span class="visually-hidden"> (opens Google)</span></a>
   </div>
   <div>
-    <h2 id="${esc(id)}" class="h3" style="margin-bottom:18px">${accent(title)}</h2>
+    <h2 id="${esc(id)}" class="h3" style="margin-bottom:18px">${accent(title)}</h2>${o.note ? `<p class="muted" style="margin:-8px 0 16px">${esc(o.note)}</p>` : ""}
     ${reviewsGrid(o.limit ?? 3)}
-    <p style="margin-top:18px">${textLink("/testimonials", "All reviews", "reviews_all")}</p>
+    <div class="cta-row">${quoteButton("reviews_quote", { onPage: o.onPage })}${textLink("/testimonials", "All reviews", "reviews_all")}</div>
   </div>
 </div>`;
 }
@@ -209,13 +218,13 @@ export function ownerSection(id, o = {}) {
   <div>
     <p class="kicker">Meet the printer</p>
     <h2 id="${esc(id)}" class="h2">${accent(o.title ?? "You'll talk to the person who *prints* it.")}</h2>
-    <p class="lead" style="margin-top:18px">ARK is a small, owner-operated shop on ${esc(SHOP.street.replace(/, Suite.*/, ""))}. ${esc(SHOP.owner)} quotes your job, checks your art, pulls the prints and answers the phone — since ${SHOP.since}.</p>
+    <p class="lead" style="margin-top:18px">ARK is a small, owner-operated shop in ${esc(SHOP.city)}. ${esc(SHOP.owner)} quotes your job, checks your art, pulls the prints and answers the phone — since ${SHOP.since}.</p>
     <ul class="checklist" style="margin-top:22px">
       <li>${icon("sealCheck")}<span><b>Licensed and insured</b><small>A fully licensed Colorado business with liability insurance.</small></span></li>
       <li>${icon("palette")}<span><b>Premium inks</b><small>${esc(FACTS.inks)}.</small></span></li>
       <li>${icon("shieldCheck")}<span><b>Satisfaction guarantee</b><small>${esc(FACTS.guarantee)}</small></span></li>
     </ul>
-    ${o.more === false ? "" : `<p style="margin-top:22px">${textLink("/about", "The ARK story", "owner_about")}</p>`}
+    <div class="cta-row">${quoteButton("owner_quote", { onPage: o.onPage })}${o.more === false ? "" : textLink("/about", "The ARK story", "owner_about")}</div>
   </div>
 </div>`;
 }
@@ -247,7 +256,7 @@ export function galleryGrid(items, o = {}) {
     const pic = picture(src, { alt, sizes: "(min-width: 900px) 400px, 50vw" });
     const full = imageInfo(src)?.variants?.at(-1)?.file ?? src;
     return `<li data-appear>${o.lightbox ? `<a href="${esc(full)}" data-lightbox data-alt="${esc(alt)}">${pic}</a>` : pic}</li>`;
-  }).join("")}</ul>${o.lightbox ? `<dialog class="lightbox" data-lightbox-dialog aria-label="Photo"><img src="" alt=""><div class="lightbox-bar"><span data-lightbox-caption></span><button type="button" data-lightbox-close>${icon("x")}<span class="visually-hidden">Close</span></button></div></dialog>` : ""}`;
+  }).join("")}</ul>${o.lightbox && o.dialog !== false ? `<dialog class="lightbox" data-lightbox-dialog aria-label="Photo"><img src="" alt=""><div class="lightbox-bar"><span data-lightbox-caption></span><button type="button" data-lightbox-close>${icon("x")}<span class="visually-hidden">Close</span></button></div></dialog>` : ""}`;
 }
 
 /** Who it's for, as a moving strip: read once (the repeat is aria-hidden),
@@ -283,13 +292,13 @@ export function quoteBand(o = {}) {
   <div class="quote-band">
     <div class="quote-next">
       <h2 id="quote-title" class="h2">${accent(o.title ?? "Get your *quote*.")}</h2>
-      <p class="lead">${esc(o.intro ?? `Tell us the garment, the quantity, your artwork and your date. We'll confirm the details within ${FACTS.replyWithin}, and you approve a proof before anything prints.`)}</p>
+      <p class="lead">${esc(o.intro ?? `Tell us the garment, the quantity, your artwork and your date. We reply within ${FACTS.replyWithin} (${FACTS.replyHours}), and you approve a proof before anything prints.`)}</p>
       <ul class="checklist">
-        <li>${icon("check")}<span><b>No minimum order</b><small>One shirt or a thousand.</small></span></li>
+        <li>${icon("check")}<span><b>No minimum order</b><small>One shirt or a thousand — screen printing from ${FACTS.screenFrom}.</small></span></li>
         <li>${icon("sealCheck")}<span><b>A proof before anything prints</b><small>You approve the mockup and the price first.</small></span></li>
-        <li>${icon("printer")}<span><b>Printed in our ${esc(SHOP.city)} shop</b><small>Pick up on ${esc(SHOP.street.replace(/, Suite.*/, ""))} or we ship.</small></span></li>
+        <li>${icon("printer")}<span><b>Printed in our ${esc(SHOP.city)} shop</b><small>${esc(FACTS.pickup)}, or we ship anywhere in the US.</small></span></li>
       </ul>
-      <div class="quote-alt"><b>Rather talk it through?</b><a href="${esc(SHOP.phoneHref)}" data-cta="quote_call">Call</a> or <a href="${esc(SHOP.smsHref)}" data-cta="quote_text">text</a> ${esc(SHOP.phoneDisplay)} — ${esc(SHOP.hours)}.</div>
+      <div class="quote-alt"><b>Rather talk it through?</b><a href="${esc(SHOP.phoneHref)}" data-cta="quote_call">Call</a> or <a href="${esc(SHOP.smsHref)}" data-cta="quote_text">text</a> ${esc(SHOP.phoneDisplay)} — ${esc(SHOP.hours)}. We reply within ${esc(FACTS.replyWithin)}.</div>
     </div>
     <div class="quote-frame"><iframe src="${esc(SITE.quoteEmbed)}" title="ARK quote form" data-quote-frame ${o.eager ? "" : 'loading="lazy" '}allow="clipboard-write"></iframe></div>
   </div>

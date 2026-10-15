@@ -1,5 +1,5 @@
 import { SHOP } from "../lib/facts.mjs";
-import { areasList, localStrip, proofSection, quoteBand, rulesTile, sectionHead, stepsList, textLink } from "../lib/components.mjs";
+import { areasList, ctaBand, localStrip, proofSection, quoteBand, rulesTile, sectionHead, stepsList, textLink } from "../lib/components.mjs";
 import { abs, migratedBlocks, pageHero, pageJsonLd } from "./parts.mjs";
 
 // Local landing pages (knowledge base chapter 25 §11.3, 12 §4.5): the page's
@@ -26,7 +26,7 @@ export function renderLocal(ctx) {
   ${sectionHead("how-title", "How an order *works*.", `From your quote to your door in ${area.name} — and you see the proof first.`)}
   ${stepsList()}
 </div></section>`;
-  const proof = `<section class="section" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What customers *say*.")}</div></section>`;
+  const proof = `<section class="section" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What customers *say*.", { onPage: true })}</div></section>`;
   const nearby = `<section class="section section--sand" aria-labelledby="nearby-title"><div class="container">
   ${sectionHead("nearby-title", "Nearby *areas*.", `All printed in our ${SHOP.city} shop.`, { aside: textLink("/service-areas", "All service areas", "nearby_all") })}
   ${areasList(family, page.slug)}
@@ -44,6 +44,6 @@ export function renderLocal(ctx) {
     hasQuote: true,
     page: page.slug,
     jsonLd: pageJsonLd(page),
-    main: hero + strip + blocks + rules + how + proof + nearby + quote,
+    main: hero + strip + blocks + ctaBand("after_content", { onPage: true, title: `Printing for ${area.name}?` }) + rules + how + proof + nearby + quote,
   };
 }

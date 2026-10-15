@@ -304,7 +304,7 @@ main{overflow-x:clip}
 .gallery{display:grid;gap:14px;grid-template-columns:repeat(2,minmax(0,1fr));padding:0;list-style:none}
 @media (min-width:900px){.gallery{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .gallery li{border-radius:var(--r-lg);overflow:hidden;background:var(--sand)}
-.gallery img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.gallery img{width:100%}
 /* Proof: the shop's Google rating, reviews, contact. */
 .proof{display:grid;gap:20px}
 @media (min-width:960px){.proof{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);align-items:stretch}}
@@ -474,7 +474,7 @@ it on outside click and Escape). */
 .card-grid article:nth-child(4n+3){border-top:4px solid var(--blue)}
 .card-grid article:nth-child(4n+4){border-top:4px solid var(--navy)}
 .img-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:24px}
-.img-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r-lg)}
+.img-grid img{width:100%;border-radius:var(--r-lg)}
 .block-split{display:grid;gap:36px;align-items:start}
 @media (min-width:960px){.block-split{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:56px}}
 .aside-stack{display:grid;gap:16px}
@@ -547,3 +547,46 @@ it on outside click and Escape). */
 /* The quick-answer callout (comparison and hub pages). */
 .callout{padding:22px 26px;border-radius:var(--r-lg);background:var(--sky);color:var(--ink)}
 .callout p{font-size:1.0625rem}
+/* Spacing: about a third less, and no doubled gap where two neighbouring
+sections share a ground. */
+:root{--section:clamp(40px,5vw,72px)}
+.section--tight{padding-block:clamp(14px,2.2vw,24px)}
+.section--tight + .section--tight{padding-top:0}
+.section:not(.section--sand) + .section:not(.section--sand),.section--sand + .section--sand{padding-top:0}
+.hero{padding-block:clamp(20px,3.5vw,44px) clamp(28px,4vw,56px)}
+.page-hero{padding-block:clamp(22px,3.5vw,44px) clamp(18px,2.5vw,32px)}
+.section-head{margin-bottom:clamp(20px,2.8vw,36px)}
+.closing{padding:clamp(28px,4vw,52px)}
+.step{padding:18px 0}
+.faq summary{padding:18px 0}
+.faq .answer{padding-bottom:18px}
+.hero-art{padding:32px 0 84px}
+@media (max-width:959px){.hero-art{padding:24px 0 132px}}
+/* Photos keep their own proportions: no forced aspect ratios or cover-crops
+(the decorative collage cards included). */
+.hero-photo,.hero-photo-card,.owner .photo,.photo,.cl{aspect-ratio:auto!important}
+.hero-photo picture,.hero-photo-card picture,.photo picture,.cl picture{height:auto}
+.hero-photo img,.hero-photo-card img,.photo img,.cl img{height:auto!important;object-fit:contain}
+.gallery,.img-grid{display:block;columns:2 200px;column-gap:14px}
+@media (min-width:900px){.gallery{columns:3 220px}}
+.gallery li,.img-grid > *{break-inside:avoid;margin:0 0 14px}
+.gallery img,.img-grid img{height:auto}
+.gallery li{background:transparent}
+.gallery img,.img-grid img{border-radius:var(--r-lg)}
+/* The CTA band between sections. */
+.cta-band{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 28px;padding:18px 24px;border-radius:var(--r-lg);background:var(--surface);border:1px solid var(--hairline)}
+.section--sand .cta-band{background:var(--parchment)}
+.cta-band p{max-width:60ch;color:var(--muted)}
+.cta-band p b{color:var(--navy);font-weight:600}
+.cta-band-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px}
+@media (max-width:519px){.cta-band-actions .btn{width:100%}}
+/* Header: room for "Get an Instant Quote" from laptop width down to phones. */
+@media (min-width:960px) and (max-width:1179px){.site-header .brand-name{display:none}.primary-nav a,.nav-menu > summary{padding:0 11px}}
+@media (max-width:659px){.site-header .brand-name{display:none}}
+@media (max-width:519px){.header-cta{padding:0 14px}.menu-button{padding:0 12px}.menu-button .menu-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}}
+@media (min-width:400px) and (max-width:519px){.header-cta .label-long{display:inline}.header-cta .label-short{display:none}.header-call{display:none}}
+@media (max-width:399px){.header-call{display:none}}
+@media (max-width:359px){.header-cta{display:inline-flex}.brand-mark{display:none}}
+.sticky-cta .btn{flex:1}
+.ways{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.ways .checklist{margin-bottom:22px}

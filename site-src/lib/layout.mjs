@@ -4,7 +4,7 @@ import { icon } from "./icons.mjs";
 
 // The page frame: <head> (metadata, fonts, the analytics tags every page has
 // always carried), a parchment header with the ARK logo, a Services menu and
-// one blue "Get a quote" button — or, on paid-search pages, a minimal header
+// one blue "Get an Instant Quote" button — or, on paid-search pages, a minimal header
 // with nothing to click away to — the footer, and the one script.
 
 const NAV = [
@@ -41,7 +41,7 @@ function header(o) {
     <div class="brand"><span class="visually-hidden">${esc(SHOP.name)}</span>${wordmark()}</div>
     <div class="header-actions">
       <a class="header-contact" href="${esc(SHOP.phoneHref)}" data-cta="nav_call">${icon("phone")}<span class="label">${esc(SHOP.phoneDisplay)}</span><span class="visually-hidden">Call ARK Screen Printing</span></a>
-      <a class="btn btn--primary header-cta" href="#quote" data-cta="nav_quote"><span class="label-long">Get a quote</span><span class="label-short">Quote</span></a>
+      <a class="btn btn--primary header-cta" href="#quote" data-cta="nav_quote" aria-label="Get an Instant Quote"><span class="label-long">Get an Instant Quote</span><span class="label-short">Instant Quote</span></a>
     </div>
   </div>
 </header>`;
@@ -61,20 +61,20 @@ function header(o) {
     <div class="header-actions">
       <a class="header-phone" href="${esc(SHOP.phoneHref)}" data-cta="nav_call">${icon("phone")}${esc(SHOP.phoneDisplay)}</a>
       <a class="header-call" href="${esc(SHOP.phoneHref)}" data-cta="nav_call_icon">${icon("phone")}<span class="visually-hidden">Call ${esc(SHOP.phoneDisplay)}</span></a>
-      <a class="btn btn--primary header-cta" href="${quoteHref(o)}" data-cta="nav_quote"><span class="label-long">Get a quote</span><span class="label-short">Quote</span></a>
+      <a class="btn btn--primary header-cta" href="${quoteHref(o)}" data-cta="nav_quote" aria-label="Get an Instant Quote"><span class="label-long">Get an Instant Quote</span><span class="label-short">Instant Quote</span></a>
       <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-toggle>${icon("list", "icon open")}${icon("x", "icon close")}<span class="menu-label">Menu</span></button>
     </div>
   </div>
   <div class="site-menu" id="site-menu" hidden>
     <nav class="container" aria-label="Main (mobile)">
-      <p class="label menu-group">Services</p>
-      <ul>${mobileServices}</ul>
-      <ul>${mobileNav}</ul>
       <div class="menu-actions">
-        <a class="btn btn--primary btn--lg" href="${quoteHref(o)}" data-cta="menu_quote">Get a quote ${icon("arrowRight")}</a>
+        <a class="btn btn--primary btn--lg" href="${quoteHref(o)}" data-cta="menu_quote">Get an Instant Quote ${icon("arrowRight")}</a>
         <a class="btn btn--ghost" href="${esc(SHOP.phoneHref)}" data-cta="menu_call">${icon("phone")}Call ${esc(SHOP.phoneDisplay)}</a>
         <a class="btn btn--ghost" href="${esc(SHOP.smsHref)}" data-cta="menu_text">${icon("chatCircleText")}Text us</a>
       </div>
+      <p class="label menu-group">Services</p>
+      <ul>${mobileServices}</ul>
+      <ul>${mobileNav}</ul>
     </nav>
   </div>
 </header>`;
@@ -126,7 +126,7 @@ function footer(o) {
       <nav aria-label="Orders">
         <h2>Orders</h2>
         <ul>
-          <li><a href="/get-a-quote#quote">Get a quote</a></li>
+          <li><a href="/get-a-quote#quote">Get an Instant Quote</a></li>
           <li><a href="${APP.trackOrder}">Track an order</a></li>
           <li><a href="${APP.wholesale}">Wholesale accounts</a></li>
           <li><a href="${APP.shipping}">Shipping policy</a></li>
@@ -148,8 +148,12 @@ function footer(o) {
  */
 export function shell(o) {
   const og = o.ogImage ? `<meta property="og:image" content="${esc(o.ogImage)}"><meta name="twitter:image" content="${esc(o.ogImage)}">` : "";
+  // The phone sticky bar on every page (not thank-you): it appears once the
+  // hero's buttons scroll away and hides while the quote form is on screen.
+  o.sticky = o.sticky ?? !["thank-you", "get-a-quote"].includes(o.page);
+  const stickyAction = o.stickyAction ?? { href: quoteHref(o), label: "Get an Instant Quote", placement: "sticky_quote" };
   const sticky = o.sticky
-    ? `<div class="sticky-cta" data-sticky-cta hidden><a class="btn btn--primary" href="#quote" data-cta="sticky_quote">Get a quote ${icon("arrowRight")}</a><a class="header-call" href="${esc(SHOP.phoneHref)}" data-cta="sticky_call">${icon("phone")}<span class="visually-hidden">Call ${esc(SHOP.phoneDisplay)}</span></a></div>`
+    ? `<div class="sticky-cta" data-sticky-cta hidden><a class="btn btn--primary" href="${esc(stickyAction.href)}" data-cta="${esc(stickyAction.placement)}">${esc(stickyAction.label)} ${icon("arrowRight")}</a><a class="header-call" href="${esc(SHOP.phoneHref)}" data-cta="sticky_call">${icon("phone")}<span class="visually-hidden">Call ${esc(SHOP.phoneDisplay)}</span></a></div>`
     : "";
   return `<!doctype html>
 <html lang="en">

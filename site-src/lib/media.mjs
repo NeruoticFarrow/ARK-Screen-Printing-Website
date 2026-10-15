@@ -13,7 +13,7 @@ export const PHOTOS = {
   /** A two-sided tee from a local brand (real). */
   brandTee: { src: "/images/gallery/img_0563.jpg", alt: "A black tee printed front and back with a small chest logo" },
   /** A team tee (real). */
-  team: { src: "/images/gallery/img_0113.jpg", alt: "A navy team tee printed in gold with an eagle and the words Stronger Together" },
+  team: { src: "/images/gallery/img_0113.jpg", alt: "A navy team tee printed in gold with a bird of prey and the words Stronger Together" },
   /** A one-colour illustration print on a light tee (real). */
   illustration: { src: "/images/gallery/img_0230.jpg", alt: "A cream tee with a detailed one-colour red illustration" },
   /** Folded tees with a chest and sleeve print (real). */
