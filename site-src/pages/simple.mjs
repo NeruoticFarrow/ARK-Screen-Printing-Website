@@ -5,7 +5,7 @@ import { icon } from "../lib/icons.mjs";
 import { picture } from "../lib/images.mjs";
 import { PHOTOS, WORK } from "../lib/media.mjs";
 import {
-  ctaRow, faqList, finalCta, galleryGrid, localStrip, ownerSection, proofSection, quoteBand, REASSURANCE, reassure,
+  ctaRow, faqList, finalCta, galleryGrid, recentWork, localStrip, ownerSection, proofSection, quoteBand, REASSURANCE, reassure,
   reviewsGrid, sectionHead, stars, textLink,
 } from "../lib/components.mjs";
 import { abs, pageHero, pageJsonLd } from "./parts.mjs";
@@ -41,7 +41,7 @@ export function renderAbout(ctx) {
   const owner = `<section class="section" aria-labelledby="owner-title"><div class="container">${ownerSection("owner-title", { more: false })}</div></section>`;
   const body = `<section class="section section--sand"><div class="container"><div class="prose">${story}</div></div></section>`;
   const proof = `<section class="section" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What customers *say*.")}</div></section>`;
-  const work = `<section class="section section--sand" aria-labelledby="work-title"><div class="container">${sectionHead("work-title", "Real work from our *presses*.", undefined, { aside: textLink("/gallery", "See the gallery", "about_gallery") })}${galleryGrid(WORK.slice(0, 6))}</div></section>`;
+  const work = `<section class="section section--sand" aria-labelledby="work-title"><div class="container">${sectionHead("work-title", "Real work from our *presses*.", undefined, { aside: textLink("/gallery", "See the gallery", "about_gallery") })}${galleryGrid(recentWork(WORK, 6))}</div></section>`;
   const closing = finalCta("Let's print *yours*.", "Tell us what you need — we'll confirm the details within 24 hours and send a proof before anything prints.");
   return base(page, { current: "about", ogImage: abs(PHOTOS.owner.src), main: hero + strip + owner + body + proof + work + closing });
 }
@@ -62,7 +62,7 @@ export function renderFaq(ctx) {
 export function renderGallery(ctx) {
   const { page } = ctx;
   const hero = pageHero({ h1: page.hero.h1, lead: page.hero.lead[0], crumbs: [{ name: "Home", href: "/" }, { name: "Our work" }] });
-  const grid = `<section class="section"><div class="container">${galleryGrid(GALLERY, { lightbox: true })}</div></section>`;
+  const grid = `<section class="section"><div class="container">${galleryGrid(recentWork(GALLERY), { lightbox: true })}</div></section>`;
   const closing = finalCta("Your logo, *printed here*.", "Send your artwork or an idea — we'll confirm the details within 24 hours and send a proof before anything prints.");
   return base(page, { current: "gallery", ogImage: abs(PHOTOS.press.src), main: hero + grid + closing });
 }

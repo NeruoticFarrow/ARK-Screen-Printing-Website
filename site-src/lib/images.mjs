@@ -3,10 +3,12 @@
 // renders as a plain <img> of the original file.
 
 import fs from "node:fs";
+import { gbpImageManifest } from "./gbp-data.mjs";
 import { esc } from "./html.mjs";
 
 const MANIFEST_URL = new URL("../content/image-manifest.json", import.meta.url);
-const manifest = fs.existsSync(MANIFEST_URL) ? JSON.parse(fs.readFileSync(MANIFEST_URL, "utf8")) : {};
+// Committed photos, plus the Business Profile photos synced for this build.
+const manifest = { ...(fs.existsSync(MANIFEST_URL) ? JSON.parse(fs.readFileSync(MANIFEST_URL, "utf8")) : {}), ...gbpImageManifest() };
 
 /** Manifest key: the root-relative path, lower-cased (the old pages linked
  *  some files in a different case than they have on disk). */

@@ -3,7 +3,7 @@ import { esc, ldScript } from "../lib/html.mjs";
 import { icon } from "../lib/icons.mjs";
 import { WORK, PHOTOS } from "../lib/media.mjs";
 import {
-  areasList, ctaRow, doodle, faqJsonLd, faqList, galleryGrid, heroArt, localStrip, ownerSection, proofSection,
+  areasList, ctaRow, doodle, recentWork, faqJsonLd, faqList, galleryGrid, heroArt, localStrip, ownerSection, proofSection,
   quoteBand, ratingLink, REASSURANCE, reassure, rulesTile, sectionHead, serviceTiles, stepsList, textLink, ticker,
 } from "../lib/components.mjs";
 import { SERVICE_PAGES } from "../content/services.mjs";
@@ -59,7 +59,7 @@ export function renderHome(ctx) {
 
   const work = `<section class="section" aria-labelledby="work-title"><div class="container">
   ${sectionHead("work-title", "Printed in our shop, not a *warehouse*.", "Real orders from our presses.", { aside: textLink("/gallery", "See more of our work", "work_gallery") })}
-  <div class="doodled">${doodle("strokes", "section-doodle section-doodle--strokes", " data-appear")}${galleryGrid(WORK.slice(0, 6))}</div>
+  <div class="doodled">${doodle("strokes", "section-doodle section-doodle--strokes", " data-appear")}${galleryGrid(recentWork(WORK, 6))}</div>
 </div></section>`;
 
   const groups = `<section class="section section--sand" aria-labelledby="groups-title"><div class="container">

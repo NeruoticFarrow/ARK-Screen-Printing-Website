@@ -514,6 +514,8 @@ it on outside click and Escape). */
 .review footer b{display:block;color:var(--ink);font-weight:600}
 .review .stars{display:inline-flex;gap:2px;color:var(--brown)}
 .review .stars .icon{width:16px;height:16px}
+.review .avatar{display:grid;place-items:center;width:40px;height:40px;flex:none;border-radius:50%;background:var(--sky);color:var(--navy);font:700 1.0625rem/1 var(--display)}
+.reviews-note{margin-top:14px;font-size:.875rem;color:var(--muted)}
 /* Areas: local pages as pill links. */
 .areas{display:flex;flex-wrap:wrap;gap:8px;padding:0;list-style:none}
 .areas a{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 16px;border-radius:var(--pill);background:var(--surface);border:1px solid var(--hairline);color:var(--navy);font:500 .9375rem/1 var(--text);text-decoration:none}

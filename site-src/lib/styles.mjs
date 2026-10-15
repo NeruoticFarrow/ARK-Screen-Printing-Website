@@ -129,6 +129,8 @@ const ADDITIONS = `
 .review footer b{display:block;color:var(--ink);font-weight:600}
 .review .stars{display:inline-flex;gap:2px;color:var(--brown)}
 .review .stars .icon{width:16px;height:16px}
+.review .avatar{display:grid;place-items:center;width:40px;height:40px;flex:none;border-radius:50%;background:var(--sky);color:var(--navy);font:700 1.0625rem/1 var(--display)}
+.reviews-note{margin-top:14px;font-size:.875rem;color:var(--muted)}
 
 /* Areas: local pages as pill links. */
 .areas{display:flex;flex-wrap:wrap;gap:8px;padding:0;list-style:none}

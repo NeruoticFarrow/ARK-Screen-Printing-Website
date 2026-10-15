@@ -2,6 +2,7 @@ import fs from "node:fs";
 import { FACTS, GOOGLE, SERVICES, SHOP, SITE } from "./facts.mjs";
 import { accent, esc, ldScript } from "./html.mjs";
 import { icon } from "./icons.mjs";
+import { gbpData } from "./gbp-data.mjs";
 import { imageInfo, picture } from "./images.mjs";
 import { PHOTOS } from "./media.mjs";
 
@@ -9,7 +10,17 @@ import { PHOTOS } from "./media.mjs";
 // accent word, pill buttons, 20 px cards and colour-block tiles, the ARK seal
 // on big tiles. Pure functions of their inputs; every value is escaped.
 
-export const REVIEWS = JSON.parse(fs.readFileSync(new URL("../content/reviews.json", import.meta.url), "utf8"));
+// Reviews: the Business Profile's own, newest first and every rating, when the
+// weekly sync is on (sync/gbp-sync.mjs); otherwise the owner's published picks.
+const PICKS = JSON.parse(fs.readFileSync(new URL("../content/reviews.json", import.meta.url), "utf8"))
+  // Relative dates ("2 days ago") were true when pasted and aren't now.
+  .map((r) => ({ ...r, rating: 5, date: r.date && !/ago|google/i.test(r.date) ? r.date : null }));
+const LIVE = gbpData();
+export const REVIEWS = LIVE?.reviews?.length ? LIVE.reviews : PICKS;
+/** The Business Profile's own photos (newest first), when the sync is on. */
+export const GBP_PHOTOS = LIVE?.photos ?? [];
+const DATE = new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric", timeZone: "UTC" });
+const reviewDate = (d) => (/^\d{4}-\d{2}-\d{2}$/.test(d ?? "") ? DATE.format(new Date(`${d}T00:00:00Z`)) : d);
 const SEAL = `<img class="seal" src="/assets/brand/ark-seal.png" width="300" height="304" alt="" loading="lazy" decoding="async">`;
 
 export function sectionHead(id, title, text, o = {}) {
@@ -42,8 +53,8 @@ export function reassure(lines) {
 /** The risk reducers under every primary CTA — each one true (facts.mjs). */
 export const REASSURANCE = ["No minimum order", `A reply within ${FACTS.replyWithin}`, "You approve a proof before we print"];
 
-export function stars(className = "stars") {
-  return `<span class="${className}" aria-hidden="true">${Array.from({ length: Math.round(GOOGLE.rating) }, () => icon("starFill")).join("")}</span>`;
+export function stars(className = "stars", value = GOOGLE.rating) {
+  return `<span class="${className}" aria-hidden="true">${Array.from({ length: Math.round(value) }, () => icon("starFill")).join("")}</span>`;
 }
 
 export function ratingLink(placement) {
@@ -164,11 +175,14 @@ export function serviceTiles(lines) {
 
 /** Real Google reviews the owner published on the site (source and date shown). */
 export function reviewsGrid(limit = REVIEWS.length) {
+  const avatar = (r) => r.photo
+    ? `<img src="${esc(encodeURI(r.photo))}" width="40" height="40" alt="" loading="lazy" decoding="async">`
+    : `<span class="avatar" aria-hidden="true">${esc((r.name || "?").trim().charAt(0).toUpperCase())}</span>`;
   return `<ul class="reviews">${REVIEWS.slice(0, limit).map((r) => `<li class="review" data-appear>
-  ${stars()}
+  ${stars("stars", r.rating ?? 5)}<span class="visually-hidden">Rated ${r.rating ?? 5} out of 5.</span>
   <blockquote>“${esc(r.quote)}”</blockquote>
-  <footer>${r.photo ? `<img src="${esc(encodeURI(r.photo))}" width="40" height="40" alt="" loading="lazy" decoding="async">` : ""}<span><b>${esc(r.name)}</b>Google review${r.date && !/google/i.test(r.date) ? ` · ${esc(r.date)}` : ""}</span></footer>
-</li>`).join("")}</ul>`;
+  <footer>${avatar(r)}<span><b>${esc(r.name)}</b>Google review${r.date ? ` · ${esc(reviewDate(r.date))}` : ""}</span></footer>
+</li>`).join("")}</ul>${LIVE ? `<p class="reviews-note">The most recent reviews from our Google Business Profile, every rating, updated ${esc(reviewDate(LIVE.fetchedAt.slice(0, 10)))}.</p>` : ""}`;
 }
 
 export function proofSection(id, title, o = {}) {
@@ -178,7 +192,7 @@ export function proofSection(id, title, o = {}) {
     <span class="label">${esc(SHOP.name)} on Google</span>
     <span class="score-figure">${GOOGLE.rating.toFixed(1)}</span>
     ${stars()}
-    <p>From ${GOOGLE.count} Google reviews of the shop. Every one is a real customer.</p>
+    <p>From ${GOOGLE.count} Google reviews of the shop. Every one is a real customer.${GOOGLE.live ? " Synced from Google each week." : ""}</p>
     <a class="btn btn--ghost" href="${esc(GOOGLE.url)}" target="_blank" rel="noopener" data-cta="reviews_google">Read them on Google ${icon("arrowUpRight")}<span class="visually-hidden"> (opens Google)</span></a>
   </div>
   <div>
@@ -204,6 +218,26 @@ export function ownerSection(id, o = {}) {
     ${o.more === false ? "" : `<p style="margin-top:22px">${textLink("/about", "The ARK story", "owner_about")}</p>`}
   </div>
 </div>`;
+}
+
+const CATEGORY_ALT = {
+  PRODUCT: "A recent print from ARK Screen Printing",
+  AT_WORK: "At work in the ARK Screen Printing shop",
+  TEAMS: "The team at ARK Screen Printing",
+  INTERIOR: "Inside the ARK Screen Printing shop",
+  EXTERIOR: "The ARK Screen Printing shop from outside",
+};
+/** A Business Profile photo as a gallery item, described by the owner's own
+ *  caption or, failing that, by its Google category. */
+const gbpItem = (p) => ({ src: p.src, alt: p.alt || CATEGORY_ALT[p.category] || "Recent work from ARK Screen Printing" });
+
+/** Real work: the newest Business Profile photos first (when synced), then
+ *  the curated photos, without repeats. */
+export function recentWork(curated, n = Infinity) {
+  const seen = new Set();
+  return [...GBP_PHOTOS.map(gbpItem), ...curated.map((c) => (typeof c === "string" ? { src: c, alt: "" } : c))]
+    .filter((it) => !seen.has(it.src) && seen.add(it.src))
+    .slice(0, n);
 }
 
 export function galleryGrid(items, o = {}) {

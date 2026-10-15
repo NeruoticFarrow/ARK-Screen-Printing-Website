@@ -10,6 +10,7 @@ import path from "node:path";
 import sharp from "sharp";
 import { PHOTOS, WORK } from "./lib/media.mjs";
 import { imageKey } from "./lib/images.mjs";
+import { gbpData } from "./lib/gbp-data.mjs";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..");
 const SITE = path.join(ROOT, "ark-site-review");
@@ -45,29 +46,46 @@ function resolveOnDisk(src) {
 
 const slugFor = (rel) => rel.replace(/^images\//, "").replace(/\.[a-z0-9]+$/i, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
-fs.mkdirSync(OUT_DIR, { recursive: true });
-const manifest = {};
 let made = 0;
-for (const src of referenced()) {
-  const rel = resolveOnDisk(src);
-  if (!rel) { console.warn(`missing on disk: ${src}`); continue; }
-  const file = path.join(SITE, rel);
-  const meta = await sharp(file).rotate().metadata();
-  const width = meta.autoOrient?.width ?? meta.width;
-  const height = meta.autoOrient?.height ?? meta.height;
-  const slug = slugFor(rel);
-  const variants = [];
-  for (const w of WIDTHS.filter((w, i) => w <= width || i === 0)) {
-    const target = Math.min(w, width);
-    const name = `${slug}-${target}.webp`;
-    const out = path.join(OUT_DIR, name);
-    if (!fs.existsSync(out)) {
-      await sharp(file).rotate().resize({ width: target, withoutEnlargement: true }).webp({ quality: 74, effort: 5 }).toFile(out);
-      made++;
+/** WebP sizes for each src into outDir (served at urlBase); returns manifest entries. */
+async function optimise(srcs, outDir, urlBase) {
+  fs.mkdirSync(outDir, { recursive: true });
+  const manifest = {};
+  for (const src of srcs) {
+    const rel = resolveOnDisk(src);
+    if (!rel) { console.warn(`missing on disk: ${src}`); continue; }
+    const file = path.join(SITE, rel);
+    const meta = await sharp(file).rotate().metadata();
+    const width = meta.autoOrient?.width ?? meta.width;
+    const height = meta.autoOrient?.height ?? meta.height;
+    const slug = slugFor(rel);
+    const variants = [];
+    for (const w of WIDTHS.filter((w, i) => w <= width || i === 0)) {
+      const target = Math.min(w, width);
+      const name = `${slug}-${target}.webp`;
+      const out = path.join(outDir, name);
+      if (!fs.existsSync(out)) {
+        await sharp(file).rotate().resize({ width: target, withoutEnlargement: true }).webp({ quality: 74, effort: 5 }).toFile(out);
+        made++;
+      }
+      variants.push({ width: target, file: `${urlBase}/${name}` });
     }
-    variants.push({ width: target, file: `/assets/img/${name}` });
+    manifest[imageKey(src)] = { original: "/" + rel.split("/").map(encodeURIComponent).join("/"), width, height, variants: [...new Map(variants.map((v) => [v.width, v])).values()] };
   }
-  manifest[imageKey(src)] = { original: "/" + rel.split("/").map(encodeURIComponent).join("/"), width, height, variants: [...new Map(variants.map((v) => [v.width, v])).values()] };
+  return manifest;
 }
+
+// Committed photos → assets/img/ and the committed manifest.
+const manifest = await optimise(referenced(), OUT_DIR, "/assets/img");
 fs.writeFileSync(path.join(ROOT, "site-src/content/image-manifest.json"), JSON.stringify(manifest, null, 2) + "\n");
-console.log(`images: ${Object.keys(manifest).length} in manifest, ${made} new WebP files`);
+
+// Business Profile photos synced for this build → git-ignored folders and a
+// manifest in site-src/.cache/ (Google allows temporary copies only).
+const gbp = gbpData();
+let gbpCount = 0;
+if (gbp?.photos?.length) {
+  const gbpManifest = await optimise(gbp.photos.map((p) => p.src), path.join(OUT_DIR, "gbp"), "/assets/img/gbp");
+  fs.writeFileSync(path.join(ROOT, "site-src/.cache/gbp-image-manifest.json"), JSON.stringify(gbpManifest, null, 2));
+  gbpCount = Object.keys(gbpManifest).length;
+}
+console.log(`images: ${Object.keys(manifest).length} in manifest${gbpCount ? ` + ${gbpCount} Business Profile photos` : ""}, ${made} new WebP files`);

@@ -2,6 +2,8 @@
 // stood on 2026-10-15 (the page is named beside it). Pages read these values;
 // they never type a number of their own.
 //
+import { gbpData } from "./gbp-data.mjs";
+
 // OWNER TO CONFIRM — the old pages disagreed with each other:
 //   · Minimums: home and service pages say "no minimums"; the FAQ recommends
 //     12+ for screen printing; the DTF pages say screen printing starts at 6.
@@ -72,13 +74,16 @@ export const FACTS = {
   freeShipping: null,
 };
 
-/** The shop's Google Business Profile, as published on the site (5.0) and read
- *  on 2026-10-13 for the review count. Update when it moves. */
+/** The shop's Google Business Profile: synced from the Business Profile API
+ *  at each build when the sync is on (sync/gbp-sync.mjs), otherwise the values
+ *  last read by hand (2026-10-13). */
+const live = gbpData();
 export const GOOGLE = {
-  rating: 5,
-  count: 10,
+  rating: live?.rating ?? 5,
+  count: live?.count ?? 10,
   url: SHOP.mapsUrl,
-  checked: "2026-10-13",
+  checked: live ? live.fetchedAt.slice(0, 10) : "2026-10-13",
+  live: Boolean(live),
 };
 
 /** Links into the online shop app (design.arkscreenprinting.com). */

@@ -29,6 +29,41 @@ npm run images     # after adding a photo: WebP sizes + content/image-manifest.j
 | The Google Ads conversion bridge and the thank-you conversion tags (byte for byte from the old site) | `content/conversion-bridge.js`, `content/thank-you-conversions.json` |
 | The browser script | `assets/site.js` |
 
+## Google reviews and photos (Business Profile sync)
+
+**How it works:**
+- Each Netlify deploy runs `npm run netlify-build` (see `netlify.toml`), which pulls three things from the shop's Google Business Profile:
+  - the **rating and review count**;
+  - **every review, newest first, every star rating**;
+  - **the photos you uploaded**. Customer photos are never fetched; they're the customer's copyright.
+- `.github/workflows/weekly-rebuild.yml` triggers a deploy every Monday, so the site stays current.
+- **Google's API rules allow only temporary copies (30 days at most).** So synced data lives in git-ignored folders (`site-src/.cache/`, `ark-site-review/images/gbp/`), is rebuilt on every deploy, and is never committed.
+- Without credentials, or if Google is down, the site shows the committed reviews (`content/reviews.json`) and the last values in `lib/facts.mjs`.
+
+**One-time setup (owner):**
+
+1. **Request API access.** Use Google's [Business Profile API contact form](https://support.google.com/business/contact/api_default) and choose *Application for Basic API Access*.
+   - Send it from an email that owns or manages the profile.
+   - Google needs the profile verified for 60+ days, with the website listed on it.
+   - Until approval, the API quota shows 0 in Google Cloud.
+2. **Set up a Google Cloud project.** In [Google Cloud](https://console.cloud.google.com/), create a project and enable the Business Profile APIs:
+   - *My Business Account Management API*;
+   - *My Business Business Information API*;
+   - *Google My Business API*.
+3. **Create an OAuth client.**
+   - Under *APIs & Services → OAuth consent screen*, set the app to **In production**. Testing-mode tokens expire after 7 days.
+   - Under *Credentials*, create an **OAuth client ID** of type **Desktop app**.
+4. **Get the remaining values.** On your own computer, in this repo, run:
+   ```powershell
+   $env:GBP_CLIENT_ID="…"; $env:GBP_CLIENT_SECRET="…"; npm run gbp:auth
+   ```
+   Then sign in with the Google account that owns the profile. The terminal prints `GBP_REFRESH_TOKEN`, `GBP_ACCOUNT_ID` and `GBP_LOCATION_ID`.
+5. **Add the values to Netlify.** Put all five `GBP_*` values in *Site configuration → Environment variables*. Never put them in a file in this repo.
+6. **Schedule the weekly rebuild.**
+   - In Netlify, go to *Build & deploy → Build hooks* and add a hook for `main`.
+   - Save its URL as the GitHub repository secret `NETLIFY_BUILD_HOOK`.
+7. **Check the base directory.** Make sure Netlify's *Base directory* is empty, because `netlify.toml` lives at the repo root.
+
 ## Rules the templates follow
 
 These come from the UX/CRO knowledge base in the ark-designer repo (`docs/knowledge/ux-cro/`, chapters 25 §11, 12 §4.5, 20 and 07).
