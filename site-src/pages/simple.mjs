@@ -1,12 +1,12 @@
 import fs from "node:fs";
-import { APP, FACTS, GOOGLE, SHOP, SITE } from "../lib/facts.mjs";
+import { APP, FACTS, SHOP, SITE } from "../lib/facts.mjs";
 import { accent, esc } from "../lib/html.mjs";
 import { icon } from "../lib/icons.mjs";
 import { picture } from "../lib/images.mjs";
 import { PHOTOS, WORK } from "../lib/media.mjs";
 import {
   ctaBand, ctaRow, faqList, finalCta, galleryGrid, recentWork, localStrip, ownerSection, proofSection, quoteBand, REASSURANCE, reassure,
-  reviewsGrid, sectionHead, stars, textLink,
+  sectionHead, textLink,
 } from "../lib/components.mjs";
 import { abs, pageHero, pageJsonLd } from "./parts.mjs";
 
@@ -72,28 +72,12 @@ export function renderGallery(ctx) {
 export function renderTestimonials(ctx) {
   const { page } = ctx;
   const hero = pageHero({ h1: page.hero.h1, lead: page.hero.lead[0], crumbs: [{ name: "Home", href: "/" }, { name: "Reviews" }] });
-  const score = `<section class="section--tight"><div class="container"><div class="tile tile--sand score" style="display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px">
-  <span class="score-figure" style="font-size:3.5rem">${GOOGLE.rating.toFixed(1)}</span>
-  <span>${stars()}<br>${GOOGLE.count} Google reviews of the shop</span>
-  <a class="btn btn--ghost" href="${esc(GOOGLE.url)}" target="_blank" rel="noopener" data-cta="reviews_google">Read them on Google ${icon("arrowUpRight")}<span class="visually-hidden"> (opens Google)</span></a>
-</div></div></section>`;
-  // A live Google-reviews widget (Starwall) stands in until the Business
-  // Profile sync is approved: its embed code lives in
-  // content/reviews-widget.html and appears here, on this page only. Its
-  // feed already holds every review in reviews.json, so it replaces the list
-  // rather than repeating it — and the list is prefilled inside the widget's
-  // own container, so the page reads the same before the script loads or if
-  // Starwall is down. The widget's look is set in styles.mjs (.reviews-embed).
-  const widgetFile = new URL("../content/reviews-widget.html", import.meta.url);
-  const widget = fs.existsSync(widgetFile) ? fs.readFileSync(widgetFile, "utf8").trim() : "";
-  const slot = /(<div id="reviews-widget-\d+">)(<\/div>)/;
-  const list = widget && slot.test(widget)
-    ? `<section class="section" aria-label="Google reviews"><div class="container"><div class="reviews-embed">${widget.replace(slot, `$1${reviewsGrid()}$2`)}</div></div></section>`
-    : `<section class="section"><div class="container">${reviewsGrid()}</div></section>` + (widget
-      ? `<section class="section section--sand" aria-labelledby="google-reviews-title"><div class="container">${sectionHead("google-reviews-title", "More reviews from *Google*.")}<div class="reviews-embed">${widget}</div></div></section>`
-      : "");
+  // The reviews as the owner's reference shows them: the rating, the heading,
+  // then the two-row ticker, live from Google via the Starwall feed
+  // (REVIEWS_FEED) until the Business Profile sync takes over.
+  const list = `<section class="section" aria-labelledby="reviews-title"><div class="container">${proofSection("reviews-title", "What customers *say*.", { live: true, leaveReview: true, note: `Recent Google reviews of our ${SHOP.city} print shop — why customers choose us, and what to expect.` })}</div></section>`;
   const closing = finalCta("Be our next *five stars*.", "Tell us what you need — we reply within ten minutes during business hours and send a proof before anything prints.");
-  return base(page, { current: "testimonials", main: hero + score + list + closing });
+  return base(page, { current: "testimonials", main: hero + list + closing });
 }
 
 export function renderServiceAreas(ctx) {

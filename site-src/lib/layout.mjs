@@ -82,7 +82,8 @@ function header(o) {
 
 function footer(o) {
   const year = new Date().getFullYear();
-  const legal = `<a href="${APP.terms}">Terms</a> · <a href="${APP.privacy}">Privacy</a> · <a href="${APP.refunds}">Refunds</a>`;
+  // The reviews show Google's "G", so Google's brand terms ask for its legal line.
+  const legal = `<a href="${APP.terms}">Terms</a> · <a href="${APP.privacy}">Privacy</a> · <a href="${APP.refunds}">Refunds</a> · Google and the Google logo are trademarks of Google LLC.`;
   if (o.chrome === "minimal") {
     // Paid pages still carry the business's identity, contact and policies.
     return `<footer class="site-footer footer-minimal">
