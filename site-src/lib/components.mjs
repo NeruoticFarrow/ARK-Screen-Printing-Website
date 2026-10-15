@@ -170,7 +170,7 @@ export function rulesTile(id = "rules-title", o = {}) {
 export const PROCESS = [
   { title: "Request your quote", text: "Tell us the garment, the quantity, where it's printed and the date you need it. The quote form takes about two minutes — or call or text and talk it through." },
   { title: "We reply fast", text: `We call or text within ${FACTS.replyWithin} (${FACTS.replyHours}) — or email if we miss you — to confirm sizes, artwork and timing.` },
-  { title: "Approve your proof", text: "You see your design on the garment, with the price, before anything is printed." },
+  { title: "Invoice, then your proof", text: "Once the details are set we send the invoice. After payment you get a digital proof of your design on the garment — nothing is printed until you approve it." },
   { title: "Printed here, then it's yours", text: `Printed in our ${SHOP.city} shop — most screen-print orders in ${FACTS.turnaround.screen}. ${FACTS.pickup}, or we ship anywhere in the US.` },
 ];
 
@@ -295,7 +295,7 @@ export function quoteBand(o = {}) {
       <p class="lead">${esc(o.intro ?? `Tell us the garment, the quantity, your artwork and your date. We reply within ${FACTS.replyWithin} (${FACTS.replyHours}), and you approve a proof before anything prints.`)}</p>
       <ul class="checklist">
         <li>${icon("check")}<span><b>No minimum order</b><small>One shirt or a thousand — screen printing from ${FACTS.screenFrom}.</small></span></li>
-        <li>${icon("sealCheck")}<span><b>A proof before anything prints</b><small>You approve the mockup and the price first.</small></span></li>
+        <li>${icon("sealCheck")}<span><b>A proof before anything prints</b><small>You approve a digital proof of your design before we print.</small></span></li>
         <li>${icon("printer")}<span><b>Printed in our ${esc(SHOP.city)} shop</b><small>${esc(FACTS.pickup)}, or we ship anywhere in the US.</small></span></li>
       </ul>
       <div class="quote-alt"><b>Rather talk it through?</b><a href="${esc(SHOP.phoneHref)}" data-cta="quote_call">Call</a> or <a href="${esc(SHOP.smsHref)}" data-cta="quote_text">text</a> ${esc(SHOP.phoneDisplay)} — ${esc(SHOP.hours)}. We reply within ${esc(FACTS.replyWithin)}.</div>
