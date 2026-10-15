@@ -17,11 +17,11 @@ import { SERVICE_PAGES } from "../content/services.mjs";
 export const HOME_FAQ = [
   { q: "Is there a minimum order?", a: [`No. Screen printing starts at ${FACTS.screenFrom} shirts; under ${FACTS.screenFrom} we print with DTF, which needs no screens — even a single shirt. Tell us your quantity and we'll recommend the right method.`] },
   { q: "How long does an order take?", a: [`Most screen-print orders are done in ${FACTS.turnaround.screen}, DTF in ${FACTS.turnaround.dtf} from artwork approval and embroidery in ${FACTS.turnaround.embroidery}. Need it for a date? Put the date in your quote request or call — rush is often possible.`] },
-  { q: "Will I see my design before you print it?", a: ["Yes. Once your invoice is paid you get a digital proof — a mockup of your design on the garment. Nothing is printed until you approve it."] },
+  { q: "Will I see my design before you print it?", a: ["Yes. A digital proof — a mockup of your design on the garment — follows moments after we've talked. Nothing is printed until you approve it."] },
   { q: "Can you help with my artwork?", a: [`Yes. Send a logo file, a sketch or just an idea and we'll prepare it for print. Our <a href="${APP.artwork}">artwork guidelines</a> explain which files work best.`] },
   { q: "Do you do embroidery?", a: ["Yes — polos, hats, jackets and bags, with free digitizing on every order and no minimum order. See <a href=\"/custom-embroidery\">custom embroidery</a>."] },
   { q: "Is local pickup available?", a: [`Yes — ${FACTS.pickup.toLowerCase()} in ${SHOP.city}, or we'll ship your order anywhere in the US.`] },
-  { q: "How fast will I hear back?", a: [`Within ${FACTS.replyWithin}, ${FACTS.replyHours}. Call or text ${SHOP.phoneDisplay} if you'd rather talk it through.`] },
+  { q: "How fast is it?", a: [`Your price shows as you fill in the form. We're in touch within ${FACTS.replyWithin} (${FACTS.replyHours}), your proof follows ${FACTS.proofSpeed}, and once you approve it, printing can start ${FACTS.printStart}.`] },
 ];
 
 export function renderHome(ctx) {
@@ -49,7 +49,7 @@ export function renderHome(ctx) {
   const rules = `<section class="section" id="rules" aria-labelledby="rules-title"><div class="container">${rulesTile("rules-title", { onPage: true })}</div></section>`;
 
   const how = `<section class="section section--sand" id="how" aria-labelledby="how-title"><div class="container">
-  ${sectionHead("how-title", "How an order *works*.", "Four steps, and nothing is printed until you approve the proof.")}
+  ${sectionHead("how-title", "How an order *works*.", "Price in minutes, proof right after, printing the same day — and nothing prints until you approve it.")}
   <div class="doodled">${doodle("loop", "section-doodle section-doodle--loop", " data-appear")}${stepsList()}</div>
   ${ctaRow("after_steps", { onPage: true })}
 </div></section>`;
@@ -66,7 +66,7 @@ export function renderHome(ctx) {
   const groups = `<section class="section section--sand" aria-labelledby="groups-title"><div class="container">
   ${sectionHead("groups-title", "Ordering for a *group*?", "Three ways to do it — pick the one that fits how your group pays.")}
   <ul class="features">
-    <li class="card feature" data-appear>${icon("package")}<h3 class="h4">One order, delivered together</h3><p>You collect sizes and we print the lot — local pickup or we ship it. Best for teams, staff and events.</p>${textLink("#quote", "Get an Instant Quote", "groups_quote")}</li>
+    <li class="card feature" data-appear>${icon("package")}<h3 class="h4">One order, delivered together</h3><p>You collect sizes and we print the lot — local pickup or we ship it. Best for teams, staff and events.</p>${textLink("#quote", "See Your Price Instantly", "groups_quote")}</li>
     <li class="card feature" data-appear>${icon("storefront")}<h3 class="h4">Everyone pays for their own</h3><p>A free online store where each person picks a size and pays. We print and ship every order — no collecting cash.</p>${textLink(APP.studio, "How group stores work", "groups_store")}</li>
     <li class="card feature" data-appear>${icon("handHeart")}<h3 class="h4">Raise money with shirts</h3><p>Set a price above the cost and the difference goes to your cause, with a store your supporters order from.</p>${textLink(APP.studio, "Fundraiser stores", "groups_fundraiser")}</li>
   </ul>

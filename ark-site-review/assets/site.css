@@ -578,13 +578,47 @@ sections share a ground. */
 .cta-band p b{color:var(--navy);font-weight:600}
 .cta-band-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px}
 @media (max-width:519px){.cta-band-actions .btn{width:100%}}
-/* Header: room for "Get an Instant Quote" from laptop width down to phones. */
+/* Header: room for "See Your Price Instantly" from laptop width down to phones. */
 @media (min-width:960px) and (max-width:1179px){.site-header .brand-name{display:none}.primary-nav a,.nav-menu > summary{padding:0 11px}}
 @media (max-width:659px){.site-header .brand-name{display:none}}
 @media (max-width:519px){.header-cta{padding:0 14px}.menu-button{padding:0 12px}.menu-button .menu-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}}
-@media (min-width:400px) and (max-width:519px){.header-cta .label-long{display:inline}.header-cta .label-short{display:none}.header-call{display:none}}
+@media (min-width:440px) and (max-width:519px){.header-cta .label-long{display:inline}.header-cta .label-short{display:none}}
+@media (max-width:519px){.header-call{display:none}}
 @media (max-width:399px){.header-call{display:none}}
 @media (max-width:359px){.header-cta{display:inline-flex}.brand-mark{display:none}}
 .sticky-cta .btn{flex:1}
+/* Reviews ticker: two offset rows drifting in opposite directions. */
+.reviews-block{display:grid;gap:24px}
+.reviews-head{display:grid;justify-items:center;gap:10px;text-align:center}
+.reviews-head .muted{max-width:56ch}
+.rating-line{display:inline-flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 10px;color:var(--ink);font-size:.9375rem;text-decoration:none}
+.rating-line .stars{display:inline-flex;gap:2px;color:var(--brown)}
+.rating-line .stars .icon{width:20px;height:20px}
+.rating-line b{color:var(--navy);font-weight:600}
+a.rating-line:hover{text-decoration:underline;color:var(--navy)}
+.rt{position:relative;display:grid;gap:14px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.rt-row{overflow-x:auto;scrollbar-width:none;padding-block:2px}
+.rt-row::-webkit-scrollbar{display:none}
+.rt-track{display:flex;gap:14px;width:max-content;margin:0;padding:0 14px 0 0;list-style:none}
+.rt-card{display:grid;gap:10px;align-content:start;width:min(80vw,330px);flex:none;padding:16px 18px;border-radius:18px;background:var(--surface);border:1px solid var(--hairline)}
+.section--sand .rt-card{background:var(--parchment)}
+.rt-top{display:flex;align-items:center;gap:10px}
+.rt-top img,.rt-top .avatar{width:40px;height:40px;flex:none;border-radius:50%;object-fit:cover}
+.rt-top .avatar{display:grid;place-items:center;background:var(--sky);color:var(--navy);font:700 1.0625rem/1 var(--display)}
+.rt-who{display:grid;gap:3px;font-size:.875rem;line-height:1.2}
+.rt-who b{color:var(--navy);font-weight:600}
+.rt-who .stars{display:inline-flex;gap:1px;color:var(--brown)}
+.rt-who .stars .icon{width:13px;height:13px}
+.rt-g{margin-left:auto;width:20px;height:20px;color:var(--muted)}
+.rt-text{font-size:.9375rem;line-height:1.5;color:var(--ink);display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.rt:not(.is-live) .rt-card[aria-hidden="true"]{display:none}
+.rt.is-live .rt-row{overflow:hidden}
+.rt.is-live .rt-track{animation:rt-scroll var(--rt-dur,48s) linear infinite}
+.rt.is-live .rt-row--b .rt-track{animation-direction:reverse;margin-left:-172px}
+.rt.is-live:hover .rt-track,.rt.is-live:focus-within .rt-track,.rt.is-paused .rt-track{animation-play-state:paused}
+@keyframes rt-scroll{to{transform:translateX(-50%)}}
+.rt-toggle{justify-self:center}
+.reviews-actions{justify-content:center;align-items:center;margin-top:0}
+@media (prefers-reduced-motion:reduce){.rt-track{animation:none!important}}
 .ways{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
 .ways .checklist{margin-bottom:22px}
