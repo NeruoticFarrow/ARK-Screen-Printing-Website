@@ -3,7 +3,7 @@ import { esc, ldScript } from "../lib/html.mjs";
 import { icon } from "../lib/icons.mjs";
 import { WORK, PHOTOS } from "../lib/media.mjs";
 import {
-  areasList, ctaRow, doodle, faqJsonLd, faqList, galleryGrid, heroArt, localStrip, ownerSection, proofSection,
+  areasList, ctaBand, ctaRow, doodle, faqJsonLd, faqList, galleryGrid, heroArt, localStrip, ownerSection, proofSection,
   quoteBand, ratingLink, REASSURANCE, reassure, rulesTile, sectionHead, serviceTiles, stepsList, textLink, ticker,
 } from "../lib/components.mjs";
 import { SERVICE_PAGES } from "../content/services.mjs";
@@ -15,12 +15,13 @@ import { SERVICE_PAGES } from "../content/services.mjs";
 // a bridge for groups; areas; answers; the quote form.
 
 export const HOME_FAQ = [
-  { q: "Is there a minimum order?", a: [`No. A single shirt is printed with DTF, which needs no screens. Screen printing is available from ${FACTS.screenFrom} pieces and is usually the best value from ${FACTS.screenBestValueFrom}. Tell us your quantity and we'll recommend the cheaper method.`] },
+  { q: "Is there a minimum order?", a: [`No. Screen printing starts at ${FACTS.screenFrom} shirts; under ${FACTS.screenFrom} we print with DTF, which needs no screens — even a single shirt. Tell us your quantity and we'll recommend the right method.`] },
   { q: "How long does an order take?", a: [`Most screen-print orders are done in ${FACTS.turnaround.screen}, DTF in ${FACTS.turnaround.dtf} from artwork approval and embroidery in ${FACTS.turnaround.embroidery}. Need it for a date? Put the date in your quote request or call — rush is often possible.`] },
   { q: "Will I see my design before you print it?", a: ["Yes. You get a proof — a mockup of your design on the garment — with the price. Nothing is printed until you approve it."] },
   { q: "Can you help with my artwork?", a: [`Yes. Send a logo file, a sketch or just an idea and we'll prepare it for print. Our <a href="${APP.artwork}">artwork guidelines</a> explain which files work best.`] },
   { q: "Do you do embroidery?", a: ["Yes — polos, hats, jackets and bags, with free digitizing on every order and no minimum order. See <a href=\"/custom-embroidery\">custom embroidery</a>."] },
-  { q: "Can I pick up my order?", a: [`Yes. Collect it from the shop at ${SHOP.address} (${SHOP.hours}), or we'll ship it anywhere in the US.`] },
+  { q: "Is local pickup available?", a: [`Yes — ${FACTS.pickup.toLowerCase()} in ${SHOP.city}, or we'll ship your order anywhere in the US.`] },
+  { q: "How fast will I hear back?", a: [`Within ${FACTS.replyWithin}, ${FACTS.replyHours}. Call or text ${SHOP.phoneDisplay} if you'd rather talk it through.`] },
 ];
 
 export function renderHome(ctx) {
@@ -43,7 +44,7 @@ export function renderHome(ctx) {
   const services = `<section class="section" aria-labelledby="services-title"><div class="container">
   ${sectionHead("services-title", "What we *print*.", "Every job is printed or stitched in our shop — so we can tell you exactly how it'll come out.", { aside: textLink("/screen-printing-and-embroidery", "Which method is right?", "services_methods") })}
   <div class="doodled">${doodle("burst", "section-doodle section-doodle--burst", " data-appear")}${serviceTiles(lines)}</div>
-</div></section>`;
+</div></section>` + ctaBand("after_services", { onPage: true });
 
   const rules = `<section class="section" id="rules" aria-labelledby="rules-title"><div class="container">${rulesTile("rules-title", { onPage: true })}</div></section>`;
 
@@ -53,9 +54,9 @@ export function renderHome(ctx) {
   ${ctaRow("after_steps", { onPage: true })}
 </div></section>`;
 
-  const proof = `<section class="section" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What customers *say*.")}</div></section>`;
+  const proof = `<section class="section" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What customers *say*.", { onPage: true })}</div></section>`;
 
-  const owner = `<section class="section section--sand" aria-labelledby="owner-title"><div class="container">${ownerSection("owner-title")}</div></section>`;
+  const owner = `<section class="section section--sand" aria-labelledby="owner-title"><div class="container">${ownerSection("owner-title", { onPage: true })}</div></section>`;
 
   const work = `<section class="section" aria-labelledby="work-title"><div class="container">
   ${sectionHead("work-title", "Printed in our shop, not a *warehouse*.", "Real orders from our presses.", { aside: textLink("/gallery", "See more of our work", "work_gallery") })}
@@ -65,14 +66,14 @@ export function renderHome(ctx) {
   const groups = `<section class="section section--sand" aria-labelledby="groups-title"><div class="container">
   ${sectionHead("groups-title", "Ordering for a *group*?", "Three ways to do it — pick the one that fits how your group pays.")}
   <ul class="features">
-    <li class="card feature" data-appear>${icon("package")}<h3 class="h4">One order, delivered together</h3><p>You collect sizes, we print the lot and you pick it up or we ship it. Best for teams, staff and events.</p>${textLink("#quote", "Get a quote", "groups_quote")}</li>
+    <li class="card feature" data-appear>${icon("package")}<h3 class="h4">One order, delivered together</h3><p>You collect sizes and we print the lot — local pickup or we ship it. Best for teams, staff and events.</p>${textLink("#quote", "Get an Instant Quote", "groups_quote")}</li>
     <li class="card feature" data-appear>${icon("storefront")}<h3 class="h4">Everyone pays for their own</h3><p>A free online store where each person picks a size and pays. We print and ship every order — no collecting cash.</p>${textLink(APP.studio, "How group stores work", "groups_store")}</li>
     <li class="card feature" data-appear>${icon("handHeart")}<h3 class="h4">Raise money with shirts</h3><p>Set a price above the cost and the difference goes to your cause, with a store your supporters order from.</p>${textLink(APP.studio, "Fundraiser stores", "groups_fundraiser")}</li>
   </ul>
 </div></section>`;
 
   const areas = `<section class="section" aria-labelledby="areas-title"><div class="container">
-  ${sectionHead("areas-title", "Across the *Pikes Peak* region.", `We're on the east side of ${SHOP.city} — pick up at the shop, or we'll ship to you.`, { aside: textLink("/service-areas", "All service areas", "areas_all") })}
+  ${sectionHead("areas-title", "Across the *Pikes Peak* region.", `Printed in ${SHOP.city}. ${FACTS.pickup}, or we'll ship to you.`, { aside: textLink("/service-areas", "All service areas", "areas_all") })}
   ${areasList(ctx.areas.close)}
 </div></section>`;
 

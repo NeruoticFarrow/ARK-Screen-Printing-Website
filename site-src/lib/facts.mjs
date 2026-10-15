@@ -2,11 +2,13 @@
 // stood on 2026-10-15 (the page is named beside it). Pages read these values;
 // they never type a number of their own.
 //
-// OWNER TO CONFIRM — the old pages disagreed with each other:
-//   · Minimums: home and service pages say "no minimums"; the FAQ recommends
-//     12+ for screen printing; the DTF pages say screen printing starts at 6.
-//     Reconciled below as: no minimum order (DTF from 1), screen printing from
-//     6, best screen-print value from 12.
+// OWNER DECISIONS (2026-10-15): screen printing's minimum is 24 shirts across
+// the site (DTF below that, so there's still no minimum order); the reply
+// promise is "within ten minutes" (stated with business hours where there's
+// room, so it stays true at 3am); pickup is "local pickup available" — the
+// address is never presented as a pickup counter.
+//
+// STILL TO CONFIRM:
 //   · Free shipping: the FAQ says "free shipping on every order, nationwide";
 //     the online shop says free over $75. Not stated on the new pages until
 //     the owner confirms (FREE_SHIPPING stays null).
@@ -48,10 +50,8 @@ export const SHOP = {
 export const FACTS = {
   /** index.html, custom-*.html, local pages. */
   noMinimum: true,
-  /** dtf-vs-screen-printing.html, dtf-printing-colorado-springs.html. */
-  screenFrom: 6,
-  /** faq.html ("we recommend 12+ pieces for screen printing"). */
-  screenBestValueFrom: 12,
+  /** Owner, 2026-10-15: the screen-printing minimum across the website. */
+  screenFrom: 24,
   turnaround: {
     /** dtf-printing-colorado-springs.html: from artwork approval. */
     dtf: "3–5 business days",
@@ -62,8 +62,12 @@ export const FACTS = {
     /** custom-hats-colorado-springs.html. */
     rush: "Rush orders in as little as a week — ask first",
   },
-  /** thank-you.html: "we'll get back to you within 24 hours". */
-  replyWithin: "24 hours",
+  /** Owner, 2026-10-15 (was "24 hours" on thank-you.html). */
+  replyWithin: "ten minutes",
+  /** Said beside the reply promise where there's room. */
+  replyHours: "7:30am–7pm Mountain Time, every day",
+  /** Owner, 2026-10-15: never "pick up at the shop/address". */
+  pickup: "Local pickup available",
   /** faq.html: Monarch plastisol, Matsui water-based and discharge inks. */
   inks: "Monarch plastisol, plus Matsui water-based and discharge inks",
   /** index.html guarantee banner. */
@@ -91,8 +95,31 @@ export const APP = {
   refunds: "https://design.arkscreenprinting.com/refund-policy",
   /** The creator platform (merch stores) — the bridge for groups where
    *  everyone pays for their own (docs: knowledge base chapter 19). */
-  studio: "/studio",
+  // The creator platform is served from the app host (arkscreenprinting.com/studio
+  // isn't proxied — that would be decision D-e in the knowledge base).
+  studio: "https://design.arkscreenprinting.com/studio",
+  studioHow: "https://design.arkscreenprinting.com/studio/how-it-works",
+  studioFaq: "https://design.arkscreenprinting.com/studio/faq",
   artwork: "/images/ark-art-requirements.pdf",
+};
+
+/** The creator platform (ark-designer shared/creatorPolicy.ts, shared/const.ts,
+ *  server/creator/ledger/rules.ts), for the print-on-demand and fundraising pages. */
+export const STORES = {
+  onDemandShipDays: "3–5",
+  campaignPrintDays: 5,
+  /** server/creator/ledger/rules.ts PAYOUT_RULES. */
+  payoutAfterShipDays: 21,
+  minimumPayoutUsd: 20,
+  /** shared/creatorPricing.ts screen.colourLimits: 24+ up to 2 colours, 40+ up to 6. */
+  screenColours: [{ from: 24, colours: 2 }, { from: 40, colours: 6 }],
+  /** CREATOR_PLATFORM_MODE in production. Set true when sign-ups open (the
+   *  offer pages then drop the invite-only note). */
+  signupOpen: false,
+  shippingFlatUsd: 7.99,
+  freeShippingOverUsd: 75,
+  sizeExchangeDays: 30,
+  defectDays: 30,
 };
 
 /** The services menu: every page that sells one service. */
@@ -104,4 +131,6 @@ export const SERVICES = [
   { slug: "custom-silk-screen-printing", label: "Screen printing", icon: "printer" },
   { slug: "dtf-printing-colorado-springs", label: "DTF printing", icon: "palette" },
   { slug: "screen-printing-and-embroidery", label: "Screen printing & embroidery", icon: "stack" },
+  { slug: "fundraising", label: "Fundraisers", icon: "handHeart" },
+  { slug: "print-on-demand", label: "Print on demand", icon: "storefront" },
 ];

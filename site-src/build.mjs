@@ -11,6 +11,7 @@ import { shell } from "./lib/layout.mjs";
 import { SITE_CSS } from "./lib/styles.mjs";
 import { PPC_PAGES } from "./content/services.mjs";
 import { renderHome } from "./pages/home.mjs";
+import { renderFundraising, renderPrintOnDemand } from "./pages/offers.mjs";
 import { renderLocal } from "./pages/local.mjs";
 import { renderPpc, renderService } from "./pages/service.mjs";
 import { renderAbout, renderFaq, renderGallery, renderQuote, renderServiceAreas, renderTestimonials, renderThankYou } from "./pages/simple.mjs";
@@ -65,6 +66,12 @@ for (const page of Object.values(pages)) {
   count++;
 }
 if (unrouted.length) throw new Error(`no template for: ${unrouted.join(", ")}`);
+
+// Pages written for the redesign (no migrated content).
+for (const [file, render] of [["print-on-demand.html", renderPrintOnDemand], ["fundraising.html", renderFundraising]]) {
+  fs.writeFileSync(path.join(SITE_DIR, file), shell({ ...render(), css: version }));
+  count++;
+}
 
 // ── Long cache for fingerprinted assets, fonts and optimised images.
 fs.writeFileSync(path.join(SITE_DIR, "_headers"), `# Written by site-src/build.mjs.

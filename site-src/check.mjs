@@ -25,7 +25,12 @@ const existsExact = (rel) => {
   }
   return fs.existsSync(dir);
 };
-const REWRITES = [/^\/shop(\/|$)/, /^\/studio(\/|$)/];
+// Paths Netlify proxies to the app, read from _redirects (status 200 rules) —
+// never assumed, so a link to a path with no rule fails the check.
+const REWRITES = fs.readFileSync(path.join(SITE, "_redirects"), "utf8").split("\n")
+  .map((l) => l.trim()).filter((l) => l && !l.startsWith("#"))
+  .map((l) => l.split(/\s+/)).filter((p) => /^200!?$/.test(p[2] ?? ""))
+  .map(([from]) => new RegExp(`^${from.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\/\*$/, "/.*")}$`));
 
 function resolves(href) {
   const clean = decodeURIComponent(href.split("#")[0].split("?")[0]);
@@ -36,15 +41,20 @@ function resolves(href) {
 }
 
 let checked = 0;
-for (const f of fs.readdirSync(CONTENT)) {
-  const src = JSON.parse(fs.readFileSync(path.join(CONTENT, f), "utf8"));
-  if (src.slug === "service-areas-old-backup") continue;
+// Migrated pages carry their content file; pages written for the redesign
+// (print-on-demand, fundraising) get every check except "unchanged from before".
+const sources = Object.fromEntries(fs.readdirSync(CONTENT).map((f) => { const s = JSON.parse(fs.readFileSync(path.join(CONTENT, f), "utf8")); return [s.file, s]; }));
+const generated = fs.readdirSync(SITE).filter((f) => f.endsWith(".html") && /name="generator" content="ark-site-src"/.test(fs.readFileSync(path.join(SITE, f), "utf8")));
+for (const file of Object.keys(sources)) if (file !== "service-areas-old-backup.html" && !generated.includes(file)) fail(file, "not generated");
+for (const genFile of generated) {
+  const src = sources[genFile] ?? { file: genFile, slug: genFile.replace(/\.html$/, ""), new: true, jsonLd: [] };
   const html = fs.readFileSync(path.join(SITE, src.file), "utf8");
   const { document: d } = parseHTML(html);
   const file = src.file;
   checked++;
 
-  if (!/name="generator" content="ark-site-src"/.test(html)) fail(file, "not generated");
+  if (src.new && !d.querySelector('meta[name="description"]')) fail(file, "no description");
+  if (src.new && !d.querySelector('link[rel="canonical"]')) fail(file, "no canonical");
   const h1s = d.querySelectorAll("h1");
   if (h1s.length !== 1) fail(file, `${h1s.length} h1 elements`);
   if (src.title && d.title !== src.title) fail(file, `title changed: "${d.title}"`);

@@ -5,7 +5,7 @@ import { icon } from "../lib/icons.mjs";
 import { picture } from "../lib/images.mjs";
 import { PHOTOS, WORK } from "../lib/media.mjs";
 import {
-  ctaRow, faqList, finalCta, galleryGrid, localStrip, ownerSection, proofSection, quoteBand, REASSURANCE, reassure,
+  ctaBand, ctaRow, faqList, finalCta, galleryGrid, localStrip, ownerSection, proofSection, quoteBand, REASSURANCE, reassure,
   reviewsGrid, sectionHead, stars, textLink,
 } from "../lib/components.mjs";
 import { abs, pageHero, pageJsonLd } from "./parts.mjs";
@@ -42,15 +42,16 @@ export function renderAbout(ctx) {
   const body = `<section class="section section--sand"><div class="container"><div class="prose">${story}</div></div></section>`;
   const proof = `<section class="section" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What customers *say*.")}</div></section>`;
   const work = `<section class="section section--sand" aria-labelledby="work-title"><div class="container">${sectionHead("work-title", "Real work from our *presses*.", undefined, { aside: textLink("/gallery", "See the gallery", "about_gallery") })}${galleryGrid(WORK.slice(0, 6))}</div></section>`;
-  const closing = finalCta("Let's print *yours*.", "Tell us what you need — we'll confirm the details within 24 hours and send a proof before anything prints.");
+  const closing = finalCta("Let's print *yours*.", "Tell us what you need — we reply within ten minutes during business hours and send a proof before anything prints.");
   return base(page, { current: "about", ogImage: abs(PHOTOS.owner.src), main: hero + strip + owner + body + proof + work + closing });
 }
 
 export function renderFaq(ctx) {
   const { page } = ctx;
   const items = page.blocks.flatMap((b) => b.faq).map((f) => ({ q: f.q, html: f.a }));
+  const half = Math.ceil(items.length / 2);
   const hero = pageHero({ h1: page.hero.h1, lead: page.hero.lead[0], crumbs: [{ name: "Home", href: "/" }, { name: "FAQ" }] });
-  const list = `<section class="section"><div class="container">${faqList(items)}</div></section>`;
+  const list = `<section class="section"><div class="container">${faqList(items.slice(0, half))}</div></section>` + ctaBand("faq_mid") + `<section class="section"><div class="container">${faqList(items.slice(half))}</div></section>`;
   const ask = `<section class="section section--sand"><div class="container"><div class="tile tile--sky" data-appear>
   <h2 class="h3">${accent("Didn't find your *answer*?")}</h2>
   <p style="margin-top:12px">Call or text ${esc(SHOP.phoneDisplay)} (${esc(SHOP.hours)}) or email <a href="mailto:${esc(SHOP.email)}">${esc(SHOP.email)}</a> — a person at the shop answers.</p>
@@ -62,8 +63,9 @@ export function renderFaq(ctx) {
 export function renderGallery(ctx) {
   const { page } = ctx;
   const hero = pageHero({ h1: page.hero.h1, lead: page.hero.lead[0], crumbs: [{ name: "Home", href: "/" }, { name: "Our work" }] });
-  const grid = `<section class="section"><div class="container">${galleryGrid(GALLERY, { lightbox: true })}</div></section>`;
-  const closing = finalCta("Your logo, *printed here*.", "Send your artwork or an idea — we'll confirm the details within 24 hours and send a proof before anything prints.");
+  const all = GALLERY;
+  const grid = `<section class="section"><div class="container">${galleryGrid(all.slice(0, 9), { lightbox: true })}</div></section>` + ctaBand("gallery_mid", { title: "Like what you see?" }) + `<section class="section"><div class="container">${galleryGrid(all.slice(9), { lightbox: true, dialog: false })}</div></section>`;
+  const closing = finalCta("Your logo, *printed here*.", "Send your artwork or an idea — we reply within ten minutes during business hours and send a proof before anything prints.");
   return base(page, { current: "gallery", ogImage: abs(PHOTOS.press.src), main: hero + grid + closing });
 }
 
@@ -75,8 +77,15 @@ export function renderTestimonials(ctx) {
   <span>${stars()}<br>${GOOGLE.count} Google reviews of the shop</span>
   <a class="btn btn--ghost" href="${esc(GOOGLE.url)}" target="_blank" rel="noopener" data-cta="reviews_google">Read them on Google ${icon("arrowUpRight")}<span class="visually-hidden"> (opens Google)</span></a>
 </div></div></section>`;
-  const list = `<section class="section"><div class="container">${reviewsGrid()}</div></section>`;
-  const closing = finalCta("Be our next *five stars*.", "Tell us what you need — we'll confirm the details within 24 hours and send a proof before anything prints.");
+  // A third-party Google-reviews widget (e.g. Featurable) can stand in until
+  // the Business Profile sync is approved: paste its embed code into
+  // content/reviews-widget.html and it appears here, on this page only.
+  const widgetFile = new URL("../content/reviews-widget.html", import.meta.url);
+  const widget = fs.existsSync(widgetFile) ? fs.readFileSync(widgetFile, "utf8").trim() : "";
+  const list = `<section class="section"><div class="container">${reviewsGrid()}</div></section>` + (widget
+    ? `<section class="section section--sand" aria-labelledby="google-reviews-title"><div class="container">${sectionHead("google-reviews-title", "More reviews from *Google*.")}<div class="reviews-widget">${widget}</div></div></section>`
+    : "");
+  const closing = finalCta("Be our next *five stars*.", "Tell us what you need — we reply within ten minutes during business hours and send a proof before anything prints.");
   return base(page, { current: "testimonials", main: hero + score + list + closing });
 }
 
@@ -86,20 +95,20 @@ export function renderServiceAreas(ctx) {
   const card = (a) => `<li><a class="card" href="/${esc(a.slug)}" style="display:grid;gap:6px;height:100%;text-decoration:none" data-appear><span class="h4">${esc(a.name)}</span>${a.blurb ? `<span class="muted" style="font-size:.9375rem">${esc(a.blurb)}</span>` : ""}<span class="text-link" style="margin-top:6px">Screen printing in ${esc(a.name)} ${icon("arrowRight")}</span></a></li>`;
   const grid = (list) => `<ul class="features" style="grid-template-columns:repeat(auto-fill,minmax(250px,1fr))">${list.map(card).join("")}</ul>`;
   const close = `<section class="section" aria-labelledby="close-title"><div class="container">${sectionHead("close-title", "Close-in *Colorado Springs* areas.", "ARK is based in Colorado Springs; these are focused local-service pages, not separate store locations.")}${grid(ctx.areas.close)}</div></section>`;
-  const towns = `<section class="section section--sand" aria-labelledby="towns-title"><div class="container">${sectionHead("towns-title", "Additional communities we *serve*.", "Pick up at the shop or we ship to you.")}${grid(ctx.areas.towns)}</div></section>`;
-  const closing = finalCta("Wherever you are in the *region*.", "Every order is printed in our Colorado Springs shop — we'll confirm the details within 24 hours and send a proof before anything prints.");
-  return base(page, { current: "service-areas", main: hero + close + towns + closing });
+  const towns = `<section class="section section--sand" aria-labelledby="towns-title"><div class="container">${sectionHead("towns-title", "Additional communities we *serve*.", `${FACTS.pickup}, or we ship to you.`)}${grid(ctx.areas.towns)}</div></section>`;
+  const closing = finalCta("Wherever you are in the *region*.", "Every order is printed in our Colorado Springs shop — we reply within ten minutes during business hours and send a proof before anything prints.");
+  return base(page, { current: "service-areas", main: hero + close + ctaBand("areas_mid", { title: "Wherever you are in the region." }) + towns + closing });
 }
 
 export function renderQuote(ctx) {
   const { page } = ctx;
   const hero = `<section class="page-hero" aria-labelledby="page-title"><div class="container">
   <h1 id="page-title" class="h1">${accent("Get an instant *quote*.")}</h1>
-  <p class="lead">Takes about two minutes. We confirm the details within ${esc(FACTS.replyWithin)} and you approve a proof before anything prints.</p>
+  <p class="lead">Takes about two minutes. We reply within ${esc(FACTS.replyWithin)} (${esc(FACTS.replyHours)}) and you approve a proof before anything prints.</p>
   ${reassure(REASSURANCE)}
 </div></section>`;
   const quote = quoteBand({ eager: true, title: "Your *project*.", intro: "Garment, quantity, print locations, artwork and your date — whatever you know so far is enough to start." });
-  const proof = `<section class="section" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What customers *say*.")}</div></section>`;
+  const proof = `<section class="section" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What customers *say*.", { onPage: true })}</div></section>`;
   return base(page, { current: "none", hasQuote: true, main: hero + quote + proof });
 }
 
@@ -107,7 +116,7 @@ export function renderThankYou(ctx) {
   const { page } = ctx;
   const main = `<section class="page-hero"><div class="container narrow">
   <h1 class="h1">${accent("Thank you — we've got your *request*.")}</h1>
-  <p class="lead">We'll get back to you within ${esc(FACTS.replyWithin)} to confirm the details of your project.</p>
+  <p class="lead">We'll get back to you within ${esc(FACTS.replyWithin)} (${esc(FACTS.replyHours)}) to confirm the details of your project.</p>
 </div></section>
 <section class="section section--sand"><div class="container narrow">
   <h2 class="h3" style="margin-bottom:20px">What happens next</h2>
@@ -121,5 +130,5 @@ export function renderThankYou(ctx) {
 </div></section>`;
   // The Google Ads conversion snippets, byte for byte from the old page.
   const head = CONVERSIONS.map((s) => `<script>\n  ${s}\n</script>`).join("\n");
-  return base(page, { current: "none", head, main });
+  return base(page, { current: "none", head, main, sticky: false });
 }

@@ -1,7 +1,7 @@
-import { SERVICES, SHOP } from "../lib/facts.mjs";
+import { FACTS, SERVICES, SHOP } from "../lib/facts.mjs";
 import { icon } from "../lib/icons.mjs";
 import {
-  areasList, faqList, localStrip, proofSection, quoteBand, rulesTile, sectionHead, stepsList, textLink, ctaRow,
+  areasList, ctaBand, faqList, localStrip, proofSection, quoteBand, rulesTile, sectionHead, stepsList, textLink, ctaRow,
 } from "../lib/components.mjs";
 import { PPC_PAGES, SERVICE_PAGES } from "../content/services.mjs";
 import { abs, migratedBlocks, pageHero, pageJsonLd, pointsSection, usesSection } from "./parts.mjs";
@@ -37,13 +37,13 @@ export function renderService(ctx) {
   ${sectionHead("how-title", "How an order *works*.", "You see the proof before you commit to anything.")}
   ${stepsList()}
 </div></section>`;
-  const proof = `<section class="section" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What customers *say*.")}</div></section>`;
+  const proof = `<section class="section" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What customers *say*.", { onPage: true })}</div></section>`;
   const faqItems = !migratedFaq && own.faq ? own.faq : [];
   const faq = faqItems.length
     ? `<section class="section section--sand" aria-labelledby="faq-title"><div class="container">${sectionHead("faq-title", "Straight *answers*.", undefined, { aside: textLink("/faq", "All questions", "faq_all") })}${faqList(faqItems)}</div></section>`
     : "";
   const areas = `<section class="section" aria-labelledby="areas-title"><div class="container">
-  ${sectionHead("areas-title", `${label} across the *Pikes Peak* region.`, `Printed in ${SHOP.city}; pick up at the shop or we ship.`, { aside: textLink("/service-areas", "All service areas", "areas_all") })}
+  ${sectionHead("areas-title", `${label} across the *Pikes Peak* region.`, `Printed in ${SHOP.city}. ${FACTS.pickup}, or we ship.`, { aside: textLink("/service-areas", "All service areas", "areas_all") })}
   ${areasList(ctx.areas.close)}
 </div></section>`;
   const quote = quoteBand({ intro: page.quoteIntro && !/^start your project$/i.test(page.quoteIntro) ? page.quoteIntro : undefined });
@@ -59,7 +59,7 @@ export function renderService(ctx) {
     hasQuote: true,
     page: page.slug,
     jsonLd: pageJsonLd(page, faqItems),
-    main: hero + strip + points + uses + blocks + rules + how + proof + faq + areas + quote,
+    main: hero + strip + points + uses + (points ? ctaBand("after_points", { onPage: true }) : "") + blocks + (page.blocks.length ? ctaBand("after_content", { onPage: true, title: "Want a price for this?" }) : "") + rules + how + proof + faq + areas + quote,
   };
 }
 
@@ -73,7 +73,7 @@ export function renderPpc(ctx) {
   const strip = `<section class="section--tight"><div class="container">${localStrip("ppc_strip")}</div></section>`;
   const points = pointsSection(withIcons(pointsData), "Why order from *ARK*.");
   const uses = usesSection(cfg.uses ?? svc.uses);
-  const proof = `<section class="section section--sand" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What customers *say*.")}</div></section>`;
+  const proof = `<section class="section section--sand" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What customers *say*.", { onPage: true })}</div></section>`;
   const rules = `<section class="section"><div class="container">${rulesTile("rules-title", { onPage: true })}</div></section>`;
   const how = `<section class="section section--sand" aria-labelledby="how-title"><div class="container">
   ${sectionHead("how-title", "How an order *works*.", "You see the proof before you commit to anything.")}
