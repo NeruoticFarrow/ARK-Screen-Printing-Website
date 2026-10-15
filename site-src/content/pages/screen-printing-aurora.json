@@ -1,0 +1,82 @@
+{
+  "file": "screen-printing-aurora.html",
+  "slug": "screen-printing-aurora",
+  "title": "Screen Printing Aurora CO | ARK Screen Printing",
+  "description": "Screen printing Aurora, CO: custom t-shirts, uniforms, and branded apparel from ARK Screen Printing. No minimums, done in-house.'s third-largest city!",
+  "canonical": "https://arkscreenprinting.com/screen-printing-aurora",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ARK Screen Printing Studio - Aurora",
+      "image": "https://arkscreenprinting.com/images/ark prototype.png",
+      "url": "https://arkscreenprinting.com/screen-printing-aurora",
+      "telephone": "(719) 280-2638",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Colorado Springs",
+        "addressLocality": "Colorado Springs",
+        "addressRegion": "CO",
+        "postalCode": "80922",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Aurora, CO"
+      },
+      "description": "Expert custom screen printing and embroidery services for businesses, schools, and events in Aurora, CO. We specialize in custom t-shirts, team uniforms, and corporate apparel.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Screen Printing Services for Aurora",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom T-Shirts & Apparel in Aurora"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Team Uniforms & Spirit Wear in Aurora"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Corporate Apparel & Embroidery in Aurora"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Aurora CO",
+    "lead": [
+      "Screen printing Aurora CO — ARK serves local businesses, teams, schools, and organizations with custom apparel, all printed in-house."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/AuroraCity.webp",
+      "alt": "Aurora Colorado - ARK Screen Printing serves Aurora"
+    },
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "local-content",
+      "variant": null,
+      "html": "<h2>Custom Screen Printing for Aurora's Military &amp; Aerospace Community</h2> <p>Aurora is Colorado's third-largest city — about 333,000 residents anchored by Buckley Space Force Base, the Anschutz Medical Campus, and a major aerospace corridor along I-225. Military families rotating through Buckley are core customers for custom apparel: unit gear, homecoming shirts, squadron reunions, and retirement ceremonies. Aerospace employers including Raytheon, Northrop Grumman, Boeing, and Lockheed Martin also generate steady demand for branded workwear and corporate event apparel.</p> <p>The Cherry Creek School District serves Aurora's south side with top-ranked programs — Cherokee Trail High School and Grandview High School both run competitive 5A athletics with active booster communities. Aurora Public Schools covers the rest of the city, including Rangeview and Overland High School. Aurora was officially recognized as a Great American Defense Community, underscoring how central military and defense culture is to the area — and to the custom apparel ordered here.</p> <article> <article> <h3>Buckley Space Force Base</h3> <p>Custom military apparel for units, squadrons, retirement ceremonies, and family events.</p> </article> <article> <h3>Aerospace &amp; medical community</h3> <p>Branded workwear and event apparel for Raytheon, Northrop Grumman, and Anschutz Medical employers.</p> </article> <article> <h3>Cherry Creek &amp; APS schools</h3> <p>Spirit wear and team gear for Cherokee Trail, Grandview, Rangeview, and Aurora's other 5A programs.</p> </article> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Fill out the form below for a fast, accurate quote on your Aurora screen printing project."
+}

@@ -1,0 +1,82 @@
+{
+  "file": "screen-printing-manitou-springs.html",
+  "slug": "screen-printing-manitou-springs",
+  "title": "Screen Printing Manitou Springs CO | ARK Screen Printing",
+  "description": "Screen printing Manitou Springs, CO: custom t-shirts, uniforms, and branded apparel from ARK Screen Printing. No minimums, done in-house.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-manitou-springs",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ARK Screen Printing Studio - Manitou Springs",
+      "image": "https://arkscreenprinting.com/images/ark prototype.png",
+      "url": "https://arkscreenprinting.com/screen-printing-manitou-springs",
+      "telephone": "(719) 280-2638",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Colorado Springs",
+        "addressLocality": "Colorado Springs",
+        "addressRegion": "CO",
+        "postalCode": "80922",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Manitou Springs, CO"
+      },
+      "description": "Expert custom screen printing and embroidery services for businesses, schools, and events in Manitou Springs, CO. We specialize in custom t-shirts, team uniforms, and corporate apparel.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Screen Printing Services for Manitou Springs",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom T-Shirts & Apparel in Manitou Springs"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Team Uniforms & Spirit Wear in Manitou Springs"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Corporate Apparel & Embroidery in Manitou Springs"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Manitou Springs CO",
+    "lead": [
+      "Screen printing Manitou Springs CO — ARK serves local businesses, teams, schools, and organizations with custom apparel, all printed in-house."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/manitou-springs.webp",
+      "alt": "Manitou Springs Colorado - ARK Screen Printing serves Manitou Springs"
+    },
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "local-content",
+      "variant": null,
+      "html": "<h2>Custom Apparel for Manitou Springs' Creative Community</h2> <p>Manitou Springs is one of Colorado's most distinctive small towns — a walkable historic district built around eight natural mineral springs, with a thriving arts scene, independent boutiques, and a personality that's proudly its own. Tourism, the arts, and outdoor recreation drive the local economy. Custom apparel is part of the fabric here: event t-shirts, staff uniforms for shops and restaurants along Manitou Avenue, and merch for community festivals like the Chalk Art Festival and the Midwinter Festival.</p> <p>Manitou Springs School District 14 is small (around 1,400 students) but holds the Colorado Department of Education's highest Accredited with Distinction rating — and community events and youth sports still drive steady demand for custom gear. We're just a few miles east in Colorado Springs, making same-week turnaround realistic for most orders. Galleries, music venues, and outdoor recreation outfitters are also regulars when they need branded staff apparel or event merchandise.</p> <article> <article> <h3>Arts &amp; tourism economy</h3> <p>Custom apparel for galleries, boutiques, restaurants, and event organizers along Manitou Avenue.</p> </article> <article> <h3>School District 14</h3> <p>Spirit wear, fundraiser gear, and athletic apparel for Manitou Springs' tight-knit school community.</p> </article> <article> <h3>Minutes away</h3> <p>ARK is right over the hill in Colorado Springs — quick coordination, no long shipping delays.</p> </article> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Fill out the form below for a fast, accurate quote on your Manitou Springs screen printing project."
+}

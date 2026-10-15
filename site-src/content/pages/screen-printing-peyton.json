@@ -1,0 +1,82 @@
+{
+  "file": "screen-printing-peyton.html",
+  "slug": "screen-printing-peyton",
+  "title": "Screen Printing Peyton CO | ARK Screen Printing",
+  "description": "Screen printing Peyton, CO: custom t-shirts, uniforms, and branded apparel from ARK Screen Printing. No minimums, done in-house.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-peyton",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ARK Screen Printing Studio - Peyton",
+      "image": "https://arkscreenprinting.com/images/ark prototype.png",
+      "url": "https://arkscreenprinting.com/screen-printing-peyton",
+      "telephone": "(719) 280-2638",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Colorado Springs",
+        "addressLocality": "Colorado Springs",
+        "addressRegion": "CO",
+        "postalCode": "80922",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Peyton, CO"
+      },
+      "description": "Expert custom screen printing and embroidery services for businesses, schools, and events in Peyton, CO. We specialize in custom t-shirts, team uniforms, and corporate apparel.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Screen Printing Services for Peyton",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom T-Shirts & Apparel in Peyton"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Team Uniforms & Spirit Wear in Peyton"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Corporate Apparel & Embroidery in Peyton"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Peyton CO",
+    "lead": [
+      "Screen printing Peyton CO — ARK serves local businesses, teams, schools, and organizations with custom apparel, all printed in-house."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/Peyton-Town.webp",
+      "alt": "Peyton Colorado - ARK Screen Printing serves Peyton"
+    },
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "local-content",
+      "variant": null,
+      "html": "<h2>Custom Screen Printing for Peyton's Rural Community</h2> <p>Peyton is a small agricultural community on the high plains east of Colorado Springs — ranching families, rural acreage homeowners, and small businesses that have called this stretch of El Paso County home for generations. It's the kind of community where rodeo tees, volunteer fire department apparel, and school spirit wear matter as much as any corporate order. <a href=\"/dtf-printing-colorado-springs\">DTF printing</a> with no minimum order is ideal here — one-off custom pieces for small community events or individual requests are exactly what we specialize in alongside larger runs.</p> <p>Peyton School District 23-JT serves the area with Peyton High School Panthers — a small program with a close-knit athletic community where school pride runs deep. Community events, 4-H programs, and local agriculture organizations generate occasional but meaningful demand for custom apparel. We're about 25 miles west in Colorado Springs and offer straightforward online ordering and shipping direct to Peyton addresses.</p> <article> <article> <h3>Rural ranching community</h3> <p>Custom apparel for Peyton's ranchers, farmers, small businesses, and rural property owners.</p> </article> <article> <h3>Peyton Panthers</h3> <p>Spirit wear and team gear for Peyton's tight-knit school community.</p> </article> <article> <h3>No minimums</h3> <p>DTF printing from just one piece — perfect for small rural orders that don't need a full screen printing run.</p> </article> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Fill out the form below for a fast, accurate quote on your Peyton screen printing project."
+}

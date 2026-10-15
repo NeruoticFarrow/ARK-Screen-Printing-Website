@@ -1,0 +1,81 @@
+{
+  "file": "screen-printing-centennial.html",
+  "slug": "screen-printing-centennial",
+  "title": "Screen Printing Centennial CO | ARK Screen Printing",
+  "description": "Screen printing Centennial, CO: custom t-shirts, uniforms, and branded apparel from ARK Screen Printing. No minimums, done in-house.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-centennial",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Screen Printing Services",
+      "provider": {
+        "@type": "Organization",
+        "name": "ARK Screen Printing Studio",
+        "telephone": "(719) 280-2638",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Colorado Springs",
+          "addressRegion": "CO",
+          "addressCountry": "US"
+        }
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Centennial",
+        "containedIn": {
+          "@type": "State",
+          "name": "Colorado"
+        }
+      },
+      "description": "Professional screen printing in Centennial, CO. Custom uniforms for retail, restaurants, and businesses. Quality apparel for the Streets at SouthGlenn area."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://arkscreenprinting.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Service Areas",
+          "item": "https://arkscreenprinting.com/service-areas"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Centennial Screen Printing"
+        }
+      ]
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Centennial CO",
+    "lead": [
+      "Screen printing Centennial CO — ARK serves local businesses, teams, schools, and organizations with custom apparel, all printed in-house."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/Centennial-SouthGlenn.jpg",
+      "alt": "Centennial Colorado - ARK Screen Printing serves Centennial"
+    },
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "local-content",
+      "variant": null,
+      "html": "<h2>Custom Apparel for Centennial's Aerospace Corridor</h2> <p>Centennial sits at the heart of Colorado's most productive aerospace and technology corridor — two Fortune 500 companies (Arrow Electronics and Newmont) are headquartered here, and more than 1,600 aerospace jobs have been added along the I-25 corridor through Centennial in just the past five years. Lockheed Martin, Blue Origin, Boeing, and United Launch Alliance all have a presence nearby. Corporate apparel — including <a href=\"/custom-embroidery\">embroidered polos and jackets</a> — for team events, trade shows, and company outings is a natural fit for the professional employers concentrated here.</p> <p>The Centennial Airport is the second-busiest general aviation airport in the United States, generating significant business activity throughout the area. Schools in the Cherry Creek and Littleton Public School districts serve Centennial's student population, with Eaglecrest High School Raptors and Arapahoe High School Warriors among the top athletic programs. We ship from Colorado Springs and consistently deliver to Centennial customers within standard turnaround windows.</p> <article> <article> <h3>Aerospace &amp; Fortune 500 hub</h3> <p>Corporate event apparel and branded workwear for Centennial's defense, tech, and enterprise companies.</p> </article> <article> <h3>Eaglecrest Raptors &amp; Arapahoe Warriors</h3> <p>Spirit wear and athletic gear for Centennial's top-performing 5A programs.</p> </article> <article> <h3>Centennial Airport community</h3> <p>Custom branded gear for the aviation, logistics, and business services firms surrounding one of the nation's busiest general aviation airports.</p> </article> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Fill out the form below for a fast, accurate quote on your Centennial screen printing project."
+}

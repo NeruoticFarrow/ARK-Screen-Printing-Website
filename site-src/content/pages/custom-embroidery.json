@@ -1,0 +1,123 @@
+{
+  "file": "custom-embroidery.html",
+  "slug": "custom-embroidery",
+  "title": "Custom Embroidery Colorado Springs | ARK Screen Printing",
+  "description": "Custom embroidery Colorado Springs — logo embroidery for corporate apparel, uniforms, and hats. Free digitizing from ARK Screen Printing.",
+  "canonical": "https://arkscreenprinting.com/custom-embroidery",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Custom Embroidery Services",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "ARK Screen Printing",
+        "telephone": "(719) 280-2638",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Colorado Springs",
+          "addressLocality": "Colorado Springs",
+          "addressRegion": "CO",
+          "postalCode": "80922",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 38.8339,
+          "longitude": -104.8214
+        },
+        "priceRange": "$$",
+        "url": "https://arkscreenprinting.com"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Colorado Springs",
+        "@id": "https://en.wikipedia.org/wiki/Colorado_Springs,_Colorado"
+      },
+      "description": "Professional custom embroidery services in Colorado Springs including logo embroidery, corporate apparel, uniforms, hats, and promotional products.",
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order for custom embroidery?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ARK Screen Printing has no minimum order on custom embroidery. Order as few or as many items as you need."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does custom embroidery take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard turnaround time is 7-14 business days from artwork approval. Rush services are available for time-sensitive projects."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What file format do you need for embroidery?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We can work with most file formats including AI, EPS, PDF, and high-resolution PNG or JPG files. Digitization is included at no additional cost."
+          }
+        }
+      ]
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Custom Embroidery Colorado Springs",
+    "lead": [],
+    "meta": null,
+    "image": null,
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "emb-section",
+      "variant": null,
+      "html": "<h2>Professional Custom Embroidery</h2> <h4>About ARK Embroidery Services</h4> <p>Custom embroidery Colorado Springs — ARK Screen Printing offers professional embroidered apparel that won't fade, crack, or peel. A premium, three-dimensional look for corporate apparel, team uniforms, and promotional products.</p> <p>Whether you're outfitting your sales team with embroidered polos, creating custom hats for a promotional campaign, or producing uniforms for Fort Carson personnel, we deliver exceptional results tailored to Colorado Springs' unique market.</p> <img src=\"/images/embroidery-intro-colorful.jpg\" alt=\"Custom embroidery services in Colorado Springs\">",
+      "faq": []
+    },
+    {
+      "kind": "emb-section",
+      "variant": null,
+      "html": "<h2>Why Choose Custom Embroidery?</h2> <p>Embroidery uses needle and thread to create your design directly in the fabric. It's durable, it's <em>beautiful</em>, and it works on just about any material. If it can be hooped, we can embroider it!</p> <p>Unlike screen printing that sits on top of the fabric, embroidery becomes <em>part</em> of the garment. No fading. No cracking. No peeling. Just a professional, textured finish that looks great wash after wash.</p> <p>We use only the <em>best</em> materials and techniques to bring your designs to life. Why? Because we care about quality. We care about durability. And we want you to wear your custom embroidery with pride for <em>years</em> to come.</p> <p>Whether you need corporate polos for your team, custom hats for a brewery promotion, or uniforms that can handle Colorado's weather extremes, embroidery delivers the premium look and lasting durability your brand deserves.</p> <img src=\"/images/embroidery-hats-placeholder.jpg\" alt=\"Custom embroidery hats Colorado Springs\"> <img src=\"/images/embroidery-hero-placeholder.jpg\" alt=\"Professional embroidery services\"> <img src=\"/images/embroidery-corporate-placeholder.jpg\" alt=\"Embroidered corporate apparel\">",
+      "faq": []
+    },
+    {
+      "kind": "emb-section",
+      "variant": null,
+      "html": "<h3>We'll Embroider Just About Anything</h3> <p>Worried your design is too complicated? Don't be. ARK can handle just about any custom design you throw at us.</p> <p>And you're not limited to just polo shirts. If it can be hooped, we can embroider it! We work with corporate apparel and business uniforms, hats, caps, and beanies, jackets and outerwear, backpacks and bags, blankets and towels, and much more.</p> <p>No matter the design, no matter the material—we'll make it yours.</p>",
+      "faq": []
+    },
+    {
+      "kind": "emb-section",
+      "variant": null,
+      "html": "<h2>Custom Embroidered Hats in Colorado Springs</h2> <p>Custom embroidered hats are one of our most popular items. Whether you need structured caps for a corporate event, trucker hats for a brewery promotion, or beanies for your outdoor crew, embroidery gives headwear a professional look that stands out — and lasts.</p> <p>We embroider hats for businesses, sports teams, schools, and promotional campaigns across Colorado Springs and the Front Range. No minimum order. Free digitizing on all orders. <a href=\"/custom-hats-colorado-springs\">See our full custom hats page →</a></p>",
+      "faq": []
+    },
+    {
+      "kind": "emb-section",
+      "variant": null,
+      "html": "<h3>Ready to Get Started?</h3> <p>Getting custom embroidery from ARK is easy. Share your design, we'll digitize it (free), you approve the sample, and we'll complete your order in 7-14 business days. Rush services available for time-sensitive projects.</p> <p>Whether you're creating corporate uniforms, team apparel, or promotional products, we're here to help bring your vision to life with professional embroidery that lasts.</p>",
+      "faq": []
+    },
+    {
+      "kind": "emb-section",
+      "variant": null,
+      "html": "<h3>Common Questions</h3> <article> <h4>What's the minimum order for custom embroidery?</h4> <p>ARK Screen Printing has no minimum order on custom embroidery. Order as few or as many items as you need.</p> </article> <article> <h4>How long does custom embroidery take?</h4> <p>Standard turnaround time is 7-14 business days from artwork approval. Rush services are available for time-sensitive projects.</p> </article> <article> <h4>What file formats do you need for embroidery?</h4> <p>We can work with most file formats including AI, EPS, PDF, and high-resolution PNG or JPG files. Digitization is included at no additional cost.</p> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": null
+}

@@ -1,0 +1,170 @@
+import { BASE_CSS } from "./styles-base.mjs";
+
+// What the custom-order site adds to the Verdara base: the services menu, the
+// local proof strip, migrated page content (.prose), the quote band around the
+// quote-form iframe, review cards, area links, the owner block, a photo
+// lightbox and the hero's order card. Same tokens, one shadow, pill buttons,
+// 20 px cards — nothing new in the visual language.
+
+const ADDITIONS = `
+/* Header: the services menu is a <details> (works without JS; site.js closes
+   it on outside click and Escape). */
+.nav-menu{position:relative}
+.nav-menu > summary{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 15px;border-radius:var(--pill);color:var(--navy);font:500 .9375rem/1 var(--text);cursor:pointer;list-style:none}
+.nav-menu > summary::-webkit-details-marker{display:none}
+.nav-menu > summary .icon{width:14px;height:14px;transition:rotate 160ms ease}
+.nav-menu[open] > summary .icon{rotate:180deg}
+.nav-menu > summary:hover,.nav-menu[open] > summary{background:var(--sand)}
+.nav-menu[data-current] > summary{background:var(--navy);color:var(--parchment)}
+.nav-panel{position:absolute;top:calc(100% + 8px);left:0;z-index:60;display:grid;gap:2px;min-width:290px;padding:10px;border-radius:var(--r-lg);background:var(--surface);border:1px solid var(--hairline);box-shadow:var(--lift)}
+.nav-panel a{display:flex;align-items:center;gap:12px;min-height:44px;padding:0 12px;border-radius:12px;color:var(--navy);font:500 .9375rem/1.2 var(--text);text-decoration:none}
+.nav-panel a .icon{width:20px;height:20px;color:var(--blue)}
+.nav-panel a:hover{background:var(--sand)}
+.nav-panel a[aria-current="page"]{background:var(--sand);font-weight:600}
+.header-phone{display:none;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:var(--pill);color:var(--navy);font:600 .9375rem/1 var(--text);text-decoration:none}
+.header-phone .icon{width:18px;height:18px;color:var(--blue)}
+.header-phone:hover{background:var(--sand);color:var(--navy)}
+@media (min-width:1180px){.header-phone{display:inline-flex}}
+.header-call{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--navy);color:var(--navy)}
+.header-call .icon{width:20px;height:20px}
+@media (min-width:960px){.header-call{display:none}}
+.site-menu .menu-group{padding:18px 0 6px;color:var(--muted)}
+.site-menu .menu-sub{display:flex;align-items:center;gap:12px;min-height:50px;border-bottom:1px solid var(--hairline);color:var(--navy);font:600 1.0625rem/1.2 var(--text);text-decoration:none}
+.site-menu .menu-sub .icon{width:20px;height:20px;color:var(--blue)}
+
+/* The local proof strip under a hero: rating, address, hours, call/text. */
+.local-strip{display:flex;flex-wrap:wrap;align-items:center;gap:10px 28px;padding:16px 0;border-block:1px solid var(--hairline);font-size:.9375rem;color:var(--ink)}
+.local-strip > *{display:inline-flex;align-items:center;gap:8px}
+.local-strip .icon{width:18px;height:18px;color:var(--blue)}
+.local-strip a{color:var(--navy);font-weight:600;text-decoration:none}
+.local-strip a:hover{text-decoration:underline}
+.local-strip .rating{font-weight:400}
+
+/* Hero order card (in place of the Studio's release card). */
+.order-card{position:absolute;z-index:4;left:0;bottom:6px;width:min(88%,350px);rotate:-2deg;display:grid;gap:10px;border-radius:18px;background:var(--surface);color:var(--ink);padding:16px 18px;box-shadow:var(--lift)}
+.order-card .oc-title{display:flex;align-items:center;justify-content:space-between;gap:10px;font:700 1.0625rem/1.2 var(--display);color:var(--navy)}
+.order-card ol{display:grid;gap:8px;margin:0;padding:0;list-style:none;font-size:.875rem}
+.order-card li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;align-items:start}
+.order-card li .icon{width:20px;height:20px;color:var(--blue)}
+.order-card li b{color:var(--navy);font-weight:600}
+@media (max-width:959px){.order-card{left:4%;width:92%}}
+
+/* Page heroes with a photo (services, local pages). */
+.page-hero .hero-grid{align-items:center}
+.page-hero .eyebrow{margin-bottom:14px;color:var(--brown)}
+.hero-photo-card{margin:0;border-radius:var(--r-xl);overflow:hidden;background:var(--sand);box-shadow:var(--lift);aspect-ratio:4/3}
+.hero-photo-card picture,.hero-photo-card img{width:100%;height:100%;object-fit:cover}
+.hero-photo-card figcaption{padding:10px 14px;font-size:.8125rem;color:var(--muted);background:var(--surface)}
+.crumbs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 18px;padding:0;list-style:none;font-size:.875rem;color:var(--muted)}
+.crumbs li + li::before{content:"/";margin-right:6px;color:var(--hairline)}
+.crumbs a{color:var(--muted)}
+
+/* Migrated page content. */
+.prose{max-width:72ch}
+.prose--wide{max-width:none}
+.prose > * + *{margin-top:16px}
+.prose h2{font-size:clamp(1.75rem,1.3rem + 1.8vw,2.625rem);line-height:1.08;margin-top:8px}
+.prose h3{font-size:1.375rem;line-height:1.2;margin-top:28px}
+.prose h4{font-size:1.125rem;margin-top:22px}
+.prose p,.prose li{color:var(--ink)}
+.prose ul,.prose ol{display:grid;gap:8px;padding-left:22px}
+.prose ul li::marker{color:var(--brown)}
+.prose .kicker,.kicker{font:600 .75rem/1.3 var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--brown)}
+.prose .kicker + h2,.prose .kicker + h3{margin-top:8px}
+.prose table{width:100%;border-collapse:collapse;font-size:.9375rem;background:var(--surface);border-radius:var(--r-lg);overflow:hidden;box-shadow:0 0 0 1px var(--hairline)}
+.prose th,.prose td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--hairline);vertical-align:top}
+.prose thead th{background:var(--parchment);font:600 .75rem/1.3 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.prose tbody tr:last-child :is(th,td){border-bottom:0}
+.prose .table-scroll{overflow-x:auto}
+.card-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:24px}
+.card-grid article{display:grid;gap:10px;align-content:start;padding:24px;border-radius:var(--r-lg);background:var(--surface);border:1px solid var(--hairline)}
+.section--sand .card-grid article{background:var(--parchment)}
+.card-grid article h3,.card-grid article h4{margin:0;font-size:1.25rem}
+.card-grid article p{color:var(--muted);font-size:.9375rem}
+.card-grid article:nth-child(4n+1){border-top:4px solid var(--tan)}
+.card-grid article:nth-child(4n+2){border-top:4px solid var(--sky)}
+.card-grid article:nth-child(4n+3){border-top:4px solid var(--blue)}
+.card-grid article:nth-child(4n+4){border-top:4px solid var(--navy)}
+.img-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:24px}
+.img-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r-lg)}
+.block-split{display:grid;gap:36px;align-items:start}
+@media (min-width:960px){.block-split{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:56px}}
+.aside-stack{display:grid;gap:16px}
+
+/* Service tiles (home): one colour each, rotating; icon, name, line, link. */
+.service-tiles{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));padding:0;list-style:none}
+.service-tiles > li{display:contents}
+.service-tile{display:grid;gap:10px;align-content:start;min-height:210px;padding:24px;border-radius:var(--r-lg);text-decoration:none;color:var(--ink);transition:translate 160ms ease,box-shadow 160ms ease}
+.service-tile:hover{translate:0 -3px;box-shadow:var(--lift);color:var(--ink)}
+.service-tile .icon{width:34px;height:34px;color:var(--navy)}
+.service-tile h3{font-size:1.5rem;color:var(--navy)}
+.service-tile p{font-size:.9375rem}
+.service-tile .text-link{margin-top:auto;color:var(--navy)}
+.service-tile:nth-child(4n+1){background:var(--tan)}
+.service-tile:nth-child(4n+2){background:var(--sky)}
+.service-tile:nth-child(4n+3){background:var(--sand)}
+.service-tile:nth-child(4n+4){background:var(--navy);color:var(--parchment)}
+.service-tile:nth-child(4n+4) :is(h3,.icon,.text-link){color:var(--parchment)}
+.service-tile:nth-child(4n+4):hover{color:var(--parchment)}
+
+/* Quote band: the embedded quote form on a surface card beside what happens next. */
+.quote-band{display:grid;gap:28px}
+@media (min-width:1020px){.quote-band{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px;align-items:start}}
+.quote-frame{border-radius:var(--r-xl);background:var(--surface);border:1px solid var(--hairline);box-shadow:var(--lift);overflow:hidden}
+.quote-frame iframe{display:block;width:100%;height:760px;border:0}
+@media (max-width:767px){.quote-frame iframe{height:680px}}
+.quote-next{display:grid;gap:18px;align-content:start}
+.quote-next .checklist{margin-top:6px}
+.quote-alt{padding:18px 20px;border-radius:var(--r-lg);background:var(--sand)}
+.quote-alt b{display:block;color:var(--navy)}
+.quote-alt a{font-weight:600}
+
+/* Reviews: real Google reviews the owner published, with source and date. */
+.reviews{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));padding:0;list-style:none}
+.review{display:grid;gap:14px;align-content:start;padding:24px;border-radius:var(--r-lg);background:var(--surface);border:1px solid var(--hairline)}
+.section--sand .review{background:var(--parchment)}
+.review blockquote{margin:0;font:500 1.0625rem/1.5 var(--display);color:var(--navy)}
+.review footer{display:flex;align-items:center;gap:12px;font-size:.875rem;color:var(--muted)}
+.review footer img{width:40px;height:40px;border-radius:50%;object-fit:cover;background:var(--sand)}
+.review footer b{display:block;color:var(--ink);font-weight:600}
+.review .stars{display:inline-flex;gap:2px;color:var(--brown)}
+.review .stars .icon{width:16px;height:16px}
+
+/* Areas: local pages as pill links. */
+.areas{display:flex;flex-wrap:wrap;gap:8px;padding:0;list-style:none}
+.areas a{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 16px;border-radius:var(--pill);background:var(--surface);border:1px solid var(--hairline);color:var(--navy);font:500 .9375rem/1 var(--text);text-decoration:none}
+.areas a:hover{background:var(--sand)}
+.areas a[aria-current="page"]{background:var(--navy);border-color:var(--navy);color:var(--parchment)}
+.area-groups{display:grid;gap:32px}
+.area-groups h3{margin-bottom:14px}
+
+/* The owner: photo, words, credentials. */
+.owner{display:grid;gap:32px;align-items:center}
+@media (min-width:960px){.owner{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:56px}}
+.owner .photo{aspect-ratio:4/5}
+.photo picture{height:100%}
+.owner .signature{width:160px;height:auto;margin-top:6px;opacity:.85}
+.owner blockquote{margin:18px 0 0;font:500 1.25rem/1.5 var(--display);color:var(--navy)}
+
+/* Gallery lightbox (a native <dialog>; site.js opens it). */
+.gallery a{display:block}
+.gallery a:focus-visible{outline-offset:-3px}
+.lightbox{width:min(96vw,1100px);max-height:92vh;padding:0;border:0;border-radius:var(--r-lg);background:var(--ink);color:var(--parchment)}
+.lightbox::backdrop{background:rgba(16,32,47,.82)}
+.lightbox img{width:100%;max-height:82vh;object-fit:contain}
+.lightbox-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;font-size:.875rem}
+.lightbox-bar button{display:inline-grid;place-items:center;width:40px;height:40px;border:0;border-radius:50%;background:var(--parchment);color:var(--navy);cursor:pointer}
+
+/* Thank-you and quote pages: a narrow centred column. */
+.narrow{max-width:760px;margin-inline:auto}
+.next-steps{counter-reset:step;display:grid;gap:14px;padding:0;list-style:none}
+.next-steps li{counter-increment:step;display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;align-items:start}
+.next-steps li::before{content:counter(step);display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:var(--tan);color:var(--navy);font:700 1.25rem/1 var(--display)}
+.next-steps b{display:block;color:var(--navy)}
+
+/* The quick-answer callout (comparison and hub pages). */
+.callout{padding:22px 26px;border-radius:var(--r-lg);background:var(--sky);color:var(--ink)}
+.callout p{font-size:1.0625rem}
+`;
+
+export const SITE_CSS = BASE_CSS + ADDITIONS;

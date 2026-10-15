@@ -1,0 +1,82 @@
+{
+  "file": "screen-printing-parker.html",
+  "slug": "screen-printing-parker",
+  "title": "Screen Printing Parker CO | ARK Screen Printing",
+  "description": "Screen printing Parker, CO: custom t-shirts, uniforms, and branded apparel from ARK Screen Printing. No minimums, done in-house.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-parker",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ARK Screen Printing Studio - Parker",
+      "image": "https://arkscreenprinting.com/images/ark prototype.png",
+      "url": "https://arkscreenprinting.com/screen-printing-parker",
+      "telephone": "(719) 280-2638",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Colorado Springs",
+        "addressLocality": "Colorado Springs",
+        "addressRegion": "CO",
+        "postalCode": "80922",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Parker, CO"
+      },
+      "description": "Expert custom screen printing and embroidery services for businesses, schools, and events in Parker, CO. We specialize in custom t-shirts, team uniforms, and corporate apparel.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Screen Printing Services for Parker",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom T-Shirts & Apparel in Parker"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Team Uniforms & Spirit Wear in Parker"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Corporate Apparel & Embroidery in Parker"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Parker CO",
+    "lead": [
+      "Screen printing Parker CO — ARK serves local businesses, teams, schools, and organizations with custom apparel, all printed in-house."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/Parker,_Colorado-Mainstreet.JPG",
+      "alt": "Parker Colorado - ARK Screen Printing serves Parker"
+    },
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "local-content",
+      "variant": null,
+      "html": "<h2>Custom Screen Printing for Parker's Growing Family Community</h2> <p>Parker has been one of Colorado's fastest-growing towns for two decades — a Douglas County community that's grown into a thriving suburb with a strong sense of local identity. The PACE Center (Parker Arts, Culture &amp; Events) anchors a vibrant community calendar, and Parker Days is one of the region's most popular annual festivals. Young families dominate the demographic, and youth sports, school fundraisers, <a href=\"/custom-shirts\">custom t-shirts</a> for community clubs, and neighborhood events create consistent demand for custom apparel year-round.</p> <p>Douglas County School District serves Parker with three major high schools: Legend High School Titans, Ponderosa High School Mustangs, and Chaparral High School Wolverines — all competing at the 5A level with active spirit wear programs and strong booster communities. The local economy is anchored by healthcare, professional services, and small business, with many residents commuting to aerospace and tech companies along the I-25 corridor to the west.</p> <article> <article> <h3>Parker community events</h3> <p>Custom tees and apparel for Parker Days, PACE events, youth leagues, and neighborhood fundraisers.</p> </article> <article> <h3>Legend, Ponderosa &amp; Chaparral</h3> <p>Spirit wear and team gear for Parker's three 5A high schools and their booster communities.</p> </article> <article> <h3>Douglas County quality</h3> <p>Families here expect the best — every ARK order is backed by our full quality guarantee.</p> </article> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Fill out the form below for a fast, accurate quote on your Parker screen printing project."
+}

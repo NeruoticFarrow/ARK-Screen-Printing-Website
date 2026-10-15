@@ -1,0 +1,82 @@
+{
+  "file": "screen-printing-woodland-park.html",
+  "slug": "screen-printing-woodland-park",
+  "title": "Screen Printing Woodland Park CO | ARK Screen Printing",
+  "description": "Screen printing Woodland Park, CO: custom t-shirts, uniforms, and branded apparel from ARK Screen Printing. No minimums, done in-house.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-woodland-park",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ARK Screen Printing Studio - Woodland Park",
+      "image": "https://arkscreenprinting.com/images/ark prototype.png",
+      "url": "https://arkscreenprinting.com/screen-printing-woodland-park",
+      "telephone": "(719) 280-2638",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Colorado Springs",
+        "addressLocality": "Colorado Springs",
+        "addressRegion": "CO",
+        "postalCode": "80922",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Woodland Park, CO"
+      },
+      "description": "Expert custom screen printing and embroidery services for businesses, schools, and events in Woodland Park, CO. We specialize in custom t-shirts, team uniforms, and corporate apparel.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Screen Printing Services for Woodland Park",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom T-Shirts & Apparel in Woodland Park"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Team Uniforms & Spirit Wear in Woodland Park"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Corporate Apparel & Embroidery in Woodland Park"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Woodland Park CO",
+    "lead": [
+      "Screen printing Woodland Park CO — ARK serves local businesses, teams, schools, and organizations with custom apparel, all printed in-house."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/Woodland-Park-Downtown.jpg",
+      "alt": "Woodland Park Colorado - ARK Screen Printing serves Woodland Park"
+    },
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "local-content",
+      "variant": null,
+      "html": "<h2>Screen Printing for Woodland Park's Mountain Community</h2> <p>Sitting at 8,465 feet on the western slope of Pikes Peak, Woodland Park is Teller County's largest town — about 20,000 residents who chose mountain living without sacrificing access to Colorado Springs 20 miles down Ute Pass. The community blends ranchers, outdoor recreation businesses, Colorado Springs commuters, and residents from Divide and Florissant. Custom apparel here ranges from branded fleece for guide operations to screen-printed tees for annual community events.</p> <p>Woodland Park School District RE-2 serves students from Woodland Park through Divide and Florissant, and the Woodland Park Panthers compete across multiple sports with strong community support. Charis Bible College, based in Woodland Park, also draws a community of students and families who need custom gear for events, missions, and ministries. We take orders online and ship directly up the pass — no need to make the drive to Colorado Springs.</p> <article> <article> <h3>Mountain community</h3> <p>Custom screen printing and DTF for businesses, outfitters, and events throughout the Ute Pass corridor.</p> </article> <article> <h3>Woodland Park Panthers</h3> <p>Spirit wear and team apparel for RE-2 athletics and school community events.</p> </article> <article> <h3>Order online, ship up the pass</h3> <p>No drive required — we handle it from our Colorado Springs shop and get it to you fast.</p> </article> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Fill out the form below for a fast, accurate quote on your Woodland Park screen printing project."
+}

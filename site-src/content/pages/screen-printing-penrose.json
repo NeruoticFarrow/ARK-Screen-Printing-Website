@@ -1,0 +1,82 @@
+{
+  "file": "screen-printing-penrose.html",
+  "slug": "screen-printing-penrose",
+  "title": "Screen Printing Penrose CO | ARK Screen Printing",
+  "description": "Screen printing Penrose, CO: custom t-shirts, uniforms, and branded apparel from ARK Screen Printing. No minimums, done in-house.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-penrose",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ARK Screen Printing Studio - Penrose",
+      "image": "https://arkscreenprinting.com/images/ark prototype.png",
+      "url": "https://arkscreenprinting.com/screen-printing-penrose",
+      "telephone": "(719) 280-2638",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Colorado Springs",
+        "addressLocality": "Colorado Springs",
+        "addressRegion": "CO",
+        "postalCode": "80922",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Penrose, CO"
+      },
+      "description": "Expert custom screen printing and embroidery services for businesses, organizations, and events in Penrose, CO. We specialize in custom t-shirts, workwear, and community apparel.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Screen Printing Services for Penrose",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom T-Shirts & Apparel in Penrose"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Workwear & Uniforms in Penrose"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Community Event Apparel in Penrose"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Penrose CO",
+    "lead": [
+      "Screen printing Penrose CO — ARK serves local businesses, teams, schools, and organizations with custom apparel, all printed in-house."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/Penrose-Mountains.avif",
+      "alt": "Penrose Colorado - ARK Screen Printing serves Penrose"
+    },
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "local-content",
+      "variant": null,
+      "html": "<h2>Custom Apparel for Penrose's Rural Fremont County Community</h2> <p>Penrose is a small rural community about 12 miles east of <a href=\"/screen-printing-canon-city\">Cañon City</a> in Fremont County — locally known as the Model Rocket Capital of the World, home to Estes Industries, the global leader in model rocketry. It's a working-class agricultural and manufacturing community where custom workwear, school apparel, and small-event gear are practical, valued needs. ARK offers <a href=\"/dtf-printing-colorado-springs\">DTF printing</a> with no minimum for small-batch community orders, alongside full screen printing runs for larger groups.</p> <p>Penrose is served by the Fremont RE-2 School District alongside Florence, with Penrose Elementary feeding into Florence Junior/Senior High School. The Estes Industries connection gives Penrose a unique identity within the region's small rural communities. Community events, agricultural fairs, and the local businesses that employ Penrose residents all generate occasional custom apparel needs. We ship from Colorado Springs, about 55 miles northeast, with reliable turnaround.</p> <article> <article> <h3>Estes Industries community</h3> <p>Custom apparel for Penrose's manufacturing workforce, agricultural businesses, and community events.</p> </article> <article> <h3>Rural Fremont County</h3> <p>Screen printing and DTF for working families, ranchers, and small organizations in the Penrose area.</p> </article> <article> <h3>No minimums</h3> <p>DTF printing from one piece — affordable for small-community orders.</p> </article> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Fill out the form below for a fast, accurate quote on your Penrose screen printing project."
+}

@@ -1,0 +1,81 @@
+{
+  "file": "screen-printing-highlands-ranch.html",
+  "slug": "screen-printing-highlands-ranch",
+  "title": "Screen Printing Highlands Ranch CO | ARK Screen Printing",
+  "description": "Screen printing Highlands Ranch, CO: custom t-shirts, uniforms, and branded apparel from ARK Screen Printing. No minimums, done in-house.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-highlands-ranch",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Screen Printing Services",
+      "provider": {
+        "@type": "Organization",
+        "name": "ARK Screen Printing Studio",
+        "telephone": "(719) 280-2638",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Colorado Springs",
+          "addressRegion": "CO",
+          "addressCountry": "US"
+        }
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Highlands Ranch",
+        "containedIn": {
+          "@type": "State",
+          "name": "Colorado"
+        }
+      },
+      "description": "Premium screen printing services in Highlands Ranch, CO. Custom corporate apparel, team uniforms, and branded merchandise for Colorado's most affluent community."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://arkscreenprinting.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Service Areas",
+          "item": "https://arkscreenprinting.com/service-areas"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Highlands Ranch Screen Printing"
+        }
+      ]
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Highlands Ranch CO",
+    "lead": [
+      "Screen printing Highlands Ranch CO — ARK serves local businesses, teams, schools, and organizations with custom apparel, all printed in-house."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/Highlands-Ranch-Town-Center.jpg",
+      "alt": "Highlands Ranch Colorado - ARK Screen Printing serves Highlands Ranch"
+    },
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "local-content",
+      "variant": null,
+      "html": "<h2>Screen Printing for Highlands Ranch's Active Community</h2> <p>Highlands Ranch is the largest unincorporated community in Colorado — over 101,000 residents across 22,000 acres of master-planned neighborhoods, trails, and recreation facilities managed by the HRCA. Four recreation centers, 70+ miles of trails, and a dense calendar of youth sports leagues, clubs, and community events create constant demand for event t-shirts, club jerseys, team uniforms, and branded athletic gear. This is a community that runs hard and expects quality.</p> <p>The Douglas County School District serves Highlands Ranch with standout high schools: Mountain Vista Golden Eagles, ThunderRidge Grizzlies, Rock Canyon Jaguars, and the STEM School Highlands Ranch — all of which run active athletic and extracurricular programs. Major local employers include UCHealth Highlands Ranch Hospital, Children's Hospital Colorado's Highlands Ranch facility, and VISA USA, while Lockheed Martin and other Denver-area aerospace companies draw many residents from the community.</p> <article> <article> <h3>HRCA community</h3> <p>Apparel for leagues, clubs, and events across Highlands Ranch's four recreation center districts.</p> </article> <article> <h3>Mountain Vista, ThunderRidge &amp; Rock Canyon</h3> <p>Spirit wear and team gear for the Douglas County schools that call Highlands Ranch home.</p> </article> <article> <h3>Premium quality expected</h3> <p>Highlands Ranch families set a high bar — ARK backs every order with a full quality guarantee.</p> </article> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Fill out the form below for a fast, accurate quote on your Highlands Ranch screen printing project."
+}

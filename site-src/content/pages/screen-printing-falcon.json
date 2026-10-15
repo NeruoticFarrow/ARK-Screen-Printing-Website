@@ -1,0 +1,82 @@
+{
+  "file": "screen-printing-falcon.html",
+  "slug": "screen-printing-falcon",
+  "title": "Screen Printing Falcon CO | ARK Screen Printing",
+  "description": "Screen printing Falcon, CO: custom t-shirts, uniforms, and branded apparel from ARK Screen Printing. No minimums, done in-house.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-falcon",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ARK Screen Printing Studio - Falcon",
+      "image": "https://arkscreenprinting.com/images/ark prototype.png",
+      "url": "https://arkscreenprinting.com/screen-printing-falcon",
+      "telephone": "(719) 280-2638",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Colorado Springs",
+        "addressLocality": "Colorado Springs",
+        "addressRegion": "CO",
+        "postalCode": "80922",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Falcon, CO"
+      },
+      "description": "Expert custom screen printing and embroidery services for businesses, schools, and events in Falcon, CO. We specialize in custom t-shirts, team uniforms, and corporate apparel.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Screen Printing Services for Falcon",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom T-Shirts & Apparel in Falcon"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Team Uniforms & Spirit Wear in Falcon"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Corporate Apparel & Embroidery in Falcon"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Falcon CO",
+    "lead": [
+      "Screen printing Falcon CO — ARK serves local businesses, teams, schools, and organizations with custom apparel, all printed in-house."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/Falcon-Meridian-Ranch.jpg",
+      "alt": "Falcon Colorado - ARK Screen Printing serves Falcon"
+    },
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "local-content",
+      "variant": null,
+      "html": "<h2>Screen Printing for Falcon's Fast-Growing Community</h2> <p>Falcon is one of El Paso County's fastest-growing communities — a broad eastern corridor transitioning from agricultural land to new housing developments while keeping its rural character. School District 49 is the fastest-growing school district in the Pikes Peak region, with nearly 26,000 students. Many Falcon residents commute to Colorado Springs, Peterson Space Force Base, or Schriever Space Force Base, giving the community a strong military and aerospace character alongside its agricultural roots.</p> <p>Falcon High School Falcons is the area's oldest District 49 high school, with history stretching back to 1900. Sand Creek High School and Skyview High School round out the district's competitive athletic programs. New neighborhood developments, HOA community events, and a growing number of small businesses serving the area all add to the demand for custom screen printing. We're about 20 miles west in Colorado Springs and ship reliably to the Falcon area.</p> <article> <article> <h3>District 49 athletics</h3> <p>Spirit wear and team gear for Falcon Falcons, Sand Creek Scorpions, and D49's fast-growing school programs.</p> </article> <article> <h3>Fast-growing community</h3> <p>Custom apparel for Falcon's new neighborhoods, HOAs, youth sports leagues, and community events.</p> </article> <article> <h3>Military connections</h3> <p>Custom gear for Falcon's large population of Peterson and Schriever Space Force families.</p> </article> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Fill out the form below for a fast, accurate quote on your Falcon screen printing project."
+}

@@ -1,0 +1,119 @@
+import { APP, FACTS, SHOP, SITE } from "../lib/facts.mjs";
+import { esc, ldScript } from "../lib/html.mjs";
+import { icon } from "../lib/icons.mjs";
+import { WORK, PHOTOS } from "../lib/media.mjs";
+import {
+  areasList, ctaRow, doodle, faqJsonLd, faqList, galleryGrid, heroArt, localStrip, ownerSection, proofSection,
+  quoteBand, ratingLink, REASSURANCE, reassure, rulesTile, sectionHead, serviceTiles, stepsList, textLink, ticker,
+} from "../lib/components.mjs";
+import { SERVICE_PAGES } from "../content/services.mjs";
+
+// The home page, local-first (knowledge base chapter 25 §11.2): what, where
+// and how to start on the first screen; local proof in plain sight; who we
+// print for; services; the rules stated plainly with the reason; a named
+// process with the proof before you commit; reviews; the printer; real work;
+// a bridge for groups; areas; answers; the quote form.
+
+export const HOME_FAQ = [
+  { q: "Is there a minimum order?", a: [`No. A single shirt is printed with DTF, which needs no screens. Screen printing is available from ${FACTS.screenFrom} pieces and is usually the best value from ${FACTS.screenBestValueFrom}. Tell us your quantity and we'll recommend the cheaper method.`] },
+  { q: "How long does an order take?", a: [`Most screen-print orders are done in ${FACTS.turnaround.screen}, DTF in ${FACTS.turnaround.dtf} from artwork approval and embroidery in ${FACTS.turnaround.embroidery}. Need it for a date? Put the date in your quote request or call — rush is often possible.`] },
+  { q: "Will I see my design before you print it?", a: ["Yes. You get a proof — a mockup of your design on the garment — with the price. Nothing is printed until you approve it."] },
+  { q: "Can you help with my artwork?", a: [`Yes. Send a logo file, a sketch or just an idea and we'll prepare it for print. Our <a href="${APP.artwork}">artwork guidelines</a> explain which files work best.`] },
+  { q: "Do you do embroidery?", a: ["Yes — polos, hats, jackets and bags, with free digitizing on every order and no minimum order. See <a href=\"/custom-embroidery\">custom embroidery</a>."] },
+  { q: "Can I pick up my order?", a: [`Yes. Collect it from the shop at ${SHOP.address} (${SHOP.hours}), or we'll ship it anywhere in the US.`] },
+];
+
+export function renderHome(ctx) {
+  const hero = `<section class="hero" aria-labelledby="hero-title"><div class="container hero-grid">
+  <div>
+    <h1 id="hero-title" class="display">Screen printing in Colorado Springs, <em class="accent swash">done here<svg class="swash-line" viewBox="0 0 120 16" aria-hidden="true" focusable="false"><path pathLength="1" d="M4 11C36 4 80 3 116 9"/></svg></em>.</h1>
+    <p class="lead">Custom shirts, hoodies, hats and embroidery for teams, businesses, churches and events — printed in our shop on Telstar Drive by the people who answer your call. No minimum order: one shirt or a thousand.</p>
+    ${ctaRow("hero", { onPage: true })}
+    ${reassure(REASSURANCE)}
+    <div class="hero-proof">${ratingLink("hero_rating")}</div>
+  </div>
+  ${heroArt()}
+</div></section>`;
+
+  const strip = `<section class="section--tight"><div class="container">${localStrip("home_strip")}</div></section>`;
+
+  const audiences = `<section class="section--tight"><div class="container">${ticker("We print for", ["Teams & boosters", "Schools & PTOs", "Churches & mission trips", "Businesses & uniforms", "Events & races", "Bands & brands", "Nonprofits", "Reunions & gifts"])}</div></section>`;
+
+  const lines = Object.fromEntries(Object.entries(SERVICE_PAGES).map(([k, v]) => [k, v.tile]));
+  const services = `<section class="section" aria-labelledby="services-title"><div class="container">
+  ${sectionHead("services-title", "What we *print*.", "Every job is printed or stitched in our shop — so we can tell you exactly how it'll come out.", { aside: textLink("/screen-printing-and-embroidery", "Which method is right?", "services_methods") })}
+  <div class="doodled">${doodle("burst", "section-doodle section-doodle--burst", " data-appear")}${serviceTiles(lines)}</div>
+</div></section>`;
+
+  const rules = `<section class="section" id="rules" aria-labelledby="rules-title"><div class="container">${rulesTile("rules-title", { onPage: true })}</div></section>`;
+
+  const how = `<section class="section section--sand" id="how" aria-labelledby="how-title"><div class="container">
+  ${sectionHead("how-title", "How an order *works*.", "Four steps, and you see the proof before you commit to anything.")}
+  <div class="doodled">${doodle("loop", "section-doodle section-doodle--loop", " data-appear")}${stepsList()}</div>
+  ${ctaRow("after_steps", { onPage: true })}
+</div></section>`;
+
+  const proof = `<section class="section" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What customers *say*.")}</div></section>`;
+
+  const owner = `<section class="section section--sand" aria-labelledby="owner-title"><div class="container">${ownerSection("owner-title")}</div></section>`;
+
+  const work = `<section class="section" aria-labelledby="work-title"><div class="container">
+  ${sectionHead("work-title", "Printed in our shop, not a *warehouse*.", "Real orders from our presses.", { aside: textLink("/gallery", "See more of our work", "work_gallery") })}
+  <div class="doodled">${doodle("strokes", "section-doodle section-doodle--strokes", " data-appear")}${galleryGrid(WORK.slice(0, 6))}</div>
+</div></section>`;
+
+  const groups = `<section class="section section--sand" aria-labelledby="groups-title"><div class="container">
+  ${sectionHead("groups-title", "Ordering for a *group*?", "Three ways to do it — pick the one that fits how your group pays.")}
+  <ul class="features">
+    <li class="card feature" data-appear>${icon("package")}<h3 class="h4">One order, delivered together</h3><p>You collect sizes, we print the lot and you pick it up or we ship it. Best for teams, staff and events.</p>${textLink("#quote", "Get a quote", "groups_quote")}</li>
+    <li class="card feature" data-appear>${icon("storefront")}<h3 class="h4">Everyone pays for their own</h3><p>A free online store where each person picks a size and pays. We print and ship every order — no collecting cash.</p>${textLink(APP.studio, "How group stores work", "groups_store")}</li>
+    <li class="card feature" data-appear>${icon("handHeart")}<h3 class="h4">Raise money with shirts</h3><p>Set a price above the cost and the difference goes to your cause, with a store your supporters order from.</p>${textLink(APP.studio, "Fundraiser stores", "groups_fundraiser")}</li>
+  </ul>
+</div></section>`;
+
+  const areas = `<section class="section" aria-labelledby="areas-title"><div class="container">
+  ${sectionHead("areas-title", "Across the *Pikes Peak* region.", `We're on the east side of ${SHOP.city} — pick up at the shop, or we'll ship to you.`, { aside: textLink("/service-areas", "All service areas", "areas_all") })}
+  ${areasList(ctx.areas.close)}
+</div></section>`;
+
+  const faq = `<section class="section section--sand" id="faq" aria-labelledby="faq-title"><div class="container">
+  ${sectionHead("faq-title", "Straight *answers*.", undefined, { aside: textLink("/faq", "All questions", "faq_all") })}
+  ${faqList(HOME_FAQ)}
+</div></section>`;
+
+  const quote = quoteBand({ plain: true });
+
+  const ld = ldScript({
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": `${SITE.origin}/#business`,
+    name: SHOP.name,
+    url: SITE.origin,
+    logo: `${SITE.origin}/assets/brand/ark-logo-120.png`,
+    image: `${SITE.origin}${PHOTOS.press.src}`,
+    description: "Custom screen printing, DTF printing, and embroidery in Colorado Springs. No minimum orders, done in-house at ARK Screen Printing.",
+    telephone: SHOP.phoneDisplay,
+    email: SHOP.email,
+    priceRange: "$$",
+    address: { "@type": "PostalAddress", streetAddress: SHOP.street, addressLocality: SHOP.city, addressRegion: SHOP.region, postalCode: SHOP.postcode, addressCountry: "US" },
+    geo: { "@type": "GeoCoordinates", ...SHOP.geo },
+    openingHoursSpecification: { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], opens: "07:30", closes: "19:00" },
+    hasMap: SHOP.mapsUrl,
+    sameAs: SHOP.sameAs,
+    areaServed: { "@type": "City", name: SHOP.city },
+  }) + ldScript({ "@context": "https://schema.org", "@type": "WebSite", name: SHOP.name, url: SITE.origin }) + faqJsonLd(HOME_FAQ);
+
+  return {
+    title: ctx.page.title,
+    description: ctx.page.description,
+    canonical: `${SITE.origin}/`,
+    robots: null,
+    ogImage: `${SITE.origin}${PHOTOS.press.src}`,
+    chrome: "full",
+    current: "home",
+    hasQuote: true,
+    page: "home",
+    jsonLd: ld,
+    main: hero + strip + audiences + services + rules + how + proof + owner + work + groups + areas + faq + quote,
+  };
+}

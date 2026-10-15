@@ -1,0 +1,162 @@
+{
+  "file": "screen-printing-ivywild.html",
+  "slug": "screen-printing-ivywild",
+  "title": "Custom Screen Printing Ivywild Colorado Springs | ARK Screen Printing",
+  "description": "Custom screen printing Ivywild Colorado Springs for creative businesses, events, teams, and merchandise. Start with artwork, garments, quantity, and deadline.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-ivywild",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Custom Screen Printing Ivywild Colorado Springs",
+      "serviceType": "Custom screen printing",
+      "url": "https://arkscreenprinting.com/screen-printing-ivywild",
+      "description": "Custom screen printing Ivywild Colorado Springs for creative businesses, events, teams, and merchandise. Start with artwork, garments, quantity, and deadline.",
+      "provider": {
+        "@type": "Organization",
+        "name": "ARK Screen Printing Studio",
+        "url": "https://arkscreenprinting.com",
+        "telephone": "(719) 280-2638",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1755 Telstar Dr, Suite 300",
+          "addressLocality": "Colorado Springs",
+          "addressRegion": "CO",
+          "postalCode": "80922",
+          "addressCountry": "US"
+        }
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Ivywild, Colorado Springs, Colorado"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I begin an Ivywild merchandise quote with a rough concept?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. A rough concept, logo, or visual reference is useful. Include the garment direction, quantity estimate, and desired timing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I ask about water-based or discharge printing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Note the garment color, artwork coverage, desired hand feel, and quantity so those options can be reviewed against the project."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can the same design be used on multiple garment colors?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Include every planned garment color and design variation in the request. Those choices can affect the print approach and quote."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is ARK located?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ARK Screen Printing Studio is based in Colorado Springs and serves Ivywild apparel projects through a quote-first workflow."
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://arkscreenprinting.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Service Areas",
+          "item": "https://arkscreenprinting.com/service-areas"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Custom Screen Printing Ivywild Colorado Springs",
+          "item": "https://arkscreenprinting.com/screen-printing-ivywild"
+        }
+      ]
+    }
+  ],
+  "hero": {
+    "eyebrow": "Ivywild · Custom apparel",
+    "h1": "Custom Screen Printing Ivywild Colorado Springs",
+    "lead": [
+      "Custom screen printing Ivywild Colorado Springs for creative businesses, events, teams, and merchandise. Start with artwork, garments, quantity, and deadline."
+    ],
+    "meta": "ARK is based in Colorado Springs and serves this area through a quote-first production workflow.",
+    "image": {
+      "src": "/images/local-cluster/ivywild-hero.webp",
+      "alt": "Custom Screen Printing Ivywild Colorado Springs"
+    },
+    "caption": "Illustrative adaptive-reuse and creative-district visual direction for Ivywild."
+  },
+  "blocks": [
+    {
+      "kind": "cluster-section",
+      "variant": null,
+      "html": "<p class=\"kicker\">A creative-project quote should start with the outcome</p><h2>Ivywild apparel for merch, gatherings, and working teams</h2><p>Ivywild’s creative and community-oriented energy makes it a natural context for custom merchandise, event shirts, staff apparel, and small brand projects. Those projects succeed when the first conversation covers the garment experience as carefully as the artwork itself.</p><p>ARK serves Ivywild from Colorado Springs. Use the quote form to share the creative direction, the kind of garment you have in mind, the print coverage, size range, quantity, and timing. That gives the production decision a useful foundation.</p><figure><img src=\"/images/screen-printing-equipment-colorado-springs.jpg\" alt=\"Screen printer preparing a custom apparel screen at ARK\"><figcaption>Production planning starts with the garment, artwork, print locations, and schedule.</figcaption></figure>",
+      "faq": []
+    },
+    {
+      "kind": "cluster-section",
+      "variant": "soft",
+      "html": "<p class=\"kicker\">Make the creative brief production-ready</p><h2>Three Ivywild apparel directions to bring into focus</h2><p>The following examples are planning prompts, not statements of a relationship with an Ivywild venue, market, business, or event.</p><article><p class=\"kicker\">01 · MAKE</p><h3>Artist and maker merchandise</h3><p>For a design-led garment, explain the illustration or logo, intended hand feel, garment color, print scale, and first-run quantity.</p></article> <article><p class=\"kicker\">02 · HOST</p><h3>Community gathering apparel</h3><p>For a gathering, include the date, participant count, sponsors or back-print needs, garments, and the distribution approach.</p></article> <article><p class=\"kicker\">03 · WORK</p><h3>Small-team and service apparel</h3><p>A team program benefits from clear logo placement, role variations, garment durability, and a plan for future hires or reorders.</p></article>",
+      "faq": []
+    },
+    {
+      "kind": "cluster-section",
+      "variant": "sand",
+      "html": "<p class=\"kicker\">Turn the concept into inputs</p><h2>What gives an Ivywild custom-apparel quote substance</h2><p>The design is important, but it is only one part of a production brief. The garment, coverage, quantity, timeline, and intended use all influence the right method.</p><ul><li>Artwork, illustration, or a clear mood/reference</li> <li>Garment type, color, fabric, and hand-feel goals</li> <li>Quantity, size range, and product or event use case</li> <li>Print locations and special finish considerations</li> <li>Launch, show, gathering, or in-hands date</li></ul><p class=\"kicker\">Quote-first workflow</p><h2>How an Ivywild apparel concept becomes a production conversation</h2><ol><li>Send the concept and known order details through the quote form.</li> <li>ARK reviews the art, garment, quantity, and finish direction.</li> <li>The quote and proofing process identify a practical route before production.</li> <li>After approval, ARK prints the order in Colorado Springs and confirms fulfillment details.</li></ol>",
+      "faq": []
+    },
+    {
+      "kind": "cluster-section",
+      "variant": null,
+      "html": "<figure><img src=\"/images/screen-printing-process-colorado-springs.jpg\" alt=\"Hands pulling a screen for a custom apparel print\"></figure><p class=\"kicker\">Choose the finish after the brief</p><h2>Choose a method that carries the artwork well</h2><p>A line-driven illustration, a soft retail graphic, a bright full-color image, and a simple staff mark ask different things of a print process. Use the quote to compare screen printing, DTF, water-based, discharge, or embroidery in relation to the actual design.</p><p>Use the quote form to describe the project. These service pages can help you understand the production conversation before you submit it.</p><a href=\"/custom-silk-screen-printing\">Custom screen printing →</a> <a href=\"/dtf-printing-colorado-springs\">DTF printing →</a> <a href=\"/water-based-screen-printing\">Water-based printing →</a> <a href=\"/discharge-screen-printing\">Discharge printing →</a> <a href=\"/images/ark-art-requirements.pdf\">Artwork guidelines →</a><a href=\"/service-areas\">Colorado Springs area guide →</a><a href=\"/screen-printing-downtown-colorado-springs\">Downtown Colorado Springs →</a> <a href=\"/screen-printing-old-colorado-city\">Old Colorado City →</a> <a href=\"/screen-printing-broadmoor-colorado-springs\">Broadmoor →</a>",
+      "faq": []
+    },
+    {
+      "kind": "cluster-section",
+      "variant": "soft",
+      "html": "<p class=\"kicker\">Questions before you quote?</p><h2>Custom Screen Printing Ivywild Colorado Springs FAQ</h2><p>Short answers to the decisions that make a custom-apparel request easier to scope.</p>",
+      "faq": [
+        {
+          "q": "Can I begin an Ivywild merchandise quote with a rough concept?",
+          "a": "<p>Yes. A rough concept, logo, or visual reference is useful. Include the garment direction, quantity estimate, and desired timing.</p>"
+        },
+        {
+          "q": "Can I ask about water-based or discharge printing?",
+          "a": "<p>Yes. Note the garment color, artwork coverage, desired hand feel, and quantity so those options can be reviewed against the project.</p>"
+        },
+        {
+          "q": "Can the same design be used on multiple garment colors?",
+          "a": "<p>Include every planned garment color and design variation in the request. Those choices can affect the print approach and quote.</p>"
+        },
+        {
+          "q": "Where is ARK located?",
+          "a": "<p>ARK Screen Printing Studio is based in Colorado Springs and serves Ivywild apparel projects through a quote-first workflow.</p>"
+        }
+      ]
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Start your project"
+}

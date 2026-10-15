@@ -1,0 +1,64 @@
+{
+  "file": "custom-silk-screen-printing.html",
+  "slug": "custom-silk-screen-printing",
+  "title": "Custom Silk Screen Printing | ARK Screen Printing",
+  "description": "Custom silk screen printing in Colorado Springs — owner-operated shop with personal attention from concept to completion. Get a quote from ARK.",
+  "canonical": "https://arkscreenprinting.com/custom-silk-screen-printing",
+  "robots": "index, follow",
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Silk Screen Printing Services",
+      "provider": {
+        "@type": "Organization",
+        "name": "ARK Screen Printing Studio",
+        "telephone": "(719) 280-2638",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Colorado Springs",
+          "addressRegion": "CO",
+          "addressCountry": "US"
+        }
+      },
+      "areaServed": {
+        "@type": "State",
+        "name": "Colorado"
+      },
+      "description": "Expert silk screen printing services offering vibrant, durable prints on custom apparel for all occasions."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://arkscreenprinting.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Screen Printing"
+        }
+      ]
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Custom Silk Screen Printing",
+    "lead": [
+      "Custom silk screen printing in Colorado Springs — from concept to completion, with personal attention from the owner every step of the way."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/custom-apparel-colorado-springs-3.jpg",
+      "alt": "Professional screen printing with intricate design details"
+    },
+    "caption": null
+  },
+  "blocks": [],
+  "areas": null,
+  "quoteIntro": null
+}

@@ -1,0 +1,82 @@
+{
+  "file": "screen-printing-black-forest.html",
+  "slug": "screen-printing-black-forest",
+  "title": "Screen Printing Black Forest CO | ARK Screen Printing",
+  "description": "Screen printing Black Forest, CO: custom t-shirts, uniforms, and branded apparel from ARK Screen Printing. No minimums, done in-house.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-black-forest",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ARK Screen Printing Studio - Black Forest",
+      "image": "https://arkscreenprinting.com/images/ark prototype.png",
+      "url": "https://arkscreenprinting.com/screen-printing-black-forest",
+      "telephone": "(719) 280-2638",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Colorado Springs",
+        "addressLocality": "Colorado Springs",
+        "addressRegion": "CO",
+        "postalCode": "80922",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Black Forest, CO"
+      },
+      "description": "Expert custom screen printing and embroidery services for businesses, schools, and events in Black Forest, CO. We specialize in custom t-shirts, team uniforms, and corporate apparel.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Screen Printing Services for Black Forest",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom T-Shirts & Apparel in Black Forest"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Team Uniforms & Spirit Wear in Black Forest"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Corporate Apparel & Embroidery in Black Forest"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Black Forest CO",
+    "lead": [
+      "Screen printing Black Forest CO — ARK serves local businesses, teams, schools, and organizations with custom apparel, all printed in-house."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/Black-Forest-Regional-Park.jpg",
+      "alt": "Black Forest Colorado - ARK Screen Printing serves Black Forest"
+    },
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "local-content",
+      "variant": null,
+      "html": "<h2>Screen Printing for Black Forest's Rural Colorado Community</h2> <p>Black Forest is a large rural community in northern El Paso County — about 15,000 residents spread across custom homes, horse properties, and ponderosa pine forests northeast of Colorado Springs. It's a community defined by its love of open space, equestrian culture, and tight-knit neighborhood associations. The Black Forest Fire of 2013 forged an especially strong sense of community resilience and mutual support. Custom apparel for neighborhood associations, equestrian groups, volunteer fire stations, and community events is a natural fit here.</p> <p>Black Forest falls primarily within Academy School District 20 (D20), one of the highest-rated school districts in Colorado. Students often attend Pine Creek High School and other D20 programs, all of which have active athletic departments and booster organizations. Local small businesses — from equestrian supply to landscaping and custom construction — also need branded workwear and event apparel. We're about 20 miles southwest in Colorado Springs and ship directly to the Black Forest area.</p> <article> <article> <h3>Rural equestrian community</h3> <p>Custom apparel for Black Forest's horse properties, neighborhood associations, and community events.</p> </article> <article> <h3>Academy D20 schools</h3> <p>Spirit wear and team gear for the high-rated schools that serve the Black Forest area.</p> </article> <article> <h3>Colorado resilience</h3> <p>A community that rebuilt after 2013 — we're proud to support Black Forest with quality custom printing.</p> </article> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Fill out the form below for a fast, accurate quote on your Black Forest screen printing project."
+}

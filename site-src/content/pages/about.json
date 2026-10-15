@@ -1,0 +1,74 @@
+{
+  "file": "about.html",
+  "slug": "about",
+  "title": "About Us | ARK Screen Printing",
+  "description": "Learn about ARK Screen Printing Studio in Colorado Springs. Impeccable craftsmanship, exemplary customer service, and fair prices.",
+  "canonical": "https://arkscreenprinting.com/about",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "ARK Screen Printing Studio",
+      "url": "https://arkscreenprinting.com",
+      "logo": "https://arkscreenprinting.com/images/ark prototype.png",
+      "description": "Premium screen printing services in Colorado Springs offering custom apparel, corporate uniforms, and promotional products.",
+      "telephone": "(719) 280-2638",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Colorado Springs",
+        "addressLocality": "Colorado Springs",
+        "addressRegion": "CO",
+        "postalCode": "80922",
+        "addressCountry": "US"
+      },
+      "sameAs": [
+        "https://www.facebook.com/arkscreenprinting",
+        "https://www.instagram.com/arkscreenprinting"
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://arkscreenprinting.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "About Us"
+        }
+      ]
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "About ARK Screen Printing Studio",
+    "lead": [
+      "Personal attention and quality focus from a dedicated owner-operator since 2024"
+    ],
+    "meta": null,
+    "image": null,
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "about-hero-new",
+      "variant": null,
+      "html": "<p>ARK Screen Printing Studio is a small, craft-centered print shop based out of Colorado Springs, CO. We got into this industry because we wanted to print our own clothes. Over time, this grew into the strongest national screen printing studio in the U.S.</p> <p>Printmaking is a traditional craft which finds origin in ancient China. Screen printing as we know today really comes into form in the early 20th century and of course gains massive popularity with Andy Warhol's photographic screen prints. We see ourselves as active participants in this tradition and thus are committed to the human process in everything we do.</p> <h2>The ARK Story</h2> <p>I started ARK Screen Printing as an organic outgrowth of my original desire to learn printmaking. While doing my own prints, people started asking me if I could do prints for them as well and this eventually blossomed into ARK Screen Printing Studio. What I love about this industry is it is an authentic service. I've had the opportunity to legitimately touch people's lives through the work we do here.</p> <h2>Why Choose ARK?</h2> <p>When you work with us, you receive genuine human connection, creativity, and just good business. All our prints are made by hand on manual equipment. The whole team here at ARK Screen Printing are treated as they ought to be; genuine craftspeople. This appreciation for human creativity and analog processes transfers into our highly valued client relationships.</p> <p>Relationships, like printmaking, are made richer when we make time.</p>",
+      "faq": []
+    },
+    {
+      "kind": "about-signoff",
+      "variant": null,
+      "html": "<p>Ultimately, it is your choice who you decide to work with on your next project.</p> <p>But I believe what we do here at ARK Screen Printing is without compare.</p> <p>—Alex R. Kinnaman</p> <img src=\"/images/alex-signature.png\" alt=\"Alex R. Kinnaman signature\">",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": null
+}

@@ -1,0 +1,133 @@
+{
+  "file": "custom-hats-colorado-springs.html",
+  "slug": "custom-hats-colorado-springs",
+  "title": "Custom Hats Colorado Springs | ARK Screen Printing",
+  "description": "Custom hats Colorado Springs — embroidered snapbacks, dad hats, beanies, and structured caps. No minimum order. Free quote from ARK Screen Printing.",
+  "canonical": "https://arkscreenprinting.com/custom-hats-colorado-springs",
+  "robots": "index, follow",
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Custom Hat Embroidery",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "ARK Screen Printing",
+        "telephone": "(719) 280-2638",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Colorado Springs",
+          "addressLocality": "Colorado Springs",
+          "addressRegion": "CO",
+          "postalCode": "80922",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 38.8339,
+          "longitude": -104.8214
+        },
+        "priceRange": "$$",
+        "url": "https://arkscreenprinting.com"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Colorado Springs",
+        "@id": "https://en.wikipedia.org/wiki/Colorado_Springs,_Colorado"
+      },
+      "description": "Custom embroidered hats in Colorado Springs including snapbacks, dad hats, beanies, and structured caps. No minimum order. Starting at $12/hat.",
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "price": "12.00",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the minimum order for custom hats?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ARK Screen Printing has no minimum order on custom hats. Order as few or as many as you need."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to get custom embroidered hats?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard turnaround is 2 weeks from artwork approval. Rush orders can be completed in as little as 1 week."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What hat styles can you embroider?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We embroider snapbacks, dad hats, structured caps, unstructured caps, beanies, trucker hats, and more."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much do custom hats cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pricing depends on hat style, design complexity, and quantity. Request a free quote for exact pricing on your order."
+          }
+        }
+      ]
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Custom Hats Colorado Springs",
+    "lead": [],
+    "meta": null,
+    "image": null,
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "hats-section",
+      "variant": null,
+      "html": "<h2>Custom Embroidered Hats in Colorado Springs</h2> <h4>Snapbacks, Dad Hats, Beanies &amp; More</h4> <p>Custom hats Colorado Springs — ARK Screen Printing creates professionally embroidered hats for businesses, sports teams, schools, breweries, and promotional campaigns across Colorado Springs and the Front Range. Snapbacks, dad hats, beanies, trucker hats, and structured caps — no minimum order.</p> <p>Whether you need one custom hat or 500 branded caps for your team, we deliver sharp embroidery that holds up wash after wash. Free digitizing included on every order.</p> <img src=\"/images/embroidery-hats-placeholder.jpg\" alt=\"Custom embroidered hats Colorado Springs\">",
+      "faq": []
+    },
+    {
+      "kind": "hats-section",
+      "variant": null,
+      "html": "<h2>Hat Styles We Embroider</h2> <p>We work with a wide variety of hat styles. Have something specific in mind? We can source it. Here are our most popular styles:</p> <article> <h3>Custom Snapback Hats Colorado Springs</h3> <p>Flat-brim snapbacks with a structured front — a go-to for sports teams, streetwear brands, and promotional use. Adjustable fit with crisp embroidery placement.</p> </article> <article> <h3>Custom Dad Hats Colorado Springs</h3> <p>Unstructured, low-profile caps with a curved brim. Popular for breweries, lifestyle brands, and casual corporate events. Soft feel, clean look.</p> </article> <article> <h3>Custom Beanies Colorado Springs</h3> <p>Embroidered beanies for cold-weather wear — popular with outdoor teams, construction crews, and winter events. Available in cuffed and slouch styles.</p> </article> <article> <h3>Structured Caps &amp; Trucker Hats</h3> <p>High-profile structured caps and mesh-back trucker hats. Great for outdoor brands, landscaping companies, ranches, and summer promotional campaigns.</p> </article>",
+      "faq": []
+    },
+    {
+      "kind": "hats-section",
+      "variant": null,
+      "html": "<h2>Why Embroidery for Custom Hats?</h2> <p>Embroidery is the <em>best</em> method for custom hats. The curved surface and structured material of a hat makes screen printing difficult — embroidery is designed for headwear and gives you a premium, three-dimensional result that lasts for years.</p> <p>Unlike printed hats that crack and fade, embroidery is stitched directly into the fabric. Your logo stays sharp through heavy use, outdoor exposure, and repeated washing — ideal for workwear, sports teams, and branded merchandise.</p> <p>Every order includes <em>free digitizing</em> — we convert your logo into an embroidery file at no charge. You approve a digital proof before we stitch a single piece.</p>",
+      "faq": []
+    },
+    {
+      "kind": "hats-section",
+      "variant": null,
+      "html": "<h3>Who Orders Custom Hats From ARK?</h3> <p>We create custom embroidered hats for a wide range of customers across Colorado Springs and the Front Range:</p> <ul> <li>Local businesses and corporate teams building branded apparel programs</li> <li>Sports leagues, travel teams, and school athletics departments</li> <li>Breweries, restaurants, and retail shops selling branded merchandise</li> <li>Nonprofits and community organizations creating event apparel</li> <li>Construction, landscaping, and outdoor trades companies needing durable workwear</li> </ul> <p>No minimum order means you can order exactly what you need — whether that's 1 hat or 1,000.</p>",
+      "faq": []
+    },
+    {
+      "kind": "hats-section",
+      "variant": null,
+      "html": "<h3>Common Questions</h3> <article> <h4>What is the minimum order for custom hats?</h4> <p>No minimum. ARK Screen Printing can embroider as few or as many hats as you need.</p> </article> <article> <h4>How long does it take to get custom embroidered hats?</h4> <p>Standard turnaround is 2 weeks from artwork approval. Rush orders available in as little as 1 week — contact us to check availability.</p> </article> <article> <h4>What file format do you need for hat embroidery?</h4> <p>We work with AI, EPS, PDF, and high-resolution PNG or JPG files. Free digitizing is included on every order — we convert your logo into an embroidery file at no charge.</p> </article> <article> <h4>How much do custom hats cost?</h4> <p>Pricing depends on hat style, design complexity, and quantity. Request a free quote and we'll get back to you with exact pricing for your order.</p> </article>",
+      "faq": []
+    },
+    {
+      "kind": "hats-section",
+      "variant": null,
+      "html": "<h3>Ready to Order Custom Hats in Colorado Springs?</h3> <p>Getting started is easy — share your logo, choose your hat style, and we'll take it from there. Free digitizing, no minimum order, and a 2-week standard turnaround with rush available.</p>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": null
+}

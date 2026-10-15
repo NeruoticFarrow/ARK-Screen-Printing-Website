@@ -1,0 +1,82 @@
+{
+  "file": "screen-printing-canon-city.html",
+  "slug": "screen-printing-canon-city",
+  "title": "Screen Printing Canon City CO | ARK Screen Printing",
+  "description": "Screen printing Canon City, CO: custom t-shirts, uniforms, and branded apparel from ARK Screen Printing. No minimums, done in-house.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-canon-city",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ARK Screen Printing Studio - Canon City",
+      "image": "https://arkscreenprinting.com/images/ark prototype.png",
+      "url": "https://arkscreenprinting.com/screen-printing-canon-city",
+      "telephone": "(719) 280-2638",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Colorado Springs",
+        "addressLocality": "Colorado Springs",
+        "addressRegion": "CO",
+        "postalCode": "80922",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Canon City, CO"
+      },
+      "description": "Expert custom screen printing and embroidery services for businesses, schools, and events in Canon City, CO. We specialize in custom t-shirts, team uniforms, and corporate apparel.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Screen Printing Services for Canon City",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom T-Shirts & Apparel in Canon City"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Team Uniforms & Spirit Wear in Canon City"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Corporate Apparel & Embroidery in Canon City"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Canon City CO",
+    "lead": [
+      "Screen printing Canon City CO — ARK serves local businesses, teams, schools, and organizations with custom apparel, all printed in-house."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/Canon-City-Town.jpg",
+      "alt": "Cañon City Colorado - ARK Screen Printing serves Cañon City"
+    },
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "local-content",
+      "variant": null,
+      "html": "<h2>Screen Printing for Cañon City's Royal Gorge Community</h2> <p>Cañon City is Fremont County's largest city — about 17,000 residents and the gateway to the Royal Gorge, one of Colorado's most visited natural attractions. The local economy runs on three pillars: tourism anchored by the Royal Gorge Bridge and Royal Gorge Route Railroad; healthcare; and the corrections industry — the Colorado Department of Corrections has multiple facilities in the area, making it one of the city's largest employers. Custom apparel for tourism operators, healthcare workers, corrections staff, and local businesses serving this diverse economy all find a home at ARK.</p> <p>Cañon City High School Tigers are the city's main athletic program, competing in the Fremont RE-1 School District. Canon City also has a notable community identity — the annual Blossom Festival is one of the region's longest-running community events. We're about 45 miles northeast in Colorado Springs and ship directly to Cañon City with reliable turnaround times.</p> <article> <article> <h3>Royal Gorge tourism</h3> <p>Branded apparel for Royal Gorge tour operators, rafting companies, and the area's visitor economy.</p> </article> <article> <h3>Cañon City Tigers</h3> <p>Spirit wear and team uniforms for Fremont RE-1 school athletics.</p> </article> <article> <h3>Healthcare &amp; corrections</h3> <p>Custom workwear for Cañon City's major employers in corrections, healthcare, and county government.</p> </article> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Fill out the form below for a fast, accurate quote on your Cañon City screen printing project."
+}

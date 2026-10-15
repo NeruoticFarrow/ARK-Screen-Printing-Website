@@ -1,0 +1,82 @@
+{
+  "file": "screen-printing-thornton.html",
+  "slug": "screen-printing-thornton",
+  "title": "Screen Printing Thornton CO | ARK Screen Printing",
+  "description": "Screen printing Thornton, CO: custom t-shirts, uniforms, and branded apparel from ARK Screen Printing. No minimums, done in-house.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-thornton",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ARK Screen Printing Studio - Thornton",
+      "image": "https://arkscreenprinting.com/images/ark prototype.png",
+      "url": "https://arkscreenprinting.com/screen-printing-thornton",
+      "telephone": "(719) 280-2638",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Colorado Springs",
+        "addressLocality": "Colorado Springs",
+        "addressRegion": "CO",
+        "postalCode": "80922",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Thornton, CO"
+      },
+      "description": "Expert custom screen printing and embroidery services for businesses, schools, and events in Thornton, CO. We specialize in custom t-shirts, team uniforms, and corporate apparel.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Screen Printing Services for Thornton",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom T-Shirts & Apparel in Thornton"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Team Uniforms & Spirit Wear in Thornton"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Corporate Apparel & Embroidery in Thornton"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Thornton CO",
+    "lead": [
+      "Screen printing Thornton CO — ARK serves local businesses, teams, schools, and organizations with custom apparel, all printed in-house."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/Thornton-City-Hall.jpg",
+      "alt": "Thornton Colorado - ARK Screen Printing serves Thornton"
+    },
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "local-content",
+      "variant": null,
+      "html": "<h2>Screen Printing for Thornton's Workforce Community</h2> <p>Thornton is Adams County's largest city — over 140,000 residents — and one of the most economically active communities along Colorado's northern Front Range. Major employers include Amazon, Google, and DISH Network, alongside a large manufacturing and distribution sector. Custom workwear, company event shirts, and employee uniforms are in constant demand here. We ship from our Colorado Springs shop and reliably serve the Thornton area with standard turnaround windows.</p> <p>The Adams 12 Five Star Schools district serves Thornton with competitive programs at Thornton High School Trojans and Horizon High School Hawks, plus the Stargate School — one of Colorado's top-rated charter schools for gifted students, with an engaged parent community that drives demand for custom gear. Thornton's large and growing community also brings a strong culture of family celebrations, cultural events, and neighborhood festivals where custom apparel plays a meaningful role.</p> <article> <article> <h3>Amazon, Google &amp; DISH</h3> <p>Custom workwear and event apparel for Thornton's major tech, distribution, and manufacturing employers.</p> </article> <article> <h3>Adams 12 athletics</h3> <p>Spirit wear and team gear for Thornton Trojans, Horizon Hawks, and Stargate School programs.</p> </article> <article> <h3>Community celebrations</h3> <p>Custom screen printing for Thornton's family events, cultural festivals, and neighborhood gatherings.</p> </article> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Fill out the form below for a fast, accurate quote on your Thornton screen printing project."
+}

@@ -1,0 +1,82 @@
+{
+  "file": "screen-printing-westminster.html",
+  "slug": "screen-printing-westminster",
+  "title": "Screen Printing Westminster CO | ARK Screen Printing",
+  "description": "Screen printing Westminster, CO: custom t-shirts, uniforms, and branded apparel from ARK Screen Printing. No minimums, done in-house.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-westminster",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ARK Screen Printing Studio - Westminster",
+      "image": "https://arkscreenprinting.com/images/ark prototype.png",
+      "url": "https://arkscreenprinting.com/screen-printing-westminster",
+      "telephone": "(719) 280-2638",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Colorado Springs",
+        "addressLocality": "Colorado Springs",
+        "addressRegion": "CO",
+        "postalCode": "80922",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Westminster, CO"
+      },
+      "description": "Expert custom screen printing and embroidery services for businesses, schools, and events in Westminster, CO. We specialize in custom t-shirts, team uniforms, and corporate apparel.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Screen Printing Services for Westminster",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom T-Shirts & Apparel in Westminster"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Team Uniforms & Spirit Wear in Westminster"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Corporate Apparel & Embroidery in Westminster"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Westminster CO",
+    "lead": [
+      "Screen printing Westminster CO — ARK serves local businesses, teams, schools, and organizations with custom apparel, all printed in-house."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/Westminster-City-Park-Grand-Staircase.jpg",
+      "alt": "Westminster Colorado - ARK Screen Printing serves Westminster"
+    },
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "local-content",
+      "variant": null,
+      "html": "<h2>Custom Screen Printing for Westminster's Tech &amp; College Community</h2> <p>Westminster spans Adams and Jefferson counties with about 115,000 residents and a notable mix of technology companies, healthcare employers, and Front Range Community College — the largest community college in Colorado, with its main campus here in Westminster. Trimble Inc., a global technology company with 11,500 employees worldwide, is headquartered in Westminster. Custom corporate apparel for team events, product launches, and company outings is a regular need in this kind of professional environment.</p> <p>Front Range Community College's Westminster campus serves nearly 22,000 students and generates demand for custom apparel — from the college's Wolves athletics to student clubs and campus events. Westminster's K-12 population splits between Adams 12 Five Star Schools and Jefferson County School District, with Legacy High School Lightning and Westminster High School Wolves among the competitive athletic programs that regularly need spirit wear and team uniforms.</p> <article> <article> <h3>Trimble &amp; tech community</h3> <p>Corporate event apparel and branded workwear for Westminster's technology and professional services employers.</p> </article> <article> <h3>Front Range Community College</h3> <p>Custom gear for FRCC Wolves athletics, student clubs, and campus events.</p> </article> <article> <h3>Legacy &amp; Westminster schools</h3> <p>Spirit wear and team uniforms for Westminster's Adams 12 and Jeffco athletic programs.</p> </article> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Fill out the form below for a fast, accurate quote on your Westminster screen printing project."
+}
