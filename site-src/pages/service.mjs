@@ -34,7 +34,7 @@ export function renderService(ctx) {
   const blocks = migratedBlocks(page.blocks, { startSand: !!own.points });
   const rules = `<section class="section"><div class="container">${rulesTile("rules-title", { onPage: true })}</div></section>`;
   const how = `<section class="section section--sand" aria-labelledby="how-title"><div class="container">
-  ${sectionHead("how-title", "How an order *works*.", "Nothing is printed until you approve the proof.")}
+  ${sectionHead("how-title", "How an order *works*.", "Price in minutes, proof right after, printing the same day.")}
   ${stepsList()}
 </div></section>`;
   const proof = `<section class="section" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What customers *say*.", { onPage: true })}</div></section>`;
@@ -76,7 +76,7 @@ export function renderPpc(ctx) {
   const proof = `<section class="section section--sand" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What customers *say*.", { onPage: true })}</div></section>`;
   const rules = `<section class="section"><div class="container">${rulesTile("rules-title", { onPage: true })}</div></section>`;
   const how = `<section class="section section--sand" aria-labelledby="how-title"><div class="container">
-  ${sectionHead("how-title", "How an order *works*.", "Nothing is printed until you approve the proof.")}
+  ${sectionHead("how-title", "How an order *works*.", "Price in minutes, proof right after, printing the same day.")}
   ${stepsList()}
   ${ctaRow("after_steps", { onPage: true })}
 </div></section>`;

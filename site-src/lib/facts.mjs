@@ -68,6 +68,10 @@ export const FACTS = {
   replyWithin: "ten minutes",
   /** Said beside the reply promise where there's room. */
   replyHours: "7:30am–7pm Mountain Time, every day",
+  /** Owner, 2026-10-15: the proof follows moments after we're in touch, and
+   *  printing can begin the same day it's approved. */
+  proofSpeed: "moments later",
+  printStart: "the same day",
   /** Owner, 2026-10-15: never "pick up at the shop/address". */
   pickup: "Local pickup available",
   /** faq.html: Monarch plastisol, Matsui water-based and discharge inks. */

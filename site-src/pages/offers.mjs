@@ -55,7 +55,7 @@ export const POD_FAQ = [
   { q: "How do I get paid?", a: [payoutRule()] },
   { q: "Can I sell a limited run instead?", a: [`Yes. Run a campaign with a closing date and we print the whole run together. ${runRule()} Every order prints either way.`] },
   { q: "What do my buyers get?", a: [`Tracking on every order, free size exchanges within ${STORES.sizeExchangeDays} days and defects made right within ${STORES.defectDays} days of delivery.`] },
-  { q: "Would a bulk order suit me better?", a: [`If you'd rather buy upfront — for an event, a team or staff — a bulk order gives the lowest price per shirt (screen printing from ${FACTS.screenFrom}). <a href="/get-a-quote#quote">Get an Instant Quote</a>.`] },
+  { q: "Would a bulk order suit me better?", a: [`If you'd rather buy upfront — for an event, a team or staff — a bulk order gives the lowest price per shirt (screen printing from ${FACTS.screenFrom}). <a href="/get-a-quote#quote">See Your Price Instantly</a>.`] },
 ];
 
 export function renderPrintOnDemand() {
@@ -68,7 +68,7 @@ export function renderPrintOnDemand() {
     <p class="kicker eyebrow">No inventory · no upfront cost</p>
     <h1 id="page-title" class="h1">${accent("Print on demand, from a *real* print shop.")}</h1>
     <p class="lead">Open a free online store, put your designs on tees and hoodies, and set your price. Every order is printed in our ${esc(SHOP.city)} shop and shipped to your buyer — you keep everything above the base.</p>
-    <div class="cta-row">${studioButton("hero_studio", "Start your store")}<a class="btn btn--ghost btn--lg" href="/get-a-quote#quote" data-cta="hero_quote">Get an Instant Quote</a></div>
+    <div class="cta-row">${studioButton("hero_studio", "Start your store")}<a class="btn btn--ghost btn--lg" href="/get-a-quote#quote" data-cta="hero_quote">See Your Price Instantly</a></div>
     ${storeNote()}
     ${reassure(["$0 to open", "No monthly or listing fees", "Printed in Colorado Springs"])}
   </div>
@@ -107,7 +107,7 @@ export function renderPrintOnDemand() {
       <tr><th>Price per shirt</th><td>You set the retail price above the base</td><td>Lowest at ${FACTS.screenFrom}+ (screen printing)</td></tr>
     </tbody>
   </table></div></div>
-  <div class="cta-row">${studioButton("compare_studio", "Start your store")}<a class="btn btn--ghost btn--lg" href="/get-a-quote#quote" data-cta="compare_quote">Get an Instant Quote</a></div>
+  <div class="cta-row">${studioButton("compare_studio", "Start your store")}<a class="btn btn--ghost btn--lg" href="/get-a-quote#quote" data-cta="compare_quote">See Your Price Instantly</a></div>
 </div></section>`;
   const work = `<section class="section" aria-labelledby="work-title"><div class="container">${sectionHead("work-title", "Printed in our shop.", undefined, { aside: textLink("/gallery", "See more work", "pod_gallery") })}${galleryGrid(WORK.slice(0, 6))}</div></section>`;
   const proof = `<section class="section section--sand" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What our custom-print customers *say*.", { note: "Google reviews of the print shop that prints every store order." })}</div></section>`;
@@ -169,7 +169,7 @@ export function renderFundraising() {
         <li>${icon("currencyDollar")}<span><b>You set the selling price</b><small>The difference between our price and yours is your fundraiser.</small></span></li>
         <li>${icon("calendarCheck")}<span><b>Ready for your date</b><small>Most screen-print orders in ${FACTS.turnaround.screen}. ${FACTS.pickup}.</small></span></li>
       </ul>
-      <div class="cta-row">${`<a class="btn btn--accent btn--lg" href="#quote" data-cta="ways_quote">Get an Instant Quote ${icon("arrowRight")}</a>`}</div>
+      <div class="cta-row">${`<a class="btn btn--accent btn--lg" href="#quote" data-cta="ways_quote">See Your Price Instantly ${icon("arrowRight")}</a>`}</div>
     </div>
     <div class="card" data-appear>
       <span class="label" style="color:var(--muted)">Option 2</span>
@@ -188,8 +188,8 @@ export function renderFundraising() {
   ${sectionHead("timeline-title", "Work back from your *date*.", "About three weeks is comfortable for a bulk order. Short on time? Call — rush is often possible.")}
   ${stepsList([
     { title: "About 3 weeks out: request your quote", text: `Garment, quantity, artwork and the date. We reply within ${FACTS.replyWithin} (${FACTS.replyHours}).` },
-    { title: "Invoice, then your proof", text: "We send the invoice; after payment you get a digital proof to approve — nothing prints until you do. Using a school or team logo? Have the permission ready." },
-    { title: "We print it here", text: `Most screen-print orders are done in ${FACTS.turnaround.screen} after the proof is approved.` },
+    { title: "Your proof, moments later", text: "A digital proof follows right after we talk — nothing prints until you approve it. Using a school or team logo? Have the permission ready." },
+    { title: "Printing starts the same day", text: `Approve the proof and pay the invoice, and printing can start the same day — most screen-print orders are done in ${FACTS.turnaround.screen}.` },
     { title: "Sell it", text: `${FACTS.pickup}, or we ship. Tell supporters how much of each sale goes to your cause.` },
   ])}
   ${ctaRow("timeline", { onPage: true })}

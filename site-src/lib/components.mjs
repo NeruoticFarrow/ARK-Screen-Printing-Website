@@ -35,7 +35,7 @@ export function textLink(href, label, placement) {
 /** The primary action: the quote form (on the page when it has one). */
 export function quoteButton(placement, o = {}) {
   const href = o.onPage ? "#quote" : "/get-a-quote#quote";
-  return `<a class="btn ${o.onDark ? "btn--accent" : "btn--primary"} btn--lg" href="${href}" data-cta="${esc(placement)}">${esc(o.label ?? "Get an Instant Quote")} ${icon("arrowRight")}</a>`;
+  return `<a class="btn ${o.onDark ? "btn--accent" : "btn--primary"} btn--lg" href="${href}" data-cta="${esc(placement)}">${esc(o.label ?? "See Your Price Instantly")} ${icon("arrowRight")}</a>`;
 }
 
 export function callButton(placement, o = {}) {
@@ -51,13 +51,13 @@ export function reassure(lines) {
 }
 
 /** The risk reducers under every primary CTA — each one true (facts.mjs). */
-export const REASSURANCE = ["No minimum order", `A reply within ${FACTS.replyWithin}, 7:30am–7pm`, "You approve a proof before we print"];
+export const REASSURANCE = ["No minimum order", `A reply within ${FACTS.replyWithin}, 7:30am–7pm`, "Proof minutes later — printing can start the same day"];
 
 /** A compact call to action placed between sections (strategic repeats of the
  *  one action: after proof, after the offer, after the page's own content). */
 export function ctaBand(placement, o = {}) {
-  return `<section class="section--tight" aria-label="Get an Instant Quote"><div class="container"><div class="cta-band" data-appear>
-  <p><b>${esc(o.title ?? "Ready when you are.")}</b> ${esc(o.text ?? `Get a price in about two minutes — we reply within ${FACTS.replyWithin} (${FACTS.replyHours}).`)}</p>
+  return `<section class="section--tight" aria-label="See Your Price Instantly"><div class="container"><div class="cta-band" data-appear>
+  <p><b>${esc(o.title ?? "Ready when you are.")}</b> ${esc(o.text ?? `Your price shows as you go. We reply within ${FACTS.replyWithin} (${FACTS.replyHours}), the proof follows ${FACTS.proofSpeed}, and printing can start ${FACTS.printStart}.`)}</p>
   <div class="cta-band-actions">${quoteButton(placement, { onPage: o.onPage })}<a class="text-link" href="${esc(SHOP.phoneHref)}" data-cta="${esc(placement)}_call">${icon("phone")}Call or text ${esc(SHOP.phoneDisplay)}</a></div>
 </div></div></section>`;
 }
@@ -105,10 +105,10 @@ function orderCard() {
   return `<div class="order-card"${layer(-0.04, 11)}>
   <span class="oc-title">How your order goes <span class="badge badge--sky">4 steps</span></span>
   <ol>
-    <li>${icon("chatCircleText")}<span><b>Quote</b> — about two minutes</span></li>
+    <li>${icon("lightning")}<span><b>Your price</b> — instantly</span></li>
     <li>${icon("phone")}<span><b>We reply</b> — within 10 min, 7:30am–7pm</span></li>
-    <li>${icon("sealCheck")}<span><b>Proof</b> — you approve it first</span></li>
-    <li>${icon("printer")}<span><b>Printed here</b> — local pickup or we ship</span></li>
+    <li>${icon("sealCheck")}<span><b>Your proof</b> — moments later</span></li>
+    <li>${icon("printer")}<span><b>Printing</b> — can start the same day</span></li>
   </ol>
 </div>`;
 }
@@ -148,8 +148,8 @@ export function rulesTile(id = "rules-title", o = {}) {
   const stats = [
     { figure: "1+", label: "shirts: no minimum order (DTF, full colour)" },
     { figure: `${FACTS.screenFrom}+`, label: "shirts: screen printing" },
-    { figure: FACTS.turnaround.screen.replace(" business days", ""), label: "business days: most screen-print orders" },
     { figure: "10 min", label: "a reply, 7:30am–7pm every day" },
+    { figure: "Same day", label: "printing can start once you approve the proof" },
   ];
   return `<div class="tile tile--navy on-dark" data-appear>
   ${SEAL}
@@ -168,10 +168,10 @@ export function rulesTile(id = "rules-title", o = {}) {
  *  confirm (a call, or an email if we miss you) → you approve the proof →
  *  we invoice and print. The proof comes before anything is printed. */
 export const PROCESS = [
-  { title: "Request your quote", text: "Tell us the garment, the quantity, where it's printed and the date you need it. The quote form takes about two minutes — or call or text and talk it through." },
-  { title: "We reply fast", text: `We call or text within ${FACTS.replyWithin} (${FACTS.replyHours}) — or email if we miss you — to confirm sizes, artwork and timing.` },
-  { title: "Invoice, then your proof", text: "Once the details are set we send the invoice. After payment you get a digital proof of your design on the garment — nothing is printed until you approve it." },
-  { title: "Printed here, then it's yours", text: `Printed in our ${SHOP.city} shop — most screen-print orders in ${FACTS.turnaround.screen}. ${FACTS.pickup}, or we ship anywhere in the US.` },
+  { title: "See your price instantly", text: "Pick the garment, the quantity and where it's printed — the form shows your price as you go. About two minutes, or call or text and talk it through." },
+  { title: "We're in touch within minutes", text: `We call or text within ${FACTS.replyWithin} (${FACTS.replyHours}) — or email if we miss you — to confirm sizes, artwork and timing.` },
+  { title: "Your proof, moments later", text: "A digital proof of your design on the garment follows right after we talk. Nothing is printed until you approve it." },
+  { title: "Printing starts the same day", text: `Approve the proof and pay the invoice, and printing can start the same day — most screen-print orders are done in ${FACTS.turnaround.screen}. ${FACTS.pickup}, or we ship anywhere in the US.` },
 ];
 
 export function stepsList(steps = PROCESS) {
@@ -194,21 +194,46 @@ export function reviewsGrid(limit = REVIEWS.length) {
 </li>`).join("")}</ul>${LIVE ? `<p class="reviews-note">The most recent reviews from our Google Business Profile, every rating, updated ${esc(reviewDate(LIVE.fetchedAt.slice(0, 10)))}.</p>` : ""}`;
 }
 
+/** Reviews as a moving ticker: two offset rows drifting in opposite
+ *  directions. Each review is read once by screen readers (repeats are
+ *  aria-hidden); it moves only once site.js wires the pause button (WCAG
+ *  2.2.2), pauses on hover and focus, and without JavaScript or with reduced
+ *  motion it's two still rows you can scroll. */
+export function reviewsTicker() {
+  const avatar = (r) => r.photo
+    ? `<img src="${esc(encodeURI(r.photo))}" width="40" height="40" alt="" loading="lazy" decoding="async">`
+    : `<span class="avatar" aria-hidden="true">${esc((r.name || "?").trim().charAt(0).toUpperCase())}</span>`;
+  const card = (r, hidden) => `<li class="rt-card"${hidden ? ' aria-hidden="true"' : ""}>
+    <div class="rt-top">${avatar(r)}<span class="rt-who"><b>${esc(r.name)}</b>${stars("stars", r.rating ?? 5)}<span class="visually-hidden">Rated ${r.rating ?? 5} out of 5, Google review</span></span>${icon("googleLogo", "icon rt-g")}</div>
+    <p class="rt-text">${esc(r.quote)}</p>
+  </li>`;
+  const rows = [[], []];
+  REVIEWS.forEach((r, i) => rows[i % 2].push(r));
+  if (!rows[1].length) rows.pop();
+  const row = (items, k) => {
+    // Repeat short rows so the strip is wider than any screen; repeats and the
+    // loop's second half are aria-hidden.
+    const seq = items.map((r) => ({ r, hidden: false }));
+    while (seq.length < 6) seq.push(...items.map((r) => ({ r, hidden: true })));
+    const html = seq.map((x) => card(x.r, x.hidden)).join("") + seq.map((x) => card(x.r, true)).join("");
+    return `<div class="rt-row rt-row--${k ? "b" : "a"}"><ul class="rt-track" style="--rt-dur:${seq.length * 7}s">${html}</ul></div>`;
+  };
+  return `<div class="rt" data-ticker role="region" aria-label="Google reviews">
+  ${rows.map((items, k) => row(items, k)).join("")}
+  <button class="ticker-toggle rt-toggle" type="button" data-ticker-toggle aria-pressed="false" hidden>${icon("pause", "icon i-pause")}${icon("play", "icon i-play")}<span class="visually-hidden">Pause the moving reviews</span></button>
+</div>`;
+}
+
 export function proofSection(id, title, o = {}) {
-  return `<div class="proof">
-  <div class="tile tile--sand score" data-appear>
-    ${SEAL.replace('class="seal"', 'class="seal seal--dark"')}
-    <span class="label">${esc(SHOP.name)} on Google</span>
-    <span class="score-figure">${GOOGLE.rating.toFixed(1)}</span>
-    ${stars()}
-    <p>From ${GOOGLE.count} Google reviews of the shop, as of ${new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${GOOGLE.checked}T00:00:00Z`))}.${GOOGLE.live ? " Synced from Google each week." : ""}</p>
-    <a class="btn btn--ghost" href="${esc(GOOGLE.url)}" target="_blank" rel="noopener" data-cta="reviews_google">Read them on Google ${icon("arrowUpRight")}<span class="visually-hidden"> (opens Google)</span></a>
+  const asOf = new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${GOOGLE.checked}T00:00:00Z`));
+  return `<div class="reviews-block">
+  <div class="reviews-head" data-appear>
+    <a class="rating-line" href="${esc(GOOGLE.url)}" target="_blank" rel="noopener" data-cta="reviews_rating">${stars()}<span><b>${GOOGLE.rating.toFixed(1)}/5</b> based on ${GOOGLE.count} Google reviews · as of ${asOf}<span class="visually-hidden"> (opens Google)</span></span></a>
+    <h2 id="${esc(id)}" class="h2">${accent(title)}</h2>
+    <p class="muted">${esc(o.note ?? `Real Google reviews of our ${SHOP.city} print shop.`)}${GOOGLE.live ? " Synced from Google each week." : ""}</p>
   </div>
-  <div>
-    <h2 id="${esc(id)}" class="h3" style="margin-bottom:18px">${accent(title)}</h2>${o.note ? `<p class="muted" style="margin:-8px 0 16px">${esc(o.note)}</p>` : ""}
-    ${reviewsGrid(o.limit ?? 3)}
-    <div class="cta-row">${quoteButton("reviews_quote", { onPage: o.onPage })}${textLink("/testimonials", "All reviews", "reviews_all")}</div>
-  </div>
+  ${reviewsTicker()}
+  <div class="cta-row reviews-actions">${quoteButton("reviews_quote", { onPage: o.onPage })}<a class="text-link" href="${esc(GOOGLE.url)}" target="_blank" rel="noopener" data-cta="reviews_google">Read all reviews on Google ${icon("arrowUpRight")}<span class="visually-hidden"> (opens Google)</span></a></div>
 </div>`;
 }
 
@@ -292,11 +317,11 @@ export function quoteBand(o = {}) {
   <div class="quote-band">
     <div class="quote-next">
       <h2 id="quote-title" class="h2">${accent(o.title ?? "Get your *quote*.")}</h2>
-      <p class="lead">${esc(o.intro ?? `Tell us the garment, the quantity, your artwork and your date. We reply within ${FACTS.replyWithin} (${FACTS.replyHours}), and you approve a proof before anything prints.`)}</p>
+      <p class="lead">${esc(o.intro ?? `Tell us the garment, the quantity, your artwork and your date. Your price shows as you go. We reply within ${FACTS.replyWithin} (${FACTS.replyHours}), your proof follows ${FACTS.proofSpeed}, and printing can start ${FACTS.printStart}.`)}</p>
       <ul class="checklist">
         <li>${icon("check")}<span><b>No minimum order</b><small>One shirt or a thousand — screen printing from ${FACTS.screenFrom}.</small></span></li>
-        <li>${icon("sealCheck")}<span><b>A proof before anything prints</b><small>You approve a digital proof of your design before we print.</small></span></li>
-        <li>${icon("printer")}<span><b>Printed in our ${esc(SHOP.city)} shop</b><small>${esc(FACTS.pickup)}, or we ship anywhere in the US.</small></span></li>
+        <li>${icon("sealCheck")}<span><b>Your proof, moments later</b><small>A digital proof right after we talk — nothing prints until you approve it.</small></span></li>
+        <li>${icon("printer")}<span><b>Printing can start the same day</b><small>In our ${esc(SHOP.city)} shop. ${esc(FACTS.pickup)}, or we ship anywhere in the US.</small></span></li>
       </ul>
       <div class="quote-alt"><b>Rather talk it through?</b><a href="${esc(SHOP.phoneHref)}" data-cta="quote_call">Call</a> or <a href="${esc(SHOP.smsHref)}" data-cta="quote_text">text</a> ${esc(SHOP.phoneDisplay)} — ${esc(SHOP.hours)}. We reply within ${esc(FACTS.replyWithin)}.</div>
     </div>
