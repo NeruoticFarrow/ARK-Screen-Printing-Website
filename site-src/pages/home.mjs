@@ -11,13 +11,13 @@ import { SERVICE_PAGES } from "../content/services.mjs";
 // The home page, local-first (knowledge base chapter 25 §11.2): what, where
 // and how to start on the first screen; local proof in plain sight; who we
 // print for; services; the rules stated plainly with the reason; a named
-// process with the proof before you commit; reviews; the printer; real work;
+// process with the proof before anything prints; reviews; the printer; real work;
 // a bridge for groups; areas; answers; the quote form.
 
 export const HOME_FAQ = [
   { q: "Is there a minimum order?", a: [`No. Screen printing starts at ${FACTS.screenFrom} shirts; under ${FACTS.screenFrom} we print with DTF, which needs no screens — even a single shirt. Tell us your quantity and we'll recommend the right method.`] },
   { q: "How long does an order take?", a: [`Most screen-print orders are done in ${FACTS.turnaround.screen}, DTF in ${FACTS.turnaround.dtf} from artwork approval and embroidery in ${FACTS.turnaround.embroidery}. Need it for a date? Put the date in your quote request or call — rush is often possible.`] },
-  { q: "Will I see my design before you print it?", a: ["Yes. You get a proof — a mockup of your design on the garment — with the price. Nothing is printed until you approve it."] },
+  { q: "Will I see my design before you print it?", a: ["Yes. Once your invoice is paid you get a digital proof — a mockup of your design on the garment. Nothing is printed until you approve it."] },
   { q: "Can you help with my artwork?", a: [`Yes. Send a logo file, a sketch or just an idea and we'll prepare it for print. Our <a href="${APP.artwork}">artwork guidelines</a> explain which files work best.`] },
   { q: "Do you do embroidery?", a: ["Yes — polos, hats, jackets and bags, with free digitizing on every order and no minimum order. See <a href=\"/custom-embroidery\">custom embroidery</a>."] },
   { q: "Is local pickup available?", a: [`Yes — ${FACTS.pickup.toLowerCase()} in ${SHOP.city}, or we'll ship your order anywhere in the US.`] },
@@ -49,7 +49,7 @@ export function renderHome(ctx) {
   const rules = `<section class="section" id="rules" aria-labelledby="rules-title"><div class="container">${rulesTile("rules-title", { onPage: true })}</div></section>`;
 
   const how = `<section class="section section--sand" id="how" aria-labelledby="how-title"><div class="container">
-  ${sectionHead("how-title", "How an order *works*.", "Four steps, and you see the proof before you commit to anything.")}
+  ${sectionHead("how-title", "How an order *works*.", "Four steps, and nothing is printed until you approve the proof.")}
   <div class="doodled">${doodle("loop", "section-doodle section-doodle--loop", " data-appear")}${stepsList()}</div>
   ${ctaRow("after_steps", { onPage: true })}
 </div></section>`;

@@ -27,7 +27,7 @@ export const SERVICE_PAGES = {
       { icon: "printer", title: "The right method for your quantity", text: `Screen printing from ${FACTS.screenFrom} shirts, DTF for anything smaller or full-colour art. We recommend the right one.` },
       { icon: "tShirt", title: "No minimum order", text: "A single shirt for a gift or a few hundred for an event — same shop, same care." },
       { icon: "paintBrush", title: "Help with your artwork", text: "Send a logo, a sketch or an idea. We'll set it up for print and send a proof." },
-      { icon: "sealCheck", title: "A proof before we print", text: "You see your design on the shirt and approve it, with the price, before anything is printed." },
+      { icon: "sealCheck", title: "A proof before we print", text: "You see a digital proof of your design on the shirt and approve it before anything is printed." },
     ],
     uses: ["Teams & schools", "Businesses & staff", "Events & races", "Churches & groups", "Bands & brands", "Reunions & gifts"],
     faq: [
@@ -107,7 +107,7 @@ export const PPC_PAGES = {
       { icon: "buildings", title: "Reorders that match", text: "A reorder starts from your approved proof — the same logo, ink colours and placement as the first run." },
       { icon: "needle", title: "Printed or embroidered", text: "A printed left-chest logo or a stitched one — both done in-house." },
       { icon: "tShirt", title: "No minimum order", text: "Outfit two new hires or the whole crew." },
-      { icon: "sealCheck", title: "A proof before we print", text: "Approve the mockup and the price first." },
+      { icon: "sealCheck", title: "A proof before we print", text: "Approve the digital proof before anything is printed." },
     ],
     uses: ["Contractors & trades", "Restaurants & cafés", "Shops & salons", "Offices & clinics", "Event staff"],
   },

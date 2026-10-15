@@ -188,7 +188,7 @@ export function renderFundraising() {
   ${sectionHead("timeline-title", "Work back from your *date*.", "About three weeks is comfortable for a bulk order. Short on time? Call — rush is often possible.")}
   ${stepsList([
     { title: "About 3 weeks out: request your quote", text: `Garment, quantity, artwork and the date. We reply within ${FACTS.replyWithin} (${FACTS.replyHours}).` },
-    { title: "Approve your proof", text: "You see the design on the garment, with the price, before anything is printed. Using a school or team logo? Have the permission ready." },
+    { title: "Invoice, then your proof", text: "We send the invoice; after payment you get a digital proof to approve — nothing prints until you do. Using a school or team logo? Have the permission ready." },
     { title: "We print it here", text: `Most screen-print orders are done in ${FACTS.turnaround.screen} after the proof is approved.` },
     { title: "Sell it", text: `${FACTS.pickup}, or we ship. Tell supporters how much of each sale goes to your cause.` },
   ])}
