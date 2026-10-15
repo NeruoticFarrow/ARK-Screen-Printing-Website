@@ -218,6 +218,22 @@ const REFINEMENTS = `
 @media (max-width:359px){.header-cta{display:inline-flex}.brand-mark{display:none}}
 .sticky-cta .btn{flex:1}
 
+/* The lead offer tile: tan colour block, offer left, two items, one action. */
+.offer{display:grid;gap:18px 32px;align-items:center;padding:clamp(22px,3vw,32px);border-radius:var(--r-lg);background:var(--tan);color:var(--ink)}
+@media (min-width:960px){.offer{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto}}
+.offer .kicker{color:var(--navy)}
+.offer h2{margin:6px 0 8px}
+.offer h2 .accent{color:var(--navy)}
+.offer-main p:last-child{max-width:52ch}
+.offer-list{display:grid;gap:12px;margin:0;padding:0;list-style:none}
+.offer-list li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;align-items:start}
+.offer-list .icon{width:26px;height:26px;color:var(--navy)}
+.offer-list b{display:block;color:var(--navy)}
+.offer-list small{display:block;font-size:.875rem}
+.offer-cta .btn{white-space:normal}
+.offer-flag{display:inline-flex;align-items:center;gap:8px;margin:0 0 16px;padding:7px 14px 7px 8px;border-radius:var(--pill);background:var(--tan);color:var(--navy);font:600 .875rem/1.2 var(--text)}
+.offer-flag .icon{width:22px;height:22px;padding:3px;border-radius:50%;background:var(--parchment)}
+
 /* Reviews ticker: two offset rows drifting in opposite directions. */
 .reviews-block{display:grid;gap:24px}
 .reviews-head{display:grid;justify-items:center;gap:10px;text-align:center}

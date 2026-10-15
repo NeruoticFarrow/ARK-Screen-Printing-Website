@@ -1,7 +1,7 @@
 import { FACTS, SERVICES, SHOP } from "../lib/facts.mjs";
 import { icon } from "../lib/icons.mjs";
 import {
-  areasList, ctaBand, faqList, localStrip, proofSection, quoteBand, rulesTile, sectionHead, stepsList, textLink, ctaRow,
+  areasList, ctaBand, faqList, localStrip, offerTile, proofSection, quoteBand, rulesTile, sectionHead, stepsList, textLink, ctaRow,
 } from "../lib/components.mjs";
 import { PPC_PAGES, SERVICE_PAGES } from "../content/services.mjs";
 import { abs, migratedBlocks, pageHero, pageJsonLd, pointsSection, usesSection } from "./parts.mjs";
@@ -28,13 +28,13 @@ export function renderService(ctx) {
     onPage: true,
     crumbs: [{ name: "Home", href: "/" }, { name: "Services", href: "/screen-printing-and-embroidery" }, { name: label }],
   });
-  const strip = `<section class="section--tight"><div class="container">${localStrip("service_strip")}</div></section>`;
+  const strip = `<section class="section--tight"><div class="container">${localStrip("service_strip")}</div></section>` + offerTile("service_offer", { onPage: true });
   const points = own.points ? pointsSection(withIcons(own.points)) : "";
   const uses = own.uses ? usesSection(own.uses) : "";
   const blocks = migratedBlocks(page.blocks, { startSand: !!own.points });
   const rules = `<section class="section"><div class="container">${rulesTile("rules-title", { onPage: true })}</div></section>`;
   const how = `<section class="section section--sand" aria-labelledby="how-title"><div class="container">
-  ${sectionHead("how-title", "How an order *works*.", "Price in minutes, proof right after, printing the same day.")}
+  ${sectionHead("how-title", "How an order *works*.", "Your price instantly, a free mockup in about 10 minutes, printing the same day.")}
   ${stepsList()}
 </div></section>`;
   const proof = `<section class="section" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What customers *say*.", { onPage: true })}</div></section>`;
@@ -70,13 +70,13 @@ export function renderPpc(ctx) {
   const photo = page.hero?.image ?? cfg.photo ?? svc.photo;
   const pointsData = cfg.points ?? svc.points;
   const hero = pageHero({ h1: page.hero?.h1 ?? page.title, lead: page.hero?.lead?.[0], photo, onPage: true });
-  const strip = `<section class="section--tight"><div class="container">${localStrip("ppc_strip")}</div></section>`;
+  const strip = `<section class="section--tight"><div class="container">${localStrip("ppc_strip")}</div></section>` + offerTile("ppc_offer", { onPage: true });
   const points = pointsSection(withIcons(pointsData), "Why order from *ARK*.");
   const uses = usesSection(cfg.uses ?? svc.uses);
   const proof = `<section class="section section--sand" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What customers *say*.", { onPage: true })}</div></section>`;
   const rules = `<section class="section"><div class="container">${rulesTile("rules-title", { onPage: true })}</div></section>`;
   const how = `<section class="section section--sand" aria-labelledby="how-title"><div class="container">
-  ${sectionHead("how-title", "How an order *works*.", "Price in minutes, proof right after, printing the same day.")}
+  ${sectionHead("how-title", "How an order *works*.", "Your price instantly, a free mockup in about 10 minutes, printing the same day.")}
   ${stepsList()}
   ${ctaRow("after_steps", { onPage: true })}
 </div></section>`;

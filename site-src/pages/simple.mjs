@@ -104,7 +104,7 @@ export function renderQuote(ctx) {
   const { page } = ctx;
   const hero = `<section class="page-hero" aria-labelledby="page-title"><div class="container">
   <h1 id="page-title" class="h1">${accent("See your price, *instantly*.")}</h1>
-  <p class="lead">About two minutes — your price shows as you go. We reply within ${esc(FACTS.replyWithin)} (${esc(FACTS.replyHours)}), your proof follows ${esc(FACTS.proofSpeed)}, and printing can start ${esc(FACTS.printStart)}.</p>
+  <p class="lead">About two minutes — your price shows as you go. Then a free mockup of your design on the garment in ${esc(FACTS.mockupWithin)} (${esc(FACTS.replyHours)}), with no obligation. Printing can start ${esc(FACTS.printStart)}.</p>
   ${reassure(REASSURANCE)}
 </div></section>`;
   const quote = quoteBand({ eager: true, title: "Your *project*.", intro: "Garment, quantity, print locations, artwork and your date — whatever you know so far is enough to start." });
@@ -116,13 +116,13 @@ export function renderThankYou(ctx) {
   const { page } = ctx;
   const main = `<section class="page-hero"><div class="container narrow">
   <h1 class="h1">${accent("Thank you — we've got your *request*.")}</h1>
-  <p class="lead">We'll be in touch within ${esc(FACTS.replyWithin)} (${esc(FACTS.replyHours)}) to confirm the details — and your proof follows ${esc(FACTS.proofSpeed)}.</p>
+  <p class="lead">We'll be in touch within ${esc(FACTS.replyWithin)} (${esc(FACTS.replyHours)}) with your free mockup — no obligation.</p>
 </div></section>
 <section class="section section--sand"><div class="container narrow">
   <h2 class="h3" style="margin-bottom:20px">What happens next</h2>
   <ol class="next-steps">
     <li><span><b>We're in touch</b>A call or text within ${esc(FACTS.replyWithin)} — and an email if we miss you — to confirm the details.</span></li>
-    <li><span><b>Your proof</b>A digital proof of your design on the garment, ${esc(FACTS.proofSpeed)}.</span></li>
+    <li><span><b>Your free mockup</b>Your design on the garment, usually within ${esc(FACTS.mockupWithin)}. Rough artwork? We'll clean it up free.</span></li>
     <li><span><b>Printing</b>Approve the proof and pay the invoice, and printing can start ${esc(FACTS.printStart)}.</span></li>
   </ol>
   <div class="quote-alt" style="margin-top:28px"><b>Questions in the meantime?</b><a href="${esc(SHOP.phoneHref)}">Call</a> or <a href="${esc(SHOP.smsHref)}">text</a> ${esc(SHOP.phoneDisplay)} · <a href="mailto:${esc(SHOP.email)}">${esc(SHOP.email)}</a></div>

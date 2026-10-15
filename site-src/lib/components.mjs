@@ -43,13 +43,30 @@ export function reassure(lines) {
 }
 
 /** The risk reducers under every primary CTA — each one true (facts.mjs). */
-export const REASSURANCE = ["No minimum order", `A reply within ${FACTS.replyWithin}, 7:30am–7pm`, "Proof minutes later — printing can start the same day"];
+export const REASSURANCE = [`Free mockup in ${FACTS.mockupWithin}`, "Free artwork cleanup", "No obligation · no minimum order"];
+
+/** The lead offer as a colour-block tile: the free mockup first, free
+ *  artwork cleanup second, one action. */
+export function offerTile(placement, o = {}) {
+  return `<section class="section--tight" aria-labelledby="${esc(placement)}-title"><div class="container"><div class="offer" data-appear>
+  <div class="offer-main">
+    <p class="kicker">Free · no obligation</p>
+    <h2 id="${esc(placement)}-title" class="h3">${accent(`See your design on the shirt in *${FACTS.mockupWithin}*.`)}</h2>
+    <p>Send your logo or idea and we'll send back a free mockup of it on your garment — usually within ${esc(FACTS.mockupWithin)} (${esc(FACTS.replyHours)}). No obligation to order.</p>
+  </div>
+  <ul class="offer-list">
+    <li>${icon("image")}<span><b>Free mockup</b><small>Your design on the real garment, in ${esc(FACTS.mockupWithin)}.</small></span></li>
+    <li>${icon("paintBrush")}<span><b>Free artwork cleanup</b><small>A sketch, a photo, a rough logo — we'll clean it up free.</small></span></li>
+  </ul>
+  <div class="offer-cta">${quoteButton(placement, { onPage: o.onPage, label: "Get My Free Mockup" })}</div>
+</div></div></section>`;
+}
 
 /** A compact call to action placed between sections (strategic repeats of the
  *  one action: after proof, after the offer, after the page's own content). */
 export function ctaBand(placement, o = {}) {
   return `<section class="section--tight" aria-label="See Your Price Instantly"><div class="container"><div class="cta-band" data-appear>
-  <p><b>${esc(o.title ?? "Ready when you are.")}</b> ${esc(o.text ?? `Your price shows as you go. We reply within ${FACTS.replyWithin} (${FACTS.replyHours}), the proof follows ${FACTS.proofSpeed}, and printing can start ${FACTS.printStart}.`)}</p>
+  <p><b>${esc(o.title ?? "Ready when you are.")}</b> ${esc(o.text ?? `See your price as you go, get a free mockup in ${FACTS.mockupWithin} (${FACTS.replyHours}), and printing can start ${FACTS.printStart}.`)}</p>
   <div class="cta-band-actions">${quoteButton(placement, { onPage: o.onPage })}<a class="text-link" href="${esc(SHOP.phoneHref)}" data-cta="${esc(placement)}_call">${icon("phone")}Call or text ${esc(SHOP.phoneDisplay)}</a></div>
 </div></div></section>`;
 }
@@ -98,8 +115,8 @@ function orderCard() {
   <span class="oc-title">How your order goes <span class="badge badge--sky">4 steps</span></span>
   <ol>
     <li>${icon("lightning")}<span><b>Your price</b> — instantly</span></li>
-    <li>${icon("phone")}<span><b>We reply</b> — within 10 min, 7:30am–7pm</span></li>
-    <li>${icon("sealCheck")}<span><b>Your proof</b> — moments later</span></li>
+    <li>${icon("image")}<span><b>Free mockup</b> — about 10 min, 7:30am–7pm</span></li>
+    <li>${icon("sealCheck")}<span><b>Approve it</b> — no obligation till then</span></li>
     <li>${icon("printer")}<span><b>Printing</b> — can start the same day</span></li>
   </ol>
 </div>`;
@@ -161,8 +178,8 @@ export function rulesTile(id = "rules-title", o = {}) {
  *  we invoice and print. The proof comes before anything is printed. */
 export const PROCESS = [
   { title: "See your price instantly", text: "Pick the garment, the quantity and where it's printed — the form shows your price as you go. About two minutes, or call or text and talk it through." },
-  { title: "We're in touch within minutes", text: `We call or text within ${FACTS.replyWithin} (${FACTS.replyHours}) — or email if we miss you — to confirm sizes, artwork and timing.` },
-  { title: "Your proof, moments later", text: "A digital proof of your design on the garment follows right after we talk. Nothing is printed until you approve it." },
+  { title: `Your free mockup in ${FACTS.mockupWithin}`, text: `We're in touch within ${FACTS.replyWithin} (${FACTS.replyHours}) with a free mockup of your design on the garment — no obligation. Rough artwork? We'll clean it up free.` },
+  { title: "Approve it, then pay", text: "Tweak the mockup until it's right. Nothing is printed until you approve it and pay the invoice." },
   { title: "Printing starts the same day", text: `Approve the proof and pay the invoice, and printing can start the same day — most screen-print orders are done in ${FACTS.turnaround.screen}. ${FACTS.pickup}, or we ship anywhere in the US.` },
 ];
 
@@ -286,10 +303,10 @@ export function quoteBand(o = {}) {
   <div class="quote-band">
     <div class="quote-next">
       <h2 id="quote-title" class="h2">${accent(o.title ?? "Get your *quote*.")}</h2>
-      <p class="lead">${esc(o.intro ?? `Tell us the garment, the quantity, your artwork and your date. Your price shows as you go. We reply within ${FACTS.replyWithin} (${FACTS.replyHours}), your proof follows ${FACTS.proofSpeed}, and printing can start ${FACTS.printStart}.`)}</p>
+      <p class="lead">${esc(o.intro ?? `Tell us the garment, the quantity, your artwork and your date. Your price shows as you go, a free mockup follows in ${FACTS.mockupWithin} (${FACTS.replyHours}) with no obligation, and printing can start ${FACTS.printStart}.`)}</p>
       <ul class="checklist">
-        <li>${icon("check")}<span><b>No minimum order</b><small>One shirt or a thousand — screen printing from ${FACTS.screenFrom}.</small></span></li>
-        <li>${icon("sealCheck")}<span><b>Your proof, moments later</b><small>A digital proof right after we talk — nothing prints until you approve it.</small></span></li>
+        <li>${icon("image")}<span><b>Free mockup in ${esc(FACTS.mockupWithin)}</b><small>Your design on the garment — no obligation.</small></span></li>
+        <li>${icon("paintBrush")}<span><b>Free artwork cleanup</b><small>Send whatever you have — a sketch, a photo, a rough logo.</small></span></li>
         <li>${icon("printer")}<span><b>Printing can start the same day</b><small>In our ${esc(SHOP.city)} shop. ${esc(FACTS.pickup)}, or we ship anywhere in the US.</small></span></li>
       </ul>
       <div class="quote-alt"><b>Rather talk it through?</b><a href="${esc(SHOP.phoneHref)}" data-cta="quote_call">Call</a> or <a href="${esc(SHOP.smsHref)}" data-cta="quote_text">text</a> ${esc(SHOP.phoneDisplay)} — ${esc(SHOP.hours)}. We reply within ${esc(FACTS.replyWithin)}.</div>

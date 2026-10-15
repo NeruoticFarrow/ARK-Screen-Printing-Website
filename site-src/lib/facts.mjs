@@ -69,6 +69,10 @@ export const FACTS = {
   /** Owner, 2026-10-15: the proof follows moments after we're in touch, and
    *  printing can begin the same day it's approved. */
   proofSpeed: "moments later",
+  /** The lead offer (owner, 2026-10-15): a free mockup of the customer's
+   *  design, no obligation, usually within about 10 minutes in business hours.
+   *  The secondary: free artwork cleanup. No discount offer. */
+  mockupWithin: "about 10 minutes",
   printStart: "the same day",
   /** Owner, 2026-10-15: never "pick up at the shop/address". */
   pickup: "Local pickup available",

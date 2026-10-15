@@ -13,7 +13,7 @@ const turnaroundAnswer = [
   `Most screen-print orders are done in ${FACTS.turnaround.screen}. DTF orders take ${FACTS.turnaround.dtf} from artwork approval, and embroidery ${FACTS.turnaround.embroidery}. Need it sooner? Call or text before you order — rush is often possible.`,
 ];
 const artAnswer = [
-  `Yes. Send whatever you have — a logo file, a sketch or an idea — and we'll prepare it for print. Our <a href="/images/ark-art-requirements.pdf">artwork guidelines</a> explain which files print best.`,
+  `Yes — free. Send whatever you have — a logo file, a sketch, a photo or an idea — and we'll clean it up for print at no charge. Our <a href="/images/ark-art-requirements.pdf">artwork guidelines</a> explain which files print best.`,
 ];
 const pickupAnswer = [
   `Yes — ${FACTS.pickup.toLowerCase()} in ${SHOP.city}, or we'll ship it to you anywhere in the US.`,
@@ -26,8 +26,8 @@ export const SERVICE_PAGES = {
     points: [
       { icon: "printer", title: "The right method for your quantity", text: `Screen printing from ${FACTS.screenFrom} shirts, DTF for anything smaller or full-colour art. We recommend the right one.` },
       { icon: "tShirt", title: "No minimum order", text: "A single shirt for a gift or a few hundred for an event — same shop, same care." },
-      { icon: "paintBrush", title: "Help with your artwork", text: "Send a logo, a sketch or an idea. We'll set it up for print and send a proof." },
-      { icon: "sealCheck", title: "A proof before we print", text: "You see a digital proof of your design on the shirt and approve it before anything is printed." },
+      { icon: "paintBrush", title: "Free artwork cleanup", text: "Send a logo, a sketch, a photo or an idea — we'll clean it up for print, free." },
+      { icon: "image", title: "A free mockup first", text: "Your design on the garment in about 10 minutes — free, no obligation. Nothing prints until you approve it." },
     ],
     uses: ["Teams & schools", "Businesses & staff", "Events & races", "Churches & groups", "Bands & brands", "Reunions & gifts"],
     faq: [
@@ -43,7 +43,7 @@ export const SERVICE_PAGES = {
     points: [
       { icon: "hoodie", title: "Printed or embroidered", text: "Screen print or DTF for bold front and back designs; embroidery for a clean chest logo." },
       { icon: "tShirt", title: "No minimum order", text: "From one hoodie to a whole team's worth." },
-      { icon: "paintBrush", title: "Help with your artwork", text: "We prepare your file for print and send a proof first." },
+      { icon: "paintBrush", title: "Free artwork cleanup", text: "Send a logo, a sketch, a photo or an idea — we'll clean it up for print, free." },
       { icon: "printer", title: "Printed in our shop", text: `Done in-house in ${SHOP.city}. ${FACTS.pickup}, or we ship.` },
     ],
     uses: ["Teams & boosters", "Company crews", "Schools & clubs", "Brands & merch", "Winter events"],
@@ -60,7 +60,7 @@ export const SERVICE_PAGES = {
     points: [
       { icon: "palette", title: "Premium inks", text: `${FACTS.inks}.` },
       { icon: "stack", title: `Built for runs of ${FACTS.screenFrom}+`, text: `Screen printing starts at ${FACTS.screenFrom} shirts — the screens are made once, then every print is fast and the price per shirt drops.` },
-      { icon: "sealCheck", title: "A proof before we print", text: "Approve the mockup, the ink colours and the placement first." },
+      { icon: "image", title: "A free mockup first", text: "Your design on the garment in about 10 minutes — free, no obligation. Nothing prints until you approve it." },
       { icon: "clock", title: `Most orders in ${FACTS.turnaround.screen}`, text: "Rush is often possible — call or text before you order." },
     ],
     uses: ["Teams & schools", "Businesses", "Events", "Bands & brands", "Fundraisers"],
@@ -107,7 +107,7 @@ export const PPC_PAGES = {
       { icon: "buildings", title: "Reorders that match", text: "A reorder starts from your approved proof — the same logo, ink colours and placement as the first run." },
       { icon: "needle", title: "Printed or embroidered", text: "A printed left-chest logo or a stitched one — both done in-house." },
       { icon: "tShirt", title: "No minimum order", text: "Outfit two new hires or the whole crew." },
-      { icon: "sealCheck", title: "A proof before we print", text: "Approve the digital proof before anything is printed." },
+      { icon: "image", title: "A free mockup first", text: "Your design on the garment in about 10 minutes — free, no obligation. Nothing prints until you approve it." },
     ],
     uses: ["Contractors & trades", "Restaurants & cafés", "Shops & salons", "Offices & clinics", "Event staff"],
   },
