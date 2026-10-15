@@ -505,15 +505,6 @@ it on outside click and Escape). */
 .quote-alt b{display:block;color:var(--navy)}
 .quote-alt a{font-weight:600}
 /* Reviews: real Google reviews the owner published, with source and date. */
-.reviews{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));padding:0;list-style:none}
-.review{display:grid;gap:14px;align-content:start;padding:24px;border-radius:var(--r-lg);background:var(--surface);border:1px solid var(--hairline)}
-.section--sand .review{background:var(--parchment)}
-.review blockquote{margin:0;font:500 1.0625rem/1.5 var(--display);color:var(--navy)}
-.review footer{display:flex;align-items:center;gap:12px;font-size:.875rem;color:var(--muted)}
-.review footer img{width:40px;height:40px;border-radius:50%;object-fit:cover;background:var(--sand)}
-.review footer b{display:block;color:var(--ink);font-weight:600}
-.review .stars{display:inline-flex;gap:2px;color:var(--brown)}
-.review .stars .icon{width:16px;height:16px}
 /* Areas: local pages as pill links. */
 .areas{display:flex;flex-wrap:wrap;gap:8px;padding:0;list-style:none}
 .areas a{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 16px;border-radius:var(--pill);background:var(--surface);border:1px solid var(--hairline);color:var(--navy);font:500 .9375rem/1 var(--text);text-decoration:none}
@@ -604,55 +595,49 @@ sections share a ground. */
 .offer-flag .icon{width:22px;height:22px;padding:3px;border-radius:50%;background:var(--parchment)}
 /* Reviews ticker: two offset rows drifting in opposite directions. */
 .reviews-block{display:grid;gap:24px}
-.reviews-head{display:grid;justify-items:center;gap:10px;text-align:center}
+.reviews-head{display:grid;justify-items:center;gap:12px;text-align:center}
 .reviews-head .muted{max-width:56ch}
-.rating-line{display:inline-flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 10px;color:var(--ink);font-size:.9375rem;text-decoration:none}
-.rating-line .stars{display:inline-flex;gap:2px;color:var(--brown)}
+.rating-line{display:inline-flex;flex-direction:column;align-items:center;gap:8px;color:var(--ink);font-size:.9375rem;text-decoration:none}
+.rating-line .stars{display:inline-flex;gap:4px;color:var(--brown)}
 .rating-line .stars .icon{width:20px;height:20px}
 .rating-line b{color:var(--navy);font-weight:600}
 a.rating-line:hover{text-decoration:underline;color:var(--navy)}
-.rt{position:relative;display:grid;gap:14px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.rt{position:relative;display:grid;gap:16px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .rt-row{overflow-x:auto;scrollbar-width:none;padding-block:2px}
 .rt-row::-webkit-scrollbar{display:none}
-.rt-track{display:flex;gap:14px;width:max-content;margin:0;padding:0 14px 0 0;list-style:none}
-.rt-card{display:grid;gap:10px;align-content:start;width:min(80vw,330px);flex:none;padding:16px 18px;border-radius:18px;background:var(--surface);border:1px solid var(--hairline)}
+.rt-track{display:flex;gap:16px;width:max-content;margin:0;padding:0 16px 0 0;list-style:none}
+.rt-card{display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;align-items:start;width:min(80vw,360px);flex:none;padding:20px;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--hairline)}
 .section--sand .rt-card{background:var(--parchment)}
-.rt-top{display:flex;align-items:center;gap:10px}
-.rt-top img,.rt-top .avatar{width:40px;height:40px;flex:none;border-radius:50%;object-fit:cover}
-.rt-top .avatar{display:grid;place-items:center;background:var(--sky);color:var(--navy);font:700 1.0625rem/1 var(--display)}
-.rt-who{display:grid;gap:3px;font-size:.875rem;line-height:1.2}
-.rt-who b{color:var(--navy);font-weight:600}
-.rt-who .stars{display:inline-flex;gap:1px;color:var(--brown)}
-.rt-who .stars .icon{width:13px;height:13px}
-.rt-g{margin-left:auto;width:20px;height:20px;color:var(--muted)}
-.rt-text{font-size:.9375rem;line-height:1.5;color:var(--ink);display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.rt-av{width:44px;height:44px;border-radius:50%;object-fit:cover}
+img.rt-av{background:var(--sand)}
+span.rt-av{display:grid;place-items:center;color:#fff;font:600 1.125rem/1 var(--text)}
+.rt-av--t0{background:var(--blue)}
+.rt-av--t1{background:var(--brown)}
+.rt-av--t2{background:var(--navy)}
+.rt-body{display:grid;gap:12px;min-width:0}
+.rt-text{margin:0;min-height:4.5em;font-size:.9375rem;line-height:1.5;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.rt-foot{display:flex;align-items:center;gap:10px;margin:0;font-size:.875rem;line-height:1.3}
+.rt-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink);font-weight:700}
+.rt-g{flex:none;width:20px;height:20px;margin-left:auto}
+.rt-src{flex:none;display:inline-flex;margin:-4px -4px -4px auto;padding:4px;border-radius:50%}
+.rt-src .rt-g{margin-left:0}
+.rt-src:hover{background:var(--parchment)}
+.rt-src:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
 .rt:not(.is-live) .rt-card[aria-hidden="true"]{display:none}
+.rt:not(.is-live){-webkit-mask-image:none;mask-image:none}
 .rt.is-live .rt-row{overflow:hidden}
 .rt.is-live .rt-track{animation:rt-scroll var(--rt-dur,48s) linear infinite}
-.rt.is-live .rt-row--b .rt-track{animation-direction:reverse;margin-left:-172px}
+.rt.is-live .rt-row--b .rt-track{animation-direction:reverse;margin-left:-188px}
 .rt.is-live:hover .rt-track,.rt.is-live:focus-within .rt-track,.rt.is-paused .rt-track{animation-play-state:paused}
+.rt.is-live .rt-row:focus-within .rt-track{animation:none}
 @keyframes rt-scroll{to{transform:translateX(-50%)}}
 .rt-toggle{justify-self:center}
+.rt-stars{display:none}
+.rt--rated .rt-stars{display:inline-flex;flex:none;gap:1px;color:var(--brown)}
+.rt-stars .icon{width:12px;height:12px}
+.rt-note{margin:0;text-align:center;font-size:.8125rem;color:var(--muted)}
+.rt-maps{color:#5e5e5e;font-weight:400;white-space:nowrap}
 .reviews-actions{justify-content:center;align-items:center;margin-top:0}
 @media (prefers-reduced-motion:reduce){.rt-track{animation:none!important}}
 .ways{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
 .ways .checklist{margin-bottom:22px}
-/* Starwall live Google reviews (Reviews page). Its stylesheet loads after
-ours, so every rule is scoped a class deeper; its buttons and brand colour
-use !important, so those rules do too. The page's score tile already shows
-the rating and the footer the phone, so the widget's copies are hidden. */
-.reviews-embed .reviews-widget{--widget-primary-color:var(--blue)!important;--widget-primary-hover:var(--blue-deep)!important;--widget-primary-focus:var(--blue)!important;--widget-text-color:var(--ink);--widget-muted-color:var(--muted);--widget-subtle-color:var(--line);--widget-surface-color:var(--parchment);--widget-surface-muted:var(--surface);--widget-border-color:var(--hairline);--widget-border-strong:var(--line);--widget-star-color:var(--brown);--widget-card-shadow:none;--widget-card-shadow-hover:var(--lift);--widget-focus-ring:rgba(0,112,186,.28)}
-.reviews-embed .reviews-widget .reviews-widget__rating,.reviews-embed .reviews-widget .reviews-widget__business-info{display:none}
-.reviews-embed .reviews-widget .reviews-widget__review{background:var(--parchment);border:1px solid var(--hairline);border-radius:18px;padding:16px 18px;box-shadow:none}
-.reviews-embed .reviews-widget .reviews-widget__author-name{font-weight:600;font-size:.9375rem;color:var(--ink)}
-.reviews-embed .reviews-widget .reviews-widget__date{font-size:.8125rem;color:var(--muted)}
-.reviews-embed .reviews-widget .reviews-widget__review-text{font-size:.9375rem;line-height:1.5;color:var(--ink);margin-top:6px;padding-left:0;border-left:0;-webkit-line-clamp:4}
-.reviews-embed .reviews-widget:not(.reviews-widget--carousel) .reviews-widget__review-text{display:block;-webkit-line-clamp:unset;overflow:visible}
-.reviews-embed .reviews-widget .reviews-widget__source-link{color:var(--blue);font-size:.8125rem;font-weight:600}
-.reviews-embed .reviews-widget .reviews-widget__leave-review-btn{background:transparent!important;color:var(--ink)!important;border:1px solid var(--line)!important;border-radius:var(--pill)!important;padding:11px 20px!important;font-weight:600!important}
-.reviews-embed .reviews-widget .reviews-widget__leave-review-btn:hover{background:var(--parchment)!important;border-color:var(--ink)!important}
-.reviews-embed .reviews-widget .reviews-widget__carousel-btn{background:var(--surface)!important;color:var(--ink)!important;border:1px solid var(--hairline)!important;width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;max-width:40px!important;max-height:40px!important}
-.reviews-embed .reviews-widget .reviews-widget__carousel-btn svg{color:var(--ink)!important;width:20px!important;height:20px!important}
-.reviews-embed .reviews-widget .reviews-widget__carousel-btn:not(:disabled):hover{background:var(--parchment)!important;border-color:var(--ink)!important}
-.reviews-embed .reviews-widget .reviews-widget__carousel-btn:disabled{background:var(--surface)!important;border-color:var(--hairline)!important;opacity:.4!important}
-.reviews-embed .reviews-widget a:focus-visible,.reviews-embed .reviews-widget button:focus-visible{outline:2px solid var(--blue)!important;outline-offset:2px!important}

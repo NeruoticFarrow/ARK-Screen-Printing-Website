@@ -48,7 +48,179 @@
       btn.setAttribute("aria-pressed", String(paused));
       t.classList.toggle("is-paused", paused);
     });
+    // Keyboard: a review link that takes focus stops its row (CSS
+    // :focus-within) and is brought to the middle, so focus never sits on a
+    // card the strip has carried off screen (WCAG 2.4.7, 2.4.11).
+    t.addEventListener("focusin", function (e) {
+      var card = e.target.closest && e.target.closest(".rt-card");
+      if (card && card.scrollIntoView) card.scrollIntoView({ block: "nearest", inline: "center" });
+    });
+    t.addEventListener("focusout", function (e) {
+      if (!t.contains(e.relatedTarget)) t.querySelectorAll(".rt-row").forEach(function (r) { r.scrollLeft = 0; });
+    });
   });
+
+  // Google reviews, live, on the Reviews page: until the Business Profile
+  // sync is approved, its ticker swaps the built-in reviews for the newest
+  // ones in the owner's Starwall feed (REVIEWS_FEED in facts.mjs). The feed
+  // is read fresh on every view and never stored (Google's terms; the feed
+  // says no-store). Every value is checked and set as text, never as HTML;
+  // any failure keeps the built-in reviews. Cards match tickerCard() in
+  // components.mjs.
+  function el(tag, cls) { var n = doc.createElement(tag); if (cls) n.className = cls; return n; }
+  // Only the addresses Google actually serves: review pages on Google Maps
+  // and reviewers' profile photos. Matching the parsed href also rules out
+  // other google.com pages, redirects and user:password@ tricks.
+  var PHOTO_URL = /^https:\/\/lh\d+\.googleusercontent\.com\/a-?\//;
+  var REVIEW_URL = /^https:\/\/www\.google\.com\/maps\//;
+  function safeUrl(u, ok) {
+    if (typeof u !== "string") return "";
+    try { var x = new URL(u); return ok.test(x.href) ? x.href : ""; } catch (e) { return ""; }
+  }
+  function readFeed(data) {
+    if (!data || !Array.isArray(data.reviews)) return null;
+    var c = data.collection || {};
+    var loc = data.location || {};
+    var reviews = [];
+    data.reviews.forEach(function (r) {
+      if (!r || typeof r.author_name !== "string" || typeof r.review_text !== "string") return;
+      var name = r.author_name.replace(/\s+/g, " ").trim().slice(0, 60);
+      var text = r.review_text.replace(/<br\s*\/?>|&lt;br\s*\/?&gt;/gi, " ").replace(/\s+/g, " ").trim().slice(0, 800);
+      var rating = Math.round(Number(r.rating));
+      if (!name || !text || !(rating >= 1 && rating <= 5)) return;
+      if (c.show_full_names === false && name.indexOf(" ") > 0) name = name.split(" ")[0] + " " + name.split(" ").pop().charAt(0) + ".";
+      reviews.push({
+        name: name, text: text, rating: rating,
+        photo: c.show_author_photos === false ? "" : safeUrl(r.author_photo, PHOTO_URL),
+        url: safeUrl(r.review_url, REVIEW_URL),
+      });
+    });
+    if (reviews.length < 2) return null;
+    var avg = Number(loc.average_rating), total = Number(loc.total_reviews);
+    return { reviews: reviews.slice(0, 30), rating: avg >= 1 && avg <= 5 ? avg : 0, count: total >= 1 && total % 1 === 0 ? total : 0 };
+  }
+  function tone(name) { for (var i = 0, n = 0; i < name.length; i += 1) n += name.charCodeAt(i); return n % 3; }
+  function initialAvatar(name) {
+    var s = el("span", "rt-av rt-av--t" + tone(name));
+    s.setAttribute("aria-hidden", "true");
+    s.textContent = name.charAt(0).toUpperCase();
+    return s;
+  }
+  function reviewCard(r, hidden, g, star) {
+    var photo = r.photo;
+    var url = r.url;
+    var li = el("li", "rt-card");
+    if (hidden) li.setAttribute("aria-hidden", "true");
+    var av = initialAvatar(r.name);
+    if (photo) {
+      var img = el("img", "rt-av");
+      img.width = 44; img.height = 44; img.alt = ""; img.loading = "lazy"; img.decoding = "async"; img.referrerPolicy = "no-referrer";
+      img.addEventListener("error", function () { if (img.parentNode) img.parentNode.replaceChild(initialAvatar(r.name), img); });
+      img.src = photo;
+      av = img;
+    }
+    var body = el("div", "rt-body");
+    var text = el("p", "rt-text");
+    text.textContent = r.text;
+    var foot = el("p", "rt-foot");
+    var who = el("b", "rt-name");
+    var at = el("span");
+    at.setAttribute("aria-hidden", "true");
+    at.textContent = "@";
+    who.appendChild(at);
+    who.appendChild(doc.createTextNode(r.name));
+    var stars = el("span", "rt-stars");
+    stars.setAttribute("aria-hidden", "true");
+    for (var s = 0; star && s < r.rating; s += 1) stars.appendChild(star.cloneNode(true));
+    var said = el("span", "visually-hidden");
+    said.textContent = ", rated " + r.rating + " out of 5 on Google";
+    foot.appendChild(who);
+    foot.appendChild(stars);
+    foot.appendChild(said);
+    var mark = g.cloneNode(true);
+    if (url) {
+      var a = el("a", "rt-src");
+      a.href = url; a.target = "_blank"; a.rel = "noopener";
+      if (hidden) a.tabIndex = -1;
+      a.setAttribute("aria-label", "Read " + r.name + "’s review on Google (opens Google)");
+      a.appendChild(mark);
+      foot.appendChild(a);
+    } else foot.appendChild(mark);
+    body.appendChild(text);
+    body.appendChild(foot);
+    li.appendChild(av);
+    li.appendChild(body);
+    return li;
+  }
+  function signature(list) { return list.slice().sort().join("\n"); }
+  function showFeed(feed, tickers) {
+    tickers.forEach(function (t) {
+      var g = t.querySelector("svg.rt-g");
+      var rows = t.querySelectorAll(".rt-row");
+      if (!g || rows.length !== 2) return;
+      // Nothing new: leave the strip alone rather than restart it.
+      var shown = [];
+      t.querySelectorAll('.rt-card:not([aria-hidden="true"])').forEach(function (c) {
+        var link = c.querySelector(".rt-src");
+        shown.push(c.querySelector(".rt-text").textContent + "|" + (link ? link.href : ""));
+      });
+      if (signature(shown) === signature(feed.reviews.map(function (r) { return r.text + "|" + r.url; }))) return;
+      g = g.cloneNode(true);
+      var star = t.querySelector(".rt-stars .icon") || doc.querySelector(".rating-line .stars .icon");
+      star = star && star.cloneNode(true);
+      t.classList.toggle("rt--rated", feed.reviews.some(function (r) { return r.rating < 5; }));
+      var notes = t.querySelectorAll("[data-rv-note]");
+      notes.forEach(function (n) { n.hidden = n.getAttribute("data-rv-note") !== "live"; });
+      var split = [[], []];
+      feed.reviews.forEach(function (r, i) { split[i % 2].push(r); });
+      rows.forEach(function (row, k) {
+        var track = row.querySelector(".rt-track");
+        var items = split[k];
+        var seq = items.map(function (r) { return { r: r, hidden: false }; });
+        while (seq.length < 6) items.forEach(function (r) { seq.push({ r: r, hidden: true }); });
+        var frag = doc.createDocumentFragment();
+        seq.forEach(function (x) { frag.appendChild(reviewCard(x.r, x.hidden, g, star)); });
+        seq.forEach(function (x) { frag.appendChild(reviewCard(x.r, true, g, star)); });
+        track.textContent = "";
+        track.appendChild(frag);
+        track.style.setProperty("--rt-dur", seq.length * 7 + "s");
+      });
+    });
+    // The rating line: Google's own total, only ever upwards from the count
+    // built into the page (a lagging feed never shrinks it). Its stars follow
+    // the live rating, and "as of" becomes this month — text changes only,
+    // so nothing reflows.
+    var built = parseInt((doc.querySelector("[data-rv-count]") || {}).textContent, 10) || 0;
+    if (feed.count && feed.count >= built) {
+      doc.querySelectorAll("[data-rv-count]").forEach(function (n) { n.textContent = String(feed.count); });
+      if (feed.rating) doc.querySelectorAll("[data-rv-rating]").forEach(function (n) {
+        n.textContent = feed.rating.toFixed(1);
+        var box = n.closest && n.closest("a");
+        var icons = box && box.querySelector(".stars");
+        var want = Math.max(1, Math.round(feed.rating));
+        if (!icons || !icons.firstElementChild) return;
+        while (icons.children.length > want) icons.removeChild(icons.lastElementChild);
+        while (icons.children.length < want) icons.appendChild(icons.firstElementChild.cloneNode(true));
+      });
+      if (window.Intl) {
+        var month = new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric" }).format(new Date());
+        doc.querySelectorAll("[data-rv-asof]").forEach(function (n) { n.textContent = month; });
+      }
+    }
+  }
+  var feedTickers = doc.querySelectorAll("[data-reviews-feed]");
+  if (feedTickers.length && window.fetch && window.URL) {
+    var ctl = window.AbortController ? new AbortController() : null;
+    var timer = ctl ? setTimeout(function () { ctl.abort(); }, 8000) : 0;
+    fetch(feedTickers[0].getAttribute("data-reviews-feed"), { credentials: "omit", cache: "no-store", signal: ctl ? ctl.signal : undefined })
+      .then(function (r) { if (!r.ok) throw new Error("reviews feed " + r.status); return r.json(); })
+      .then(function (data) {
+        clearTimeout(timer);
+        var feed = readFeed(data);
+        if (feed) showFeed(feed, feedTickers);
+      })
+      .catch(function () { clearTimeout(timer); });
+  }
 
   // Cards rise into place once as they scroll into view.
   if (hasIO && !reduce) {

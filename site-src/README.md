@@ -25,7 +25,8 @@ npm run images     # after adding a photo: WebP sizes + content/image-manifest.j
 | Local pages (towns and Colorado Springs areas) | `pages/local.mjs` |
 | About, FAQ, gallery, reviews, areas, quote, thank-you | `pages/simple.mjs` |
 | Each page's own title, description, H1, local copy, FAQs and structured data | `content/pages/<slug>.json` (migrated once from the old pages by `migrate/extract.mjs`) |
-| Reviews shown on the site (the owner's picks of real Google reviews) | `content/reviews.json` |
+| Reviews shown on the site: the owner's picks of real Google reviews, in the two-row ticker on every page with a reviews section | `content/reviews.json` |
+| Live reviews on the Reviews page: the newest Google reviews from the owner's Starwall feed, read fresh in the browser by `assets/site.js` (never stored, per Google's terms); `""` turns it off and the picks above show instead | `REVIEWS_FEED` in `lib/facts.mjs` |
 | The Google Ads conversion bridge and the thank-you conversion tags (byte for byte from the old site) | `content/conversion-bridge.js`, `content/thank-you-conversions.json` |
 | The browser script | `assets/site.js` |
 

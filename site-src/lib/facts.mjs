@@ -84,12 +84,23 @@ export const FACTS = {
   freeShipping: null,
 };
 
+/** Live Google reviews on the Reviews page until the Business Profile sync is
+ *  approved: the public feed behind the owner's Starwall widget (collection
+ *  342). Visitors' browsers read it on each view of /testimonials and its
+ *  ticker shows the newest reviews; the built-in ones (content/reviews.json)
+ *  stay if it fails, and on every other page. "" turns it off. Starwall's
+ *  terms license its widget, not this feed: confirm with Starwall in writing
+ *  before this goes live. */
+export const REVIEWS_FEED = "https://starwall.io/embed/YiV4AUpveXuQVJ5txn667ugZBx6sNBs4/data";
+
 /** The shop's Google Business Profile, as published on the site (5.0) and read
  *  on 2026-10-13 for the review count. Update when it moves. */
 export const GOOGLE = {
   rating: 5,
   count: 10,
   url: SHOP.mapsUrl,
+  /** Google's "write a review" page for the shop (its Place ID). */
+  writeReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJkatxyWHhgIAR2dfD8Cm-yz4",
   checked: "2026-10-13",
 };
 

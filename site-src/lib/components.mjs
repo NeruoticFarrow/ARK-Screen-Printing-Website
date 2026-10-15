@@ -1,5 +1,5 @@
 import fs from "node:fs";
-import { FACTS, GOOGLE, SERVICES, SHOP, SITE } from "./facts.mjs";
+import { FACTS, GOOGLE, REVIEWS_FEED, SERVICES, SHOP, SITE } from "./facts.mjs";
 import { accent, esc, ldScript } from "./html.mjs";
 import { icon } from "./icons.mjs";
 import { imageInfo, picture } from "./images.mjs";
@@ -76,7 +76,7 @@ export function stars(className = "stars", value = GOOGLE.rating) {
 }
 
 export function ratingLink(placement) {
-  return `<a class="rating" href="${esc(GOOGLE.url)}" target="_blank" rel="noopener" data-cta="${esc(placement)}">${stars()}<span><b>${GOOGLE.rating.toFixed(1)} on Google</b> · ${GOOGLE.count} reviews<span class="visually-hidden"> (opens Google)</span></span></a>`;
+  return `<a class="rating" href="${esc(GOOGLE.url)}" target="_blank" rel="noopener" data-cta="${esc(placement)}">${stars()}<span><b><span data-rv-rating>${GOOGLE.rating.toFixed(1)}</span> on Google</b> · <span data-rv-count>${GOOGLE.count}</span> reviews<span class="visually-hidden"> (opens Google)</span></span></a>`;
 }
 
 /** Rating, address, hours and call/text: local proof in plain sight. */
@@ -191,28 +191,48 @@ export function serviceTiles(lines) {
   return `<ul class="service-tiles">${SERVICES.map((s) => `<li><a class="service-tile" href="/${s.slug}" data-cta="service_${esc(s.slug)}" data-appear>${icon(s.icon)}<h3>${esc(s.label)}</h3><p>${esc(lines[s.slug] ?? "")}</p><span class="text-link">See ${esc(s.label.toLowerCase())} ${icon("arrowRight")}</span></a></li>`).join("")}</ul>`;
 }
 
-/** Real Google reviews the owner published on the site (source and date shown). */
-export function reviewsGrid(limit = REVIEWS.length) {
-  return `<ul class="reviews">${REVIEWS.slice(0, limit).map((r) => `<li class="review" data-appear>
-  ${stars()}
-  <blockquote>“${esc(r.quote)}”</blockquote>
-  <footer>${r.photo ? `<img src="${esc(encodeURI(r.photo))}" width="40" height="40" alt="" loading="lazy" decoding="async">` : ""}<span><b>${esc(r.name)}</b>Google review${r.date ? ` · ${esc(r.date)}` : ""}</span></footer>
-</li>`).join("")}</ul>`;
+/** Google's multicolour "G", marking each card as a Google review the way
+ *  Google's own review widgets do. site.js clones it for live cards. */
+const GOOGLE_G = `<svg class="rt-g" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.76h3.56c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.56-2.76c-.99.66-2.25 1.06-3.72 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.11A6.6 6.6 0 0 1 5.5 12c0-.73.13-1.44.34-2.11V7.05H2.18A11 11 0 0 0 1 12c0 1.78.43 3.46 1.18 4.95l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15A10.56 10.56 0 0 0 12 1 11 11 0 0 0 2.18 7.05l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>`;
+
+/** Initials get one of three logo colours, picked from the name so a
+ *  reviewer keeps theirs. site.js uses the same sum for live cards. */
+export const avatarTone = (name) => {
+  let n = 0;
+  for (let i = 0; i < name.length; i += 1) n += name.charCodeAt(i);
+  return n % 3;
+};
+
+/** One ticker card, laid out like the owner's reference ("Google Reviews
+ *  Ticker"): photo or initial, three lines of the review, "@Name" and the
+ *  Google G, which links to the review on Google when there's a link. Its
+ *  stars show only when the ticker's ratings differ (.rt--rated): the
+ *  reference has none, and an all-5★ strip says so in its header.
+ *  site.js builds live cards to the same markup — change both together. */
+function tickerCard(r, hidden) {
+  const name = (r.name || "Google reviewer").trim();
+  const rating = r.rating ?? 5;
+  const avatar = r.photo
+    ? `<img class="rt-av" src="${esc(/^https:/.test(r.photo) ? r.photo : encodeURI(r.photo))}" width="44" height="44" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">`
+    : `<span class="rt-av rt-av--t${avatarTone(name)}" aria-hidden="true">${esc(name.charAt(0).toUpperCase())}</span>`;
+  const mark = /^https:\/\/www\.google\.com\/maps\//.test(r.url ?? "")
+    ? `<a class="rt-src" href="${esc(r.url)}" target="_blank" rel="noopener"${hidden ? ' tabindex="-1"' : ""} aria-label="Read ${esc(name)}’s review on Google (opens Google)">${GOOGLE_G}</a>`
+    : GOOGLE_G;
+  return `<li class="rt-card"${hidden ? ' aria-hidden="true"' : ""}>${avatar}<div class="rt-body"><p class="rt-text">${esc(r.quote)}</p><p class="rt-foot"><b class="rt-name"><span aria-hidden="true">@</span>${esc(name)}</b>${stars("rt-stars", rating)}<span class="visually-hidden">, rated ${rating} out of 5 on Google</span>${mark}</p></div></li>`;
 }
 
 /** Reviews as a moving ticker: two offset rows drifting in opposite
- *  directions. Each review is read once by screen readers (repeats are
- *  aria-hidden); it moves only once site.js wires the pause button (WCAG
- *  2.2.2), pauses on hover and focus, and without JavaScript or with reduced
- *  motion it's two still rows you can scroll. */
-export function reviewsTicker() {
-  const avatar = (r) => r.photo
-    ? `<img src="${esc(encodeURI(r.photo))}" width="40" height="40" alt="" loading="lazy" decoding="async">`
-    : `<span class="avatar" aria-hidden="true">${esc((r.name || "?").trim().charAt(0).toUpperCase())}</span>`;
-  const card = (r, hidden) => `<li class="rt-card"${hidden ? ' aria-hidden="true"' : ""}>
-    <div class="rt-top">${avatar(r)}<span class="rt-who"><b>${esc(r.name)}</b>${stars("stars", r.rating ?? 5)}<span class="visually-hidden">Rated ${r.rating ?? 5} out of 5, Google review</span></span>${icon("googleLogo", "icon rt-g")}</div>
-    <p class="rt-text">${esc(r.quote)}</p>
-  </li>`;
+ *  directions (the owner's reference has three; they asked for two). Each
+ *  review is read once by screen readers (repeats are aria-hidden); it moves
+ *  only once site.js wires the pause button (WCAG 2.2.2), pauses on hover and
+ *  focus, and without JavaScript or with reduced motion it's two still rows
+ *  you can scroll. With o.live (the Reviews page only, where Starwall's own
+ *  widget used to sit) site.js swaps in the newest reviews from the Starwall
+ *  feed, fresh on every view — Google's terms allow no caching — and these
+ *  built-in ones stay if the feed fails. */
+export function reviewsTicker(o = {}) {
+  const feed = o.live && !GOOGLE.live ? REVIEWS_FEED : "";
+  const rated = REVIEWS.some((r) => (r.rating ?? 5) < 5);
   const rows = [[], []];
   REVIEWS.forEach((r, i) => rows[i % 2].push(r));
   if (!rows[1].length) rows.pop();
@@ -221,25 +241,40 @@ export function reviewsTicker() {
     // loop's second half are aria-hidden.
     const seq = items.map((r) => ({ r, hidden: false }));
     while (seq.length < 6) seq.push(...items.map((r) => ({ r, hidden: true })));
-    const html = seq.map((x) => card(x.r, x.hidden)).join("") + seq.map((x) => card(x.r, true)).join("");
+    const html = seq.map((x) => tickerCard(x.r, x.hidden)).join("") + seq.map((x) => tickerCard(x.r, true)).join("");
     return `<div class="rt-row rt-row--${k ? "b" : "a"}"><ul class="rt-track" style="--rt-dur:${seq.length * 7}s">${html}</ul></div>`;
   };
-  return `<div class="rt" data-ticker role="region" aria-label="Google reviews">
+  // A live strip says where its reviews come from and in what order (Google's
+  // Places policies: the "Google Maps" credit and an ordering notice). Both
+  // lines are rendered so the swap never reflows the page.
+  // With the Business Profile sync on, the strip is every review, newest first.
+  const synced = new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${GOOGLE.checked}T00:00:00Z`));
+  const note = feed
+    ? `<p class="rt-note"><span data-rv-note="built">A selection of our reviews on Google.</span><span data-rv-note="live" hidden>Our newest reviews on <span class="rt-maps" translate="no">Google Maps</span>, newest first.</span></p>`
+    : GOOGLE.live ? `<p class="rt-note">Our newest Google reviews, newest first and every rating, as of ${esc(synced)}.</p>` : "";
+  return `<div class="rt${rated ? " rt--rated" : ""}" data-ticker${feed ? ` data-reviews-feed="${esc(feed)}"` : ""} role="region" aria-label="Google reviews">
   ${rows.map((items, k) => row(items, k)).join("")}
   <button class="ticker-toggle rt-toggle" type="button" data-ticker-toggle aria-pressed="false" hidden>${icon("pause", "icon i-pause")}${icon("play", "icon i-play")}<span class="visually-hidden">Pause the moving reviews</span></button>
+  ${note}
 </div>`;
 }
 
+/** The reviews block: the rating, a heading and the ticker, as in the
+ *  owner's reference. o.live turns on the live Google feed (the Reviews page
+ *  only); o.leaveReview adds the "leave us a review" link there. */
 export function proofSection(id, title, o = {}) {
   const asOf = new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${GOOGLE.checked}T00:00:00Z`));
+  const leave = o.leaveReview
+    ? `<a class="text-link" href="${esc(GOOGLE.writeReviewUrl)}" target="_blank" rel="noopener" data-cta="reviews_leave">Leave us a review ${icon("arrowUpRight")}<span class="visually-hidden"> (opens Google)</span></a>`
+    : "";
   return `<div class="reviews-block">
   <div class="reviews-head" data-appear>
-    <a class="rating-line" href="${esc(GOOGLE.url)}" target="_blank" rel="noopener" data-cta="reviews_rating">${stars()}<span><b>${GOOGLE.rating.toFixed(1)}/5</b> based on ${GOOGLE.count} Google reviews · as of ${asOf}<span class="visually-hidden"> (opens Google)</span></span></a>
+    <a class="rating-line" href="${esc(GOOGLE.url)}" target="_blank" rel="noopener" data-cta="reviews_rating">${stars()}<span><b><span data-rv-rating>${GOOGLE.rating.toFixed(1)}</span>/5</b> based on <b data-rv-count>${GOOGLE.count}</b> Google reviews · as of <span data-rv-asof>${asOf}</span><span class="visually-hidden"> (opens Google)</span></span></a>
     <h2 id="${esc(id)}" class="h2">${accent(title)}</h2>
     <p class="muted">${esc(o.note ?? `Real Google reviews of our ${SHOP.city} print shop.`)}</p>
   </div>
-  ${reviewsTicker()}
-  <div class="cta-row reviews-actions">${quoteButton("reviews_quote", { onPage: o.onPage })}<a class="text-link" href="${esc(GOOGLE.url)}" target="_blank" rel="noopener" data-cta="reviews_google">Read all reviews on Google ${icon("arrowUpRight")}<span class="visually-hidden"> (opens Google)</span></a></div>
+  ${reviewsTicker({ live: o.live })}
+  <div class="cta-row reviews-actions">${quoteButton("reviews_quote", { onPage: o.onPage })}<a class="text-link" href="${esc(GOOGLE.url)}" target="_blank" rel="noopener" data-cta="reviews_google">Read all reviews on Google ${icon("arrowUpRight")}<span class="visually-hidden"> (opens Google)</span></a>${leave}</div>
 </div>`;
 }
 
