@@ -1,5 +1,5 @@
 import { SHOP } from "../lib/facts.mjs";
-import { areasList, ctaBand, localStrip, proofSection, quoteBand, rulesTile, sectionHead, stepsList, textLink } from "../lib/components.mjs";
+import { areasList, ctaBand, localStrip, offerTile, proofSection, quoteBand, rulesTile, sectionHead, stepsList, textLink } from "../lib/components.mjs";
 import { abs, migratedBlocks, pageHero, pageJsonLd } from "./parts.mjs";
 
 // Local landing pages (knowledge base chapter 25 §11.3, 12 §4.5): the page's
@@ -19,7 +19,7 @@ export function renderLocal(ctx) {
     onPage: true,
     crumbs: [{ name: "Home", href: "/" }, { name: "Service areas", href: "/service-areas" }, { name: area.name }],
   });
-  const strip = `<section class="section--tight"><div class="container">${localStrip("local_strip")}</div></section>`;
+  const strip = `<section class="section--tight"><div class="container">${localStrip("local_strip")}</div></section>` + offerTile("local_offer", { onPage: true });
   const blocks = migratedBlocks(page.blocks);
   const rules = `<section class="section"><div class="container">${rulesTile("rules-title", { onPage: true })}</div></section>`;
   const how = `<section class="section section--sand" aria-labelledby="how-title"><div class="container">

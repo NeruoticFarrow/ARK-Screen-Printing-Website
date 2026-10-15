@@ -3,7 +3,7 @@ import { esc, ldScript } from "../lib/html.mjs";
 import { icon } from "../lib/icons.mjs";
 import { WORK, PHOTOS } from "../lib/media.mjs";
 import {
-  areasList, ctaBand, ctaRow, doodle, recentWork, faqJsonLd, faqList, galleryGrid, heroArt, localStrip, ownerSection, proofSection,
+  areasList, ctaBand, ctaRow, doodle, offerTile, recentWork, faqJsonLd, faqList, galleryGrid, heroArt, localStrip, ownerSection, proofSection,
   quoteBand, ratingLink, REASSURANCE, reassure, rulesTile, sectionHead, serviceTiles, stepsList, textLink, ticker,
 } from "../lib/components.mjs";
 import { SERVICE_PAGES } from "../content/services.mjs";
@@ -17,18 +17,19 @@ import { SERVICE_PAGES } from "../content/services.mjs";
 export const HOME_FAQ = [
   { q: "Is there a minimum order?", a: [`No. Screen printing starts at ${FACTS.screenFrom} shirts; under ${FACTS.screenFrom} we print with DTF, which needs no screens — even a single shirt. Tell us your quantity and we'll recommend the right method.`] },
   { q: "How long does an order take?", a: [`Most screen-print orders are done in ${FACTS.turnaround.screen}, DTF in ${FACTS.turnaround.dtf} from artwork approval and embroidery in ${FACTS.turnaround.embroidery}. Need it for a date? Put the date in your quote request or call — rush is often possible.`] },
-  { q: "Will I see my design before you print it?", a: ["Yes. A digital proof — a mockup of your design on the garment — follows moments after we've talked. Nothing is printed until you approve it."] },
-  { q: "Can you help with my artwork?", a: [`Yes. Send a logo file, a sketch or just an idea and we'll prepare it for print. Our <a href="${APP.artwork}">artwork guidelines</a> explain which files work best.`] },
+  { q: "Will I see my design before you print it?", a: [`Yes — and it's free. We send a mockup of your design on the garment, usually within ${FACTS.mockupWithin} (${FACTS.replyHours}). There's no obligation, and nothing is printed until you approve it.`] },
+  { q: "Can you help with my artwork?", a: [`Yes — free. Send a logo file, a sketch, a photo or just an idea and we'll clean it up for print at no charge. Our <a href="${APP.artwork}">artwork guidelines</a> explain which files work best.`] },
   { q: "Do you do embroidery?", a: ["Yes — polos, hats, jackets and bags, with free digitizing on every order and no minimum order. See <a href=\"/custom-embroidery\">custom embroidery</a>."] },
   { q: "Is local pickup available?", a: [`Yes — ${FACTS.pickup.toLowerCase()} in ${SHOP.city}, or we'll ship your order anywhere in the US.`] },
-  { q: "How fast is it?", a: [`Your price shows as you fill in the form. We're in touch within ${FACTS.replyWithin} (${FACTS.replyHours}), your proof follows ${FACTS.proofSpeed}, and once you approve it, printing can start ${FACTS.printStart}.`] },
+  { q: "How fast is it?", a: [`Your price shows as you fill in the form, your free mockup follows in ${FACTS.mockupWithin} (${FACTS.replyHours}), and once you approve it and pay, printing can start ${FACTS.printStart}.`] },
 ];
 
 export function renderHome(ctx) {
   const hero = `<section class="hero" aria-labelledby="hero-title"><div class="container hero-grid">
   <div>
+    <p class="offer-flag">${icon("image")}Free mockup in ${FACTS.mockupWithin} · no obligation</p>
     <h1 id="hero-title" class="display">Screen printing in Colorado Springs, <em class="accent swash">done here<svg class="swash-line" viewBox="0 0 120 16" aria-hidden="true" focusable="false"><path pathLength="1" d="M4 11C36 4 80 3 116 9"/></svg></em>.</h1>
-    <p class="lead">Custom shirts, hoodies, hats and embroidery for teams, businesses, churches and events — printed in our shop on Telstar Drive by the people who answer your call. No minimum order: one shirt or a thousand.</p>
+    <p class="lead">Custom shirts, hoodies, hats and embroidery for teams, businesses, churches and events — printed in our shop on Telstar Drive by the people who answer your call. Send your logo and see it on the shirt in ${FACTS.mockupWithin} — free, no obligation.</p>
     ${ctaRow("hero", { onPage: true })}
     ${reassure(REASSURANCE)}
     <div class="hero-proof">${ratingLink("hero_rating")}</div>
@@ -36,7 +37,7 @@ export function renderHome(ctx) {
   ${heroArt()}
 </div></section>`;
 
-  const strip = `<section class="section--tight"><div class="container">${localStrip("home_strip")}</div></section>`;
+  const strip = `<section class="section--tight"><div class="container">${localStrip("home_strip")}</div></section>` + offerTile("home_offer", { onPage: true });
 
   const audiences = `<section class="section--tight"><div class="container">${ticker("We print for", ["Teams & boosters", "Schools & PTOs", "Churches & mission trips", "Businesses & uniforms", "Events & races", "Bands & brands", "Nonprofits", "Reunions & gifts"])}</div></section>`;
 
@@ -49,7 +50,7 @@ export function renderHome(ctx) {
   const rules = `<section class="section" id="rules" aria-labelledby="rules-title"><div class="container">${rulesTile("rules-title", { onPage: true })}</div></section>`;
 
   const how = `<section class="section section--sand" id="how" aria-labelledby="how-title"><div class="container">
-  ${sectionHead("how-title", "How an order *works*.", "Price in minutes, proof right after, printing the same day — and nothing prints until you approve it.")}
+  ${sectionHead("how-title", "How an order *works*.", "Your price instantly, a free mockup in about 10 minutes, printing the same day — and nothing prints until you approve it.")}
   <div class="doodled">${doodle("loop", "section-doodle section-doodle--loop", " data-appear")}${stepsList()}</div>
   ${ctaRow("after_steps", { onPage: true })}
 </div></section>`;

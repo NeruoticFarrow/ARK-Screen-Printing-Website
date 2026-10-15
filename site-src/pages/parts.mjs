@@ -1,7 +1,8 @@
 import { accent, esc, ldScript } from "../lib/html.mjs";
 import { picture } from "../lib/images.mjs";
 import { crumbs, ctaRow, faqJsonLd, faqList, prose, ratingLink, REASSURANCE, reassure, sectionHead } from "../lib/components.mjs";
-import { SITE } from "../lib/facts.mjs";
+import { FACTS, SITE } from "../lib/facts.mjs";
+import { icon } from "../lib/icons.mjs";
 
 // Pieces the inner-page templates share.
 
@@ -15,6 +16,7 @@ export function pageHero(o) {
   <div>
     ${o.crumbs ? crumbs(o.crumbs) : ""}
     ${o.eyebrow ? `<p class="kicker eyebrow">${esc(o.eyebrow)}</p>` : ""}
+    ${o.noCta ? "" : `<p class="offer-flag">${icon("image")}Free mockup in ${esc(FACTS.mockupWithin)} · no obligation</p>`}
     <h1 id="page-title" class="h1">${accent(o.h1)}</h1>
     ${o.lead ? `<p class="lead">${esc(o.lead)}</p>` : ""}
     ${o.meta ? `<p class="cta-note">${esc(o.meta)}</p>` : ""}

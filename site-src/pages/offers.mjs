@@ -4,7 +4,7 @@ import { icon } from "../lib/icons.mjs";
 import { picture } from "../lib/images.mjs";
 import { PHOTOS, WORK } from "../lib/media.mjs";
 import {
-  ctaBand, ctaRow, faqJsonLd, faqList, galleryGrid, localStrip, proofSection, quoteBand, REASSURANCE, reassure,
+  ctaBand, ctaRow, faqJsonLd, offerTile, faqList, galleryGrid, localStrip, proofSection, quoteBand, REASSURANCE, reassure,
   ratingLink, rulesTile, sectionHead, stepsList, textLink, ticker,
 } from "../lib/components.mjs";
 import { pageHero } from "./parts.mjs";
@@ -156,7 +156,7 @@ export function renderFundraising() {
     onPage: true,
     crumbs: [{ name: "Home", href: "/" }, { name: "Fundraisers" }],
   });
-  const strip = `<section class="section--tight"><div class="container">${localStrip("fund_strip")}</div></section>`;
+  const strip = `<section class="section--tight"><div class="container">${localStrip("fund_strip")}</div></section>` + offerTile("fund_offer", { onPage: true });
   const who = `<section class="section--tight"><div class="container">${ticker("Made for", ["Schools & PTOs", "Booster clubs", "Sports teams", "Nonprofits", "Churches & youth groups", "Mission trips", "Bands & clubs", "Memorials & causes"])}</div></section>`;
   const ways = `<section class="section" aria-labelledby="ways-title"><div class="container">
   ${sectionHead("ways-title", "Two ways to *raise money*.", "Pick by how your supporters pay.")}
@@ -188,7 +188,7 @@ export function renderFundraising() {
   ${sectionHead("timeline-title", "Work back from your *date*.", "About three weeks is comfortable for a bulk order. Short on time? Call — rush is often possible.")}
   ${stepsList([
     { title: "About 3 weeks out: request your quote", text: `Garment, quantity, artwork and the date. We reply within ${FACTS.replyWithin} (${FACTS.replyHours}).` },
-    { title: "Your proof, moments later", text: "A digital proof follows right after we talk — nothing prints until you approve it. Using a school or team logo? Have the permission ready." },
+    { title: "Your free mockup in about 10 minutes", text: "See the design on the garment — free, no obligation; we'll clean up rough artwork free too. Using a school or team logo? Have the permission ready." },
     { title: "Printing starts the same day", text: `Approve the proof and pay the invoice, and printing can start the same day — most screen-print orders are done in ${FACTS.turnaround.screen}.` },
     { title: "Sell it", text: `${FACTS.pickup}, or we ship. Tell supporters how much of each sale goes to your cause.` },
   ])}
