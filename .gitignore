@@ -1,1 +1,6 @@
 node_modules/
+# Google Business Profile copies: rebuilt at each deploy, never committed
+# (Google allows only temporary copies of API content — site-src/sync/gbp-sync.mjs).
+site-src/.cache/
+ark-site-review/images/gbp/
+ark-site-review/assets/img/gbp/

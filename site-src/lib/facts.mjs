@@ -2,6 +2,8 @@
 // stood on 2026-10-15 (the page is named beside it). Pages read these values;
 // they never type a number of their own.
 //
+import { gbpData } from "./gbp-data.mjs";
+
 // OWNER DECISIONS (2026-10-15): screen printing's minimum is 24 shirts across
 // the site (DTF below that, so there's still no minimum order); the reply
 // promise is "within ten minutes" (stated with business hours where there's
@@ -93,15 +95,18 @@ export const FACTS = {
  *  before this goes live. */
 export const REVIEWS_FEED = "https://starwall.io/embed/YiV4AUpveXuQVJ5txn667ugZBx6sNBs4/data";
 
-/** The shop's Google Business Profile, as published on the site (5.0) and read
- *  on 2026-10-13 for the review count. Update when it moves. */
+/** The shop's Google Business Profile: synced from the Business Profile API
+ *  at each build when the sync is on (sync/gbp-sync.mjs), otherwise the values
+ *  last read by hand (2026-10-13). */
+const live = gbpData();
 export const GOOGLE = {
-  rating: 5,
-  count: 10,
+  rating: live?.rating ?? 5,
+  count: live?.count ?? 10,
   url: SHOP.mapsUrl,
   /** Google's "write a review" page for the shop (its Place ID). */
   writeReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJkatxyWHhgIAR2dfD8Cm-yz4",
-  checked: "2026-10-13",
+  checked: live ? live.fetchedAt.slice(0, 10) : "2026-10-13",
+  live: Boolean(live),
 };
 
 /** Links into the online shop app (design.arkscreenprinting.com). */

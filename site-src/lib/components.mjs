@@ -2,6 +2,7 @@ import fs from "node:fs";
 import { FACTS, GOOGLE, REVIEWS_FEED, SERVICES, SHOP, SITE } from "./facts.mjs";
 import { accent, esc, ldScript } from "./html.mjs";
 import { icon } from "./icons.mjs";
+import { gbpData } from "./gbp-data.mjs";
 import { imageInfo, picture } from "./images.mjs";
 import { PHOTOS } from "./media.mjs";
 
@@ -9,10 +10,15 @@ import { PHOTOS } from "./media.mjs";
 // accent word, pill buttons, 20 px cards and colour-block tiles, the ARK seal
 // on big tiles. Pure functions of their inputs; every value is escaped.
 
-// The owner's published picks. Relative dates ("2 days ago") were true when
-// pasted and aren't now, so they're dropped (FTC: no misleading recency).
-export const REVIEWS = JSON.parse(fs.readFileSync(new URL("../content/reviews.json", import.meta.url), "utf8"))
-  .map((r) => ({ ...r, date: r.date && !/ago|google/i.test(r.date) ? r.date : null }));
+// Reviews: the Business Profile's own, newest first and every rating, when the
+// weekly sync is on (sync/gbp-sync.mjs); otherwise the owner's published picks.
+const PICKS = JSON.parse(fs.readFileSync(new URL("../content/reviews.json", import.meta.url), "utf8"))
+  // Relative dates ("2 days ago") were true when pasted and aren't now.
+  .map((r) => ({ ...r, rating: 5, date: r.date && !/ago|google/i.test(r.date) ? r.date : null }));
+const LIVE = gbpData();
+export const REVIEWS = LIVE?.reviews?.length ? LIVE.reviews : PICKS;
+/** The Business Profile's own photos (newest first), when the sync is on. */
+export const GBP_PHOTOS = LIVE?.photos ?? [];
 const SEAL = `<img class="seal" src="/assets/brand/ark-seal.png" width="300" height="304" alt="" loading="lazy" decoding="async">`;
 
 export function sectionHead(id, title, text, o = {}) {
@@ -271,7 +277,7 @@ export function proofSection(id, title, o = {}) {
   <div class="reviews-head" data-appear>
     <a class="rating-line" href="${esc(GOOGLE.url)}" target="_blank" rel="noopener" data-cta="reviews_rating">${stars()}<span><b><span data-rv-rating>${GOOGLE.rating.toFixed(1)}</span>/5</b> based on <b data-rv-count>${GOOGLE.count}</b> Google reviews · as of <span data-rv-asof>${asOf}</span><span class="visually-hidden"> (opens Google)</span></span></a>
     <h2 id="${esc(id)}" class="h2">${accent(title)}</h2>
-    <p class="muted">${esc(o.note ?? `Real Google reviews of our ${SHOP.city} print shop.`)}</p>
+    <p class="muted">${esc(o.note ?? `Real Google reviews of our ${SHOP.city} print shop.`)}${GOOGLE.live ? " Synced from Google each week." : ""}</p>
   </div>
   ${reviewsTicker({ live: o.live })}
   <div class="cta-row reviews-actions">${quoteButton("reviews_quote", { onPage: o.onPage })}<a class="text-link" href="${esc(GOOGLE.url)}" target="_blank" rel="noopener" data-cta="reviews_google">Read all reviews on Google ${icon("arrowUpRight")}<span class="visually-hidden"> (opens Google)</span></a>${leave}</div>
@@ -293,6 +299,26 @@ export function ownerSection(id, o = {}) {
     <div class="cta-row">${quoteButton("owner_quote", { onPage: o.onPage })}${o.more === false ? "" : textLink("/about", "The ARK story", "owner_about")}</div>
   </div>
 </div>`;
+}
+
+const CATEGORY_ALT = {
+  PRODUCT: "A recent print from ARK Screen Printing",
+  AT_WORK: "At work in the ARK Screen Printing shop",
+  TEAMS: "The team at ARK Screen Printing",
+  INTERIOR: "Inside the ARK Screen Printing shop",
+  EXTERIOR: "The ARK Screen Printing shop from outside",
+};
+/** A Business Profile photo as a gallery item, described by the owner's own
+ *  caption or, failing that, by its Google category. */
+const gbpItem = (p) => ({ src: p.src, alt: p.alt || CATEGORY_ALT[p.category] || "Recent work from ARK Screen Printing" });
+
+/** Real work: the newest Business Profile photos first (when synced), then
+ *  the curated photos, without repeats. */
+export function recentWork(curated, n = Infinity) {
+  const seen = new Set();
+  return [...GBP_PHOTOS.map(gbpItem), ...curated.map((c) => (typeof c === "string" ? { src: c, alt: "" } : c))]
+    .filter((it) => !seen.has(it.src) && seen.add(it.src))
+    .slice(0, n);
 }
 
 export function galleryGrid(items, o = {}) {

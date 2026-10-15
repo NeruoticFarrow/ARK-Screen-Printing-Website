@@ -1,0 +1,19 @@
+# Rebuilds the live site every Monday so the Google rating, reviews and owner
+# photos stay current (Netlify runs the Business Profile sync at build time).
+# Needs one repository secret: NETLIFY_BUILD_HOOK (Netlify → Site configuration
+# → Build & deploy → Build hooks → Add build hook, branch main).
+name: Weekly rebuild (Google reviews and photos)
+on:
+  schedule:
+    - cron: "0 13 * * 1" # Mondays 13:00 UTC (7am Mountain)
+  workflow_dispatch:
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger a Netlify build
+        env:
+          HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then echo "NETLIFY_BUILD_HOOK isn't set yet — skipping."; exit 0; fi
+          curl -fsS -X POST -d '{}' "$HOOK" > /dev/null && echo "Netlify build triggered."
