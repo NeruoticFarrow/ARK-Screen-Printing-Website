@@ -273,6 +273,102 @@ span.rt-av{display:grid;place-items:center;color:#fff;font:600 1.125rem/1 var(--
 @media (prefers-reduced-motion:reduce){.rt-track{animation:none!important}}
 .ways{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
 .ways .checklist{margin-bottom:22px}
+/* The "who we print for" strips: site.js repeats the list until each half
+   is wider than the window and sets the pace from the width (no gap at the
+   loop, owner 2026-10-16). */
+.ticker.is-live .ticker-track{animation-duration:var(--ticker-dur,48s)}
+/* The accent word's underline: a fixed height in em, stretched to the word
+   (preserveAspectRatio none), so it sits just under the letters at any
+   length (owner, 2026-10-16: it covered the bottom of "done here"). */
+.swash-line{height:.3em;bottom:-.2em;stroke-width:8}
+/* Print on demand — the creator platform's landing (moved here from the
+   Studio's own pages, 2026-10-16). */
+.pod-hero .crumbs{margin-bottom:16px}
+/* The hero's deck: real prints dealt into a fan as the page loads (each card
+   turns about a pivot below the deck), then the doodles draw, the facts and
+   the shop's sticker settle in. Hover lifts a card. Still and fanned for
+   reduced motion; drifts with the scroll on desktop (site.js). */
+.deck-stage{position:relative;width:100%;max-width:540px;justify-self:center;aspect-ratio:1/1.04;margin-top:8px}
+.deck{position:absolute;inset:0}
+.deck-card{--w:min(40%,220px);position:absolute;left:calc(50% - var(--w) / 2);top:9%;width:var(--w);aspect-ratio:3/4;padding:6px;border-radius:18px;background:var(--surface);box-shadow:0 18px 36px rgba(12,52,89,.16),0 2px 6px rgba(12,52,89,.08);transform-origin:50% 170%;rotate:calc(var(--k) * 8deg);transition:scale .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s ease}
+.deck-card picture{display:block;height:100%}
+.deck-card img{display:block;width:100%;height:100%;object-fit:cover;border-radius:12px;background:var(--sand)}
+.deck-card:hover{z-index:30!important;scale:1.06;box-shadow:0 26px 48px rgba(12,52,89,.24)}
+@keyframes deck-in{from{opacity:0;translate:0 10%;scale:.94}}
+@keyframes deck-fan{from{rotate:0deg}}
+.deck-card{animation:deck-in .6s cubic-bezier(.2,.7,.2,1) backwards,deck-fan 1.05s cubic-bezier(.34,1.3,.5,1) backwards;animation-delay:.1s,calc(var(--d) * 70ms + 620ms)}
+.deck-stage > [data-depth]:not(.deck){animation:settle .7s cubic-bezier(.2,.7,.2,1) backwards;animation-delay:calc(var(--i,0) * 100ms + 1000ms)}
+.deck-stage .doodle path{animation:draw 1.1s ease-out backwards;animation-delay:calc(var(--i,0) * 120ms + 1150ms)}
+.deck-stage .sticker{top:0;right:2%;width:96px;height:96px;z-index:16}
+.dk-burst{top:1%;left:7%;width:54px;color:var(--tan);z-index:16}
+.dk-loop{bottom:1%;left:-2%;width:122px;color:var(--sky)}
+.dk-strokes{top:46%;right:-3%;width:56px;color:var(--brown);z-index:16}
+.dk-chip{z-index:18}
+.dk-chip--a{top:20%;left:-5%}
+.dk-chip--b{bottom:21%;right:-4%}
+.dk-chip--c{bottom:5%;left:20%}
+@media (max-width:959px){.deck-stage{max-width:460px;margin-top:24px}}
+@media (max-width:519px){.deck-card{--w:min(44%,190px);rotate:calc(var(--k) * 7deg)}.dk-chip--c,.dk-strokes{display:none}.deck-stage .sticker{width:76px;height:76px}.dk-chip--a{left:-2%}.dk-chip--b{right:-2%}}
+@media (prefers-reduced-motion:reduce){.deck-card,.deck-stage [data-depth],.deck-stage .doodle path{animation:none!important}}
+/* The product categories: one tile each, linking into the designer. */
+.cats{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));margin:0;padding:0;list-style:none}
+@media (min-width:900px){.cats{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}}
+.cat{display:grid;justify-items:center;align-content:start;gap:6px;height:100%;padding:22px 16px 18px;border-radius:var(--r-lg);border:1px solid var(--hairline);text-align:center;text-decoration:none;color:var(--navy);transition:translate .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s ease,border-color .25s ease}
+.cat--sand{background:var(--sand)}
+.cat--sky{background:#e5f0f3;background:color-mix(in srgb,var(--sky) 28%,var(--surface))}
+.cat--surface{background:var(--surface)}
+.cat--tan{background:#f1e4d0;background:color-mix(in srgb,var(--tan) 28%,var(--surface))}
+.section--sand .cat--sand{background:var(--parchment)}
+.cat:hover{translate:0 -4px;box-shadow:var(--lift);border-color:var(--tan)}
+.cat:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.cat-art{display:grid;place-items:center;width:92px;height:92px;margin-bottom:4px}
+.garment{display:block;width:100%;height:100%;overflow:visible}
+.garment-line{fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.garment-print{fill:var(--tan);transition:fill .25s ease}
+.garment-dot{fill:currentColor}
+.cat--tan .garment-print,.cat:hover .garment-print{fill:var(--brown)}
+.cat-name{font:700 1.125rem/1.2 var(--display);color:var(--navy)}
+.cat-go{display:inline-flex;align-items:center;gap:4px;font-size:.8125rem;font-weight:600;color:var(--blue)}
+.cat-go .icon{width:14px;height:14px}
+/* The profit calculator (ported from the Studio's pages). */
+.calc{display:grid;gap:20px}
+@media (min-width:900px){.calc{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:start}}
+.calc fieldset{min-width:0;margin:0;padding:0;border:0}
+.calc legend{padding:0}
+.calc-form{border-radius:var(--r-lg);background:var(--surface);border:1px solid var(--hairline);box-shadow:var(--lift);padding:clamp(20px,3vw,32px)}
+.options{display:grid;gap:10px;margin-top:14px}
+.option{position:relative}
+.option input{position:absolute;opacity:0;width:1px;height:1px}
+.option label{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:var(--r-md);background:var(--parchment);border:1px solid var(--hairline);cursor:pointer;transition:background-color 140ms ease,border-color 140ms ease}
+.option label:hover{border-color:var(--tan)}
+.option .dot{display:grid;place-items:center;width:22px;height:22px;flex:none;border-radius:8px;background:var(--surface);border:1.5px solid var(--line)}
+.option .name{flex:1;font-weight:600;color:var(--navy)}
+.option .name small{display:block;margin-top:2px;font-weight:400;font-size:.8125rem;color:var(--muted)}
+.option b{font-weight:600;color:var(--navy)}
+.option input:checked + label{background:var(--sand);border-color:var(--tan)}
+.option input:checked + label .dot{background:var(--navy);border-color:var(--navy)}
+.option input:checked + label .dot::after{content:"";width:9px;height:5px;margin-top:-2px;border-left:2px solid var(--parchment);border-bottom:2px solid var(--parchment);transform:rotate(-45deg)}
+.option input:focus-visible + label{outline:3px solid var(--blue);outline-offset:2px}
+.field{display:grid;gap:8px;margin-top:22px}
+.field-label{font:600 .9375rem/1.3 var(--text);color:var(--navy)}
+.field-hint{margin:0;font-size:.875rem;color:var(--muted)}
+.price-field{display:flex;align-items:center;gap:6px;height:56px;padding:0 22px;border-radius:var(--pill);background:var(--parchment);border:1.5px solid var(--line);font:600 1.25rem/1 var(--text);color:var(--navy)}
+.price-field:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,112,186,.22)}
+.price-field input{width:100%;border:0;background:transparent;font:inherit;color:inherit;outline:none}
+.range{width:100%;accent-color:var(--blue)}
+.range-scale{display:flex;justify-content:space-between;font-size:.8125rem;color:var(--muted)}
+.result{display:grid;gap:18px;align-content:start}
+.result .label{color:var(--on-dark)}
+.result-total{font:700 clamp(3rem,2.2rem + 3.4vw,4.75rem)/1 var(--display);letter-spacing:-.025em;color:var(--parchment)}
+.result-sub{margin:0;color:var(--on-dark)}
+.result-rows{display:grid;margin:0;padding:0;list-style:none}
+.result-rows li{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid rgba(245,238,223,.24)}
+.result-rows b{color:var(--parchment)}
+.calc-warning{margin:0;color:var(--tan);font-weight:600}
+.calc-note{margin:0;font-size:.875rem;color:var(--on-dark)}
+.calc-foot{margin-top:18px;max-width:72ch;font-size:.875rem;color:var(--muted)}
+.pod-facts{margin-top:26px}
+@media (min-width:900px){.pod-facts{grid-template-columns:repeat(3,minmax(0,1fr))}}
 `;
 
 export const SITE_CSS = BASE_CSS + ADDITIONS + REFINEMENTS;

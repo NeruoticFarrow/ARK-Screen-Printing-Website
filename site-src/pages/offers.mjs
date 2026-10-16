@@ -1,12 +1,18 @@
+import fs from "node:fs";
 import { APP, FACTS, SHOP, SITE, STORES } from "../lib/facts.mjs";
 import { accent, esc, ldScript } from "../lib/html.mjs";
 import { icon } from "../lib/icons.mjs";
 import { picture } from "../lib/images.mjs";
 import { PHOTOS, WORK } from "../lib/media.mjs";
 import {
-  ctaBand, ctaRow, faqJsonLd, offerTile, faqList, galleryGrid, localStrip, proofSection, quoteBand, REASSURANCE, reassure,
-  ratingLink, rulesTile, sectionHead, stepsList, textLink, ticker,
+  ctaBand, ctaRow, doodle, faqJsonLd, offerTile, faqList, FUNDRAISING_AUDIENCES, galleryGrid, localStrip, POD_AUDIENCES, proofSection,
+  quoteBand, quoteButton, REASSURANCE, reassure, ratingLink, rulesTile, SEAL, sectionHead, stepsList, swash, textLink, ticker,
 } from "../lib/components.mjs";
+import {
+  calculator, calculatorFootnote, categoryShowcase, deckArt, priceButton, runRuleTile, shippingText, STORE_CTA, storeButton,
+} from "../lib/studio.mjs";
+
+const GALLERY = JSON.parse(fs.readFileSync(new URL("../content/gallery.json", import.meta.url), "utf8"));
 import { pageHero } from "./parts.mjs";
 
 // Two offer pages added 2026-10-15 (owner request):
@@ -29,7 +35,7 @@ const runRule = () => {
 const payoutRule = () => `Earnings become available ${STORES.payoutAfterShipDays} days after an order ships and are paid by PayPal once a month when you have $${STORES.minimumPayoutUsd} or more. A W-9 is needed once payouts pass the IRS reporting threshold.`;
 
 const studioButton = (placement, label, o = {}) =>
-  `<a class="btn ${o.onDark ? "btn--accent" : o.ghost ? "btn--ghost" : "btn--primary"} btn--lg" href="${APP.studio}" data-cta="${esc(placement)}">${esc(label)} ${icon("arrowRight")}</a>`;
+  `<a class="btn ${o.onDark ? "btn--accent" : o.ghost ? "btn--ghost" : "btn--primary"} btn--lg" href="/print-on-demand" data-cta="${esc(placement)}">${esc(label)} ${icon("arrowRight")}</a>`;
 
 const breadcrumbLd = (name, slug) => ldScript({
   "@context": "https://schema.org",
@@ -51,42 +57,87 @@ const serviceLd = (name, description, slug) => ldScript({
 
 export const POD_FAQ = [
   { q: "Does it cost anything to open a store?", a: ["No. A store is $0 to open, with no monthly fee and no listing fee. Each sale has a base — the blank, the print, packing and our margin — and everything you charge above it is yours."] },
-  { q: "Who prints and ships the orders?", a: [`We do, in our ${SHOP.city} shop. Print-on-demand orders ship within ${STORES.onDemandShipDays} business days, with tracking (carrier time is extra). Store-order shipping is $${STORES.shippingFlatUsd.toFixed(2)} flat and free over $${STORES.freeShippingOverUsd}, US addresses only.`] },
+  { q: "How much is shipping?", a: [`Your buyers pay it: ${shippingText()}, to US addresses. Every order ships with tracking within ${STORES.onDemandShipDays} business days (carrier time is extra).`] },
+  { q: "Who prints and ships the orders?", a: [`We do, in our ${SHOP.city} shop — every order is printed, packed and shipped here, not sent to a warehouse. You can call or text the people printing it.`] },
+  { q: "What can I put my designs on?", a: [`Every category in our designer: short and long sleeves, hoodies, sweatshirts, tote bags, polos, youth sizes, overalls and more. <a href="#products">See the categories</a>.`] },
   { q: "How do I get paid?", a: [payoutRule()] },
   { q: "Can I sell a limited run instead?", a: [`Yes. Run a campaign with a closing date and we print the whole run together. ${runRule()} Every order prints either way.`] },
   { q: "What do my buyers get?", a: [`Tracking on every order, free size exchanges within ${STORES.sizeExchangeDays} days and defects made right within ${STORES.defectDays} days of delivery.`] },
-  { q: "Would a bulk order suit me better?", a: [`If you'd rather buy upfront — for an event, a team or staff — a bulk order gives the lowest price per shirt (screen printing from ${FACTS.screenFrom}). <a href="/get-a-quote#quote">See Your Price Instantly</a>.`] },
+  { q: "Can I open a store today?", a: [STORES.signupOpen ? `Yes — <a href="${esc(APP.studioStart)}">start your store</a>. It's free.` : `Stores are invite-only while we finish testing. <a href="${esc(STORE_CTA.href)}">Request an invite</a> by email and we'll set you up.`] },
+  { q: "Would a bulk order suit me better?", a: [`If you'd rather buy upfront — for an event, a team or staff — a bulk order gives the lowest price per shirt (screen printing from ${FACTS.screenFrom}). <a href="/get-a-quote#quote">Price a bulk order</a>.`] },
 ];
 
+/** Real prints for the page's gallery (described; the hero's deck is decoration). */
+const POD_WORK = [
+  "/images/gallery/awaken-camp-tee-on-press.webp",
+  "/images/gallery/starmaker-tee-print.webp",
+  "/images/gallery/loac-tee-back.webp",
+  "/images/gallery/hsso-soccer-crest-print.webp",
+  "/images/gallery/team-powers-quarter-zip-print.webp",
+  "/images/gallery/giro-di-california-badge.webp",
+];
+
+/** The creator platform's landing page (owner, 2026-10-16): the Studio's
+ *  home, moved here from design.arkscreenprinting.com/studio — the hero deck,
+ *  who it's for, how it works, the run rule, the profit calculator (where this
+ *  page's "See Your Price Instantly" goes), the product categories, real work,
+ *  reviews and answers. Section ids keep the old Studio pages' anchors
+ *  (#how, #the-run, #pricing, #products, #faq) for the redirects. */
 export function renderPrintOnDemand() {
   const slug = "print-on-demand";
   const title = "Print on Demand Colorado Springs | ARK Screen Printing";
-  const description = `Print on demand from a real Colorado Springs print shop: open a free store, set your price, and we print every order and ship it within ${STORES.onDemandShipDays} business days. No inventory, no upfront cost.`;
-  const hero = `<section class="page-hero" aria-labelledby="page-title"><div class="container hero-grid">
+  const description = `Sell your merch with print on demand from a real Colorado Springs print shop: open a free store, set your price and see what you keep. We print every order and ship it within ${STORES.onDemandShipDays} business days — no inventory, no upfront cost.`;
+  const altOf = new Map(GALLERY.map((g) => [g.src, g.alt]));
+
+  const hero = `<section class="hero pod-hero" aria-labelledby="page-title"><div class="container hero-grid">
   <div>
     <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">Home</a></li><li><span aria-current="page">Print on demand</span></li></ol></nav>
-    <p class="kicker eyebrow">No inventory · no upfront cost</p>
-    <h1 id="page-title" class="h1">${accent("Print on demand, from a *real* print shop.")}</h1>
-    <p class="lead">Open a free online store, put your designs on tees and hoodies, and set your price. Every order is printed in our ${esc(SHOP.city)} shop and shipped to your buyer — you keep everything above the base.</p>
-    <div class="cta-row">${studioButton("hero_studio", "Start your store")}<a class="btn btn--ghost btn--lg" href="/get-a-quote#quote" data-cta="hero_quote">See Your Price Instantly</a></div>
-    ${storeNote()}
-    ${reassure(["$0 to open", "No monthly or listing fees", "Printed in Colorado Springs"])}
+    <p class="kicker eyebrow">Print on demand · $0 to open</p>
+    <h1 id="page-title" class="display">Sell your merch. A ${swash("real")} print shop does the rest.</h1>
+    <p class="lead">Open a store for $0 — no monthly or listing fees. You set the price; the base covers the blank, the print, packing and our margin, and everything above it is yours. We print and ship every order from our ${esc(SHOP.city)} shop.</p>
+    <div class="cta-row">${storeButton("hero_store")}${priceButton("hero_price", { ghost: true })}</div>
+    ${STORE_CTA.note ? `<p class="cta-note">${esc(STORE_CTA.note)}</p>` : ""}
+    ${reassure(STORE_CTA.reassurance)}
+    <div class="hero-proof">${ratingLink("hero_rating")}</div>
   </div>
-  <figure class="hero-photo-card">${picture(PHOTOS.folded.src, { alt: PHOTOS.folded.alt, sizes: "(min-width: 960px) 560px, 92vw", priority: true })}</figure>
+  ${deckArt()}
 </div></section>`;
+
   const strip = `<section class="section--tight"><div class="container">${localStrip("pod_strip")}</div></section>`;
-  const audiences = `<section class="section--tight"><div class="container">${ticker("Made for", ["Bands & artists", "Clothing brands", "Creators", "Schools & teams", "Churches & clubs", "Small businesses", "Fundraisers"])}</div></section>`;
-  const how = `<section class="section section--sand" aria-labelledby="how-title"><div class="container">
-  ${sectionHead("how-title", "How print on demand *works*.", "You make the design and set the price. We print, pack, ship and look after your buyers.")}
-  ${stepsList([
-    { title: "Design your release", text: "Upload your art, place it on a garment and pick the colours you sell. The Studio shows the base before you set a price." },
-    { title: "Share your store", text: "Your own store at your own link. A printer checks every file before a release goes live." },
-    { title: "We print each order", text: `Printed in our ${SHOP.city} shop and shipped with tracking within ${STORES.onDemandShipDays} business days (US only).` },
-    { title: "You get paid", text: "Everything above the base is yours, paid monthly by PayPal." },
-  ])}
-  <div class="cta-row">${studioButton("after_steps_studio", "Start your store")}${textLink(APP.studioHow, "The whole process", "pod_how")}</div>
+  const audiences = `<section class="section--tight"><div class="container">${ticker("Made for", POD_AUDIENCES)}</div></section>`;
+
+  const how = `<section class="section section--sand" id="how" aria-labelledby="how-title"><div class="container">
+  ${sectionHead("how-title", "Three steps. We do the *printing*.", "You make the release and decide how it sells. We print, pack, ship and look after your buyers.")}
+  <div class="doodled">${doodle("loop", "section-doodle section-doodle--loop", " data-appear")}${stepsList([
+    { title: "Design and price it", text: "Upload your art, place it and pick colours. See the base and set your price — what you keep updates as you type." },
+    { title: "Launch your store", text: "Run a campaign with a closing date, or print on demand so it's always on sale. A printer reviews your file first." },
+    { title: "We print, ship and pay you", text: `Printed in our ${SHOP.city} shop and shipped with tracking within ${STORES.onDemandShipDays} business days. Your earnings are paid monthly by PayPal.` },
+  ])}</div>
+  <div class="cta-row">${storeButton("after_steps_store")}${priceButton("after_steps_price", { ghost: true })}</div>
 </div></section>`;
-  const why = `<section class="section" aria-labelledby="why-title"><div class="container">
+
+  const rule = `<section class="section" id="the-run" aria-labelledby="run-title"><div class="container">
+  ${runRuleTile("run-title", `${runRule()} What you keep is the same either way.`, `<div class="cta-row">${textLink("/dtf-vs-screen-printing", "DTF vs screen printing", "pod_methods")}</div>`)}
+</div></section>`;
+
+  const pricing = `<section class="section section--sand" id="pricing" aria-labelledby="pricing-title"><div class="container">
+  ${sectionHead("pricing-title", "See your price — and what you *keep*.", "Pick a tee, try your price and slide to how many you'd sell. The base is the blank, the print, packing and our margin — the same number the Studio shows you. Everything above it is yours.")}
+  ${calculator()}
+  ${calculatorFootnote()}
+  <ul class="checklist pod-facts">
+    <li>${icon("truck")}<span><b>Shipping</b><small>${esc(shippingText())}, paid by your buyer. US addresses, tracked, within ${esc(STORES.onDemandShipDays)} business days.</small></span></li>
+    <li>${icon("currencyDollar")}<span><b>Payouts</b><small>Paid monthly by PayPal once you have $${STORES.minimumPayoutUsd} or more, ${STORES.payoutAfterShipDays} days after an order ships.</small></span></li>
+    <li>${icon("storefront")}<span><b>No fees</b><small>$0 to open, no monthly fee and no listing fee.</small></span></li>
+  </ul>
+  <div class="cta-row">${storeButton("after_calc_store")}</div>
+</div></section>`;
+
+  const products = `<section class="section" id="products" aria-labelledby="products-title"><div class="container">
+  ${sectionHead("products-title", "Pick your *canvas*.", "Short sleeves to overalls — every category in our designer. Choose one to start designing.")}
+  <div class="doodled">${doodle("burst", "section-doodle section-doodle--burst", " data-appear")}${categoryShowcase()}</div>
+</div></section>`;
+
+  const why = `<section class="section section--sand" aria-labelledby="why-title"><div class="container">
   ${sectionHead("why-title", "Why sell with *ARK*.")}
   <ul class="features">
     <li class="card feature" data-appear>${icon("storefront")}<h3 class="h4">$0 to open</h3><p>No monthly fee and no listing fee. The base on each sale covers the blank, the print, packing and our margin.</p></li>
@@ -95,7 +146,8 @@ export function renderPrintOnDemand() {
     <li class="card feature" data-appear>${icon("shieldCheck")}<h3 class="h4">Buyers looked after</h3><p>Tracking on every order, free size exchanges within ${STORES.sizeExchangeDays} days and defects made right within ${STORES.defectDays}.</p></li>
   </ul>
 </div></section>`;
-  const compare = `<section class="section section--sand" aria-labelledby="compare-title"><div class="container">
+
+  const compare = `<section class="section" aria-labelledby="compare-title"><div class="container">
   ${sectionHead("compare-title", "Print on demand or a *bulk order*?", "Both are printed in the same shop. Pick by who pays and when.")}
   <div class="prose prose--wide"><div class="table-scroll"><table>
     <thead><tr><th></th><th>Print on demand (a store)</th><th>Bulk order</th></tr></thead>
@@ -103,19 +155,29 @@ export function renderPrintOnDemand() {
       <tr><th>Who pays</th><td>Each buyer, online</td><td>You, upfront</td></tr>
       <tr><th>Inventory</th><td>None — each order is printed as it's placed</td><td>You receive the whole order</td></tr>
       <tr><th>Delivery</th><td>Shipped to each buyer within ${STORES.onDemandShipDays} business days (US only)</td><td>${esc(FACTS.pickup)}, or shipped to you</td></tr>
+      <tr><th>Shipping</th><td>${esc(shippingText())}, paid by the buyer</td><td>Quoted with your order</td></tr>
       <tr><th>Best for</th><td>Merch, brands, fans and supporters ordering their own size</td><td>Teams, staff and events with a date</td></tr>
       <tr><th>Price per shirt</th><td>You set the retail price above the base</td><td>Lowest at ${FACTS.screenFrom}+ (screen printing)</td></tr>
     </tbody>
   </table></div></div>
-  <div class="cta-row">${studioButton("compare_studio", "Start your store")}<a class="btn btn--ghost btn--lg" href="/get-a-quote#quote" data-cta="compare_quote">See Your Price Instantly</a></div>
+  <div class="cta-row">${storeButton("compare_store")}${quoteButton("compare_quote", { label: "Price a bulk order" })}</div>
 </div></section>`;
-  const work = `<section class="section" aria-labelledby="work-title"><div class="container">${sectionHead("work-title", "Printed in our shop.", undefined, { aside: textLink("/gallery", "See more work", "pod_gallery") })}${galleryGrid(WORK.slice(0, 6))}</div></section>`;
-  const proof = `<section class="section section--sand" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What our custom-print customers *say*.", { note: "Google reviews of the print shop that prints every store order." })}</div></section>`;
-  const faq = `<section class="section" aria-labelledby="faq-title"><div class="container">${sectionHead("faq-title", "Straight *answers*.", undefined, { aside: textLink(APP.studioFaq, "Creator FAQ", "pod_faq") })}${faqList(POD_FAQ)}</div></section>`;
+
+  const work = `<section class="section section--sand" aria-labelledby="work-title"><div class="container">
+  ${sectionHead("work-title", "Printed in our shop, not a *warehouse*.", `Real work from our presses in ${SHOP.city}.`, { aside: textLink("/gallery", "See more work", "pod_gallery") })}
+  <div class="doodled">${doodle("strokes", "section-doodle section-doodle--strokes", " data-appear")}${galleryGrid(POD_WORK.map((src) => ({ src, alt: altOf.get(src) ?? "" })))}</div>
+</div></section>`;
+
+  const proof = `<section class="section" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What our customers *say*.", { note: "Google reviews of the print shop that prints every store order.", button: priceButton("reviews_price") })}</div></section>`;
+
+  const faq = `<section class="section section--sand" id="faq" aria-labelledby="faq-title"><div class="container">${sectionHead("faq-title", "Straight *answers*.")}${faqList(POD_FAQ)}</div></section>`;
+
   const closing = `<section class="section" aria-labelledby="final-title"><div class="container"><div class="tile tile--navy on-dark closing" data-appear>
-  <div><h2 id="final-title" class="h1">${accent("Open your *store*.")}</h2><p>Design a release, set your price and see what you'd keep — before anything goes on sale.</p></div>
-  <div><div class="cta-row">${studioButton("final_studio", "Start your store", { onDark: true })}<a class="btn btn--ghost btn--lg" href="${esc(SHOP.phoneHref)}" data-cta="final_call">${icon("phone")}Call ${esc(SHOP.phoneDisplay)}</a></div>${storeNote()}</div>
+  ${SEAL}
+  <div><h2 id="final-title" class="h1">${accent("Make your *first* release.")}</h2><p>Open a free store, design a release and see exactly what you'd keep — before anything goes on sale.</p></div>
+  <div><div class="cta-row">${storeButton("final_store", { onDark: true })}<a class="btn btn--ghost btn--lg" href="${esc(SHOP.phoneHref)}" data-cta="final_call">${icon("phone")}Call ${esc(SHOP.phoneDisplay)}</a></div>${reassure(STORE_CTA.reassurance)}</div>
 </div></div></section>`;
+
   return {
     title, description,
     canonical: `${SITE.origin}/${slug}`,
@@ -124,10 +186,11 @@ export function renderPrintOnDemand() {
     chrome: "full",
     current: slug,
     hasQuote: false,
+    quoteHref: "#pricing",
     page: slug,
-    stickyAction: { href: APP.studio, label: "Start your store", placement: "sticky_studio" },
+    stickyAction: { href: "#pricing", label: "See Your Price Instantly", placement: "sticky_price" },
     jsonLd: serviceLd("Print on demand", description, slug) + breadcrumbLd("Print on demand", slug) + faqJsonLd(POD_FAQ),
-    main: hero + strip + audiences + how + why + ctaBand("pod_band", { title: "Prefer one bulk order?", text: `Screen printing starts at ${FACTS.screenFrom} shirts — get a price in about two minutes.` }) + compare + work + proof + faq + closing,
+    main: hero + strip + audiences + how + rule + pricing + products + why + ctaBand("pod_band", { title: "Prefer one bulk order?", text: `Screen printing starts at ${FACTS.screenFrom} shirts — get a price in about two minutes.`, label: "Price a bulk order" }) + compare + work + proof + faq + closing,
   };
 }
 
@@ -157,7 +220,7 @@ export function renderFundraising() {
     crumbs: [{ name: "Home", href: "/" }, { name: "Fundraisers" }],
   });
   const strip = `<section class="section--tight"><div class="container">${localStrip("fund_strip")}</div></section>` + offerTile("fund_offer", { onPage: true });
-  const who = `<section class="section--tight"><div class="container">${ticker("Made for", ["Schools & PTOs", "Booster clubs", "Sports teams", "Nonprofits", "Churches & youth groups", "Mission trips", "Bands & clubs", "Memorials & causes"])}</div></section>`;
+  const who = `<section class="section--tight"><div class="container">${ticker("Made for", FUNDRAISING_AUDIENCES)}</div></section>`;
   const ways = `<section class="section" aria-labelledby="ways-title"><div class="container">
   ${sectionHead("ways-title", "Two ways to *raise money*.", "Pick by how your supporters pay.")}
   <div class="ways">

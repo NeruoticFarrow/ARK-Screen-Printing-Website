@@ -32,7 +32,10 @@ function wordmark() {
   return `<img class="brand-logo" src="/assets/brand/ark-logo-120.png" width="42" height="42" alt="" decoding="async"><span class="brand-mark" aria-hidden="true">ARK</span><span class="brand-name" aria-hidden="true">Screen Printing<small>${esc(SHOP.city)}, ${esc(SHOP.region)}</small></span>`;
 }
 
-const quoteHref = (o) => (o.hasQuote ? "#quote" : "/get-a-quote#quote");
+// Where "See Your Price Instantly" goes: the quote form (on the page when it
+// has one). A page whose price is something else says so — print on demand
+// sends it to its profit calculator (owner, 2026-10-16).
+const quoteHref = (o) => o.quoteHref ?? (o.hasQuote ? "#quote" : "/get-a-quote#quote");
 
 function header(o) {
   if (o.chrome === "minimal") {
@@ -89,7 +92,7 @@ function footer(o) {
     return `<footer class="site-footer footer-minimal">
   <div class="container">
     <div class="footer-bottom">
-      <span>© ${year} ${esc(SHOP.name)} · ${esc(SHOP.address)} · <a href="${esc(SHOP.phoneHref)}">${esc(SHOP.phoneDisplay)}</a></span>
+      <span>© ${year} ${esc(SHOP.name)} · ${esc(SHOP.cityLine)} · <a href="${esc(SHOP.phoneHref)}">${esc(SHOP.phoneDisplay)}</a></span>
       <span>${legal}</span>
     </div>
   </div>
@@ -102,7 +105,7 @@ function footer(o) {
         <a class="brand" href="/"><span class="visually-hidden">${esc(SHOP.name)} — home</span>${wordmark()}</a>
         <p>Screen printing, DTF printing and embroidery, done in-house in ${esc(SHOP.city)} by the people you talk to.</p>
         <ul>
-          <li><a href="${esc(SHOP.mapsUrl)}" target="_blank" rel="noopener">${esc(SHOP.address)}<span class="visually-hidden"> (opens Google Maps)</span></a></li>
+          <li><a href="${esc(SHOP.mapsUrl)}" target="_blank" rel="noopener">${esc(SHOP.cityLine)}<span class="visually-hidden"> (opens Google Maps)</span></a></li>
           <li>${esc(SHOP.hours)}</li>
           <li><a href="${esc(SHOP.phoneHref)}">Call ${esc(SHOP.phoneDisplay)}</a> · <a href="${esc(SHOP.smsHref)}">Text</a></li>
           <li><a href="mailto:${esc(SHOP.email)}">${esc(SHOP.email)}</a></li>
@@ -121,7 +124,7 @@ function footer(o) {
           <li><a href="/faq">FAQ</a></li>
           <li><a href="/service-areas">Service areas</a></li>
           <li><a href="${APP.artwork}">Artwork guidelines (PDF)</a></li>
-          <li><a href="${APP.studio}">Sell merch online</a></li>
+          <li><a href="/print-on-demand">Sell merch online</a></li>
         </ul>
       </nav>
       <nav aria-label="Orders">
@@ -135,7 +138,7 @@ function footer(o) {
       </nav>
     </div>
     <div class="footer-bottom">
-      <span>© ${year} ${esc(SHOP.name)} · ${esc(SHOP.address)}</span>
+      <span>© ${year} ${esc(SHOP.name)} · ${esc(SHOP.cityLine)}</span>
       <span>${legal}</span>
     </div>
   </div>
