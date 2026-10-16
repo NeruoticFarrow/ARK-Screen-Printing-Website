@@ -83,10 +83,6 @@ export const SERVICE_PAGES = {
     tile: "Full-colour transfers with no setup — ideal for small orders.",
     lead: `Full-colour DTF prints pressed in-house — no minimum, no setup fees, and ready in ${FACTS.turnaround.dtf} from artwork approval.`,
   },
-  "screen-printing-and-embroidery": {
-    tile: "Screen printing, DTF and embroidery under one roof.",
-    lead: "Screen printing, DTF and embroidery under one roof in Colorado Springs. Tell us the job and we'll recommend the method that fits it.",
-  },
   // The two offer pages render from pages/offers.mjs; these lines feed the home tiles.
   fundraising: { tile: "Raise money with shirts: a bulk order for your event, or a free online store." },
   "print-on-demand": { tile: "Sell online with no inventory — we print and ship every order." },

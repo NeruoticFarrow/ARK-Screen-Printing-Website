@@ -425,13 +425,32 @@ export function crumbs(items) {
   return `<nav aria-label="Breadcrumb"><ol class="crumbs">${items.map((c, i) => `<li>${i < items.length - 1 ? `<a href="${esc(c.href)}">${esc(c.name)}</a>` : `<span aria-current="page">${esc(c.name)}</span>`}</li>`).join("")}</ol></nav>`;
 }
 
-/** Migrated content: cards grouped into a grid, images into an image grid
+/** A run of photos as one row (img-grid--row): each keeps its own
+ *  proportions and all stand the same height — each column's share is its
+ *  photo's width/height — like the old embroidery page's three-up row
+ *  (owner, 2026-10-16). Phones stack them. */
+function photoRow(run) {
+  const photos = [...run.matchAll(/<img src="([^"]+)" alt="([^"]*)">/g)].map(([, src, alt]) => {
+    const info = imageInfo(src);
+    return { src, alt, ratio: info ? info.width / info.height : 1.5 };
+  });
+  const total = photos.reduce((sum, p) => sum + p.ratio, 0);
+  const cols = photos.map((p) => `${+p.ratio.toFixed(3)}fr`).join(" ");
+  const cells = photos.map((p) => {
+    const share = p.ratio / total;
+    return picture(p.src, { alt: p.alt, sizes: `(min-width: 1300px) ${Math.round(1240 * share)}px, (min-width: 700px) ${Math.round(92 * share)}vw, 92vw` });
+  });
+  return `<div class="img-grid img-grid--row" style="--cols:${cols}">${cells.join("")}</div>`;
+}
+
+/** Migrated content: cards grouped into a grid, images into a photo row
  *  (optimised), tables made scrollable on phones, internal links fixed. */
 export function prose(html, o = {}) {
   let out = html
     .replace(/(?:<article>[\s\S]*?<\/article>\s*)+/g, (m) => `<div class="card-grid">${m}</div>`)
-    .replace(/<img src="([^"]+)" alt="([^"]*)">/g, (_, src, alt) => picture(src, { alt, sizes: "(min-width: 960px) 360px, 90vw" }))
-    .replace(/(?:(?:<picture>[\s\S]*?<\/picture>|<img [^>]+>)\s*){2,}/g, (m) => `<div class="img-grid">${m}</div>`)
+    .replace(/(?:<img src="[^"]+" alt="[^"]*">\s*){2,}/g, photoRow)
+    // A lone image runs the full width of the text.
+    .replace(/<img src="([^"]+)" alt="([^"]*)">/g, (_, src, alt) => picture(src, { alt, sizes: "(min-width: 1300px) 1240px, 92vw" }))
     .replace(/<table>/g, '<div class="table-scroll"><table>').replace(/<\/table>/g, "</table></div>")
     // Pages that never existed on the site: point them at the screen-printing page.
     .replace(/href="\/(water-based-screen-printing|discharge-screen-printing)"/g, 'href="/custom-silk-screen-printing"')

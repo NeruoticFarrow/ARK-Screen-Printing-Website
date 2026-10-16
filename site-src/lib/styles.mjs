@@ -414,6 +414,26 @@ span.rt-av{display:grid;place-items:center;color:#fff;font:600 1.125rem/1 var(--
 .media-figure{margin:0}
 .media-figure img{display:block;width:100%;height:auto;border-radius:var(--r-lg);box-shadow:var(--lift)}
 .media-figure figcaption{margin-top:10px;font-size:.8125rem;line-height:1.45;color:var(--muted)}
+/* A portrait photo beside its text takes the narrower column, and stays a
+   modest width when it stacks under the text. */
+.media-split--tall .media-figure{max-width:440px}
+@media (min-width:900px){.media-split--tall{grid-template-columns:minmax(0,1.3fr) minmax(260px,.7fr)}.media-split--flip.media-split--tall{grid-template-columns:minmax(260px,.7fr) minmax(0,1.3fr)}}
+/* A row of photos (embroidery): each column's share is its photo's
+   width/height, so all stand the same height at their own proportions;
+   phones stack them. */
+@media (min-width:700px){.img-grid--row{display:grid;grid-template-columns:var(--cols);gap:14px;align-items:start;columns:auto}.img-grid--row > *{margin:0}}
+.img-grid--row img{display:block;box-shadow:var(--lift)}
+/* Drawn lines (the accent word's underline, the doodles) wait out their delay
+   inside a gap longer than the line. With a gap of exactly one line length, a
+   dash began right at the line's end and its round cap showed there as a dot
+   before the line drew (owner, 2026-10-16). */
+.swash-line path,.doodle path{stroke-dasharray:1 2}
+@keyframes draw{from{stroke-dashoffset:1.05}}
+/* Home: "What we print" follows the audience strip with no extra gap
+   (owner, 2026-10-16). */
+.section--flush-top{padding-top:0}
+/* The home's eight service cards: two even rows of four on wide screens. */
+@media (min-width:1100px){.service-tiles{grid-template-columns:repeat(4,minmax(0,1fr))}}
 `;
 
 export const SITE_CSS = BASE_CSS + ADDITIONS + REFINEMENTS;
