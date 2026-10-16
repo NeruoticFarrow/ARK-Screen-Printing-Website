@@ -369,6 +369,35 @@ span.rt-av{display:grid;place-items:center;color:#fff;font:600 1.125rem/1 var(--
 .calc-foot{margin-top:18px;max-width:72ch;font-size:.875rem;color:var(--muted)}
 .pod-facts{margin-top:26px}
 @media (min-width:900px){.pod-facts{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* FAQ: each question a card; its answer opens inside it, indented under the
+   question on a soft panel with a tan rule (owner, 2026-10-16). */
+.faq{display:grid;gap:12px;border-top:0}
+.faq details{border:1px solid var(--hairline);border-radius:var(--r-lg);background:var(--surface);transition:border-color .2s ease,box-shadow .2s ease}
+.section--sand .faq details{background:var(--parchment)}
+.faq details[open]{border-color:var(--tan);box-shadow:var(--lift)}
+.faq summary{padding:18px 18px 18px 22px;border-radius:var(--r-lg)}
+.faq summary:hover{color:var(--blue-deep)}
+.faq summary:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.faq summary .icon{flex:none;width:32px;height:32px;padding:7px;border-radius:50%;background:var(--sand);color:var(--navy);transition:background-color .2s ease,color .2s ease}
+.faq details[open] summary .icon{background:var(--navy);color:var(--parchment)}
+.faq .answer{max-width:none;margin:0 22px 22px;padding:16px 20px;border-left:3px solid var(--tan);border-radius:0 var(--r-md) var(--r-md) 0;background:var(--parchment);color:var(--ink)}
+.section--sand .faq .answer{background:var(--surface)}
+.faq .answer a{color:var(--blue-deep);font-weight:600}
+.faq-group + .faq-group{margin-top:40px}
+@media (max-width:519px){.faq summary{padding:16px 14px 16px 18px}.faq .answer{margin:0 14px 16px;padding:14px 16px}}
+/* About: the owner's story in the site's own sections (owner, 2026-10-16). */
+.about-split .h2{margin-top:8px}
+.about-p{margin-top:16px;max-width:60ch}
+.about-photo{margin:0;overflow:hidden;border-radius:var(--r-xl);border:8px solid var(--surface);box-shadow:var(--lift);rotate:1.5deg}
+.about-split--flip .about-photo{rotate:-1.5deg}
+.about-photo picture,.about-photo img{display:block;width:100%}
+.pull-quote{margin:28px 0 0;padding:4px 0 4px 24px;border-left:4px solid var(--tan);font:600 italic clamp(1.25rem,1.1rem + .7vw,1.625rem)/1.35 var(--display);color:var(--navy)}
+.letter{max-width:720px;margin:0 auto;padding:clamp(28px,4vw,48px);border-radius:var(--r-xl);background:var(--surface);border:1px solid var(--hairline);box-shadow:var(--lift);text-align:center}
+.letter blockquote{margin:0}
+.letter blockquote p{margin:0;font:500 clamp(1.25rem,1.1rem + .8vw,1.75rem)/1.4 var(--display);color:var(--navy)}
+.letter blockquote p + p{margin-top:12px}
+.letter figcaption{display:grid;justify-items:center;gap:8px;margin-top:22px;color:var(--muted);font-size:.9375rem}
+.letter .signature{width:180px;height:auto;opacity:.85}
 `;
 
 export const SITE_CSS = BASE_CSS + ADDITIONS + REFINEMENTS;

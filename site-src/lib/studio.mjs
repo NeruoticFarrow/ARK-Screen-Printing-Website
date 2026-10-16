@@ -49,8 +49,12 @@ export const STUDIO_PRICING = JSON.parse(fs.readFileSync(new URL("../content/stu
 const money = (n) => `$${n.toFixed(2)}`;
 const usd = (n) => (Number.isInteger(n) ? `$${n}` : money(n));
 
-/** "$8 an order, plus $3 for each additional item" (owner, 2026-10-16). */
-export const shippingText = () => `${usd(STORES.shippingFirstUsd)} an order, plus ${usd(STORES.shippingEachMoreUsd)} for each additional item`;
+/** "$8 for the first item and $3 for each additional item, up to $35 an
+ *  order" (owner, 2026-10-16: the $3 counts at most 9 more items). */
+export const shippingText = () => {
+  const cap = STORES.shippingFirstUsd + STORES.shippingEachMoreUsd * STORES.shippingMaxMoreItems;
+  return `${usd(STORES.shippingFirstUsd)} for the first item and ${usd(STORES.shippingEachMoreUsd)} for each additional item, up to ${usd(cap)} an order`;
+};
 
 /** The example price for a tee: the typical price, unless that would sit
  *  below the tee's base — then ARK's suggested price for it. */

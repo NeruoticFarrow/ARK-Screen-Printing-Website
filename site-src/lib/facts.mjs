@@ -11,8 +11,9 @@ import { gbpData } from "./gbp-data.mjs";
 // address is never presented as a pickup counter.
 //
 // Shipping (owner, 2026-10-16): $8 for an order's first item and $3 for each
-// additional item, for online orders (the app's checkout and the stores); a
-// bulk order's shipping is on its quote. There is no free shipping.
+// additional item, counting at most 9 more ($35 at most), for orders through
+// the designer and the stores. Stated only on the print-on-demand page — the
+// local pages don't quote shipping. There is no free shipping.
 //
 // STILL TO CONFIRM:
 //   · Turnaround differs by method (below). The PPC pages' "most orders ship
@@ -147,10 +148,11 @@ export const STORES = {
    *  offer pages then drop the invite-only note). */
   signupOpen: false,
   /** Owner, 2026-10-16: $8 for an order's first item plus $3 for each
-   *  additional item — the rule the app's checkout charges (ark-designer
-   *  shared/const.ts, changed in step with this page). */
+   *  additional item, up to 9 more ($35 at most) — the rule the app's checkout
+   *  charges (ark-designer shared/const.ts, changed in step with this page). */
   shippingFirstUsd: 8,
   shippingEachMoreUsd: 3,
+  shippingMaxMoreItems: 9,
   /** The print every quoted base assumes (the Studio's PLANNING_LOCATION). */
   planningPrint: "one full-front print up to 10 × 12 in",
   /** A typical tee price for worked examples — always labelled as one. */
