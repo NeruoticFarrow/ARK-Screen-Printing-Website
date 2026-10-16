@@ -21,7 +21,7 @@ export const HOME_FAQ = [
   { q: "Can you help with my artwork?", a: [`Yes — free. Send a logo file, a sketch, a photo or just an idea and we'll clean it up for print at no charge. Our <a href="${APP.artwork}">artwork guidelines</a> explain which files work best.`] },
   { q: "Do you do embroidery?", a: ["Yes — polos, hats, jackets and bags, with free digitizing on every order and no minimum order. See <a href=\"/custom-embroidery\">custom embroidery</a>."] },
   { q: "Is local pickup available?", a: [`Yes — ${FACTS.pickup.toLowerCase()} in ${SHOP.city}, or we'll ship your order anywhere in the US.`] },
-  { q: "How fast is it?", a: [`Your price shows as you fill in the form, your free mockup follows in ${FACTS.mockupWithin} (${FACTS.replyHours}), and once you approve it and pay, printing can start ${FACTS.printStart}.`] },
+  { q: "How fast is it?", a: [`Your price shows as you fill in the form, your free mockup follows in ${FACTS.mockupWithin} (${FACTS.replyHours}), and once you approve it and pay, we start your order ${FACTS.printStart} — ${FACTS.sameDayWork}. Most screen-print orders are ready in ${FACTS.turnaround.screen}.`] },
 ];
 
 export function renderHome(ctx) {
@@ -29,7 +29,7 @@ export function renderHome(ctx) {
   <div>
     <p class="offer-flag">${icon("image")}Free mockup in ${FACTS.mockupWithin} · no obligation</p>
     <h1 id="hero-title" class="display">Screen printing in Colorado Springs, ${swash("done here")}.</h1>
-    <p class="lead">Custom shirts, hoodies, hats and embroidery for teams, businesses, churches and events — printed in our ${esc(SHOP.city)} shop by the people who answer your call. Send your logo and see it on the shirt in ${FACTS.mockupWithin} — free, no obligation.</p>
+    <p class="lead">Custom shirts, hoodies, hats and embroidery for teams, businesses, churches and events — printed in our own ${esc(SHOP.city)} shop, and a real person answers when you call. Send your logo and see it on the shirt in ${FACTS.mockupWithin} — free, no obligation.</p>
     ${ctaRow("hero", { onPage: true })}
     ${reassure(REASSURANCE)}
     <div class="hero-proof">${ratingLink("hero_rating")}</div>
@@ -50,7 +50,7 @@ export function renderHome(ctx) {
   const rules = `<section class="section" id="rules" aria-labelledby="rules-title"><div class="container">${rulesTile("rules-title", { onPage: true })}</div></section>`;
 
   const how = `<section class="section section--sand" id="how" aria-labelledby="how-title"><div class="container">
-  ${sectionHead("how-title", "How an order *works*.", "Your price instantly, a free mockup in about 10 minutes, printing the same day — and nothing prints until you approve it.")}
+  ${sectionHead("how-title", "How an order *works*.", "Your price instantly, a free mockup in about 10 minutes, your order started the same day — and nothing prints until you approve it.")}
   <div class="doodled">${doodle("loop", "section-doodle section-doodle--loop", " data-appear")}${stepsList()}</div>
   ${ctaRow("after_steps", { onPage: true })}
 </div></section>`;

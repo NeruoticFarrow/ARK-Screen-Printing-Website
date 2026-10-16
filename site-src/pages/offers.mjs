@@ -58,7 +58,7 @@ const serviceLd = (name, description, slug) => ldScript({
 export const POD_FAQ = [
   { q: "Does it cost anything to open a store?", a: ["No. A store is $0 to open, with no monthly fee and no listing fee. Each sale has a base — the blank, the print, packing and our margin — and everything you charge above it is yours."] },
   { q: "How much is shipping?", a: [`Your buyers pay it: ${shippingText()}, to US addresses. Every order ships with tracking within ${STORES.onDemandShipDays} business days (carrier time is extra).`] },
-  { q: "Who prints and ships the orders?", a: [`We do, in our ${SHOP.city} shop — every order is printed, packed and shipped here, not sent to a warehouse. You can call or text the people printing it.`] },
+  { q: "Who prints and ships the orders?", a: [`We do, in our ${SHOP.city} shop — every order is printed, packed and shipped here, not sent to a warehouse. You can call or text the shop.`] },
   { q: "What can I put my designs on?", a: [`Every category in our designer: short and long sleeves, hoodies, sweatshirts, tote bags, polos, youth sizes, overalls and more. <a href="#products">See the categories</a>.`] },
   { q: "How do I get paid?", a: [payoutRule()] },
   { q: "Can I sell a limited run instead?", a: [`Yes. Run a campaign with a closing date and we print the whole run together. ${runRule()} Every order prints either way.`] },
@@ -141,7 +141,7 @@ export function renderPrintOnDemand() {
   ${sectionHead("why-title", "Why sell with *ARK*.")}
   <ul class="features">
     <li class="card feature" data-appear>${icon("storefront")}<h3 class="h4">$0 to open</h3><p>No monthly fee and no listing fee. The base on each sale covers the blank, the print, packing and our margin.</p></li>
-    <li class="card feature" data-appear>${icon("printer")}<h3 class="h4">Printed here, not a warehouse</h3><p>Every order is printed in our ${esc(SHOP.city)} shop — and you can call or text the people printing it.</p></li>
+    <li class="card feature" data-appear>${icon("printer")}<h3 class="h4">Printed here, not a warehouse</h3><p>Every order is printed in our ${esc(SHOP.city)} shop — and you can call or text the shop.</p></li>
     <li class="card feature" data-appear>${icon("sealCheck")}<h3 class="h4">A printer checks every file</h3><p>Before a release goes live, a person at the shop reviews your file and tells you what to fix.</p></li>
     <li class="card feature" data-appear>${icon("shieldCheck")}<h3 class="h4">Buyers looked after</h3><p>Tracking on every order, free size exchanges within ${STORES.sizeExchangeDays} days and defects made right within ${STORES.defectDays}.</p></li>
   </ul>
@@ -252,7 +252,7 @@ export function renderFundraising() {
   ${stepsList([
     { title: "About 3 weeks out: request your quote", text: `Garment, quantity, artwork and the date. We reply within ${FACTS.replyWithin} (${FACTS.replyHours}).` },
     { title: "Your free mockup in about 10 minutes", text: "See the design on the garment — free, no obligation; we'll clean up rough artwork free too. Using a school or team logo? Have the permission ready." },
-    { title: "Printing starts the same day", text: `Approve the proof and pay the invoice, and printing can start the same day — most screen-print orders are done in ${FACTS.turnaround.screen}.` },
+    { title: "We start the same day", text: `Approve the proof and pay the invoice, and we start your order the same day — ${FACTS.sameDayWork}. Most screen-print orders are done in ${FACTS.turnaround.screen}.` },
     { title: "Sell it", text: `${FACTS.pickup}, or we ship. Tell supporters how much of each sale goes to your cause.` },
   ])}
   ${ctaRow("timeline", { onPage: true })}

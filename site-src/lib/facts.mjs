@@ -16,8 +16,8 @@ import { gbpData } from "./gbp-data.mjs";
 // local pages don't quote shipping. There is no free shipping.
 //
 // STILL TO CONFIRM:
-//   · Turnaround differs by method (below). The PPC pages' "most orders ship
-//     within 5–7 business days" is used for screen printing.
+//   · Turnaround differs by method (below). Screen printing: 5–10 business
+//     days (owner, 2026-10-16; the PPC pages said 5–7).
 
 export const SITE = {
   origin: "https://arkscreenprinting.com",
@@ -62,8 +62,8 @@ export const FACTS = {
   turnaround: {
     /** dtf-printing-colorado-springs.html: from artwork approval. */
     dtf: "3–5 business days",
-    /** custom-*-ppc.html: "most orders ship within 5–7 business days". */
-    screen: "5–7 business days",
+    /** Owner, 2026-10-16 (was 5–7 on the PPC pages). */
+    screen: "5–10 business days",
     /** custom-embroidery.html / custom-hats-colorado-springs.html (≈2 weeks). */
     embroidery: "7–14 business days",
     /** custom-hats-colorado-springs.html. */
@@ -85,6 +85,9 @@ export const FACTS = {
   callWithin: "5 minutes",
   mockupAfterCall: "ten minutes",
   printStart: "the same day",
+  /** Owner, 2026-10-16: what "starts the same day" means — the work begins
+   *  that day, the order isn't printed that day. */
+  sameDayWork: "garments ordered, films printed, screens burned",
   /** Owner, 2026-10-15: never "pick up at the shop/address". */
   pickup: "Local pickup available",
   /** faq.html: Monarch plastisol, Matsui water-based and discharge inks. */
