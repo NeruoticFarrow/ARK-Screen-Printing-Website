@@ -3,8 +3,8 @@ import { esc, ldScript } from "../lib/html.mjs";
 import { icon } from "../lib/icons.mjs";
 import { WORK, PHOTOS } from "../lib/media.mjs";
 import {
-  areasList, ctaBand, ctaRow, doodle, offerTile, recentWork, faqJsonLd, faqList, galleryGrid, heroArt, localStrip, ownerSection, proofSection,
-  quoteBand, ratingLink, REASSURANCE, reassure, rulesTile, sectionHead, serviceTiles, stepsList, textLink, ticker,
+  areasList, ctaBand, ctaRow, doodle, HOME_AUDIENCES, offerTile, recentWork, faqJsonLd, faqList, galleryGrid, heroArt, localStrip, ownerSection, proofSection,
+  quoteBand, ratingLink, REASSURANCE, reassure, rulesTile, sectionHead, serviceTiles, stepsList, swash, textLink, ticker,
 } from "../lib/components.mjs";
 import { SERVICE_PAGES } from "../content/services.mjs";
 
@@ -28,8 +28,8 @@ export function renderHome(ctx) {
   const hero = `<section class="hero" aria-labelledby="hero-title"><div class="container hero-grid">
   <div>
     <p class="offer-flag">${icon("image")}Free mockup in ${FACTS.mockupWithin} · no obligation</p>
-    <h1 id="hero-title" class="display">Screen printing in Colorado Springs, <em class="accent swash">done here<svg class="swash-line" viewBox="0 0 120 16" aria-hidden="true" focusable="false"><path pathLength="1" d="M4 11C36 4 80 3 116 9"/></svg></em>.</h1>
-    <p class="lead">Custom shirts, hoodies, hats and embroidery for teams, businesses, churches and events — printed in our shop on Telstar Drive by the people who answer your call. Send your logo and see it on the shirt in ${FACTS.mockupWithin} — free, no obligation.</p>
+    <h1 id="hero-title" class="display">Screen printing in Colorado Springs, ${swash("done here")}.</h1>
+    <p class="lead">Custom shirts, hoodies, hats and embroidery for teams, businesses, churches and events — printed in our ${esc(SHOP.city)} shop by the people who answer your call. Send your logo and see it on the shirt in ${FACTS.mockupWithin} — free, no obligation.</p>
     ${ctaRow("hero", { onPage: true })}
     ${reassure(REASSURANCE)}
     <div class="hero-proof">${ratingLink("hero_rating")}</div>
@@ -39,7 +39,7 @@ export function renderHome(ctx) {
 
   const strip = `<section class="section--tight"><div class="container">${localStrip("home_strip")}</div></section>` + offerTile("home_offer", { onPage: true });
 
-  const audiences = `<section class="section--tight"><div class="container">${ticker("We print for", ["Teams & boosters", "Schools & PTOs", "Churches & mission trips", "Businesses & uniforms", "Events & races", "Bands & brands", "Nonprofits", "Reunions & gifts"])}</div></section>`;
+  const audiences = `<section class="section--tight"><div class="container">${ticker("We print for", HOME_AUDIENCES)}</div></section>`;
 
   const lines = Object.fromEntries(Object.entries(SERVICE_PAGES).map(([k, v]) => [k, v.tile]));
   const services = `<section class="section" aria-labelledby="services-title"><div class="container">
@@ -68,8 +68,8 @@ export function renderHome(ctx) {
   ${sectionHead("groups-title", "Ordering for a *group*?", "Three ways to do it — pick the one that fits how your group pays.")}
   <ul class="features">
     <li class="card feature" data-appear>${icon("package")}<h3 class="h4">One order, delivered together</h3><p>You collect sizes and we print the lot — local pickup or we ship it. Best for teams, staff and events.</p>${textLink("#quote", "See Your Price Instantly", "groups_quote")}</li>
-    <li class="card feature" data-appear>${icon("storefront")}<h3 class="h4">Everyone pays for their own</h3><p>A free online store where each person picks a size and pays. We print and ship every order — no collecting cash.</p>${textLink(APP.studio, "How group stores work", "groups_store")}</li>
-    <li class="card feature" data-appear>${icon("handHeart")}<h3 class="h4">Raise money with shirts</h3><p>Set a price above the cost and the difference goes to your cause, with a store your supporters order from.</p>${textLink(APP.studio, "Fundraiser stores", "groups_fundraiser")}</li>
+    <li class="card feature" data-appear>${icon("storefront")}<h3 class="h4">Everyone pays for their own</h3><p>A free online store where each person picks a size and pays. We print and ship every order — no collecting cash.</p>${textLink("/print-on-demand", "How group stores work", "groups_store")}</li>
+    <li class="card feature" data-appear>${icon("handHeart")}<h3 class="h4">Raise money with shirts</h3><p>Set a price above the cost and the difference goes to your cause, with a store your supporters order from.</p>${textLink("/fundraising", "Fundraiser stores", "groups_fundraiser")}</li>
   </ul>
 </div></section>`;
 

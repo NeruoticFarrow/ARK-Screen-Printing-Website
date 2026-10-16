@@ -10,10 +10,12 @@ import { gbpData } from "./gbp-data.mjs";
 // room, so it stays true at 3am); pickup is "local pickup available" — the
 // address is never presented as a pickup counter.
 //
+// Shipping (owner, 2026-10-16): $8 for an order's first item and $3 for each
+// additional item, counting at most 9 more ($35 at most), for orders through
+// the designer and the stores. Stated only on the print-on-demand page — the
+// local pages don't quote shipping. There is no free shipping.
+//
 // STILL TO CONFIRM:
-//   · Free shipping: the FAQ says "free shipping on every order, nationwide";
-//     the online shop says free over $75. Not stated on the new pages until
-//     the owner confirms (FREE_SHIPPING stays null).
 //   · Turnaround differs by method (below). The PPC pages' "most orders ship
 //     within 5–7 business days" is used for screen printing.
 
@@ -40,6 +42,9 @@ export const SHOP = {
   region: "CO",
   postcode: "80922",
   address: "1755 Telstar Dr, Suite 300, Colorado Springs, CO 80922",
+  /** What the pages show (owner, 2026-10-16): the city, state and ZIP only.
+   *  The full address stays in the structured data for Google. */
+  cityLine: "Colorado Springs, CO 80922",
   /** index.html footer and LocalBusiness schema. */
   hours: "Monday – Sunday, 7:30am – 7pm",
   mapsUrl: "https://maps.app.goo.gl/ncwEPkwtvKs4gBBY8",
@@ -75,6 +80,10 @@ export const FACTS = {
    *  design, no obligation, usually within about 10 minutes in business hours.
    *  The secondary: free artwork cleanup. No discount offer. */
   mockupWithin: "about 10 minutes",
+  /** Owner, 2026-10-16: after the quote form, a call within five minutes;
+   *  the free mockup follows ten minutes after that call. */
+  callWithin: "5 minutes",
+  mockupAfterCall: "ten minutes",
   printStart: "the same day",
   /** Owner, 2026-10-15: never "pick up at the shop/address". */
   pickup: "Local pickup available",
@@ -82,8 +91,6 @@ export const FACTS = {
   inks: "Monarch plastisol, plus Matsui water-based and discharge inks",
   /** index.html guarantee banner. */
   guarantee: "Quality work, on time, or we make it right — at no cost to you.",
-  /** null until the owner confirms the rule (see the note at the top). */
-  freeShipping: null,
 };
 
 /** Live Google reviews on the Reviews page until the Business Profile sync is
@@ -117,13 +124,13 @@ export const APP = {
   terms: "https://design.arkscreenprinting.com/terms",
   privacy: "https://design.arkscreenprinting.com/privacy",
   refunds: "https://design.arkscreenprinting.com/refund-policy",
-  /** The creator platform (merch stores) — the bridge for groups where
-   *  everyone pays for their own (docs: knowledge base chapter 19). */
-  // The creator platform is served from the app host (arkscreenprinting.com/studio
-  // isn't proxied — that would be decision D-e in the knowledge base).
-  studio: "https://design.arkscreenprinting.com/studio",
-  studioHow: "https://design.arkscreenprinting.com/studio/how-it-works",
-  studioFaq: "https://design.arkscreenprinting.com/studio/faq",
+  /** The creator platform's sign-up (merch stores). Its landing page lives
+   *  here now, at /print-on-demand (owner, 2026-10-16); the app stays on the
+   *  app host. */
+  studioStart: "https://design.arkscreenprinting.com/studio/start",
+  /** The product designer: the print-on-demand categories link here until
+   *  the catalogue moves to this site. */
+  designer: "https://design.arkscreenprinting.com/",
   artwork: "/images/ark-art-requirements.pdf",
 };
 
@@ -140,8 +147,16 @@ export const STORES = {
   /** CREATOR_PLATFORM_MODE in production. Set true when sign-ups open (the
    *  offer pages then drop the invite-only note). */
   signupOpen: false,
-  shippingFlatUsd: 7.99,
-  freeShippingOverUsd: 75,
+  /** Owner, 2026-10-16: $8 for an order's first item plus $3 for each
+   *  additional item, up to 9 more ($35 at most) — the rule the app's checkout
+   *  charges (ark-designer shared/const.ts, changed in step with this page). */
+  shippingFirstUsd: 8,
+  shippingEachMoreUsd: 3,
+  shippingMaxMoreItems: 9,
+  /** The print every quoted base assumes (the Studio's PLANNING_LOCATION). */
+  planningPrint: "one full-front print up to 10 × 12 in",
+  /** A typical tee price for worked examples — always labelled as one. */
+  examplePriceUsd: 24.99,
   sizeExchangeDays: 30,
   defectDays: 30,
 };

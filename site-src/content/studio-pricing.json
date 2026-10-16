@@ -1,0 +1,11 @@
+{
+  "source": "https://design.arkscreenprinting.com/studio/pricing",
+  "fetchedAt": "2026-10-16",
+  "version": 1,
+  "screenMinimum": 24,
+  "garments": [
+    { "key": "ss_activewear/5000", "label": "Bayside Unisex USA-Made Fine Jersey T-Shirt", "dtfBase": 16.15, "suggestedRetail": 29.49 },
+    { "key": "ss_activewear/3600", "label": "Next Level Unisex Cotton Tee", "dtfBase": 12.06, "suggestedRetail": 21.99 },
+    { "key": "as_colour/5001", "label": "AS Colour Staple Tee", "dtfBase": 14.35, "suggestedRetail": 25.99 }
+  ]
+}

@@ -10,7 +10,8 @@
     "migrate": "node site-src/migrate/extract.mjs",
     "gbp:auth": "node site-src/sync/gbp-auth.mjs",
     "gbp:sync": "node site-src/sync/gbp-sync.mjs",
-    "netlify-build": "node site-src/sync/gbp-sync.mjs && node site-src/images.mjs && node site-src/build.mjs && node site-src/check.mjs"
+    "netlify-build": "node site-src/sync/gbp-sync.mjs && node site-src/sync/studio-pricing.mjs && node site-src/images.mjs && node site-src/build.mjs && node site-src/check.mjs",
+    "studio:sync": "node site-src/sync/studio-pricing.mjs"
   },
   "devDependencies": {
     "linkedom": "0.18.5",

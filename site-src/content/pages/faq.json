@@ -68,10 +68,10 @@
         },
         {
           "@type": "Question",
-          "name": "Do you offer free shipping?",
+          "name": "How much is shipping?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes — free shipping on every order, nationwide, no minimums or weight-based fees. Estimated delivery is about two weeks from when you place your order. Need it sooner? Call or text us at (719) 280-2638."
+            "text": "Online orders ship anywhere in the US for $8 for the first item and $3 for each additional item. For a bulk order, shipping is on your quote — or choose local pickup. Estimated delivery is about two weeks from when you place your order. Need it sooner? Call or text us at (719) 280-2638."
           }
         },
         {
@@ -179,8 +179,8 @@
           "a": "<p>Payment is collected securely at checkout via Stripe — we never see or store your card details. Your order is placed in our production queue immediately upon confirmation, and you will receive emails as your order moves forward in the queue. There is no separate approval step required unless we have details which are unclear or which require confirmation. In such case, we will hold off for printing until we are able to reach you to answer our questions or confirm details. To ensure the smoothest process, make sure your artwork is high quality, and upload your artwork on the mockup exactly as you'd like it to appear as printed. Approved wholesale accounts can also pay by invoice and have access to net terms and 50% deposit terms.</p>"
         },
         {
-          "q": "Do you offer free shipping?",
-          "a": "<p>Yes — free shipping on every order, nationwide, no minimums or weight-based fees. Estimated delivery is about two weeks from when you place your order. Need it sooner? Call or text us at <a href=\"tel:+17192802638\">(719) 280-2638</a>.</p>"
+          "q": "How much is shipping?",
+          "a": "<p>Online orders ship anywhere in the US for $8 for the first item and $3 for each additional item. For a bulk order, shipping is on your quote — or choose local pickup. Estimated delivery is about two weeks from when you place your order. Need it sooner? Call or text us at <a href=\"tel:+17192802638\">(719) 280-2638</a>.</p>"
         },
         {
           "q": "Can I reorder a previous design?",

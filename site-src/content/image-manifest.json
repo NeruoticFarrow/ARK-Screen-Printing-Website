@@ -1286,5 +1286,234 @@
         "file": "/assets/img/security-widefield-960.webp"
       }
     ]
+  },
+  "/images/gallery/awaken-camp-tee-on-press.webp": {
+    "original": "/images/gallery/awaken-camp-tee-on-press.webp",
+    "width": 1500,
+    "height": 2000,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-awaken-camp-tee-on-press-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-awaken-camp-tee-on-press-960.webp"
+      }
+    ]
+  },
+  "/images/gallery/loac-tee-back.webp": {
+    "original": "/images/gallery/loac-tee-back.webp",
+    "width": 1125,
+    "height": 1500,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-loac-tee-back-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-loac-tee-back-960.webp"
+      }
+    ]
+  },
+  "/images/gallery/starmaker-tee-print.webp": {
+    "original": "/images/gallery/starmaker-tee-print.webp",
+    "width": 1125,
+    "height": 1500,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-starmaker-tee-print-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-starmaker-tee-print-960.webp"
+      }
+    ]
+  },
+  "/images/gallery/usafa-prep-crest-print.webp": {
+    "original": "/images/gallery/usafa-prep-crest-print.webp",
+    "width": 1593,
+    "height": 2000,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-usafa-prep-crest-print-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-usafa-prep-crest-print-960.webp"
+      }
+    ]
+  },
+  "/images/gallery/hsso-soccer-crest-print.webp": {
+    "original": "/images/gallery/hsso-soccer-crest-print.webp",
+    "width": 1500,
+    "height": 2000,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-hsso-soccer-crest-print-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-hsso-soccer-crest-print-960.webp"
+      }
+    ]
+  },
+  "/images/gallery/team-powers-quarter-zip-print.webp": {
+    "original": "/images/gallery/team-powers-quarter-zip-print.webp",
+    "width": 1125,
+    "height": 1500,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-team-powers-quarter-zip-print-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-team-powers-quarter-zip-print-960.webp"
+      }
+    ]
+  },
+  "/images/gallery/space-range-squadron-onesie.webp": {
+    "original": "/images/gallery/space-range-squadron-onesie.webp",
+    "width": 1500,
+    "height": 2000,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-space-range-squadron-onesie-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-space-range-squadron-onesie-960.webp"
+      }
+    ]
+  },
+  "/images/gallery/giro-di-california-badge.webp": {
+    "original": "/images/gallery/giro-di-california-badge.webp",
+    "width": 1125,
+    "height": 1500,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-giro-di-california-badge-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-giro-di-california-badge-960.webp"
+      }
+    ]
+  },
+  "/images/gallery/alan-walker-red-rocks-tee.webp": {
+    "original": "/images/gallery/alan-walker-red-rocks-tee.webp",
+    "width": 1500,
+    "height": 2000,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-alan-walker-red-rocks-tee-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-alan-walker-red-rocks-tee-960.webp"
+      }
+    ]
+  },
+  "/images/gallery/awaken-camp-tee-white.webp": {
+    "original": "/images/gallery/awaken-camp-tee-white.webp",
+    "width": 1500,
+    "height": 2000,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-awaken-camp-tee-white-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-awaken-camp-tee-white-960.webp"
+      }
+    ]
+  },
+  "/images/gallery/shark-tee-print.webp": {
+    "original": "/images/gallery/shark-tee-print.webp",
+    "width": 1125,
+    "height": 1500,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-shark-tee-print-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-shark-tee-print-960.webp"
+      }
+    ]
+  },
+  "/images/gallery/loac-tee-front.webp": {
+    "original": "/images/gallery/loac-tee-front.webp",
+    "width": 1125,
+    "height": 1500,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-loac-tee-front-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-loac-tee-front-960.webp"
+      }
+    ]
+  },
+  "/images/gallery/team-powers-quarter-zips-boxed.webp": {
+    "original": "/images/gallery/team-powers-quarter-zips-boxed.webp",
+    "width": 1500,
+    "height": 2000,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-team-powers-quarter-zips-boxed-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-team-powers-quarter-zips-boxed-960.webp"
+      }
+    ]
+  },
+  "/images/gallery/usafa-prep-left-chest.webp": {
+    "original": "/images/gallery/usafa-prep-left-chest.webp",
+    "width": 2000,
+    "height": 1500,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-usafa-prep-left-chest-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-usafa-prep-left-chest-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/gallery-usafa-prep-left-chest-1600.webp"
+      }
+    ]
+  },
+  "/images/gallery/usafa-prep-order-boxed.webp": {
+    "original": "/images/gallery/usafa-prep-order-boxed.webp",
+    "width": 1500,
+    "height": 2000,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-usafa-prep-order-boxed-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-usafa-prep-order-boxed-960.webp"
+      }
+    ]
   }
 }

@@ -26,7 +26,8 @@ export function picture(src, o = {}) {
   const info = imageInfo(src);
   const alt = esc(o.alt ?? "");
   const cls = o.className ? ` class="${esc(o.className)}"` : "";
-  const loading = o.priority ? ' fetchpriority="high"' : ' loading="lazy"';
+  // priority: the page's main image; eager: on screen at once (no lazy wait).
+  const loading = o.priority ? ' fetchpriority="high"' : o.eager ? "" : ' loading="lazy"';
   const dims = info ? ` width="${info.width}" height="${info.height}"` : "";
   const original = esc(info?.original ?? src);
   const img = `<img src="${original}"${dims} alt="${alt}"${loading} decoding="async"${cls}>`;

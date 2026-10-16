@@ -19,7 +19,7 @@ const LIVE = gbpData();
 export const REVIEWS = LIVE?.reviews?.length ? LIVE.reviews : PICKS;
 /** The Business Profile's own photos (newest first), when the sync is on. */
 export const GBP_PHOTOS = LIVE?.photos ?? [];
-const SEAL = `<img class="seal" src="/assets/brand/ark-seal.png" width="300" height="304" alt="" loading="lazy" decoding="async">`;
+export const SEAL = `<img class="seal" src="/assets/brand/ark-seal.png" width="300" height="304" alt="" loading="lazy" decoding="async">`;
 
 export function sectionHead(id, title, text, o = {}) {
   const tag = o.level ?? "h2";
@@ -71,9 +71,9 @@ export function offerTile(placement, o = {}) {
 /** A compact call to action placed between sections (strategic repeats of the
  *  one action: after proof, after the offer, after the page's own content). */
 export function ctaBand(placement, o = {}) {
-  return `<section class="section--tight" aria-label="See Your Price Instantly"><div class="container"><div class="cta-band" data-appear>
+  return `<section class="section--tight" aria-label="${esc(o.label ?? "See Your Price Instantly")}"><div class="container"><div class="cta-band" data-appear>
   <p><b>${esc(o.title ?? "Ready when you are.")}</b> ${esc(o.text ?? `See your price as you go, get a free mockup in ${FACTS.mockupWithin} (${FACTS.replyHours}), and printing can start ${FACTS.printStart}.`)}</p>
-  <div class="cta-band-actions">${quoteButton(placement, { onPage: o.onPage })}<a class="text-link" href="${esc(SHOP.phoneHref)}" data-cta="${esc(placement)}_call">${icon("phone")}Call or text ${esc(SHOP.phoneDisplay)}</a></div>
+  <div class="cta-band-actions">${quoteButton(placement, { onPage: o.onPage, label: o.label })}<a class="text-link" href="${esc(SHOP.phoneHref)}" data-cta="${esc(placement)}_call">${icon("phone")}Call or text ${esc(SHOP.phoneDisplay)}</a></div>
 </div></div></section>`;
 }
 
@@ -85,11 +85,12 @@ export function ratingLink(placement) {
   return `<a class="rating" href="${esc(GOOGLE.url)}" target="_blank" rel="noopener" data-cta="${esc(placement)}">${stars()}<span><b><span data-rv-rating>${GOOGLE.rating.toFixed(1)}</span> on Google</b> · <span data-rv-count>${GOOGLE.count}</span> reviews<span class="visually-hidden"> (opens Google)</span></span></a>`;
 }
 
-/** Rating, address, hours and call/text: local proof in plain sight. */
+/** Where we are, hours and call/text: local proof in plain sight. The rating
+ *  sits in every hero above it, so the strip doesn't repeat it (owner,
+ *  2026-10-16); the address shows as the city line. */
 export function localStrip(placement = "strip") {
   return `<div class="local-strip">
-  ${ratingLink(`${placement}_rating`)}
-  <span>${icon("mapPin")}<a href="${esc(SHOP.mapsUrl)}" target="_blank" rel="noopener" data-cta="${esc(placement)}_map">${esc(SHOP.street)}, ${esc(SHOP.city)}<span class="visually-hidden"> (opens Google Maps)</span></a></span>
+  <span>${icon("mapPin")}<a href="${esc(SHOP.mapsUrl)}" target="_blank" rel="noopener" data-cta="${esc(placement)}_map">${esc(SHOP.cityLine)}<span class="visually-hidden"> (opens Google Maps)</span></a></span>
   <span>${icon("clock")}${esc(SHOP.hours)}</span>
   <span>${icon("phone")}<a href="${esc(SHOP.phoneHref)}" data-cta="${esc(placement)}_call">Call</a> or <a href="${esc(SHOP.smsHref)}" data-cta="${esc(placement)}_text">text</a> ${esc(SHOP.phoneDisplay)}</span>
 </div>`;
@@ -101,16 +102,20 @@ const DOODLES = {
   loop: `<svg viewBox="0 0 160 90" fill="none" focusable="false"><path pathLength="1" d="M5 72C30 22 64 8 73 34s-31 40-26 14S105 15 155 28" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   strokes: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" focusable="false"><path pathLength="1" d="M16 48 56 14"/><path pathLength="1" d="M22 68 74 26"/><path pathLength="1" d="M36 84 86 44"/></svg>`,
 };
+export function swash(word) {
+  return `<em class="accent swash">${esc(word)}<svg class="swash-line" viewBox="0 0 120 16" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M4 11C36 4 80 3 116 9"/></svg></em>`;
+}
+
 export function doodle(kind, className = "", attrs = "") {
   return `<span class="doodle doodle--${kind}${className ? ` ${className}` : ""}" aria-hidden="true"${attrs}>${DOODLES[kind]}</span>`;
 }
-const layer = (depth, order, extra = "") => ` data-depth="${depth}" style="--i:${order}"${extra}`;
+export const layer = (depth, order, extra = "") => ` data-depth="${depth}" style="--i:${order}"${extra}`;
 
-function sticker(attrs) {
+export function sticker(attrs) {
   return `<span class="sticker" aria-hidden="true"${attrs}><svg viewBox="0 0 120 120" focusable="false"><defs><path id="sticker-ring" d="M60 60m-45 0a45 45 0 1 1 90 0a45 45 0 1 1-90 0"/></defs><circle cx="60" cy="60" r="59" class="sticker-disc"/><circle cx="60" cy="60" r="31" class="sticker-core"/><text class="sticker-text"><textPath href="#sticker-ring" textLength="278" lengthAdjust="spacingAndGlyphs">ARK SCREEN PRINTING · COLORADO SPRINGS ·</textPath></text><image href="/assets/brand/ark-logo-120.png" x="38" y="38" width="44" height="44"/></svg></span>`;
 }
 
-function floatChip(name, text, className, attrs) {
+export function floatChip(name, text, className, attrs) {
   return `<span class="float-chip ${className}"${attrs}>${icon(name)}<span>${esc(text)}</span></span>`;
 }
 
@@ -280,7 +285,7 @@ export function proofSection(id, title, o = {}) {
     <p class="muted">${esc(o.note ?? `Real Google reviews of our ${SHOP.city} print shop.`)}${GOOGLE.live ? " Synced from Google each week." : ""}</p>
   </div>
   ${reviewsTicker({ live: o.live })}
-  <div class="cta-row reviews-actions">${quoteButton("reviews_quote", { onPage: o.onPage })}<a class="text-link" href="${esc(GOOGLE.url)}" target="_blank" rel="noopener" data-cta="reviews_google">Read all reviews on Google ${icon("arrowUpRight")}<span class="visually-hidden"> (opens Google)</span></a>${leave}</div>
+  <div class="cta-row reviews-actions">${o.button ?? quoteButton("reviews_quote", { onPage: o.onPage })}<a class="text-link" href="${esc(GOOGLE.url)}" target="_blank" rel="noopener" data-cta="reviews_google">Read all reviews on Google ${icon("arrowUpRight")}<span class="visually-hidden"> (opens Google)</span></a>${leave}</div>
 </div>`;
 }
 
@@ -331,6 +336,29 @@ export function galleryGrid(items, o = {}) {
   }).join("")}</ul>${o.lightbox && o.dialog !== false ? `<dialog class="lightbox" data-lightbox-dialog aria-label="Photo"><img src="" alt=""><div class="lightbox-bar"><span data-lightbox-caption></span><button type="button" data-lightbox-close>${icon("x")}<span class="visually-hidden">Close</span></button></div></dialog>` : ""}`;
 }
 
+/** Who each strip names (owner, 2026-10-16: "like 25 categories"). */
+export const HOME_AUDIENCES = [
+  "Teams & boosters", "Schools & PTOs", "Churches & mission trips", "Businesses & uniforms", "Events & races",
+  "Bands & brands", "Nonprofits", "Reunions & gifts", "Military units & squadrons", "First responders",
+  "Restaurants & cafés", "Breweries & bars", "Gyms & studios", "Contractors & trades", "Real estate teams",
+  "Startups", "Clubs & leagues", "Youth camps", "Homeschool groups", "Dance & theater",
+  "Car & motorcycle clubs", "Fundraisers", "Weddings & parties", "Conferences & retreats", "Coaches & trainers",
+];
+export const POD_AUDIENCES = [
+  "Bands & artists", "Clothing brands", "Creators & influencers", "Podcasts & streamers", "Artists & illustrators",
+  "Schools & PTOs", "Sports teams", "Booster clubs", "Churches & ministries", "Youth groups & camps",
+  "Clubs & communities", "Fundraisers & causes", "Nonprofits", "Small businesses", "Coffee shops & breweries",
+  "Gyms & studios", "Events & festivals", "Races & tournaments", "Family reunions", "Weddings & parties",
+  "Gamers & esports teams", "Dance & theater", "Car & motorcycle clubs", "Homeschool groups", "Coaches & trainers",
+];
+export const FUNDRAISING_AUDIENCES = [
+  "Schools & PTOs", "Booster clubs", "Sports teams", "Nonprofits", "Churches & youth groups",
+  "Mission trips", "Bands & clubs", "Memorials & causes", "Scout troops", "Theater & choir",
+  "Robotics & STEM teams", "Dance teams", "Cheer squads", "Class trips", "Graduating classes",
+  "Animal rescues", "Medical causes", "Community gardens", "Food pantries", "Veterans groups",
+  "Fun runs & 5Ks", "Shelters & outreach", "Libraries & museums", "Rec leagues", "Alumni groups",
+];
+
 /** Who it's for, as a moving strip: read once (the repeat is aria-hidden),
  *  moves only once site.js has wired the pause button (WCAG 2.2.2), pauses on
  *  hover and focus, and stays still for prefers-reduced-motion. */
@@ -364,9 +392,10 @@ export function quoteBand(o = {}) {
   <div class="quote-band">
     <div class="quote-next">
       <h2 id="quote-title" class="h2">${accent(o.title ?? "Get your *quote*.")}</h2>
-      <p class="lead">${esc(o.intro ?? `Tell us the garment, the quantity, your artwork and your date. Your price shows as you go, a free mockup follows in ${FACTS.mockupWithin} (${FACTS.replyHours}) with no obligation, and printing can start ${FACTS.printStart}.`)}</p>
+      <p class="lead">${esc(o.intro ?? `Tell us the garment, the quantity, your artwork and your date. Your price shows as you go. Send it, and we'll call you within ${FACTS.callWithin} to go over it; ${FACTS.mockupAfterCall} after that call, your free mockup is in your inbox.`)}</p>
       <ul class="checklist">
-        <li>${icon("image")}<span><b>Free mockup in ${esc(FACTS.mockupWithin)}</b><small>Your design on the garment — no obligation.</small></span></li>
+        <li>${icon("phone")}<span><b>A call within ${esc(FACTS.callWithin)}</b><small>From the person who'll print it, to confirm the details (${esc(FACTS.replyHours)}).</small></span></li>
+        <li>${icon("image")}<span><b>Your free mockup ${esc(FACTS.mockupAfterCall)} later</b><small>Your design on the garment, ${esc(FACTS.mockupAfterCall)} after we hang up — no obligation.</small></span></li>
         <li>${icon("paintBrush")}<span><b>Free artwork cleanup</b><small>Send whatever you have — a sketch, a photo, a rough logo.</small></span></li>
         <li>${icon("printer")}<span><b>Printing can start the same day</b><small>In our ${esc(SHOP.city)} shop. ${esc(FACTS.pickup)}, or we ship anywhere in the US.</small></span></li>
       </ul>

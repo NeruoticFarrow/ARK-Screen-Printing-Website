@@ -57,12 +57,53 @@
     if (toggle && toggle.getAttribute("aria-expanded") === "true") { toggle.click(); toggle.focus(); }
   });
 
+  // A "who we print for" strip loops by sliding exactly half its length, so
+  // each half has to be wider than the strip's window — otherwise a gap opens
+  // before the loop comes round (owner, 2026-10-16). Repeat the list (the
+  // copies are aria-hidden: it's read once) until a half is wide enough, and
+  // set the duration from that width so the strip moves at an even pace.
+  var TICKER_SPEED = 32; // px a second
+  function fillTicker(t) {
+    var win = t.querySelector(".ticker-window");
+    var list = t.querySelector(".ticker-track");
+    if (!win || !list) return;
+    var items = [];
+    [].slice.call(list.children).forEach(function (li) {
+      if (li.getAttribute("aria-hidden") === "true") list.removeChild(li);
+      else items.push(li);
+    });
+    var one = list.scrollWidth;
+    if (!items.length || !one) return;
+    var copies = Math.max(1, Math.ceil((win.clientWidth + 40) / one));
+    var add = function (n) {
+      for (var c = 0; c < n; c += 1) items.forEach(function (li) { var dup = li.cloneNode(true); dup.setAttribute("aria-hidden", "true"); list.appendChild(dup); });
+    };
+    add(copies - 1); // the rest of the first half
+    add(copies); // the second half, identical to the first
+    list.style.setProperty("--ticker-dur", Math.round((one * copies) / TICKER_SPEED) + "s");
+  }
+
   // Who we print for: moves only with a working pause button (WCAG 2.2.2).
   doc.querySelectorAll("[data-ticker]").forEach(function (t) {
     var btn = t.querySelector("[data-ticker-toggle]");
     if (!btn || reduce) return;
     btn.hidden = false;
     t.classList.add("is-live");
+    if (t.querySelector(".ticker-window")) {
+      fillTicker(t);
+      // Web fonts and a wider window change the widths: fill again.
+      if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { fillTicker(t); });
+      var lastWidth = window.innerWidth;
+      var resizing = 0;
+      window.addEventListener("resize", function () {
+        clearTimeout(resizing);
+        resizing = setTimeout(function () {
+          if (window.innerWidth === lastWidth) return;
+          lastWidth = window.innerWidth;
+          fillTicker(t);
+        }, 200);
+      });
+    }
     btn.addEventListener("click", function () {
       var paused = btn.getAttribute("aria-pressed") !== "true";
       btn.setAttribute("aria-pressed", String(paused));
@@ -240,6 +281,59 @@
         if (feed) showFeed(feed, feedTickers);
       })
       .catch(function () { clearTimeout(timer); });
+  }
+
+  // Print on demand: the profit calculator (ported from the Studio's pages).
+  // The bases come with the page (content/studio-pricing.json); this only
+  // does the Studio's arithmetic — what you keep = your price − the tee's
+  // base, never below zero — and says when a price sits below the base.
+  var calc = doc.querySelector("[data-calculator]");
+  var calcData = doc.getElementById("calculator-data");
+  if (calc && calcData) {
+    var pricing = null;
+    try { pricing = JSON.parse(calcData.textContent || "{}"); } catch (e) { pricing = null; }
+    var tees = pricing && Array.isArray(pricing.garments) ? pricing.garments : [];
+    var priceIn = calc.querySelector("[data-calc-price]");
+    var unitsIn = calc.querySelector("[data-calc-units]");
+    var unitsOut = calc.querySelector("[data-calc-units-out]");
+    var calcUsed = false;
+    var dollars = function (n) { return "$" + n.toFixed(2); };
+    var cents = function (n) { return Math.round(n * 100) / 100; };
+    var setOut = function (name, text) { var n = calc.querySelector('[data-out="' + name + '"]'); if (n) n.textContent = text; };
+    var chosen = function () {
+      var checked = calc.querySelector('input[name="calc-garment"]:checked');
+      for (var i = 0; i < tees.length; i += 1) if (checked && tees[i].key === checked.value) return tees[i];
+      return tees[0];
+    };
+    var renderCalc = function () {
+      var tee = chosen();
+      if (!tee || !priceIn || !unitsIn) return;
+      var price = Number(priceIn.value);
+      var units = Math.max(1, Math.round(Number(unitsIn.value) || 1));
+      var valid = isFinite(price) && price > 0;
+      var keep = valid ? Math.max(0, cents(price - tee.dtfBase)) : 0;
+      if (unitsOut) unitsOut.textContent = String(units);
+      setOut("base", dollars(tee.dtfBase));
+      setOut("keep", dollars(keep));
+      setOut("total", dollars(cents(keep * units)));
+      setOut("units", String(units));
+      setOut("method", units >= pricing.screenMinimum ? "Screen printed by hand" : "DTF printed");
+      var warning = calc.querySelector('[data-out="warning"]');
+      if (warning) {
+        var below = valid && price < tee.dtfBase;
+        warning.hidden = !below;
+        warning.textContent = below ? "Below the " + dollars(tee.dtfBase) + " base — the Studio won't let a price lose money, so the lowest you can set is the base." : "";
+      }
+    };
+    var calcInput = function () {
+      renderCalc();
+      if (!calcUsed) { calcUsed = true; track("pod_calculator_used", {}); }
+    };
+    // Switching tee keeps the price typed; the warning says if it now sits
+    // below that tee's base.
+    calc.addEventListener("input", calcInput);
+    calc.addEventListener("change", calcInput);
+    renderCalc();
   }
 
   // Cards rise into place once as they scroll into view.
