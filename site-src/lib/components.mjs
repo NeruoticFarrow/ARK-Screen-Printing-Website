@@ -104,6 +104,12 @@ const DOODLES = {
 };
 const capitalise = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
+/** "We print for": the scrolling audience strip, the same on every page that
+ *  shows one (owner, 2026-10-16) — the home page's, with its 25 audiences. */
+export function audienceStrip() {
+  return `<section class="section--tight"><div class="container">${ticker("We print for", HOME_AUDIENCES)}</div></section>`;
+}
+
 export function swash(word) {
   return `<em class="accent swash">${esc(word)}<svg class="swash-line" viewBox="0 0 120 16" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M4 11C36 4 80 3 116 9"/></svg></em>`;
 }

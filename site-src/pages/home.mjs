@@ -3,8 +3,8 @@ import { esc, ldScript } from "../lib/html.mjs";
 import { icon } from "../lib/icons.mjs";
 import { WORK, PHOTOS } from "../lib/media.mjs";
 import {
-  areasList, ctaRow, doodle, HOME_AUDIENCES, offerTile, recentWork, faqJsonLd, faqList, galleryGrid, heroArt, localStrip, ownerSection, proofSection,
-  quoteBand, ratingLink, REASSURANCE, reassure, rulesTile, sectionHead, serviceTiles, stepsList, swash, textLink, ticker,
+  areasList, audienceStrip, ctaRow, doodle, offerTile, recentWork, faqJsonLd, faqList, galleryGrid, heroArt, localStrip, ownerSection, proofSection,
+  quoteBand, ratingLink, REASSURANCE, reassure, rulesTile, sectionHead, serviceTiles, stepsList, swash, textLink,
 } from "../lib/components.mjs";
 import { SERVICE_PAGES } from "../content/services.mjs";
 
@@ -39,7 +39,7 @@ export function renderHome(ctx) {
 
   const strip = `<section class="section--tight"><div class="container">${localStrip("home_strip")}</div></section>` + offerTile("home_offer", { onPage: true });
 
-  const audiences = `<section class="section--tight"><div class="container">${ticker("We print for", HOME_AUDIENCES)}</div></section>`;
+  const audiences = audienceStrip();
 
   const lines = Object.fromEntries(Object.entries(SERVICE_PAGES).map(([k, v]) => [k, v.tile]));
   const services = `<section class="section section--flush-top" aria-labelledby="services-title"><div class="container">
