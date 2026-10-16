@@ -26,7 +26,7 @@ export function renderService(ctx) {
     lead,
     photo,
     onPage: true,
-    crumbs: [{ name: "Home", href: "/" }, { name: "Services", href: "/screen-printing-and-embroidery" }, { name: label }],
+    crumbs: [{ name: "Home", href: "/" }, { name: label }],
   });
   const strip = `<section class="section--tight"><div class="container">${localStrip("service_strip")}</div></section>` + offerTile("service_offer", { onPage: true });
   const points = own.points ? pointsSection(withIcons(own.points)) : "";

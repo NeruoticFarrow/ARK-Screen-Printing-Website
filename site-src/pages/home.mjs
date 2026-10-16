@@ -1,9 +1,10 @@
+import fs from "node:fs";
 import { APP, FACTS, SHOP, SITE } from "../lib/facts.mjs";
 import { esc, ldScript } from "../lib/html.mjs";
 import { icon } from "../lib/icons.mjs";
 import { WORK, PHOTOS } from "../lib/media.mjs";
 import {
-  areasList, ctaBand, ctaRow, doodle, HOME_AUDIENCES, offerTile, recentWork, faqJsonLd, faqList, galleryGrid, heroArt, localStrip, ownerSection, proofSection,
+  areasList, ctaRow, doodle, HOME_AUDIENCES, offerTile, recentWork, faqJsonLd, faqList, galleryGrid, heroArt, localStrip, ownerSection, proofSection,
   quoteBand, ratingLink, REASSURANCE, reassure, rulesTile, sectionHead, serviceTiles, stepsList, swash, textLink, ticker,
 } from "../lib/components.mjs";
 import { SERVICE_PAGES } from "../content/services.mjs";
@@ -24,6 +25,16 @@ export const HOME_FAQ = [
   { q: "How fast is it?", a: [`Your price shows as you fill in the form, your free mockup follows in ${FACTS.mockupWithin} (${FACTS.replyHours}), and once you approve it and pay, we start your order ${FACTS.printStart} — ${FACTS.sameDayWork}. Most screen-print orders are ready in ${FACTS.turnaround.screen}.`] },
 ];
 
+const GALLERY = JSON.parse(fs.readFileSync(new URL("../content/gallery.json", import.meta.url), "utf8"));
+/** The home gallery's work: the curated list, with the recent USAF Academy
+ *  Prep School order in place of the "Stronger Together" and "100%
+ *  Homeschooled" shirts (owner, 2026-10-16). */
+const HOME_SWAPS = {
+  "/images/gallery/img_0113.jpg": "/images/gallery/usafa-prep-left-chest.webp",
+  "/images/gallery/img_0783.jpg": "/images/gallery/usafa-prep-order-boxed.webp",
+};
+const HOME_WORK = WORK.map((src) => (HOME_SWAPS[src] ? GALLERY.find((g) => g.src === HOME_SWAPS[src]) ?? { src: HOME_SWAPS[src], alt: "" } : src));
+
 export function renderHome(ctx) {
   const hero = `<section class="hero" aria-labelledby="hero-title"><div class="container hero-grid">
   <div>
@@ -42,10 +53,10 @@ export function renderHome(ctx) {
   const audiences = `<section class="section--tight"><div class="container">${ticker("We print for", HOME_AUDIENCES)}</div></section>`;
 
   const lines = Object.fromEntries(Object.entries(SERVICE_PAGES).map(([k, v]) => [k, v.tile]));
-  const services = `<section class="section" aria-labelledby="services-title"><div class="container">
-  ${sectionHead("services-title", "What we *print*.", "Every job is printed or stitched in our shop — so we can tell you exactly how it'll come out.", { aside: textLink("/screen-printing-and-embroidery", "Which method is right?", "services_methods") })}
+  const services = `<section class="section section--flush-top" aria-labelledby="services-title"><div class="container">
+  ${sectionHead("services-title", "What we *print*.", "Every job is printed or stitched in our shop — so we can tell you exactly how it'll come out.", { aside: textLink("/dtf-vs-screen-printing", "Which method is right?", "services_methods") })}
   <div class="doodled">${doodle("burst", "section-doodle section-doodle--burst", " data-appear")}${serviceTiles(lines)}</div>
-</div></section>` + ctaBand("after_services", { onPage: true });
+</div></section>`;
 
   const rules = `<section class="section" id="rules" aria-labelledby="rules-title"><div class="container">${rulesTile("rules-title", { onPage: true })}</div></section>`;
 
@@ -61,7 +72,7 @@ export function renderHome(ctx) {
 
   const work = `<section class="section" aria-labelledby="work-title"><div class="container">
   ${sectionHead("work-title", "Printed in our shop, not a *warehouse*.", "Real orders from our presses.", { aside: textLink("/gallery", "See more of our work", "work_gallery") })}
-  <div class="doodled">${doodle("strokes", "section-doodle section-doodle--strokes", " data-appear")}${galleryGrid(recentWork(WORK, 6))}</div>
+  <div class="doodled">${doodle("strokes", "section-doodle section-doodle--strokes", " data-appear")}${galleryGrid(recentWork(HOME_WORK, 6))}</div>
 </div></section>`;
 
   const groups = `<section class="section section--sand" aria-labelledby="groups-title"><div class="container">

@@ -40,3 +40,11 @@
 
 /shop      https://design.arkscreenprinting.com/shop?arkSurface=apex         200!
 /shop/*    https://design.arkscreenprinting.com/shop/:splat?arkSurface=apex   200!
+
+# ─── Retired pages ───────────────────────────────────────────────────────────
+# The "Screen printing & embroidery" hub repeated the home page's "What we
+# print" section, so it was retired (owner, 2026-10-16). A 301 keeps its
+# old links and search history pointing at the home page.
+
+/screen-printing-and-embroidery        /    301
+/screen-printing-and-embroidery.html   /    301

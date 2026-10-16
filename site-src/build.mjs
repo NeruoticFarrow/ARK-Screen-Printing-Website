@@ -60,7 +60,7 @@ for (const page of Object.values(pages)) {
   else if (SIMPLE[page.slug]) out = SIMPLE[page.slug](ctx);
   else if (PPC_PAGES[page.slug]) out = renderPpc(ctx);
   else if (areaBySlug[page.slug]) out = renderLocal(ctx);
-  else if (/^(custom-|dtf-|screen-printing-and-embroidery)/.test(page.slug)) out = renderService(ctx);
+  else if (/^(custom-|dtf-)/.test(page.slug)) out = renderService(ctx);
   else { unrouted.push(page.slug); continue; }
   fs.writeFileSync(path.join(SITE_DIR, page.file), shell({ ...out, css: version }));
   count++;

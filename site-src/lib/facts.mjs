@@ -172,7 +172,6 @@ export const SERVICES = [
   { slug: "custom-hats-colorado-springs", label: "Custom hats", icon: "baseballCap" },
   { slug: "custom-silk-screen-printing", label: "Screen printing", icon: "printer" },
   { slug: "dtf-printing-colorado-springs", label: "DTF printing", icon: "palette" },
-  { slug: "screen-printing-and-embroidery", label: "Screen printing & embroidery", icon: "stack" },
   { slug: "fundraising", label: "Fundraisers", icon: "handHeart" },
   { slug: "print-on-demand", label: "Print on demand", icon: "storefront" },
 ];

@@ -34,19 +34,24 @@ export function pageHero(o) {
 /** The page's migrated content blocks, one section each (alternating ground).
  *  A block's FAQ items render as the site's FAQ list. */
 /** A section whose one photo leads or trails its text — the area pages'
- *  sections, which sat side by side on the old site. Shown that way again,
- *  at the photo's own proportions, instead of stretched across the page
- *  (owner, 2026-10-16). Anything else returns null. */
+ *  sections and the embroidery and hats intros, which sat side by side on
+ *  the old site. Shown that way again, at the photo's own proportions,
+ *  instead of stretched across the page (owner, 2026-10-16); a portrait
+ *  photo gets the narrower column. Anything else returns null. */
+const PHOTO = String.raw`<figure>[\s\S]*?<\/figure>|<img src="[^"]+" alt="[^"]*">`;
 function mediaSplit(html) {
-  const lead = html.match(/^\s*(<figure>[\s\S]*?<\/figure>)([\s\S]+)$/);
-  const trail = html.match(/^([\s\S]+?)(<figure>[\s\S]*?<\/figure>)\s*$/);
+  const lead = html.match(new RegExp(String.raw`^\s*(${PHOTO})([\s\S]+)$`));
+  const trail = html.match(new RegExp(String.raw`^([\s\S]+?)(${PHOTO})\s*$`));
   const m = lead ? { fig: lead[1], text: lead[2], flip: true } : trail ? { fig: trail[2], text: trail[1], flip: false } : null;
   if (!m || /<figure|<img/.test(m.text)) return null;
-  const fig = m.fig
+  const src = m.fig.match(/<img src="([^"]+)"/)?.[1];
+  const info = src ? imageInfo(src) : null;
+  const tall = Boolean(info && info.width / info.height < 0.9);
+  const fig = (m.fig.startsWith("<img") ? `<figure>${m.fig}</figure>` : m.fig)
     .replace("<figure>", '<figure class="media-figure">')
-    .replace(/<img src="([^"]+)" alt="([^"]*)">/, (_, src, alt) => picture(src, { alt, sizes: "(min-width: 900px) 540px, 92vw" }));
+    .replace(/<img src="([^"]+)" alt="([^"]*)">/, (_, s, alt) => picture(s, { alt, sizes: tall ? "(min-width: 900px) 420px, 92vw" : "(min-width: 900px) 540px, 92vw" }));
   const text = `<div>${prose(m.text)}</div>`;
-  return `<div class="media-split${m.flip ? " media-split--flip" : ""}">${m.flip ? fig + text : text + fig}</div>`;
+  return `<div class="media-split${m.flip ? " media-split--flip" : ""}${tall ? " media-split--tall" : ""}">${m.flip ? fig + text : text + fig}</div>`;
 }
 
 export function migratedBlocks(blocks, o = {}) {
