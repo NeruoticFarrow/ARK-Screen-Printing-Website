@@ -19,7 +19,7 @@ export const FAQ_GROUPS = [
       { q: "How do I get a price?", a: [`Fill in our <a href="/get-a-quote#quote">quote form</a> — your price shows as you go, and it takes about two minutes. Send it and we'll call you within ${FACTS.callWithin} to go over the details (${FACTS.replyHours}). Rather talk first? Call or text ${phone}.`] },
       { q: "Is there a minimum order?", a: [`No minimum order. Screen printing starts at ${FACTS.screenFrom} shirts — that's where making a screen for each ink colour pays off. Under ${FACTS.screenFrom}, we print with DTF: full colour, no setup, even for a single shirt.`] },
       { q: "Is the mockup really free?", a: [`Yes. ${capital(FACTS.mockupAfterCall)} after our call, you get a free mockup of your design on your garment — no obligation to order. Tweak it until it's right.`] },
-      { q: "How do I pay, and when does printing start?", a: [`Once the details are set, we send an invoice. Approve your mockup and pay the invoice, and printing can start ${FACTS.printStart}.`] },
+      { q: "How do I pay, and when does printing start?", a: [`Once the details are set, we send an invoice. Approve your mockup and pay the invoice, and we start your order ${FACTS.printStart} — ${FACTS.sameDayWork}.`] },
       { q: "How long will my order take?", a: [`Screen printing takes ${FACTS.turnaround.screen}, DTF ${FACTS.turnaround.dtf} and embroidery ${FACTS.turnaround.embroidery} from when you approve your artwork. ${FACTS.turnaround.rush}.`] },
     ],
   },

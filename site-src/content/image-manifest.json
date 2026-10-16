@@ -215,6 +215,138 @@
       }
     ]
   },
+  "/images/catalog/short-sleeves.webp": {
+    "original": "/images/catalog/short-sleeves.webp",
+    "width": 880,
+    "height": 880,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/catalog-short-sleeves-480.webp"
+      }
+    ]
+  },
+  "/images/catalog/long-sleeves.webp": {
+    "original": "/images/catalog/long-sleeves.webp",
+    "width": 880,
+    "height": 880,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/catalog-long-sleeves-480.webp"
+      }
+    ]
+  },
+  "/images/catalog/hoodies.webp": {
+    "original": "/images/catalog/hoodies.webp",
+    "width": 880,
+    "height": 880,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/catalog-hoodies-480.webp"
+      }
+    ]
+  },
+  "/images/catalog/sweatshirts.webp": {
+    "original": "/images/catalog/sweatshirts.webp",
+    "width": 880,
+    "height": 880,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/catalog-sweatshirts-480.webp"
+      }
+    ]
+  },
+  "/images/catalog/tote-bags.webp": {
+    "original": "/images/catalog/tote-bags.webp",
+    "width": 880,
+    "height": 880,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/catalog-tote-bags-480.webp"
+      }
+    ]
+  },
+  "/images/catalog/polos.webp": {
+    "original": "/images/catalog/polos.webp",
+    "width": 880,
+    "height": 880,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/catalog-polos-480.webp"
+      }
+    ]
+  },
+  "/images/catalog/youth.webp": {
+    "original": "/images/catalog/youth.webp",
+    "width": 880,
+    "height": 880,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/catalog-youth-480.webp"
+      }
+    ]
+  },
+  "/images/catalog/overalls.webp": {
+    "original": "/images/catalog/overalls.webp",
+    "width": 880,
+    "height": 880,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/catalog-overalls-480.webp"
+      }
+    ]
+  },
+  "/images/catalog/tanks.webp": {
+    "original": "/images/catalog/tanks.webp",
+    "width": 880,
+    "height": 880,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/catalog-tanks-480.webp"
+      }
+    ]
+  },
+  "/images/catalog/button-ups.webp": {
+    "original": "/images/catalog/button-ups.webp",
+    "width": 880,
+    "height": 880,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/catalog-button-ups-480.webp"
+      }
+    ]
+  },
+  "/images/catalog/jackets.webp": {
+    "original": "/images/catalog/jackets.webp",
+    "width": 880,
+    "height": 880,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/catalog-jackets-480.webp"
+      }
+    ]
+  },
+  "/images/catalog/aprons.webp": {
+    "original": "/images/catalog/aprons.webp",
+    "width": 880,
+    "height": 880,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/catalog-aprons-480.webp"
+      }
+    ]
+  },
   "/images/alex-signature.png": {
     "original": "/images/alex-signature.png",
     "width": 1412,

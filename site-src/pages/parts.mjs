@@ -30,6 +30,22 @@ export function pageHero(o) {
 
 /** The page's migrated content blocks, one section each (alternating ground).
  *  A block's FAQ items render as the site's FAQ list. */
+/** A section whose one photo leads or trails its text — the area pages'
+ *  sections, which sat side by side on the old site. Shown that way again,
+ *  at the photo's own proportions, instead of stretched across the page
+ *  (owner, 2026-10-16). Anything else returns null. */
+function mediaSplit(html) {
+  const lead = html.match(/^\s*(<figure>[\s\S]*?<\/figure>)([\s\S]+)$/);
+  const trail = html.match(/^([\s\S]+?)(<figure>[\s\S]*?<\/figure>)\s*$/);
+  const m = lead ? { fig: lead[1], text: lead[2], flip: true } : trail ? { fig: trail[2], text: trail[1], flip: false } : null;
+  if (!m || /<figure|<img/.test(m.text)) return null;
+  const fig = m.fig
+    .replace("<figure>", '<figure class="media-figure">')
+    .replace(/<img src="([^"]+)" alt="([^"]*)">/, (_, src, alt) => picture(src, { alt, sizes: "(min-width: 900px) 540px, 92vw" }));
+  const text = `<div>${prose(m.text)}</div>`;
+  return `<div class="media-split${m.flip ? " media-split--flip" : ""}">${m.flip ? fig + text : text + fig}</div>`;
+}
+
 export function migratedBlocks(blocks, o = {}) {
   let sand = o.startSand ?? false;
   return blocks.map((b, i) => {
@@ -37,7 +53,7 @@ export function migratedBlocks(blocks, o = {}) {
     const cls = sand ? "section section--sand" : "section";
     sand = !sand;
     const isCallout = /quick-answer|intro-callout/.test(b.kind);
-    const body = isCallout ? `<div class="callout">${prose(b.html, { wide: true })}</div>` : prose(b.html, { wide: /cluster|hub|compare|emb|hats|dtf/.test(b.kind) });
+    const body = (!isCallout && mediaSplit(b.html)) || (isCallout ? `<div class="callout">${prose(b.html, { wide: true })}</div>` : prose(b.html, { wide: /cluster|hub|compare|emb|hats|dtf/.test(b.kind) }));
     const faq = b.faq.length ? `<div style="margin-top:28px">${faqList(b.faq.map((f) => ({ q: f.q, html: f.a })))}</div>` : "";
     return `<section class="${cls}" data-block="${esc(b.kind)}"><div class="container">${body}${faq}</div></section>`;
   }).join("");

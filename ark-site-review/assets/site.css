@@ -439,7 +439,7 @@ it on outside click and Escape). */
 .order-card li b{color:var(--navy);font-weight:600}
 @media (max-width:959px){.order-card{left:4%;width:92%}}
 /* Page heroes with a photo (services, local pages). */
-.page-hero .hero-grid{align-items:center}
+.page-hero .hero-grid{align-items:end}
 .page-hero .eyebrow{margin-bottom:14px;color:var(--brown)}
 .hero-photo-card{margin:0;border-radius:var(--r-xl);overflow:hidden;background:var(--sand);box-shadow:var(--lift);aspect-ratio:4/3}
 .hero-photo-card picture,.hero-photo-card img{width:100%;height:100%;object-fit:cover}
@@ -628,7 +628,7 @@ span.rt-av{display:grid;place-items:center;color:#fff;font:600 1.125rem/1 var(--
 .rt.is-live .rt-row{overflow:hidden}
 .rt.is-live .rt-track{animation:rt-scroll var(--rt-dur,48s) linear infinite}
 .rt.is-live .rt-row--b .rt-track{animation-direction:reverse;margin-left:-188px}
-.rt.is-live:hover .rt-track,.rt.is-live:focus-within .rt-track,.rt.is-paused .rt-track{animation-play-state:paused}
+.rt.is-live:focus-within .rt-track,.rt.is-paused .rt-track{animation-play-state:paused}
 .rt.is-live .rt-row:focus-within .rt-track{animation:none}
 @keyframes rt-scroll{to{transform:translateX(-50%)}}
 .rt-toggle{justify-self:center}
@@ -681,7 +681,7 @@ reduced motion; drifts with the scroll on desktop (site.js). */
 /* The product categories: one tile each, linking into the designer. */
 .cats{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));margin:0;padding:0;list-style:none}
 @media (min-width:900px){.cats{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}}
-.cat{display:grid;justify-items:center;align-content:start;gap:6px;height:100%;padding:22px 16px 18px;border-radius:var(--r-lg);border:1px solid var(--hairline);text-align:center;text-decoration:none;color:var(--navy);transition:translate .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s ease,border-color .25s ease}
+.cat{display:grid;justify-items:center;align-content:start;gap:6px;height:100%;padding:12px 12px 16px;border-radius:var(--r-lg);border:1px solid var(--hairline);text-align:center;text-decoration:none;color:var(--navy);transition:translate .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s ease,border-color .25s ease}
 .cat--sand{background:var(--sand)}
 .cat--sky{background:#e5f0f3;background:color-mix(in srgb,var(--sky) 28%,var(--surface))}
 .cat--surface{background:var(--surface)}
@@ -689,12 +689,9 @@ reduced motion; drifts with the scroll on desktop (site.js). */
 .section--sand .cat--sand{background:var(--parchment)}
 .cat:hover{translate:0 -4px;box-shadow:var(--lift);border-color:var(--tan)}
 .cat:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
-.cat-art{display:grid;place-items:center;width:92px;height:92px;margin-bottom:4px}
-.garment{display:block;width:100%;height:100%;overflow:visible}
-.garment-line{fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.garment-print{fill:var(--tan);transition:fill .25s ease}
-.garment-dot{fill:currentColor}
-.cat--tan .garment-print,.cat:hover .garment-print{fill:var(--brown)}
+.cat-photo{display:block;width:100%;aspect-ratio:1;margin-bottom:6px;overflow:hidden;border-radius:calc(var(--r-lg) - 6px);background:#fff}
+.cat-photo picture,.cat-photo img{display:block;width:100%;height:100%;object-fit:contain;transition:scale .35s cubic-bezier(.2,.7,.2,1)}
+.cat:hover .cat-photo img{scale:1.05}
 .cat-name{font:700 1.125rem/1.2 var(--display);color:var(--navy)}
 .cat-go{display:inline-flex;align-items:center;gap:4px;font-size:.8125rem;font-weight:600;color:var(--blue)}
 .cat-go .icon{width:14px;height:14px}
@@ -766,3 +763,19 @@ question on a soft panel with a tan rule (owner, 2026-10-16). */
 .letter blockquote p + p{margin-top:12px}
 .letter figcaption{display:grid;justify-items:center;gap:8px;margin-top:22px;color:var(--muted);font-size:.9375rem}
 .letter .signature{width:180px;height:auto;opacity:.85}
+/* The moving strips stop only with their pause button, not on hover (owner,
+2026-10-16); keyboard focus still holds them (WCAG 2.4.11). */
+.ticker.is-live:hover:not(.is-paused):not(:focus-within) .ticker-track{animation-play-state:running}
+/* The address/contact strip sits right under the hero's rating line (owner,
+2026-10-16): a hero followed by the strip keeps only a small gap, and a
+page hero's text sits level with the bottom of its photo. */
+.hero:has(+ .section--tight .local-strip),.page-hero:has(+ .section--tight .local-strip){padding-bottom:16px}
+.hero + .section--tight:has(.local-strip),.page-hero + .section--tight:has(.local-strip){padding-top:0}
+/* Town and area pages: a section's photo sits beside its text at its own
+proportions, as on the old pages (owner, 2026-10-16), not stretched
+across the page. */
+.media-split{display:grid;gap:28px;align-items:center}
+@media (min-width:900px){.media-split{grid-template-columns:minmax(0,1.05fr) minmax(300px,.95fr);gap:56px}.media-split--flip{grid-template-columns:minmax(300px,.95fr) minmax(0,1.05fr)}}
+.media-figure{margin:0}
+.media-figure img{display:block;width:100%;height:auto;border-radius:var(--r-lg);box-shadow:var(--lift)}
+.media-figure figcaption{margin-top:10px;font-size:.8125rem;line-height:1.45;color:var(--muted)}

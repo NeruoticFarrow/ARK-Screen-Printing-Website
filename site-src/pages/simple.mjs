@@ -79,7 +79,7 @@ export function renderAbout(ctx) {
   <figcaption><span>— Alex R. Kinnaman, owner</span><img class="signature" src="/images/alex-signature.png" width="320" height="120" alt="Alex R. Kinnaman's signature" loading="lazy" decoding="async"></figcaption>
 </figure></div></section>`;
   const proof = `<section class="section section--sand" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What customers *say*.")}</div></section>`;
-  const work = `<section class="section" aria-labelledby="work-title"><div class="container">${sectionHead("work-title", "Real work from our *presses*.", undefined, { aside: textLink("/gallery", "See the gallery", "about_gallery") })}${galleryGrid(recentWork(WORK, 6))}</div></section>`;
+  const work = `<section class="section" aria-labelledby="work-title"><div class="container">${sectionHead("work-title", "Real work hot off the *press*.", undefined, { aside: textLink("/gallery", "See the gallery", "about_gallery") })}${galleryGrid(recentWork(WORK, 6))}</div></section>`;
   const closing = finalCta("Let's print *yours*.", "Tell us what you need — we reply within ten minutes during business hours and send a proof before anything prints.");
   return base(page, { current: "about", ogImage: abs(PHOTOS.owner.src), main: hero + strip + owner + intro + story + why + letter + proof + work + closing });
 }
@@ -94,7 +94,7 @@ export function renderFaq(ctx) {
   const list = `<section class="section"><div class="container narrow">${FAQ_GROUPS.slice(0, half).map(group).join("")}</div></section>` + ctaBand("faq_mid") + `<section class="section"><div class="container narrow">${FAQ_GROUPS.slice(half).map(group).join("")}</div></section>`;
   const ask = `<section class="section section--sand"><div class="container"><div class="tile tile--sky" data-appear>
   <h2 class="h3">${accent("Didn't find your *answer*?")}</h2>
-  <p style="margin-top:12px">Call or text ${esc(SHOP.phoneDisplay)} (${esc(SHOP.hours)}) or email <a href="mailto:${esc(SHOP.email)}">${esc(SHOP.email)}</a> — a person at the shop answers.</p>
+  <p style="margin-top:12px">Call or text ${esc(SHOP.phoneDisplay)} (${esc(SHOP.hours)}) or email <a href="mailto:${esc(SHOP.email)}">${esc(SHOP.email)}</a> — a real person at ARK answers.</p>
   ${ctaRow("faq_ask")}
 </div></div></section>`;
   // Google's FAQ data follows the questions on the page, not the migrated ones.
@@ -137,7 +137,7 @@ export function renderQuote(ctx) {
   const { page } = ctx;
   const hero = `<section class="page-hero" aria-labelledby="page-title"><div class="container">
   <h1 id="page-title" class="h1">${accent("See your price, *instantly*.")}</h1>
-  <p class="lead">About two minutes — your price shows as you go. Send it and we'll call you within ${esc(FACTS.callWithin)}; ${esc(FACTS.mockupAfterCall)} after that call, a free mockup of your design on the garment is in your inbox (${esc(FACTS.replyHours)}). No obligation, and printing can start ${esc(FACTS.printStart)}.</p>
+  <p class="lead">About two minutes — your price shows as you go. Send it and we'll call you within ${esc(FACTS.callWithin)}; ${esc(FACTS.mockupAfterCall)} after that call, a free mockup of your design on the garment is in your inbox (${esc(FACTS.replyHours)}). No obligation — approve it and we start your order ${esc(FACTS.printStart)}.</p>
   ${reassure(REASSURANCE)}
 </div></section>`;
   const quote = quoteBand({ eager: true, title: "Your *project*.", intro: "Garment, quantity, print locations, artwork and your date — whatever you know so far is enough to start." });
@@ -156,7 +156,7 @@ export function renderThankYou(ctx) {
   <ol class="next-steps">
     <li><span><b>We call you</b>Within ${esc(FACTS.callWithin)} — and a text or email if we miss you — to confirm the details.</span></li>
     <li><span><b>Your free mockup</b>Your design on the garment, ${esc(FACTS.mockupAfterCall)} after that call. Rough artwork? We'll clean it up free.</span></li>
-    <li><span><b>Printing</b>Approve the proof and pay the invoice, and printing can start ${esc(FACTS.printStart)}.</span></li>
+    <li><span><b>We start the same day</b>Approve the proof and pay the invoice, and we start your order that day — ${esc(FACTS.sameDayWork)}. Most screen-print orders are ready in ${esc(FACTS.turnaround.screen)}.</span></li>
   </ol>
   <div class="quote-alt" style="margin-top:28px"><b>Questions in the meantime?</b><a href="${esc(SHOP.phoneHref)}">Call</a> or <a href="${esc(SHOP.smsHref)}">text</a> ${esc(SHOP.phoneDisplay)} · <a href="mailto:${esc(SHOP.email)}">${esc(SHOP.email)}</a></div>
   <div class="cta-row"><a class="btn btn--ghost" href="/">Back to the home page</a><a class="btn btn--ghost" href="/gallery">See our work</a></div>

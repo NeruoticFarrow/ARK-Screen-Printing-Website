@@ -3,7 +3,6 @@ import { APP, SHOP, STORES } from "./facts.mjs";
 import { accent, esc } from "./html.mjs";
 import { icon } from "./icons.mjs";
 import { picture } from "./images.mjs";
-import { garment } from "./garments.mjs";
 import { doodle, floatChip, layer, SEAL, sticker } from "./components.mjs";
 
 // The creator platform's landing page lives on this site since 2026-10-16
@@ -117,22 +116,24 @@ export function calculatorFootnote() {
 }
 
 /** Product categories, as the designer groups them (ark-designer client/src/
- *  lib/products.ts CATEGORIES). Each links into the designer on that category
- *  until the catalogue moves to this site; crewneck sweatshirts sit in the
- *  designer's Hoodies category. */
+ *  lib/products.ts CATEGORIES), each shown by a real garment from that
+ *  catalogue (its front image, trimmed onto a white square — images/catalog/,
+ *  owner 2026-10-16). Each links into the designer on that category until the
+ *  catalogue moves to this site; crewneck sweatshirts sit in the designer's
+ *  Hoodies category. */
 export const CATEGORIES = [
-  { name: "Short sleeves", kind: "tee", designer: "T-Shirts" },
-  { name: "Long sleeves", kind: "longSleeve", designer: "Longsleeves" },
-  { name: "Hoodies", kind: "hoodie", designer: "Hoodies" },
-  { name: "Sweatshirts", kind: "sweatshirt", designer: "Hoodies" },
-  { name: "Tote bags", kind: "tote", designer: "Bags" },
-  { name: "Polos", kind: "polo", designer: "Polos" },
-  { name: "Youth", kind: "youth", designer: "Kids" },
-  { name: "Overalls", kind: "overalls", designer: "Overalls" },
-  { name: "Tanks", kind: "tank", designer: "Singlets" },
-  { name: "Button-ups", kind: "buttonUp", designer: "Shirts" },
-  { name: "Jackets", kind: "jacket", designer: "Jackets" },
-  { name: "Aprons", kind: "apron", designer: "Aprons" },
+  { name: "Short sleeves", designer: "T-Shirts", photo: "/images/catalog/short-sleeves.webp", alt: "AS Colour Staple Tee in navy" },
+  { name: "Long sleeves", designer: "Longsleeves", photo: "/images/catalog/long-sleeves.webp", alt: "AS Colour Staple long-sleeve tee in bone" },
+  { name: "Hoodies", designer: "Hoodies", photo: "/images/catalog/hoodies.webp", alt: "AS Colour Stencil Hood in camel" },
+  { name: "Sweatshirts", designer: "Hoodies", photo: "/images/catalog/sweatshirts.webp", alt: "AS Colour Heavy Crew sweatshirt in pine green" },
+  { name: "Tote bags", designer: "Bags", photo: "/images/catalog/tote-bags.webp", alt: "AS Colour Carrie Tote in cream" },
+  { name: "Polos", designer: "Polos", photo: "/images/catalog/polos.webp", alt: "AS Colour Chad Polo in black" },
+  { name: "Youth", designer: "Kids", photo: "/images/catalog/youth.webp", alt: "AS Colour Youth Staple Tee in bright royal" },
+  { name: "Overalls", designer: "Overalls", photo: "/images/catalog/overalls.webp", alt: "AS Colour Canvas Overalls in walnut" },
+  { name: "Tanks", designer: "Singlets", photo: "/images/catalog/tanks.webp", alt: "AS Colour Classic Tank in cypress" },
+  { name: "Button-ups", designer: "Shirts", photo: "/images/catalog/button-ups.webp", alt: "AS Colour Work Shirt in navy" },
+  { name: "Jackets", designer: "Jackets", photo: "/images/catalog/jackets.webp", alt: "AS Colour Chore Jacket in army" },
+  { name: "Aprons", designer: "Aprons", photo: "/images/catalog/aprons.webp", alt: "AS Colour Canvas Apron in black" },
 ];
 const TONES = ["sand", "sky", "surface", "tan"];
 
@@ -140,7 +141,7 @@ export function categoryShowcase() {
   return `<ul class="cats">${CATEGORIES.map((c, i) => {
     const slug = c.name.toLowerCase().replace(/[^a-z]+/g, "_");
     return `<li data-appear style="--i:${i % 4}"><a class="cat cat--${TONES[i % TONES.length]}" href="${esc(`${APP.designer}?category=${encodeURIComponent(c.designer)}`)}" data-cta="pod_category_${slug}">
-    <span class="cat-art">${garment(c.kind)}</span>
+    <span class="cat-photo">${picture(c.photo, { alt: c.alt, sizes: "(min-width: 900px) 260px, 45vw" })}</span>
     <span class="cat-name">${esc(c.name)}</span>
     <span class="cat-go">Design yours ${icon("arrowUpRight")}<span class="visually-hidden"> (opens the designer)</span></span>
   </a></li>`;
