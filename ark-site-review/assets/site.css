@@ -802,3 +802,12 @@ before the line drew (owner, 2026-10-16). */
 .section--flush-top{padding-top:0}
 /* The home's eight service cards: two even rows of four on wide screens. */
 @media (min-width:1100px){.service-tiles{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* The service cards' colours (owner, 2026-10-16), counted on the list items:
+each card is the only child of its <li>, so counting the cards themselves
+made every card tan. Eight steps, so no two neighbours match at four, two
+or one card to a row. */
+.service-tiles > li:nth-child(8n+1) .service-tile,.service-tiles > li:nth-child(8n+6) .service-tile{background:var(--tan)}
+.service-tiles > li:nth-child(8n+2) .service-tile,.service-tiles > li:nth-child(8n+5) .service-tile{background:var(--sky)}
+.service-tiles > li:nth-child(8n+3) .service-tile,.service-tiles > li:nth-child(8n+8) .service-tile{background:var(--sand)}
+.service-tiles > li:nth-child(8n+4) .service-tile,.service-tiles > li:nth-child(8n+7) .service-tile{background:var(--navy);color:var(--parchment)}
+.service-tiles > li:nth-child(8n+4) .service-tile :is(h3,.icon,.text-link),.service-tiles > li:nth-child(8n+7) .service-tile :is(h3,.icon,.text-link),.service-tiles > li:nth-child(8n+4) .service-tile:hover,.service-tiles > li:nth-child(8n+7) .service-tile:hover{color:var(--parchment)}
