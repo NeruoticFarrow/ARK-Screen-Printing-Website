@@ -1,5 +1,5 @@
 import { accent, esc, ldScript } from "../lib/html.mjs";
-import { picture } from "../lib/images.mjs";
+import { imageInfo, picture } from "../lib/images.mjs";
 import { crumbs, ctaRow, faqJsonLd, faqList, prose, ratingLink, REASSURANCE, reassure, sectionHead } from "../lib/components.mjs";
 import { FACTS, SITE } from "../lib/facts.mjs";
 import { icon } from "../lib/icons.mjs";
@@ -7,12 +7,15 @@ import { icon } from "../lib/icons.mjs";
 // Pieces the inner-page templates share.
 
 /** H1 + lead + actions on the left, a photo card on the right (when the page
- *  has one). The H1 is the page's own, migrated unchanged (search). */
+ *  has one). The H1 is the page's own, migrated unchanged (search). A
+ *  landscape or square photo gets the wider column (hero-grid--photo). */
 export function pageHero(o) {
+  const info = o.photo ? imageInfo(o.photo.src) : null;
+  const wide = Boolean(info && info.width / info.height >= 0.9);
   const photo = o.photo
-    ? `<figure class="hero-photo-card">${picture(o.photo.src, { alt: o.photo.alt ?? "", sizes: "(min-width: 960px) 560px, 92vw", priority: true })}${o.caption ? `<figcaption>${esc(o.caption)}</figcaption>` : ""}</figure>`
+    ? `<figure class="hero-photo-card">${picture(o.photo.src, { alt: o.photo.alt ?? "", sizes: wide ? "(min-width: 960px) 640px, 92vw" : "(min-width: 960px) 560px, 92vw", priority: true })}${o.caption ? `<figcaption>${esc(o.caption)}</figcaption>` : ""}</figure>`
     : "";
-  return `<section class="page-hero" aria-labelledby="page-title"><div class="container ${photo ? "hero-grid" : ""}">
+  return `<section class="page-hero" aria-labelledby="page-title"><div class="container ${photo ? `hero-grid${wide ? " hero-grid--photo" : ""}` : ""}">
   <div>
     ${o.crumbs ? crumbs(o.crumbs) : ""}
     ${o.eyebrow ? `<p class="kicker eyebrow">${esc(o.eyebrow)}</p>` : ""}

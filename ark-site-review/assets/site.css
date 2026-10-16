@@ -438,12 +438,16 @@ it on outside click and Escape). */
 .order-card li .icon{width:20px;height:20px;color:var(--blue)}
 .order-card li b{color:var(--navy);font-weight:600}
 @media (max-width:959px){.order-card{left:4%;width:92%}}
-/* Page heroes with a photo (services, local pages). */
-.page-hero .hero-grid{align-items:end}
+/* Page heroes with a photo (services, local pages): the photo sits level
+with the middle of the text. */
+.page-hero .hero-grid{align-items:center}
 .page-hero .eyebrow{margin-bottom:14px;color:var(--brown)}
 .hero-photo-card{margin:0;border-radius:var(--r-xl);overflow:hidden;background:var(--sand);box-shadow:var(--lift);aspect-ratio:4/3}
 .hero-photo-card picture,.hero-photo-card img{width:100%;height:100%;object-fit:cover}
 .hero-photo-card figcaption{padding:10px 14px;font-size:.8125rem;color:var(--muted);background:var(--surface)}
+/* A landscape photo takes the wider column, so it reads about as large as the
+text beside it (owner); a portrait one is as tall as the text already. */
+@media (min-width:960px){.page-hero .hero-grid--photo{grid-template-columns:minmax(440px,1fr) minmax(0,1.15fr);gap:48px}}
 .crumbs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 18px;padding:0;list-style:none;font-size:.875rem;color:var(--muted)}
 .crumbs li + li::before{content:"/";margin-right:6px;color:var(--hairline)}
 .crumbs a{color:var(--muted)}
@@ -767,8 +771,7 @@ question on a soft panel with a tan rule (owner, 2026-10-16). */
 2026-10-16); keyboard focus still holds them (WCAG 2.4.11). */
 .ticker.is-live:hover:not(.is-paused):not(:focus-within) .ticker-track{animation-play-state:running}
 /* The address/contact strip sits right under the hero's rating line (owner,
-2026-10-16): a hero followed by the strip keeps only a small gap, and a
-page hero's text sits level with the bottom of its photo. */
+2026-10-16): a hero followed by the strip keeps only a small gap. */
 .hero:has(+ .section--tight .local-strip),.page-hero:has(+ .section--tight .local-strip){padding-bottom:16px}
 .hero + .section--tight:has(.local-strip),.page-hero + .section--tight:has(.local-strip){padding-top:0}
 /* Town and area pages: a section's photo sits beside its text at its own
