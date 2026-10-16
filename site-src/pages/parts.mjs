@@ -84,7 +84,3 @@ export function pointsSection(points, title = "What you *get*.") {
   <ul class="features">${points.map((p) => `<li class="card feature" data-appear>${p.iconHtml}<h3 class="h4">${esc(p.title)}</h3><p>${esc(p.text)}</p></li>`).join("")}</ul>
 </div></section>`;
 }
-
-export function usesSection(uses, title = "Who we print *for*.") {
-  return `<section class="section--tight"><div class="container"><div class="ticker" style="border-block:1px solid var(--hairline)"><span class="label">${accent(title).replace(/<[^>]+>/g, "")}</span><ul class="chips">${uses.map((u) => `<li class="chip">${esc(u)}</li>`).join("")}</ul></div></div></section>`;
-}
