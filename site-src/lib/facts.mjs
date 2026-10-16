@@ -10,10 +10,11 @@ import { gbpData } from "./gbp-data.mjs";
 // room, so it stays true at 3am); pickup is "local pickup available" — the
 // address is never presented as a pickup counter.
 //
+// Shipping (owner, 2026-10-16): $8 for an order's first item and $3 for each
+// additional item, for online orders (the app's checkout and the stores); a
+// bulk order's shipping is on its quote. There is no free shipping.
+//
 // STILL TO CONFIRM:
-//   · Free shipping: the FAQ says "free shipping on every order, nationwide";
-//     the online shop says free over $75. Not stated on the new pages until
-//     the owner confirms (FREE_SHIPPING stays null).
 //   · Turnaround differs by method (below). The PPC pages' "most orders ship
 //     within 5–7 business days" is used for screen printing.
 
@@ -89,8 +90,6 @@ export const FACTS = {
   inks: "Monarch plastisol, plus Matsui water-based and discharge inks",
   /** index.html guarantee banner. */
   guarantee: "Quality work, on time, or we make it right — at no cost to you.",
-  /** null until the owner confirms the rule (see the note at the top). */
-  freeShipping: null,
 };
 
 /** Live Google reviews on the Reviews page until the Business Profile sync is
@@ -147,9 +146,9 @@ export const STORES = {
   /** CREATOR_PLATFORM_MODE in production. Set true when sign-ups open (the
    *  offer pages then drop the invite-only note). */
   signupOpen: false,
-  /** Owner, 2026-10-16: $8 an order plus $3 for each additional item.
-   *  The app's checkout (ark-designer shared/const.ts) still charges $7.99 a
-   *  order, free over $75 — the two must match before this page goes live. */
+  /** Owner, 2026-10-16: $8 for an order's first item plus $3 for each
+   *  additional item — the rule the app's checkout charges (ark-designer
+   *  shared/const.ts, changed in step with this page). */
   shippingFirstUsd: 8,
   shippingEachMoreUsd: 3,
   /** The print every quoted base assumes (the Studio's PLANNING_LOCATION). */
