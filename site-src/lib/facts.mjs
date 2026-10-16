@@ -145,11 +145,13 @@ export const STORES = {
   /** server/creator/ledger/rules.ts PAYOUT_RULES. */
   payoutAfterShipDays: 21,
   minimumPayoutUsd: 20,
-  /** shared/creatorPricing.ts screen.colourLimits: 24+ up to 2 colours, 40+ up to 6. */
-  screenColours: [{ from: 24, colours: 2 }, { from: 40, colours: 6 }],
+  /** shared/creatorPricing.ts screen.colourLimits (owner, 2026-10-16): 24+ up to
+   *  3 colours, 40+ up to 6 — the quote form's rule too. */
+  screenColours: [{ from: 24, colours: 3 }, { from: 40, colours: 6 }],
   /** CREATOR_PLATFORM_MODE in production. Set true when sign-ups open (the
-   *  offer pages then drop the invite-only note). */
-  signupOpen: false,
+   *  offer pages then drop the invite-only note). Owner, 2026-10-16: open, so
+   *  the store sign-up can be walked through as a creator will see it. */
+  signupOpen: true,
   /** Owner, 2026-10-16: $8 for an order's first item plus $3 for each
    *  additional item, up to 9 more ($35 at most) — the rule the app's checkout
    *  charges (ark-designer shared/const.ts, changed in step with this page). */
