@@ -1,0 +1,64 @@
+{
+  "file": "custom-shirts.html",
+  "slug": "custom-shirts",
+  "title": "Custom T-Shirts Colorado Springs | ARK Screen Printing",
+  "description": "Custom T-shirts Colorado Springs — screen printed or DTF printed in-house. Vibrant colors, durable prints, no minimums from ARK Screen Printing.",
+  "canonical": "https://arkscreenprinting.com/custom-shirts",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Custom T-Shirt Screen Printing",
+      "provider": {
+        "@type": "Organization",
+        "name": "ARK Screen Printing Studio",
+        "telephone": "(719) 280-2638",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Colorado Springs",
+          "addressRegion": "CO",
+          "addressCountry": "US"
+        }
+      },
+      "areaServed": {
+        "@type": "State",
+        "name": "Colorado"
+      },
+      "description": "Professional custom t-shirt screen printing services for businesses, schools, events, and teams in Colorado Springs."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://arkscreenprinting.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Custom Shirts"
+        }
+      ]
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Custom T-Shirts Colorado Springs",
+    "lead": [
+      "Custom T-shirts Colorado Springs — screen printed or DTF printed in-house. No minimum for small orders. Fast turnaround, ships nationwide."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/stpfrontfoldedds.jpg",
+      "alt": "Custom printed t-shirt with artistic design - ARK Screen Printing craftsmanship"
+    },
+    "caption": null
+  },
+  "blocks": [],
+  "areas": "<p>We print custom t-shirts for businesses, schools, and sports teams throughout the Colorado Springs region — including <a href=\"/screen-printing-monument\">Monument</a>, <a href=\"/screen-printing-fountain\">Fountain</a>, <a href=\"/screen-printing-woodland-park\">Woodland Park</a>, <a href=\"/screen-printing-pueblo\">Pueblo</a>, <a href=\"/screen-printing-castle-rock\">Castle Rock</a>, and <a href=\"/screen-printing-highlands-ranch\">Highlands Ranch</a>. We ship anywhere in Colorado.</p>",
+  "quoteIntro": null
+}

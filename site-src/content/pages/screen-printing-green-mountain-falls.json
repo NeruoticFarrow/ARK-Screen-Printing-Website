@@ -1,0 +1,82 @@
+{
+  "file": "screen-printing-green-mountain-falls.html",
+  "slug": "screen-printing-green-mountain-falls",
+  "title": "Screen Printing Green Mountain Falls CO | ARK",
+  "description": "Screen printing Green Mountain Falls, CO: custom t-shirts, uniforms, and branded apparel from ARK Screen Printing. No minimums, done in-house.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-green-mountain-falls",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ARK Screen Printing Studio - Green Mountain Falls",
+      "image": "https://arkscreenprinting.com/images/ark prototype.png",
+      "url": "https://arkscreenprinting.com/screen-printing-green-mountain-falls",
+      "telephone": "(719) 280-2638",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Colorado Springs",
+        "addressLocality": "Colorado Springs",
+        "addressRegion": "CO",
+        "postalCode": "80922",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Green Mountain Falls, CO"
+      },
+      "description": "Expert custom screen printing and embroidery services for businesses, organizations, and events in Green Mountain Falls, CO. We specialize in custom t-shirts, workwear, and community apparel.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Screen Printing Services for Green Mountain Falls",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom T-Shirts & Apparel in Green Mountain Falls"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Workwear & Uniforms in Green Mountain Falls"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Community Event Apparel in Green Mountain Falls"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Green Mountain Falls CO",
+    "lead": [
+      "Screen printing Green Mountain Falls CO — ARK serves local businesses, teams, schools, and organizations with custom apparel, all printed in-house."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/Green-Mountain-Falls-Gazebo.webp",
+      "alt": "Green Mountain Falls Colorado - ARK Screen Printing serves Green Mountain Falls"
+    },
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "local-content",
+      "variant": null,
+      "html": "<h2>Custom Apparel for Green Mountain Falls' Mountain Village</h2> <p>Green Mountain Falls is one of Colorado's smallest incorporated towns — about 685 residents in a narrow valley at 7,800 feet, tucked below Highway 24 in the Ute Pass corridor west of Colorado Springs. The town centers around Gazebo Lake, and its character blends historic mountain resort, working artists, outdoor recreationists, and full-time residents who chose simplicity over sprawl. Community events, outdoor recreation organizers, and the small businesses here generate demand for custom apparel — especially small-run <a href=\"/dtf-printing-colorado-springs\">DTF printing</a> for individual pieces and small gatherings.</p> <p>Green Mountain Falls is part of <a href=\"/screen-printing-manitou-springs\">Manitou Springs</a> School District 14 along with Cascade, Chipita Park, and surrounding Ute Pass communities. For small-volume orders — a single custom piece or a run of ten — DTF printing with no minimum is the right fit for Green Mountain Falls' scale, and we handle every order with the same attention as a large run. We're just over the hill in Colorado Springs.</p> <article> <article> <h3>Mountain village charm</h3> <p>Custom screen printing and DTF for Green Mountain Falls' community events, small businesses, and artists.</p> </article> <article> <h3>Manitou Springs SD 14</h3> <p>Spirit wear and apparel for the Ute Pass school community.</p> </article> <article> <h3>No minimums</h3> <p>DTF printing from one piece — ideal for the scale of a small mountain village order.</p> </article> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Fill out the form below for a fast, accurate quote on your Green Mountain Falls screen printing project."
+}

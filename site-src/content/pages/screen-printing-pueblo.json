@@ -1,0 +1,82 @@
+{
+  "file": "screen-printing-pueblo.html",
+  "slug": "screen-printing-pueblo",
+  "title": "Screen Printing Pueblo CO | ARK Screen Printing",
+  "description": "Screen printing Pueblo, CO: custom t-shirts, uniforms, and branded apparel from ARK Screen Printing. No minimums, done in-house.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-pueblo",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ARK Screen Printing Studio - Pueblo",
+      "image": "https://arkscreenprinting.com/images/ark prototype.png",
+      "url": "https://arkscreenprinting.com/screen-printing-pueblo",
+      "telephone": "(719) 280-2638",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Colorado Springs",
+        "addressLocality": "Colorado Springs",
+        "addressRegion": "CO",
+        "postalCode": "80922",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Pueblo, CO"
+      },
+      "description": "Expert custom screen printing and embroidery services for businesses, schools, and events in Pueblo, CO. We specialize in custom t-shirts, team uniforms for schools like Pueblo County High Hornets, and corporate apparel for major employers like EVRAZ and UCHealth.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Screen Printing Services for Pueblo",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom T-Shirts & Apparel in Pueblo"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Team Uniforms & Spirit Wear in Pueblo"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Corporate Apparel & Embroidery in Pueblo"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Pueblo CO",
+    "lead": [
+      "Screen printing Pueblo CO — ARK serves local businesses, teams, schools, and organizations with custom apparel, all printed in-house."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/Pueblo-Historic-Rieverwalk.jpg",
+      "alt": "Pueblo Colorado - ARK Screen Printing serves Pueblo"
+    },
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "local-content",
+      "variant": null,
+      "html": "<h2>Screen Printing for Pueblo's Steel City Community</h2> <p>Pueblo is Colorado's original industrial city — known as the Steel City for the Evraz Rocky Mountain Steel mill, one of the largest steel manufacturing operations in the United States and one of Pueblo's defining employers. About 45 miles south of our Colorado Springs shop, Pueblo has deep roots in manufacturing, a growing university presence, and a rich Hispanic cultural heritage. CSU-Pueblo Thunderwolves athletics, Pueblo Community College, and the historic Arkansas Riverwalk all create consistent demand for custom screen printing and embroidery.</p> <p>Two school districts serve the area — Pueblo City Schools (D60) and Pueblo County Schools (D70) — with competitive programs at East High School Warriors, Centennial High School Bulldogs, and Pueblo County High School Hornets. The Colorado State Fair, held in Pueblo every August and the largest annual event in Colorado, generates significant demand for custom event merchandise, staff apparel, and vendor gear. We're well within shipping range from Colorado Springs with reliable turnaround for Pueblo customers.</p> <article> <article> <h3>CSU-Pueblo &amp; the State Fair</h3> <p>Custom apparel for Thunderwolves athletics, Colorado State Fair vendors, and Pueblo's major annual events.</p> </article> <article> <h3>Warriors, Bulldogs &amp; Hornets</h3> <p>Spirit wear and team uniforms for Pueblo's D60 and D70 high school programs.</p> </article> <article> <h3>Steel City workforce</h3> <p>Custom workwear and branded gear for Pueblo's manufacturing, healthcare, and industrial employers.</p> </article> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Fill out the form below for a fast, accurate quote on your Pueblo screen printing project."
+}

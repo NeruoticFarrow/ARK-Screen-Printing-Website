@@ -1,0 +1,64 @@
+{
+  "file": "custom-silk-screen-printing-ppc.html",
+  "slug": "custom-silk-screen-printing-ppc",
+  "title": "Custom Screen Printing | ARK Screen Printing",
+  "description": "Custom screen printing for any apparel — t-shirts, hoodies, work shirts and more. Printed in-house, ships nationwide. Get a quote from ARK Screen Printing.",
+  "canonical": "https://arkscreenprinting.com/custom-silk-screen-printing-ppc",
+  "robots": "noindex",
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Screen Printing Services",
+      "provider": {
+        "@type": "Organization",
+        "name": "ARK Screen Printing Studio",
+        "telephone": "(719) 280-2638",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Colorado Springs",
+          "addressRegion": "CO",
+          "addressCountry": "US"
+        }
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "United States"
+      },
+      "description": "Custom screen printing for any apparel — t-shirts, hoodies, work shirts. Printed in-house with no middleman markup. Ships nationwide."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://arkscreenprinting.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Custom Screen Printing"
+        }
+      ]
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Custom Screen Printing",
+    "lead": [
+      "Custom screen printing for any apparel — t-shirts, hoodies, work shirts, and more. Printed in-house, shipped anywhere in the US. No contract printers, no middleman markup — most orders ship within 5–7 business days."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/custom-apparel-colorado-springs-3.jpg",
+      "alt": "Custom screen printed apparel — printed in-house by ARK Screen Printing"
+    },
+    "caption": null
+  },
+  "blocks": [],
+  "areas": null,
+  "quoteIntro": null
+}

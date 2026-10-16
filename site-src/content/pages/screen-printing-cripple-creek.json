@@ -1,0 +1,82 @@
+{
+  "file": "screen-printing-cripple-creek.html",
+  "slug": "screen-printing-cripple-creek",
+  "title": "Screen Printing Cripple Creek CO | ARK Screen Printing",
+  "description": "Screen printing Cripple Creek, CO: custom t-shirts, uniforms, and branded apparel from ARK Screen Printing. No minimums, done in-house.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-cripple-creek",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ARK Screen Printing Studio - Cripple Creek",
+      "image": "https://arkscreenprinting.com/images/ark prototype.png",
+      "url": "https://arkscreenprinting.com/screen-printing-cripple-creek",
+      "telephone": "(719) 280-2638",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Colorado Springs",
+        "addressLocality": "Colorado Springs",
+        "addressRegion": "CO",
+        "postalCode": "80922",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Cripple Creek, CO"
+      },
+      "description": "Expert custom screen printing and embroidery services for businesses, casinos, and events in Cripple Creek, CO. We specialize in casino uniforms, tourism merchandise, and historic event apparel.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Screen Printing Services for Cripple Creek",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Casino Uniforms & Staff Apparel in Cripple Creek"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Tourism Merchandise & Souvenirs in Cripple Creek"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Historic Event Apparel in Cripple Creek"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Cripple Creek CO",
+    "lead": [
+      "Screen printing Cripple Creek CO — ARK serves local businesses, teams, schools, and organizations with custom apparel, all printed in-house."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/Cripple-Creek-Downtown.webp",
+      "alt": "Cripple Creek Colorado - ARK Screen Printing serves Cripple Creek"
+    },
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "local-content",
+      "variant": null,
+      "html": "<h2>Custom Screen Printing for Cripple Creek's Gaming &amp; Tourism Community</h2> <p>Cripple Creek is Colorado's historic gold rush capital, reborn in the 1990s as one of three Colorado cities where limited-stakes casino gambling is legal. Today the town of about 1,200 residents operates nine active casinos and draws hundreds of thousands of visitors each year to its preserved Victorian streetscapes. The tourism and gaming industry is the primary employer here, generating demand for casino staff uniforms, event merchandise, tourism operator gear, and promotional apparel.</p> <p>Cripple Creek and nearby <a href=\"/screen-printing-victor\">Victor</a> share the Cripple Creek-Victor School District — a small district serving these two Teller County communities. Local events including the Cripple Creek Ice Festival, Donkey Derby Days, and Heritage Weekend draw crowds and often call for custom merchandise and staff apparel. Despite its small resident population, Cripple Creek's high visitor volume and tourism economy make it a meaningful market for professionally branded custom apparel.</p> <article> <article> <h3>Casino &amp; gaming industry</h3> <p>Staff uniforms, promotional gear, and event apparel for Cripple Creek's nine active casinos and gaming operations.</p> </article> <article> <h3>Teller County tourism</h3> <p>Custom merchandise and apparel for Cripple Creek's visitor economy and seasonal events.</p> </article> <article> <h3>CC-V School District</h3> <p>Spirit wear and community apparel for the Cripple Creek-Victor school community.</p> </article> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Fill out the form below for a fast, accurate quote on your Cripple Creek screen printing project."
+}

@@ -1,0 +1,28 @@
+# Runs the same build Netlify runs (netlify.toml) on every pull request and on
+# main: npm ci, the Business Profile sync (skipped here — no credentials in CI),
+# image optimisation, the page build and the page checks. A red check means the
+# Netlify deploy would fail too.
+name: Site build check
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run netlify-build
+      - name: Generated pages are committed and up to date
+        run: |
+          git add -A ark-site-review
+          if ! git diff --cached --quiet -- '*.html' ark-site-review/assets/site.css ark-site-review/assets/site.js; then
+            echo "::error::Run npm run build and commit the generated pages."
+            git diff --cached --stat -- '*.html' | tail -5
+            exit 1
+          fi

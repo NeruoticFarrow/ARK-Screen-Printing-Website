@@ -1,0 +1,64 @@
+{
+  "file": "custom-hoodies-ppc.html",
+  "slug": "custom-hoodies-ppc",
+  "title": "Custom Hoodies | ARK Screen Printing",
+  "description": "Bulk custom hoodies printed in-house with no middleman markup. Fast turnaround, ships nationwide. Get a quote from ARK Screen Printing.",
+  "canonical": "https://arkscreenprinting.com/custom-hoodies-ppc",
+  "robots": "noindex",
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Custom Hoodie Screen Printing",
+      "provider": {
+        "@type": "Organization",
+        "name": "ARK Screen Printing Studio",
+        "telephone": "(719) 280-2638",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Colorado Springs",
+          "addressRegion": "CO",
+          "addressCountry": "US"
+        }
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "United States"
+      },
+      "description": "Bulk custom hoodies printed in-house with no middleman markup. Fast turnaround, ships nationwide."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://arkscreenprinting.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Custom Hoodies"
+        }
+      ]
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Custom Hoodies",
+    "lead": [
+      "Bulk custom hoodies for businesses, teams, and organizations — printed in-house and shipped anywhere in the US. No contract printers, no middleman markup — most orders ship within 5–7 business days."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/colorado-springs-custom-hoodies-screen-printing.jpg",
+      "alt": "Bulk custom hoodies screen printed in-house by ARK Screen Printing"
+    },
+    "caption": null
+  },
+  "blocks": [],
+  "areas": null,
+  "quoteIntro": null
+}

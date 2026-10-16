@@ -1,0 +1,89 @@
+{
+  "file": "index.html",
+  "slug": "index",
+  "title": "Screen Printing Colorado Springs | ARK Screen Printing",
+  "description": "Screen printing in Colorado Springs with no minimums, done in-house. Custom shirts, hoodies, hats, embroidery & DTF printing. Fast turnaround — get a quote.",
+  "canonical": "https://arkscreenprinting.com/",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "ARK Screen Printing",
+      "url": "https://arkscreenprinting.com",
+      "logo": "https://arkscreenprinting.com/images/ark prototype.png",
+      "image": "https://arkscreenprinting.com/images/ark prototype.png",
+      "description": "Custom screen printing, DTF printing, and embroidery in Colorado Springs. No minimum orders, done in-house at ARK Screen Printing.",
+      "telephone": "(719) 280-2638",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1755 Telstar Dr, Suite 300",
+        "addressLocality": "Colorado Springs",
+        "addressRegion": "CO",
+        "postalCode": "80922",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 38.8339,
+        "longitude": -104.8214
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "07:30",
+        "closes": "19:00"
+      },
+      "sameAs": [
+        "https://www.facebook.com/arkscreenprinting",
+        "https://www.instagram.com/arkscreenprinting",
+        "https://arkscreenprinting.com"
+      ],
+      "areaServed": {
+        "@type": "City",
+        "name": "Colorado Springs"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "ARK Screen Printing Studio",
+      "url": "https://arkscreenprinting.com"
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Colorado Springs",
+    "lead": [
+      "Screen printing Colorado Springs — no minimums, done in-house at ARK. Your print shop for screen printing, DTF printing, and embroidery. Fast turnaround. Ships nationwide."
+    ],
+    "meta": null,
+    "image": null,
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "services",
+      "variant": null,
+      "html": "<h2>Premier Silk Screen Printing &amp; Embroidery Services</h2> <article> <h3>Screen Printing</h3> </article> <article> <h3>Graphic Design</h3> </article> <a href=\"/custom-embroidery\"> <article> <h3>Embroidery</h3> </article> </a> <a href=\"/dtf-printing-colorado-springs\"><article> <h3>Direct to Film</h3> </article></a>",
+      "faq": []
+    },
+    {
+      "kind": "gallery",
+      "variant": null,
+      "html": "<h2>Our Work</h2> <img src=\"/images/ywgofrontfoldedds.jpg\" alt=\"Peace is available hoodie with geometric design\"> <img src=\"/images/stpfrontfoldedds.jpg\" alt=\"You Will Go On t-shirt with circular design and NOW text\"> <img src=\"/images/stpback_f4f4f2ds.webp\" alt=\"Sanity Takes Precedence t-shirt back design\"> <img src=\"/images/img_0656.jpg\" alt=\"Custom screen printed apparel design\"> <img src=\"/images/img_0769.jpg\" alt=\"Professional screen printed business apparel\"> <img src=\"/images/img_0780.jpg\" alt=\"High-quality custom screen printing work\"> <img src=\"/images/gallery-img-0113.jpg\" alt=\"Custom screen printed apparel by ARK Screen Printing\"> <img src=\"/images/gallery-img-0230.jpg\" alt=\"Quality custom screen printing work Colorado Springs\"> <img src=\"/images/gallery-img-0305.jpg\" alt=\"Professional screen printed garment ARK Screen Printing\">",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": null
+}

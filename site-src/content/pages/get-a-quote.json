@@ -1,0 +1,31 @@
+{
+  "file": "get-a-quote.html",
+  "slug": "get-a-quote",
+  "title": "Get a Quote | ARK Screen Printing",
+  "description": "Get a free quote for custom screen printing services in Colorado Springs. Fast turnaround, competitive pricing, and exceptional quality.",
+  "canonical": "https://arkscreenprinting.com/get-a-quote",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://arkscreenprinting.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Get a Quote"
+        }
+      ]
+    }
+  ],
+  "hero": null,
+  "blocks": [],
+  "areas": null,
+  "quoteIntro": null
+}

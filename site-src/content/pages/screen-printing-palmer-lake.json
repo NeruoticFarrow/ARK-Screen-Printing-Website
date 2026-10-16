@@ -1,0 +1,82 @@
+{
+  "file": "screen-printing-palmer-lake.html",
+  "slug": "screen-printing-palmer-lake",
+  "title": "Screen Printing Palmer Lake CO | ARK Screen Printing",
+  "description": "Screen printing Palmer Lake, CO: custom t-shirts, uniforms, and branded apparel from ARK Screen Printing. No minimums, done in-house.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-palmer-lake",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ARK Screen Printing Studio - Palmer Lake",
+      "image": "https://arkscreenprinting.com/images/ark prototype.png",
+      "url": "https://arkscreenprinting.com/screen-printing-palmer-lake",
+      "telephone": "(719) 280-2638",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Colorado Springs",
+        "addressLocality": "Colorado Springs",
+        "addressRegion": "CO",
+        "postalCode": "80922",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Palmer Lake, CO"
+      },
+      "description": "Expert custom screen printing and embroidery services for businesses, organizations, and events in Palmer Lake, CO. We specialize in custom t-shirts, workwear, and community apparel.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Screen Printing Services for Palmer Lake",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom T-Shirts & Apparel in Palmer Lake"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Workwear & Uniforms in Palmer Lake"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Community Event Apparel in Palmer Lake"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Palmer Lake CO",
+    "lead": [
+      "Screen printing Palmer Lake CO — ARK serves local businesses, teams, schools, and organizations with custom apparel, all printed in-house."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/Palmer-Lake-Star.jpg",
+      "alt": "Palmer Lake Colorado - ARK Screen Printing serves Palmer Lake"
+    },
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "local-content",
+      "variant": null,
+      "html": "<h2>Custom Apparel for Palmer Lake's Historic Tri-Lakes Community</h2> <p>Palmer Lake is a small, historic town of about 3,000 residents perched on the Palmer Divide at 7,200 feet — the high point between Denver and Colorado Springs on the Tri-Lakes corridor. Known for sweeping Rocky Mountain views, a charming downtown with independent shops and restaurants, and an active arts scene anchored by the Tri-Lakes Center for the Arts, Palmer Lake punches well above its size for community character. Custom apparel for gallery shows, community festivals, trail races, and local business staff is a natural fit.</p> <p>Palmer Lake is part of the Lewis-Palmer School District 38, so students attend Lewis-Palmer High School Rangers and Palmer Ridge High School Bears — the same programs serving the broader Tri-Lakes community. The area's strong trail system and proximity to Monument Lake and the Santa Fe Trail generate outdoor recreation traffic and events throughout the year. We're about 25 miles south in Colorado Springs and regularly serve the entire Tri-Lakes corridor.</p> <article> <article> <h3>Tri-Lakes community</h3> <p>Custom apparel for Palmer Lake's galleries, restaurants, trail events, and community festivals.</p> </article> <article> <h3>Lewis-Palmer schools</h3> <p>Spirit wear and team gear for Rangers and Bears athletics through Lewis-Palmer District 38.</p> </article> <article> <h3>Palmer Divide charm</h3> <p>A small town with big community spirit — proud to serve Palmer Lake's local businesses and events.</p> </article> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Fill out the form below for a fast, accurate quote on your Palmer Lake screen printing project."
+}

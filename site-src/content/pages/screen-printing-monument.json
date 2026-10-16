@@ -1,0 +1,162 @@
+{
+  "file": "screen-printing-monument.html",
+  "slug": "screen-printing-monument",
+  "title": "Custom Screen Printing Monument CO | ARK Screen Printing",
+  "description": "Custom screen printing Monument CO for Tri-Lakes business apparel, merch, events, and groups. Share your artwork, quantity, and deadline for an ARK quote.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-monument",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Custom Screen Printing Monument CO",
+      "serviceType": "Custom screen printing",
+      "url": "https://arkscreenprinting.com/screen-printing-monument",
+      "description": "Custom screen printing Monument CO for Tri-Lakes business apparel, merch, events, and groups. Share your artwork, quantity, and deadline for an ARK quote.",
+      "provider": {
+        "@type": "Organization",
+        "name": "ARK Screen Printing Studio",
+        "url": "https://arkscreenprinting.com",
+        "telephone": "(719) 280-2638",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1755 Telstar Dr, Suite 300",
+          "addressLocality": "Colorado Springs",
+          "addressRegion": "CO",
+          "postalCode": "80922",
+          "addressCountry": "US"
+        }
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Monument and the Tri-Lakes area, Colorado"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do you serve the Monument and Tri-Lakes area?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. ARK is based in Colorado Springs and serves Monument and the Tri-Lakes area. Use the quote form to confirm the details of your particular project."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What should I include in a Monument event-apparel quote?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Include the date, artwork, quantity, garment type, size range, print locations, and any distribution or deadline considerations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can ARK help choose between screen printing and DTF?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The artwork, quantity, garment, color count, and requested finish all affect the production choice."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need finished artwork before requesting a quote?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A finished file is helpful, but a clear logo, concept, or artwork direction is enough to begin discussing the production options."
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://arkscreenprinting.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Service Areas",
+          "item": "https://arkscreenprinting.com/service-areas"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Custom Screen Printing Monument CO",
+          "item": "https://arkscreenprinting.com/screen-printing-monument"
+        }
+      ]
+    }
+  ],
+  "hero": {
+    "eyebrow": "Monument & Tri-Lakes · Custom apparel",
+    "h1": "Custom Screen Printing Monument CO",
+    "lead": [
+      "Custom screen printing Monument CO for Tri-Lakes business apparel, merch, events, and groups. Share your artwork, quantity, and deadline for an ARK quote."
+    ],
+    "meta": "ARK is based in Colorado Springs and serves this area through a quote-first production workflow.",
+    "image": {
+      "src": "/images/monument-pikes-peak.jpg",
+      "alt": "Custom Screen Printing Monument CO"
+    },
+    "caption": "Front Range visual direction for the Monument and Tri-Lakes service page."
+  },
+  "blocks": [
+    {
+      "kind": "cluster-section",
+      "variant": null,
+      "html": "<p class=\"kicker\">A clear Monument project brief</p><h2>Apparel planning for Monument and the Tri-Lakes area</h2><p>Monument projects often bring together small-business identity, community events, recreation groups, and practical staff apparel. The right apparel plan starts with the job the garments need to do—whether that is a first merch run, a recurring program, or a time-sensitive event order.</p><p>ARK is based in Colorado Springs and serves Monument and the broader Tri-Lakes area. Send the artwork, garment direction, quantity, print locations, and in-hands date through the quote form, and the production conversation can begin with the decisions that matter.</p><figure><img src=\"/images/screen-printing-equipment-colorado-springs.jpg\" alt=\"Screen printer preparing a custom apparel screen at ARK\"><figcaption>Production planning starts with the garment, artwork, print locations, and schedule.</figcaption></figure>",
+      "faq": []
+    },
+    {
+      "kind": "cluster-section",
+      "variant": "soft",
+      "html": "<p class=\"kicker\">Plan the project, then choose the print path</p><h2>Three Monument apparel requests to scope clearly</h2><p>These are practical planning paths, not claims about ARK clients, schools, teams, or organizations in Monument.</p><article><p class=\"kicker\">01 · IDENTITY</p><h3>Business and field-team apparel</h3><p>For staff pieces or branded workwear, share the garment type, logo use, role variations, and reorder expectations so the initial run can become a consistent program.</p></article> <article><p class=\"kicker\">02 · COMMUNITY</p><h3>Group and event shirts</h3><p>A group order is easier to manage when the quote includes the date, size spread, artwork, print locations, and distribution plan from the beginning.</p></article> <article><p class=\"kicker\">03 · MERCH</p><h3>Retail-ready merchandise</h3><p>For a merch concept, describe the hand feel, coverage, colorway, first-run quantity, and the way the garment should represent the brand after repeat wear.</p></article>",
+      "faq": []
+    },
+    {
+      "kind": "cluster-section",
+      "variant": "sand",
+      "html": "<p class=\"kicker\">Build a usable quote</p><h2>Give a Monument apparel order a dependable starting point</h2><p>A complete request keeps garment, artwork, finish, and delivery decisions from getting separated later in the process.</p><ul><li>Artwork file, logo, or a clear visual direction</li> <li>Approximate quantity and size breakdown</li> <li>Garment preference, color, and print locations</li> <li>Event date, launch date, or in-hands deadline</li> <li>Any durability, hand-feel, or budget priority</li></ul><p class=\"kicker\">Quote-first workflow</p><h2>How a Monument project moves forward</h2><ol><li>Send your project details through the quote form.</li> <li>ARK reviews the artwork, garments, quantity, print locations, and target finish.</li> <li>You receive a production recommendation and a clear path for art preparation, proofing, and approval.</li> <li>Once approved, ARK prints the order in Colorado Springs and confirms fulfillment details.</li></ol>",
+      "faq": []
+    },
+    {
+      "kind": "cluster-section",
+      "variant": null,
+      "html": "<figure><img src=\"/images/screen-printing-process-colorado-springs.jpg\" alt=\"Hands pulling a screen for a custom apparel print\"></figure><p class=\"kicker\">Choose the finish after the brief</p><h2>Match the finish to the Monument order</h2><p>Screen printing can be a strong choice for many repeatable programs and group runs. Other projects may point toward DTF, embroidery, water-based ink, or discharge. The best route is determined by the artwork, garment, coverage, quantity, and finish—not just the neighborhood name.</p><p>Use the quote form to describe the project. These service pages can help you understand the production conversation before you submit it.</p><a href=\"/custom-silk-screen-printing\">Custom screen printing →</a> <a href=\"/dtf-printing-colorado-springs\">DTF printing →</a> <a href=\"/water-based-screen-printing\">Water-based printing →</a> <a href=\"/discharge-screen-printing\">Discharge printing →</a> <a href=\"/images/ark-art-requirements.pdf\">Artwork guidelines →</a><a href=\"/service-areas\">Colorado Springs area guide →</a><a href=\"/screen-printing-gleneagle\">Gleneagle →</a> <a href=\"/screen-printing-flying-horse\">Flying Horse →</a> <a href=\"/screen-printing-northgate-interquest\">Northgate + InterQuest →</a>",
+      "faq": []
+    },
+    {
+      "kind": "cluster-section",
+      "variant": "soft",
+      "html": "<p class=\"kicker\">Questions before you quote?</p><h2>Custom Screen Printing Monument CO FAQ</h2><p>Short answers to the decisions that make a custom-apparel request easier to scope.</p>",
+      "faq": [
+        {
+          "q": "Do you serve the Monument and Tri-Lakes area?",
+          "a": "<p>Yes. ARK is based in Colorado Springs and serves Monument and the Tri-Lakes area. Use the quote form to confirm the details of your particular project.</p>"
+        },
+        {
+          "q": "What should I include in a Monument event-apparel quote?",
+          "a": "<p>Include the date, artwork, quantity, garment type, size range, print locations, and any distribution or deadline considerations.</p>"
+        },
+        {
+          "q": "Can ARK help choose between screen printing and DTF?",
+          "a": "<p>Yes. The artwork, quantity, garment, color count, and requested finish all affect the production choice.</p>"
+        },
+        {
+          "q": "Do I need finished artwork before requesting a quote?",
+          "a": "<p>A finished file is helpful, but a clear logo, concept, or artwork direction is enough to begin discussing the production options.</p>"
+        }
+      ]
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Start your project"
+}

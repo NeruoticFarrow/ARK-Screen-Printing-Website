@@ -1,0 +1,82 @@
+{
+  "file": "screen-printing-castle-rock.html",
+  "slug": "screen-printing-castle-rock",
+  "title": "Screen Printing Castle Rock CO | ARK Screen Printing",
+  "description": "Screen printing Castle Rock, CO: custom t-shirts, uniforms, and branded apparel from ARK Screen Printing. No minimums, done in-house.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-castle-rock",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ARK Screen Printing Studio - Castle Rock",
+      "image": "https://arkscreenprinting.com/images/ark prototype.png",
+      "url": "https://arkscreenprinting.com/screen-printing-castle-rock",
+      "telephone": "(719) 280-2638",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Colorado Springs",
+        "addressLocality": "Colorado Springs",
+        "addressRegion": "CO",
+        "postalCode": "80922",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Castle Rock, CO"
+      },
+      "description": "Expert custom screen printing and embroidery services for businesses, schools, and events in Castle Rock, CO. We specialize in custom t-shirts, team uniforms, and corporate apparel.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Screen Printing Services for Castle Rock",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom T-Shirts & Apparel in Castle Rock"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Team Uniforms & Spirit Wear in Castle Rock"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Corporate Apparel & Embroidery in Castle Rock"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Castle Rock CO",
+    "lead": [
+      "Screen printing Castle Rock CO — ARK serves local businesses, teams, schools, and organizations with custom apparel, all printed in-house."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/Castle_Rock_Cafe.JPG",
+      "alt": "Castle Rock Colorado - ARK Screen Printing serves Castle Rock"
+    },
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "local-content",
+      "variant": null,
+      "html": "<h2>Custom Screen Printing for Castle Rock's Growing Community</h2> <p>Castle Rock has grown from a historic railroad town into one of Colorado's fastest-growing communities — now over 80,000 residents, the Douglas County seat, and an expanding mix of healthcare, retail, and professional employers. The town holds onto its historic downtown identity even as new neighborhoods spread across its mesa terrain. Custom apparel is in demand everywhere: at corporate offices along I-25, in parks and recreation programs, and at the community events that pack Festival Park and Philip S. Miller Regional Park each year.</p> <p>The Douglas County School District serves Castle Rock with standout schools. Castle View High School and Rock Canyon High School — ranked among the best public high schools in Colorado — are the area's main athletic programs, and <a href=\"/custom-shirts\">spirit wear</a>, team uniforms, and senior class gear are a consistent part of how this community rallies. Castle Rock Adventist Hospital, the Douglas County government complex, and a growing retail corridor add to the mix of employers needing branded workwear and event apparel.</p> <article> <article> <h3>Douglas County hub</h3> <p>Custom apparel for Castle Rock's businesses, government offices, healthcare workers, and community events.</p> </article> <article> <h3>Castle View &amp; Rock Canyon</h3> <p>Spirit wear and athletic gear for two of the best school programs in Douglas County.</p> </article> <article> <h3>Off I-25, ~60 miles north</h3> <p>Easy to coordinate from our Colorado Springs shop with reliable shipping turnaround.</p> </article> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Fill out the form below for a fast, accurate quote on your Castle Rock screen printing project."
+}

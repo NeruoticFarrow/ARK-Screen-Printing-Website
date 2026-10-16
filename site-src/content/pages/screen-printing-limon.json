@@ -1,0 +1,82 @@
+{
+  "file": "screen-printing-limon.html",
+  "slug": "screen-printing-limon",
+  "title": "Screen Printing Limon CO | ARK Screen Printing",
+  "description": "Screen printing Limon, CO: custom t-shirts, uniforms, and branded apparel from ARK Screen Printing. No minimums, done in-house.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-limon",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ARK Screen Printing Studio - Limon",
+      "image": "https://arkscreenprinting.com/images/ark prototype.png",
+      "url": "https://arkscreenprinting.com/screen-printing-limon",
+      "telephone": "(719) 280-2638",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Colorado Springs",
+        "addressLocality": "Colorado Springs",
+        "addressRegion": "CO",
+        "postalCode": "80922",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Limon, CO"
+      },
+      "description": "Expert custom screen printing and embroidery services for businesses, organizations, and events in Limon, CO. We specialize in custom t-shirts, workwear, and community apparel.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Screen Printing Services for Limon",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom T-Shirts & Apparel in Limon"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Workwear & Uniforms in Limon"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Community Event Apparel in Limon"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Limon CO",
+    "lead": [
+      "Screen printing Limon CO — ARK serves local businesses, teams, schools, and organizations with custom apparel, all printed in-house."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/Limon-Heritage-Museum.jpg",
+      "alt": "Limon Colorado - ARK Screen Printing serves Limon"
+    },
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "local-content",
+      "variant": null,
+      "html": "<h2>Custom Screen Printing for Limon's Crossroads Community</h2> <p>Limon is a small ranching and agricultural town of about 2,000 residents in Lincoln County — positioned at the crossroads of I-70 and US-24 on Colorado's eastern plains, making it a regional hub for the surrounding farming and ranching communities. About 90 miles east of Colorado Springs, the town's economy centers on agriculture, transportation, and the services that support a rural county seat. Custom apparel here tends toward practical uses: team uniforms, 4-H gear, agricultural event shirts, and employer workwear.</p> <p>Limon School District RE-4J serves the area with Limon High School, where the Badgers compete in small-school athletics and community identity runs strong. The town's position as a Lincoln County hub means it draws from surrounding ranching communities for school sports, community events, and agricultural programs. For small-volume needs, <a href=\"/dtf-printing-colorado-springs\">DTF printing</a> with no minimum makes ordering from ARK accessible regardless of quantity.</p> <article> <article> <h3>Eastern plains hub</h3> <p>Custom apparel for Limon's ranching community, agricultural businesses, and county events.</p> </article> <article> <h3>Limon Badgers</h3> <p>Spirit wear and team gear for Limon High School's athletic programs.</p> </article> <article> <h3>Ship anywhere</h3> <p>We ship from Colorado Springs to Limon and the surrounding Lincoln County area with no order minimums.</p> </article> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Fill out the form below for a fast, accurate quote on your Limon screen printing project."
+}

@@ -1,0 +1,1290 @@
+{
+  "/images/gallery/img_0858.jpg": {
+    "original": "/images/gallery/img_0858.jpg",
+    "width": 3024,
+    "height": 4032,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-img-0858-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-img-0858-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/gallery-img-0858-1600.webp"
+      }
+    ]
+  },
+  "/images/gallery-img-0305.jpg": {
+    "original": "/images/gallery-img-0305.jpg",
+    "width": 4284,
+    "height": 5712,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-img-0305-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-img-0305-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/gallery-img-0305-1600.webp"
+      }
+    ]
+  },
+  "/images/img_0769.jpg": {
+    "original": "/images/img_0769.jpg",
+    "width": 4032,
+    "height": 3024,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/img-0769-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/img-0769-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/img-0769-1600.webp"
+      }
+    ]
+  },
+  "/images/gallery/img_0563.jpg": {
+    "original": "/images/gallery/img_0563.jpg",
+    "width": 2000,
+    "height": 2449,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-img-0563-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-img-0563-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/gallery-img-0563-1600.webp"
+      }
+    ]
+  },
+  "/images/gallery/img_0113.jpg": {
+    "original": "/images/gallery/img_0113.jpg",
+    "width": 3024,
+    "height": 4032,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-img-0113-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-img-0113-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/gallery-img-0113-1600.webp"
+      }
+    ]
+  },
+  "/images/gallery/img_0230.jpg": {
+    "original": "/images/gallery/img_0230.jpg",
+    "width": 4284,
+    "height": 5712,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-img-0230-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-img-0230-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/gallery-img-0230-1600.webp"
+      }
+    ]
+  },
+  "/images/stpfrontfoldedds.jpg": {
+    "original": "/images/stpfrontfoldedds.jpg",
+    "width": 2000,
+    "height": 1600,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/stpfrontfoldedds-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/stpfrontfoldedds-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/stpfrontfoldedds-1600.webp"
+      }
+    ]
+  },
+  "/images/img_0351.jpg": {
+    "original": "/images/img_0351.jpg",
+    "width": 1536,
+    "height": 2048,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/img-0351-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/img-0351-960.webp"
+      }
+    ]
+  },
+  "/images/service-custom-garments.jpg": {
+    "original": "/images/service-custom-garments.jpg",
+    "width": 1536,
+    "height": 2048,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/service-custom-garments-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/service-custom-garments-960.webp"
+      }
+    ]
+  },
+  "/images/alexander_kinnaman_portrait.jpg": {
+    "original": "/images/alexander_kinnaman_portrait.jpg",
+    "width": 1200,
+    "height": 1600,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/alexander-kinnaman-portrait-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/alexander-kinnaman-portrait-960.webp"
+      }
+    ]
+  },
+  "/images/gallery/img_0114.jpg": {
+    "original": "/images/gallery/img_0114.jpg",
+    "width": 3024,
+    "height": 4032,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-img-0114-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-img-0114-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/gallery-img-0114-1600.webp"
+      }
+    ]
+  },
+  "/images/gallery/img_0783.jpg": {
+    "original": "/images/gallery/img_0783.jpg",
+    "width": 3024,
+    "height": 4032,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-img-0783-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-img-0783-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/gallery-img-0783-1600.webp"
+      }
+    ]
+  },
+  "/images/alex-signature.png": {
+    "original": "/images/alex-signature.png",
+    "width": 1412,
+    "height": 358,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/alex-signature-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/alex-signature-960.webp"
+      }
+    ]
+  },
+  "/images/embroidery-intro-colorful.jpg": {
+    "original": "/images/embroidery-intro-colorful.jpg",
+    "width": 1536,
+    "height": 2048,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/embroidery-intro-colorful-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/embroidery-intro-colorful-960.webp"
+      }
+    ]
+  },
+  "/images/embroidery-hats-placeholder.jpg": {
+    "original": "/images/embroidery-hats-placeholder.jpg",
+    "width": 2048,
+    "height": 1365,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/embroidery-hats-placeholder-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/embroidery-hats-placeholder-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/embroidery-hats-placeholder-1600.webp"
+      }
+    ]
+  },
+  "/images/embroidery-hero-placeholder.jpg": {
+    "original": "/images/embroidery-hero-placeholder.jpg",
+    "width": 2048,
+    "height": 1365,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/embroidery-hero-placeholder-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/embroidery-hero-placeholder-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/embroidery-hero-placeholder-1600.webp"
+      }
+    ]
+  },
+  "/images/embroidery-corporate-placeholder.jpg": {
+    "original": "/images/embroidery-corporate-placeholder.jpg",
+    "width": 1536,
+    "height": 2048,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/embroidery-corporate-placeholder-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/embroidery-corporate-placeholder-960.webp"
+      }
+    ]
+  },
+  "/images/colorado-springs-custom-hoodies-screen-printing.jpg": {
+    "original": "/images/colorado-springs-custom-hoodies-screen-printing.jpg",
+    "width": 3264,
+    "height": 4928,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/colorado-springs-custom-hoodies-screen-printing-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/colorado-springs-custom-hoodies-screen-printing-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/colorado-springs-custom-hoodies-screen-printing-1600.webp"
+      }
+    ]
+  },
+  "/images/custom-apparel-colorado-springs-3.jpg": {
+    "original": "/images/custom-apparel-colorado-springs-3.jpg",
+    "width": 4000,
+    "height": 5000,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/custom-apparel-colorado-springs-3-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/custom-apparel-colorado-springs-3-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/custom-apparel-colorado-springs-3-1600.webp"
+      }
+    ]
+  },
+  "/images/custom-work-shirt-logo-print.jpg": {
+    "original": "/images/custom-work-shirt-logo-print.jpg",
+    "width": 675,
+    "height": 900,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/custom-work-shirt-logo-print-480.webp"
+      }
+    ]
+  },
+  "/images/gallery/img_0007.jpg": {
+    "original": "/images/gallery/img_0007.jpg",
+    "width": 4032,
+    "height": 3024,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-img-0007-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-img-0007-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/gallery-img-0007-1600.webp"
+      }
+    ]
+  },
+  "/images/gallery/img_0564.jpg": {
+    "original": "/images/gallery/img_0564.jpg",
+    "width": 2000,
+    "height": 2445,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-img-0564-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-img-0564-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/gallery-img-0564-1600.webp"
+      }
+    ]
+  },
+  "/images/gallery/img_0565.jpg": {
+    "original": "/images/gallery/img_0565.jpg",
+    "width": 2000,
+    "height": 1600,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-img-0565-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-img-0565-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/gallery-img-0565-1600.webp"
+      }
+    ]
+  },
+  "/images/gallery/img_0566.jpg": {
+    "original": "/images/gallery/img_0566.jpg",
+    "width": 2000,
+    "height": 2499,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-img-0566-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-img-0566-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/gallery-img-0566-1600.webp"
+      }
+    ]
+  },
+  "/images/gallery/img_0567.jpg": {
+    "original": "/images/gallery/img_0567.jpg",
+    "width": 2000,
+    "height": 1600,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-img-0567-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-img-0567-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/gallery-img-0567-1600.webp"
+      }
+    ]
+  },
+  "/images/gallery/img_0664.jpg": {
+    "original": "/images/gallery/img_0664.jpg",
+    "width": 3024,
+    "height": 4032,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-img-0664-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-img-0664-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/gallery-img-0664-1600.webp"
+      }
+    ]
+  },
+  "/images/gallery/img_0756.jpg": {
+    "original": "/images/gallery/img_0756.jpg",
+    "width": 3024,
+    "height": 4032,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-img-0756-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-img-0756-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/gallery-img-0756-1600.webp"
+      }
+    ]
+  },
+  "/images/gallery/img_0770.jpg": {
+    "original": "/images/gallery/img_0770.jpg",
+    "width": 3024,
+    "height": 4032,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-img-0770-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-img-0770-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/gallery-img-0770-1600.webp"
+      }
+    ]
+  },
+  "/images/gallery/img_0959.jpg": {
+    "original": "/images/gallery/img_0959.jpg",
+    "width": 3024,
+    "height": 4032,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-img-0959-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-img-0959-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/gallery-img-0959-1600.webp"
+      }
+    ]
+  },
+  "/images/gallery/img_0305.jpg": {
+    "original": "/images/gallery/img_0305.jpg",
+    "width": 4284,
+    "height": 5712,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-img-0305-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-img-0305-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/gallery-img-0305-1600.webp"
+      }
+    ]
+  },
+  "/images/ywgofrontfoldedds.jpg": {
+    "original": "/images/ywgofrontfoldedds.jpg",
+    "width": 2000,
+    "height": 1600,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/ywgofrontfoldedds-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/ywgofrontfoldedds-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/ywgofrontfoldedds-1600.webp"
+      }
+    ]
+  },
+  "/images/stpback_f4f4f2ds.webp": {
+    "original": "/images/stpback_f4f4f2ds.webp",
+    "width": 1675,
+    "height": 2048,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/stpback-f4f4f2ds-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/stpback-f4f4f2ds-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/stpback-f4f4f2ds-1600.webp"
+      }
+    ]
+  },
+  "/images/img_0656.jpg": {
+    "original": "/images/img_0656.jpg",
+    "width": 1822,
+    "height": 1769,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/img-0656-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/img-0656-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/img-0656-1600.webp"
+      }
+    ]
+  },
+  "/images/img_0780.jpg": {
+    "original": "/images/img_0780.jpg",
+    "width": 2997,
+    "height": 4029,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/img-0780-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/img-0780-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/img-0780-1600.webp"
+      }
+    ]
+  },
+  "/images/gallery-img-0113.jpg": {
+    "original": "/images/gallery-img-0113.jpg",
+    "width": 3024,
+    "height": 4032,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-img-0113-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-img-0113-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/gallery-img-0113-1600.webp"
+      }
+    ]
+  },
+  "/images/gallery-img-0230.jpg": {
+    "original": "/images/gallery-img-0230.jpg",
+    "width": 4284,
+    "height": 5712,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-img-0230-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-img-0230-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/gallery-img-0230-1600.webp"
+      }
+    ]
+  },
+  "/images/auroracity.webp": {
+    "original": "/images/auroracity.webp",
+    "width": 1200,
+    "height": 900,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/auroracity-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/auroracity-960.webp"
+      }
+    ]
+  },
+  "/images/black-forest-regional-park.jpg": {
+    "original": "/images/black-forest-regional-park.jpg",
+    "width": 355,
+    "height": 266,
+    "variants": [
+      {
+        "width": 355,
+        "file": "/assets/img/black-forest-regional-park-355.webp"
+      }
+    ]
+  },
+  "/images/local-cluster/briargate-hero.webp": {
+    "original": "/images/local-cluster/briargate-hero.webp",
+    "width": 2560,
+    "height": 1440,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/local-cluster-briargate-hero-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/local-cluster-briargate-hero-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/local-cluster-briargate-hero-1600.webp"
+      }
+    ]
+  },
+  "/images/screen-printing-equipment-colorado-springs.jpg": {
+    "original": "/images/screen-printing-equipment-colorado-springs.jpg",
+    "width": 2048,
+    "height": 1365,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/screen-printing-equipment-colorado-springs-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/screen-printing-equipment-colorado-springs-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/screen-printing-equipment-colorado-springs-1600.webp"
+      }
+    ]
+  },
+  "/images/screen-printing-process-colorado-springs.jpg": {
+    "original": "/images/screen-printing-process-colorado-springs.jpg",
+    "width": 2048,
+    "height": 1365,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/screen-printing-process-colorado-springs-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/screen-printing-process-colorado-springs-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/screen-printing-process-colorado-springs-1600.webp"
+      }
+    ]
+  },
+  "/images/local-cluster/broadmoor-hero.webp": {
+    "original": "/images/local-cluster/broadmoor-hero.webp",
+    "width": 2560,
+    "height": 1440,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/local-cluster-broadmoor-hero-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/local-cluster-broadmoor-hero-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/local-cluster-broadmoor-hero-1600.webp"
+      }
+    ]
+  },
+  "/images/paint-mines-calhan.jpg": {
+    "original": "/images/paint-mines-calhan.jpg",
+    "width": 1200,
+    "height": 630,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/paint-mines-calhan-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/paint-mines-calhan-960.webp"
+      }
+    ]
+  },
+  "/images/canon-city-town.jpg": {
+    "original": "/images/canon-city-town.jpg",
+    "width": 1200,
+    "height": 803,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/canon-city-town-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/canon-city-town-960.webp"
+      }
+    ]
+  },
+  "/images/castle-pines-golf-club.jpg": {
+    "original": "/images/castle-pines-golf-club.jpg",
+    "width": 1536,
+    "height": 920,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/castle-pines-golf-club-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/castle-pines-golf-club-960.webp"
+      }
+    ]
+  },
+  "/images/castle_rock_cafe.jpg": {
+    "original": "/images/castle_rock_cafe.jpg",
+    "width": 960,
+    "height": 720,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/castle-rock-cafe-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/castle-rock-cafe-960.webp"
+      }
+    ]
+  },
+  "/images/centennial-southglenn.jpg": {
+    "original": "/images/centennial-southglenn.jpg",
+    "width": 605,
+    "height": 218,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/centennial-southglenn-480.webp"
+      }
+    ]
+  },
+  "/images/cripple-creek-downtown.webp": {
+    "original": "/images/cripple-creek-downtown.webp",
+    "width": 1200,
+    "height": 795,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/cripple-creek-downtown-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/cripple-creek-downtown-960.webp"
+      }
+    ]
+  },
+  "/images/south-denver-downtown.jpg": {
+    "original": "/images/south-denver-downtown.jpg",
+    "width": 1200,
+    "height": 800,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/south-denver-downtown-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/south-denver-downtown-960.webp"
+      }
+    ]
+  },
+  "/images/local-cluster/downtown-colorado-springs-hero.webp": {
+    "original": "/images/local-cluster/downtown-colorado-springs-hero.webp",
+    "width": 2560,
+    "height": 1440,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/local-cluster-downtown-colorado-springs-hero-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/local-cluster-downtown-colorado-springs-hero-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/local-cluster-downtown-colorado-springs-hero-1600.webp"
+      }
+    ]
+  },
+  "/images/falcon-meridian-ranch.jpg": {
+    "original": "/images/falcon-meridian-ranch.jpg",
+    "width": 1200,
+    "height": 800,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/falcon-meridian-ranch-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/falcon-meridian-ranch-960.webp"
+      }
+    ]
+  },
+  "/images/florence-landmark.avif": {
+    "original": "/images/florence-landmark.avif",
+    "width": 1080,
+    "height": 720,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/florence-landmark-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/florence-landmark-960.webp"
+      }
+    ]
+  },
+  "/images/local-cluster/flying-horse-hero.webp": {
+    "original": "/images/local-cluster/flying-horse-hero.webp",
+    "width": 2560,
+    "height": 1440,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/local-cluster-flying-horse-hero-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/local-cluster-flying-horse-hero-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/local-cluster-flying-horse-hero-1600.webp"
+      }
+    ]
+  },
+  "/images/local-cluster/fountain-fort-carson-hero.webp": {
+    "original": "/images/local-cluster/fountain-fort-carson-hero.webp",
+    "width": 2560,
+    "height": 1440,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/local-cluster-fountain-fort-carson-hero-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/local-cluster-fountain-fort-carson-hero-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/local-cluster-fountain-fort-carson-hero-1600.webp"
+      }
+    ]
+  },
+  "/images/local-cluster/gleneagle-hero.webp": {
+    "original": "/images/local-cluster/gleneagle-hero.webp",
+    "width": 2560,
+    "height": 1440,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/local-cluster-gleneagle-hero-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/local-cluster-gleneagle-hero-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/local-cluster-gleneagle-hero-1600.webp"
+      }
+    ]
+  },
+  "/images/green-mountain-falls-gazebo.webp": {
+    "original": "/images/green-mountain-falls-gazebo.webp",
+    "width": 1920,
+    "height": 1080,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/green-mountain-falls-gazebo-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/green-mountain-falls-gazebo-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/green-mountain-falls-gazebo-1600.webp"
+      }
+    ]
+  },
+  "/images/highlands-ranch-town-center.jpg": {
+    "original": "/images/highlands-ranch-town-center.jpg",
+    "width": 1600,
+    "height": 1006,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/highlands-ranch-town-center-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/highlands-ranch-town-center-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/highlands-ranch-town-center-1600.webp"
+      }
+    ]
+  },
+  "/images/local-cluster/ivywild-hero.webp": {
+    "original": "/images/local-cluster/ivywild-hero.webp",
+    "width": 2560,
+    "height": 1440,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/local-cluster-ivywild-hero-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/local-cluster-ivywild-hero-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/local-cluster-ivywild-hero-1600.webp"
+      }
+    ]
+  },
+  "/images/limon-heritage-museum.jpg": {
+    "original": "/images/limon-heritage-museum.jpg",
+    "width": 763,
+    "height": 509,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/limon-heritage-museum-480.webp"
+      }
+    ]
+  },
+  "/images/historic-downtown-littleton.avif": {
+    "original": "/images/historic-downtown-littleton.avif",
+    "width": 599,
+    "height": 630,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/historic-downtown-littleton-480.webp"
+      }
+    ]
+  },
+  "/images/manitou-springs.webp": {
+    "original": "/images/manitou-springs.webp",
+    "width": 1619,
+    "height": 1080,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/manitou-springs-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/manitou-springs-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/manitou-springs-1600.webp"
+      }
+    ]
+  },
+  "/images/monument-pikes-peak.jpg": {
+    "original": "/images/monument-pikes-peak.jpg",
+    "width": 2048,
+    "height": 1365,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/monument-pikes-peak-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/monument-pikes-peak-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/monument-pikes-peak-1600.webp"
+      }
+    ]
+  },
+  "/images/local-cluster/northgate-interquest-hero.webp": {
+    "original": "/images/local-cluster/northgate-interquest-hero.webp",
+    "width": 2560,
+    "height": 1440,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/local-cluster-northgate-interquest-hero-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/local-cluster-northgate-interquest-hero-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/local-cluster-northgate-interquest-hero-1600.webp"
+      }
+    ]
+  },
+  "/images/local-cluster/old-colorado-city-hero.webp": {
+    "original": "/images/local-cluster/old-colorado-city-hero.webp",
+    "width": 2560,
+    "height": 1440,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/local-cluster-old-colorado-city-hero-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/local-cluster-old-colorado-city-hero-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/local-cluster-old-colorado-city-hero-1600.webp"
+      }
+    ]
+  },
+  "/images/palmer-lake-star.jpg": {
+    "original": "/images/palmer-lake-star.jpg",
+    "width": 960,
+    "height": 562,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/palmer-lake-star-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/palmer-lake-star-960.webp"
+      }
+    ]
+  },
+  "/images/parker,_colorado-mainstreet.jpg": {
+    "original": "/images/parker%2C_colorado-mainstreet.jpg",
+    "width": 960,
+    "height": 590,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/parker-colorado-mainstreet-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/parker-colorado-mainstreet-960.webp"
+      }
+    ]
+  },
+  "/images/penrose-mountains.avif": {
+    "original": "/images/penrose-mountains.avif",
+    "width": 540,
+    "height": 312,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/penrose-mountains-480.webp"
+      }
+    ]
+  },
+  "/images/peyton-town.webp": {
+    "original": "/images/peyton-town.webp",
+    "width": 828,
+    "height": 621,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/peyton-town-480.webp"
+      }
+    ]
+  },
+  "/images/pueblo-historic-rieverwalk.jpg": {
+    "original": "/images/pueblo-historic-rieverwalk.jpg",
+    "width": 1200,
+    "height": 800,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/pueblo-historic-rieverwalk-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/pueblo-historic-rieverwalk-960.webp"
+      }
+    ]
+  },
+  "/images/local-cluster/security-widefield-hero.webp": {
+    "original": "/images/local-cluster/security-widefield-hero.webp",
+    "width": 2560,
+    "height": 1440,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/local-cluster-security-widefield-hero-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/local-cluster-security-widefield-hero-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/local-cluster-security-widefield-hero-1600.webp"
+      }
+    ]
+  },
+  "/images/thornton-city-hall.jpg": {
+    "original": "/images/thornton-city-hall.jpg",
+    "width": 1920,
+    "height": 640,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/thornton-city-hall-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/thornton-city-hall-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/thornton-city-hall-1600.webp"
+      }
+    ]
+  },
+  "/images/victor-gold-coin-mine.jpg": {
+    "original": "/images/victor-gold-coin-mine.jpg",
+    "width": 800,
+    "height": 498,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/victor-gold-coin-mine-480.webp"
+      }
+    ]
+  },
+  "/images/westminster-city-park-grand-staircase.jpg": {
+    "original": "/images/westminster-city-park-grand-staircase.jpg",
+    "width": 1787,
+    "height": 966,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/westminster-city-park-grand-staircase-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/westminster-city-park-grand-staircase-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/westminster-city-park-grand-staircase-1600.webp"
+      }
+    ]
+  },
+  "/images/woodland-park-downtown.jpg": {
+    "original": "/images/woodland-park-downtown.jpg",
+    "width": 750,
+    "height": 422,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/woodland-park-downtown-480.webp"
+      }
+    ]
+  },
+  "/images/fountain-creek-nature.jpg": {
+    "original": "/images/fountain-creek-nature.jpg",
+    "width": 700,
+    "height": 400,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/fountain-creek-nature-480.webp"
+      }
+    ]
+  },
+  "/images/security-widefield.avif": {
+    "original": "/images/security-widefield.avif",
+    "width": 1080,
+    "height": 720,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/security-widefield-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/security-widefield-960.webp"
+      }
+    ]
+  }
+}

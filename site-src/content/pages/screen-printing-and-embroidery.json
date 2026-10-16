@@ -1,0 +1,69 @@
+{
+  "file": "screen-printing-and-embroidery.html",
+  "slug": "screen-printing-and-embroidery",
+  "title": "Screen Printing & Embroidery Colorado Springs | ARK",
+  "description": "Screen printing & embroidery Colorado Springs — one shop for shirts, hats, jackets, and uniforms. Get a quote from ARK Screen Printing.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-and-embroidery",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "ARK Screen Printing",
+      "description": "Custom screen printing, DTF printing, and embroidery in Colorado Springs. One shop for all your custom apparel needs.",
+      "telephone": "(719) 280-2638",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1755 Telstar Dr, Suite 300",
+        "addressLocality": "Colorado Springs",
+        "addressRegion": "CO",
+        "postalCode": "80922",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 38.8339,
+        "longitude": -104.8214
+      },
+      "url": "https://arkscreenprinting.com",
+      "priceRange": "$$",
+      "openingHours": "Mo-Su 07:30-19:00"
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing & Embroidery Colorado Springs",
+    "lead": [],
+    "meta": null,
+    "image": null,
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "intro-callout",
+      "variant": null,
+      "html": "One shop for all your custom apparel in Colorado Springs. ARK does screen printing, DTF printing, and embroidery in-house — printed shirts, embroidered hats, decorated jackets, and more. Whether you need 1 item or 500, we handle it.",
+      "faq": []
+    },
+    {
+      "kind": "hub-section",
+      "variant": null,
+      "html": "<h2>Our Services</h2> <p>Screen printing &amp; embroidery Colorado Springs — ARK does both in-house. Not sure which method is right? We'll figure it out together.</p> <article> <article> No Minimum <h3>DTF Printing</h3> <p>Direct to Film printing for orders of any size — even a single shirt. Full-color designs, no setup fees, 3–5 day turnaround. The right choice for small orders and complex artwork.</p> <a href=\"/dtf-printing-colorado-springs\">Learn About DTF Printing</a> </article> <article> Best for 24+ Shirts <h3>Screen Printing</h3> <p>Ink-on-fabric screen printing for teams, events, and bulk orders. The most durable print method available — ideal for uniforms, merchandise, and any order where per-shirt price matters.</p> <a href=\"/custom-silk-screen-printing\">Learn About Screen Printing</a> </article> <article> Hats, Polos &amp; More <h3>Custom Embroidery</h3> <p>Thread stitched directly into the fabric for a professional, three-dimensional look. Perfect for hats, polos, jackets, and uniforms. Logo digitizing included at no extra cost.</p> <a href=\"/custom-embroidery\">Learn About Embroidery</a> </article> </article> <p>Not sure whether DTF or screen printing is right for your order? <a href=\"/dtf-vs-screen-printing\">Read our full comparison guide.</a></p>",
+      "faq": []
+    },
+    {
+      "kind": "hub-section",
+      "variant": null,
+      "html": "<h2>Who We Work With</h2> <p>ARK works with businesses, teams, organizations, and individuals across Colorado Springs and nationwide.</p> <article> <h4>Small Businesses</h4> <p>Branded uniforms, embroidered polos, and promotional apparel.</p> </article> <article> <h4>Sports Teams</h4> <p>Jerseys, practice shirts, and team gear in any quantity.</p> </article> <article> <h4>Events &amp; Organizations</h4> <p>Printed shirts, embroidered hats, and volunteer gear for events.</p> </article> <article> <h4>Trades &amp; Contractors</h4> <p>Workwear and uniforms that hold up on the job site.</p> </article> <article> <h4>Schools &amp; Nonprofits</h4> <p>Spirit wear, fundraiser shirts, and staff apparel.</p> </article> <article> <h4>Individuals</h4> <p>One shirt? No problem. DTF printing with no minimum order.</p> </article>",
+      "faq": []
+    },
+    {
+      "kind": "hub-section",
+      "variant": null,
+      "html": "<h2>Why ARK?</h2> <p>ARK Screen Printing is a Colorado Springs shop that does everything in-house — screen printing, DTF printing, and embroidery all under one roof. That means faster turnaround, better quality control, and one point of contact for your entire order.</p> <p>We print <em>from 1 shirt to 1,000</em>. Small orders use DTF so there's no minimum and no wasted setup cost. Larger orders use screen printing for maximum value. Need printed shirts <em>and</em> embroidered hats for the same event? We handle both.</p> <p>We also ship nationwide — so if you're not local to Colorado Springs, you can still get ARK quality delivered to your door.</p>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": null
+}

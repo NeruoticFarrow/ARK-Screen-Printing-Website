@@ -1,0 +1,20 @@
+{
+  "file": "thank-you.html",
+  "slug": "thank-you",
+  "title": "Thank You | ARK Screen Printing",
+  "description": "Thank you for contacting ARK Screen Printing Studio. We'll get back to you soon with information about our premium screen printing services.",
+  "canonical": "https://arkscreenprinting.com/thank-you",
+  "robots": "noindex, follow",
+  "jsonLd": [],
+  "hero": null,
+  "blocks": [
+    {
+      "kind": "thank-you-section",
+      "variant": null,
+      "html": "<h2>Thank You!</h2> <h2>Your Project Request Has Been Received</h2> <p>We've received your project request and will get back to you within 24 hours to confirm details for your project.</p> <article> <h3>What Happens Next?</h3> <article> <article> 1 <article> <h4>Review</h4> <p>We'll carefully review your project details and requirements</p> </article> </article> <article> 2 <article> <h4>Confirmation</h4> <p>You'll receive a phone call and if no answer an email from us confirming the details of the project.</p> </article> </article> <article> 3 <article> <h4>Create</h4> <p>Once approved, we'll send you an invoice and we'll bring your vision to life</p> </article> </article> </article> </article> <article> <h3>Questions? Contact Us Directly</h3> ‪(719) 280-2638‬ alex@arkscreenprinting.com </article> <a href=\"/\">Return to Home</a> <a href=\"/index#gallery\">View Our Work</a>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": null
+}

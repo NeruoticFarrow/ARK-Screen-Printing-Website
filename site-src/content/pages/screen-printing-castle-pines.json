@@ -1,0 +1,81 @@
+{
+  "file": "screen-printing-castle-pines.html",
+  "slug": "screen-printing-castle-pines",
+  "title": "Screen Printing Castle Pines CO | ARK Screen Printing",
+  "description": "Screen printing Castle Pines, CO: custom t-shirts, uniforms, and branded apparel from ARK Screen Printing. No minimums, done in-house.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-castle-pines",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Screen Printing Services",
+      "provider": {
+        "@type": "Organization",
+        "name": "ARK Screen Printing Studio",
+        "telephone": "(719) 280-2638",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Colorado Springs",
+          "addressRegion": "CO",
+          "addressCountry": "US"
+        }
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Castle Pines",
+        "containedIn": {
+          "@type": "State",
+          "name": "Colorado"
+        }
+      },
+      "description": "Premium screen printing in Castle Pines, CO. Custom apparel for golf events, upscale businesses, and exclusive community gatherings. Exceptional quality."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://arkscreenprinting.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Service Areas",
+          "item": "https://arkscreenprinting.com/service-areas"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Castle Pines Screen Printing"
+        }
+      ]
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Castle Pines CO",
+    "lead": [
+      "Screen printing Castle Pines CO — ARK serves local businesses, teams, schools, and organizations with custom apparel, all printed in-house."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/Castle-Pines-Golf-Club.jpg",
+      "alt": "Castle Pines Colorado - ARK Screen Printing serves Castle Pines"
+    },
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "local-content",
+      "variant": null,
+      "html": "<h2>Custom Screen Printing for Castle Pines' Upscale Community</h2> <p>Castle Pines is one of Colorado's most affluent communities — a Douglas County enclave of about 13,000 residents known for the Castle Pines Golf Club, executive housing, and a professional demographic that holds high standards for everything they commission. Corporate branded apparel, <a href=\"/custom-embroidery\">custom embroidery</a>, and premium event merchandise, and upscale community event gear reflect the level of quality expected here. ARK delivers that quality from our Colorado Springs shop, about 55 miles south on I-25.</p> <p>Castle Pines falls within the Douglas County School District, primarily served by Rock Canyon High School Jaguars — one of the highest-ranked public high schools in Colorado. Athletic booster programs, youth lacrosse and soccer leagues, and community events generate consistent demand for quality custom apparel. We treat every order with the same care and craftsmanship that Castle Pines residents expect from the businesses they choose to work with.</p> <article> <article> <h3>Golf &amp; country club events</h3> <p>Premium branded apparel for the Castle Pines Golf Club, tournaments, and exclusive community gatherings.</p> </article> <article> <h3>Rock Canyon Jaguars</h3> <p>Spirit wear and team uniforms for Douglas County School District's top-ranked high school.</p> </article> <article> <h3>Quality guaranteed</h3> <p>Every order backed by ARK's full quality guarantee — because Castle Pines standards are our standards.</p> </article> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Fill out the form below for a fast, accurate quote on your Castle Pines screen printing project."
+}

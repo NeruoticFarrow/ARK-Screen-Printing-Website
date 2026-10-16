@@ -1,0 +1,64 @@
+{
+  "file": "custom-hoodies.html",
+  "slug": "custom-hoodies",
+  "title": "Custom Hoodies Colorado Springs | ARK Screen Printing",
+  "description": "Custom hoodies Colorado Springs — screen printed in-house with vibrant, long-lasting designs. No minimums. Corporate apparel and team uniforms from ARK.",
+  "canonical": "https://arkscreenprinting.com/custom-hoodies",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Custom Hoodie Screen Printing",
+      "provider": {
+        "@type": "Organization",
+        "name": "ARK Screen Printing Studio",
+        "telephone": "(719) 280-2638",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Colorado Springs",
+          "addressRegion": "CO",
+          "addressCountry": "US"
+        }
+      },
+      "areaServed": {
+        "@type": "State",
+        "name": "Colorado"
+      },
+      "description": "High-quality custom hoodie and sweatshirt screen printing for corporate apparel, team uniforms, and promotional wear."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://arkscreenprinting.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Custom Hoodies"
+        }
+      ]
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Custom Hoodies Colorado Springs",
+    "lead": [
+      "Custom hoodies Colorado Springs — screen printed in-house with vibrant, long-lasting designs. No minimum for small orders. Ships nationwide."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/colorado-springs-custom-hoodies-screen-printing.jpg",
+      "alt": "Custom printed hoodie with geometric design - ARK Screen Printing quality"
+    },
+    "caption": null
+  },
+  "blocks": [],
+  "areas": "<p>ARK ships custom hoodies to businesses and teams across the Front Range and Pikes Peak region — from <a href=\"/screen-printing-monument\">Monument</a> and <a href=\"/screen-printing-manitou-springs\">Manitou Springs</a> to <a href=\"/screen-printing-castle-rock\">Castle Rock</a>, <a href=\"/screen-printing-parker\">Parker</a>, <a href=\"/screen-printing-centennial\">Centennial</a>, and <a href=\"/screen-printing-pueblo\">Pueblo</a>. No minimum for small orders.</p>",
+  "quoteIntro": null
+}

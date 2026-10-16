@@ -1,0 +1,82 @@
+{
+  "file": "screen-printing-victor.html",
+  "slug": "screen-printing-victor",
+  "title": "Screen Printing Victor CO | ARK Screen Printing",
+  "description": "Screen printing Victor, CO: custom t-shirts, uniforms, and branded apparel from ARK Screen Printing. No minimums, done in-house.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-victor",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ARK Screen Printing Studio - Victor",
+      "image": "https://arkscreenprinting.com/images/ark prototype.png",
+      "url": "https://arkscreenprinting.com/screen-printing-victor",
+      "telephone": "(719) 280-2638",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Colorado Springs",
+        "addressLocality": "Colorado Springs",
+        "addressRegion": "CO",
+        "postalCode": "80922",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Victor, CO"
+      },
+      "description": "Expert custom screen printing and embroidery services for businesses, organizations, and events in Victor, CO. We specialize in custom t-shirts, workwear, and community apparel.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Screen Printing Services for Victor",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom T-Shirts & Apparel in Victor"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Workwear & Uniforms in Victor"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Community Event Apparel in Victor"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Victor CO",
+    "lead": [
+      "Screen printing Victor CO — ARK serves local businesses, teams, schools, and organizations with custom apparel, all printed in-house."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/Victor-Gold-Coin-Mine.jpg",
+      "alt": "Victor Colorado - ARK Screen Printing serves Victor"
+    },
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "local-content",
+      "variant": null,
+      "html": "<h2>Custom Screen Printing for Victor's Historic Gold Camp Community</h2> <p>Victor is one of Colorado's most authentic historic towns — a former gold rush boomtown that once housed 18,000 people at its peak, now home to about 400 full-time residents who have chosen to preserve and live in the City of Mines. Unlike neighboring <a href=\"/screen-printing-cripple-creek\">Cripple Creek</a>, Victor opted out of casino gambling, keeping its authentic character intact. The community attracts history enthusiasts, artists, and outdoor recreationists exploring the Cripple Creek and Victor area, generating demand for small-run custom apparel for events, local businesses, and community organizations.</p> <p>Victor shares the Cripple Creek-Victor School District with Cripple Creek. The town's strong historic identity means community events, anniversaries, and tourism occasions regularly call for custom merchandise. For a community this size, <a href=\"/dtf-printing-colorado-springs\">DTF printing</a> with no minimum order is the right fit — allowing a single shirt, a small run of event tees, or custom pieces for local businesses without requiring a large screen printing commitment.</p> <article> <article> <h3>City of Mines heritage</h3> <p>Custom apparel for Victor's historic businesses, community events, and tourism organizations.</p> </article> <article> <h3>Small-run friendly</h3> <p>DTF printing from one piece — perfect for Victor's small-community scale.</p> </article> <article> <h3>Cripple Creek–Victor community</h3> <p>Spirit wear and team gear for the CC-V school district and Teller County events.</p> </article> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Fill out the form below for a fast, accurate quote on your Victor screen printing project."
+}

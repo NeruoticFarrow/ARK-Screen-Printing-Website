@@ -1,0 +1,14 @@
+# Netlify builds the site on every deploy so it can pull the shop's Google
+# rating, reviews and owner photos fresh (site-src/sync/gbp-sync.mjs). Without
+# the GBP_* environment variables the sync is skipped and the build is the same
+# as the committed pages. The site's "Base directory" in the Netlify UI is
+# still ark-site-review (from before the pages were generated), so `base`
+# pins it back to the repo root here; otherwise Netlify looks for the publish
+# folder at ark-site-review/ark-site-review and the deploy fails.
+[build]
+  base = "."
+  command = "npm ci --no-audit --no-fund && npm run netlify-build"
+  publish = "ark-site-review"
+
+[build.environment]
+  NODE_VERSION = "22"

@@ -1,0 +1,5 @@
+# Written by site-src/build.mjs.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+/fonts/gf/*
+  Cache-Control: public, max-age=31536000, immutable

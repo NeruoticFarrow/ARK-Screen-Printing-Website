@@ -1,0 +1,162 @@
+{
+  "file": "screen-printing-fountain.html",
+  "slug": "screen-printing-fountain",
+  "title": "Custom Screen Printing Fountain CO | ARK Screen Printing",
+  "description": "Custom screen printing Fountain CO for local business apparel, events, group orders, and merchandise. Send project details to ARK for a quote.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-fountain",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Custom Screen Printing Fountain CO",
+      "serviceType": "Custom screen printing",
+      "url": "https://arkscreenprinting.com/screen-printing-fountain",
+      "description": "Custom screen printing Fountain CO for local business apparel, events, group orders, and merchandise. Send project details to ARK for a quote.",
+      "provider": {
+        "@type": "Organization",
+        "name": "ARK Screen Printing Studio",
+        "url": "https://arkscreenprinting.com",
+        "telephone": "(719) 280-2638",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1755 Telstar Dr, Suite 300",
+          "addressLocality": "Colorado Springs",
+          "addressRegion": "CO",
+          "postalCode": "80922",
+          "addressCountry": "US"
+        }
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Fountain and the Fort Carson corridor, Colorado"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does ARK serve Fountain custom-apparel projects?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. ARK is based in Colorado Springs and serves Fountain. Use the quote form to start with the details of your project."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this page mean ARK has a Fort Carson location?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The page describes the Fountain and south-corridor service area. It does not claim a Fort Carson location, base access, or military affiliation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I quote durable work shirts and event tees together?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Identify each garment group, artwork, quantity, and timing separately in the request."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What helps move a Fountain quote quickly?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A logo or artwork direction, garment preference, approximate quantity, print locations, and in-hands date are the most useful starting details."
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://arkscreenprinting.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Service Areas",
+          "item": "https://arkscreenprinting.com/service-areas"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Custom Screen Printing Fountain CO",
+          "item": "https://arkscreenprinting.com/screen-printing-fountain"
+        }
+      ]
+    }
+  ],
+  "hero": {
+    "eyebrow": "Fountain + Fort Carson corridor · Custom apparel",
+    "h1": "Custom Screen Printing Fountain CO",
+    "lead": [
+      "Custom screen printing Fountain CO for local business apparel, events, group orders, and merchandise. Send project details to ARK for a quote."
+    ],
+    "meta": "ARK is based in Colorado Springs and serves this area through a quote-first production workflow.",
+    "image": {
+      "src": "/images/local-cluster/fountain-fort-carson-hero.webp",
+      "alt": "Custom Screen Printing Fountain CO"
+    },
+    "caption": "Illustrative south-corridor and Fountain greenway visual direction; no military affiliation is implied."
+  },
+  "blocks": [
+    {
+      "kind": "cluster-section",
+      "variant": null,
+      "html": "<p class=\"kicker\">A focused Fountain apparel brief</p><h2>Custom apparel for Fountain and the south-corridor project</h2><p>Fountain custom-apparel requests can include local-business identity, community and family events, group shirts, practical staff garments, and new merchandise ideas. The key is to define the order around its real use instead of treating every shirt request the same way.</p><p>ARK is based in Colorado Springs and serves Fountain and the surrounding south corridor. The quote form is the place to share the design, garment, quantity, print locations, deadline, and any durability or hand-feel priorities.</p><figure><img src=\"/images/screen-printing-equipment-colorado-springs.jpg\" alt=\"Screen printer preparing a custom apparel screen at ARK\"><figcaption>Production planning starts with the garment, artwork, print locations, and schedule.</figcaption></figure>",
+      "faq": []
+    },
+    {
+      "kind": "cluster-section",
+      "variant": "soft",
+      "html": "<p class=\"kicker\">Local service without a made-up branch</p><h2>Three Fountain apparel projects to clarify early</h2><p>This page is for Fountain service requests. It does not claim a Fort Carson location, base access, military contract, or affiliation.</p><article><p class=\"kicker\">01 · EQUIP</p><h3>Business and field apparel</h3><p>Describe the working conditions, garment preferences, logo use, role variations, and reorder needs to create a dependable apparel program.</p></article> <article><p class=\"kicker\">02 · GATHER</p><h3>Events and group shirts</h3><p>A group order becomes easier to quote when the date, artwork, quantity, sizing, print locations, and distribution plan are available together.</p></article> <article><p class=\"kicker\">03 · INTRODUCE</p><h3>Merchandise and promotion</h3><p>For a branded product or campaign piece, include the intended audience, garment feel, design coverage, launch quantity, and visual goals.</p></article>",
+      "faq": []
+    },
+    {
+      "kind": "cluster-section",
+      "variant": "sand",
+      "html": "<p class=\"kicker\">Give the production plan enough context</p><h2>What to send in a Fountain custom-apparel request</h2><p>The correct print path depends on how the garments will be used, the artwork, the garment choice, and the amount of production required.</p><ul><li>Artwork or logo and desired garment use</li> <li>Garment type, color, and any durability needs</li> <li>Quantity, size range, and possible reorder needs</li> <li>Front, back, sleeve, or multiple placement details</li> <li>Needed-by date and fulfillment notes</li></ul><p class=\"kicker\">Quote-first workflow</p><h2>How a Fountain order is scoped</h2><ol><li>Send the project details through the quote form.</li> <li>ARK reviews the garment, art, quantity, and timeline requirements.</li> <li>The quote and proofing steps are set before production is scheduled.</li> <li>With approval, ARK produces the order in Colorado Springs and confirms fulfillment.</li></ol>",
+      "faq": []
+    },
+    {
+      "kind": "cluster-section",
+      "variant": null,
+      "html": "<figure><img src=\"/images/screen-printing-process-colorado-springs.jpg\" alt=\"Hands pulling a screen for a custom apparel print\"></figure><p class=\"kicker\">Choose the finish after the brief</p><h2>Pick a process based on the garment’s job</h2><p>A durable work piece, a vivid event shirt, a simple promo tee, and a detailed product graphic may need different methods. Screen printing, DTF, embroidery, water-based ink, and discharge are selected from the project brief rather than the city name.</p><p>Use the quote form to describe the project. These service pages can help you understand the production conversation before you submit it.</p><a href=\"/custom-silk-screen-printing\">Custom screen printing →</a> <a href=\"/dtf-printing-colorado-springs\">DTF printing →</a> <a href=\"/water-based-screen-printing\">Water-based printing →</a> <a href=\"/discharge-screen-printing\">Discharge printing →</a> <a href=\"/images/ark-art-requirements.pdf\">Artwork guidelines →</a><a href=\"/service-areas\">Colorado Springs area guide →</a><a href=\"/screen-printing-security-widefield\">Security-Widefield →</a> <a href=\"/screen-printing-broadmoor-colorado-springs\">Broadmoor →</a> <a href=\"/screen-printing-downtown-colorado-springs\">Downtown Colorado Springs →</a>",
+      "faq": []
+    },
+    {
+      "kind": "cluster-section",
+      "variant": "soft",
+      "html": "<p class=\"kicker\">Questions before you quote?</p><h2>Custom Screen Printing Fountain CO FAQ</h2><p>Short answers to the decisions that make a custom-apparel request easier to scope.</p>",
+      "faq": [
+        {
+          "q": "Does ARK serve Fountain custom-apparel projects?",
+          "a": "<p>Yes. ARK is based in Colorado Springs and serves Fountain. Use the quote form to start with the details of your project.</p>"
+        },
+        {
+          "q": "Does this page mean ARK has a Fort Carson location?",
+          "a": "<p>No. The page describes the Fountain and south-corridor service area. It does not claim a Fort Carson location, base access, or military affiliation.</p>"
+        },
+        {
+          "q": "Can I quote durable work shirts and event tees together?",
+          "a": "<p>Yes. Identify each garment group, artwork, quantity, and timing separately in the request.</p>"
+        },
+        {
+          "q": "What helps move a Fountain quote quickly?",
+          "a": "<p>A logo or artwork direction, garment preference, approximate quantity, print locations, and in-hands date are the most useful starting details.</p>"
+        }
+      ]
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Start your project"
+}

@@ -1,0 +1,64 @@
+{
+  "file": "custom-work-shirts.html",
+  "slug": "custom-work-shirts",
+  "title": "Custom Work Shirts | ARK Screen Printing",
+  "description": "Custom work shirts printed in-house with no middleman markup. Bulk pricing, fast turnaround, ships nationwide. Get a quote from ARK Screen Printing.",
+  "canonical": "https://arkscreenprinting.com/custom-work-shirts",
+  "robots": "noindex",
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Custom Work Shirt Screen Printing",
+      "provider": {
+        "@type": "Organization",
+        "name": "ARK Screen Printing Studio",
+        "telephone": "(719) 280-2638",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Colorado Springs",
+          "addressRegion": "CO",
+          "addressCountry": "US"
+        }
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "United States"
+      },
+      "description": "Custom work shirts printed in-house with no middleman markup. Bulk pricing, fast turnaround, ships nationwide."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://arkscreenprinting.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Custom Work Shirts"
+        }
+      ]
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Custom Work Shirts",
+    "lead": [
+      "Printed in-house, shipped anywhere in the US. No contract printers, no middleman markup — most orders ship within 5–7 business days."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/custom-work-shirt-logo-print.jpg",
+      "alt": "Custom work shirts with company logo — screen printed in-house by ARK Screen Printing"
+    },
+    "caption": null
+  },
+  "blocks": [],
+  "areas": null,
+  "quoteIntro": null
+}

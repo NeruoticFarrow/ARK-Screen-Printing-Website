@@ -1,0 +1,82 @@
+{
+  "file": "screen-printing-calhan.html",
+  "slug": "screen-printing-calhan",
+  "title": "Screen Printing Calhan CO | ARK Screen Printing",
+  "description": "Screen printing Calhan, CO: custom t-shirts, uniforms, and branded apparel from ARK Screen Printing. No minimums, done in-house.",
+  "canonical": "https://arkscreenprinting.com/screen-printing-calhan",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ARK Screen Printing Studio - Calhan",
+      "image": "https://arkscreenprinting.com/images/ark prototype.png",
+      "url": "https://arkscreenprinting.com/screen-printing-calhan",
+      "telephone": "(719) 280-2638",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Colorado Springs",
+        "addressLocality": "Colorado Springs",
+        "addressRegion": "CO",
+        "postalCode": "80922",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Calhan, CO"
+      },
+      "description": "Expert custom screen printing and embroidery services for businesses, organizations, and events in Calhan, CO. We specialize in custom t-shirts, workwear, and community apparel.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Screen Printing Services for Calhan",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom T-Shirts & Apparel in Calhan"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Workwear & Uniforms in Calhan"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Community Event Apparel in Calhan"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Screen Printing Calhan CO",
+    "lead": [
+      "Screen printing Calhan CO — ARK serves local businesses, teams, schools, and organizations with custom apparel, all printed in-house."
+    ],
+    "meta": null,
+    "image": {
+      "src": "/images/Paint-Mines-Calhan.jpg",
+      "alt": "Calhan Colorado - ARK Screen Printing serves Calhan"
+    },
+    "caption": null
+  },
+  "blocks": [
+    {
+      "kind": "local-content",
+      "variant": null,
+      "html": "<h2>Custom Screen Printing for Calhan's Prairie Community</h2> <p>Calhan is a small agricultural town on Colorado's eastern plains — about 1,500 residents in El Paso County's open northeast, where ranching, dryland farming, and wide-sky views define the landscape. It's the kind of community where rodeo tees, volunteer fire department apparel, and school spirit wear matter as much as any corporate order. <a href=\"/dtf-printing-colorado-springs\">DTF printing</a> with no minimum order is a natural fit here — one-off custom pieces for small community events or individual requests are handled without fuss.</p> <p>Calhan School District RJ-1 is the heart of the community — a small district where the high school's athletic teams and extracurricular programs are central to community life. Calhan High School Eagles bring the town together for sports seasons, and custom spirit wear is a meaningful part of that tradition. We're about 35 miles west in Colorado Springs and offer online ordering and direct shipping to Calhan.</p> <article> <article> <h3>Prairie community</h3> <p>Custom apparel for Calhan's ranching families, agricultural businesses, and small-town events.</p> </article> <article> <h3>Calhan Eagles</h3> <p>Spirit wear and team gear for Calhan High School's athletic programs and school community.</p> </article> <article> <h3>No minimums</h3> <p>DTF from just one piece — perfect for small rural orders without a large-order commitment.</p> </article> </article>",
+      "faq": []
+    }
+  ],
+  "areas": null,
+  "quoteIntro": "Fill out the form below for a fast, accurate quote on your Calhan screen printing project."
+}

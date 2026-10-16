@@ -1,0 +1,40 @@
+{
+  "file": "testimonials.html",
+  "slug": "testimonials",
+  "title": "Testimonials | ARK Screen Printing",
+  "description": "Read customer reviews and testimonials for ARK Screen Printing. See why Colorado Springs trusts us for custom screen printing services.",
+  "canonical": "https://arkscreenprinting.com/testimonials",
+  "robots": null,
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://arkscreenprinting.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Testimonials"
+        }
+      ]
+    }
+  ],
+  "hero": {
+    "eyebrow": null,
+    "h1": "Customer Testimonials",
+    "lead": [
+      "See what our customers say about ARK Screen Printing's quality and service"
+    ],
+    "meta": null,
+    "image": null,
+    "caption": null
+  },
+  "blocks": [],
+  "areas": null,
+  "quoteIntro": null
+}
