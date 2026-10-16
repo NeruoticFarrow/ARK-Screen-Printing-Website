@@ -1,10 +1,10 @@
 import { FACTS, SERVICES, SHOP } from "../lib/facts.mjs";
 import { icon } from "../lib/icons.mjs";
 import {
-  areasList, ctaBand, faqList, localStrip, offerTile, proofSection, quoteBand, rulesTile, sectionHead, stepsList, textLink, ctaRow,
+  areasList, audienceStrip, ctaBand, faqList, localStrip, offerTile, proofSection, quoteBand, rulesTile, sectionHead, stepsList, textLink, ctaRow,
 } from "../lib/components.mjs";
 import { PPC_PAGES, SERVICE_PAGES } from "../content/services.mjs";
-import { abs, migratedBlocks, pageHero, pageJsonLd, pointsSection, usesSection } from "./parts.mjs";
+import { abs, migratedBlocks, pageHero, pageJsonLd, pointsSection } from "./parts.mjs";
 
 // Service pages (custom shirts, hoodies, embroidery, hats, screen printing,
 // DTF, the hub and the comparison) and the paid-search pages (minimal chrome,
@@ -30,7 +30,7 @@ export function renderService(ctx) {
   });
   const strip = `<section class="section--tight"><div class="container">${localStrip("service_strip")}</div></section>` + offerTile("service_offer", { onPage: true });
   const points = own.points ? pointsSection(withIcons(own.points)) : "";
-  const uses = own.uses ? usesSection(own.uses) : "";
+  const uses = own.uses ? audienceStrip() : "";
   const blocks = migratedBlocks(page.blocks, { startSand: !!own.points });
   const rules = `<section class="section"><div class="container">${rulesTile("rules-title", { onPage: true })}</div></section>`;
   const how = `<section class="section section--sand" aria-labelledby="how-title"><div class="container">
@@ -59,7 +59,7 @@ export function renderService(ctx) {
     hasQuote: true,
     page: page.slug,
     jsonLd: pageJsonLd(page, faqItems),
-    main: hero + strip + points + uses + (points ? ctaBand("after_points", { onPage: true }) : "") + blocks + (page.blocks.length ? ctaBand("after_content", { onPage: true, title: "Want a price for this?" }) : "") + rules + how + proof + faq + areas + quote,
+    main: hero + strip + points + uses + (points && page.blocks.length ? ctaBand("after_points", { onPage: true }) : "") + blocks + rules + how + proof + faq + areas + quote,
   };
 }
 
@@ -72,7 +72,7 @@ export function renderPpc(ctx) {
   const hero = pageHero({ h1: page.hero?.h1 ?? page.title, lead: page.hero?.lead?.[0], photo, onPage: true });
   const strip = `<section class="section--tight"><div class="container">${localStrip("ppc_strip")}</div></section>` + offerTile("ppc_offer", { onPage: true });
   const points = pointsSection(withIcons(pointsData), "Why order from *ARK*.");
-  const uses = usesSection(cfg.uses ?? svc.uses);
+  const uses = audienceStrip();
   const proof = `<section class="section section--sand" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What customers *say*.", { onPage: true })}</div></section>`;
   const rules = `<section class="section"><div class="container">${rulesTile("rules-title", { onPage: true })}</div></section>`;
   const how = `<section class="section section--sand" aria-labelledby="how-title"><div class="container">

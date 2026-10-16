@@ -275,6 +275,6 @@ export function renderFundraising() {
     hasQuote: true,
     page: slug,
     jsonLd: serviceLd("Fundraiser shirts", description, slug) + breadcrumbLd("Fundraisers", slug) + faqJsonLd(FUNDRAISING_FAQ),
-    main: hero + strip + who + ways + timeline + ctaBand("fund_band", { onPage: true, title: "Planning a fundraiser?" }) + rules + proof + faq + quote,
+    main: hero + strip + who + ways + timeline + rules + proof + faq + quote,
   };
 }

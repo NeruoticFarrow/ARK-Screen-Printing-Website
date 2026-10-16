@@ -1,5 +1,5 @@
 import { SHOP } from "../lib/facts.mjs";
-import { areasList, ctaBand, localStrip, offerTile, proofSection, quoteBand, rulesTile, sectionHead, stepsList, textLink } from "../lib/components.mjs";
+import { areasList, localStrip, offerTile, proofSection, quoteBand, rulesTile, sectionHead, stepsList, textLink } from "../lib/components.mjs";
 import { abs, migratedBlocks, pageHero, pageJsonLd } from "./parts.mjs";
 
 // Local landing pages (knowledge base chapter 25 §11.3, 12 §4.5): the page's
@@ -44,6 +44,6 @@ export function renderLocal(ctx) {
     hasQuote: true,
     page: page.slug,
     jsonLd: pageJsonLd(page),
-    main: hero + strip + blocks + ctaBand("after_content", { onPage: true, title: `Printing for ${area.name}?` }) + rules + how + proof + nearby + quote,
+    main: hero + strip + blocks + rules + how + proof + nearby + quote,
   };
 }
