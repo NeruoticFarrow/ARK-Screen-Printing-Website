@@ -47,7 +47,10 @@ export const SHOP = {
   cityLine: "Colorado Springs, CO 80922",
   /** index.html footer and LocalBusiness schema. */
   hours: "Monday – Sunday, 7:30am – 7pm",
-  mapsUrl: "https://maps.app.goo.gl/ncwEPkwtvKs4gBBY8",
+  /** The shop on Google Maps (its Place ID). The old maps.app.goo.gl short
+   *  link was a share of one review (Jessi Wood’s), so every map and rating
+   *  link opened that review (owner, 2026-10-16). */
+  mapsUrl: "https://www.google.com/maps/search/?api=1&query=ARK+Screen+Printing&query_place_id=ChIJkatxyWHhgIAR2dfD8Cm-yz4",
   /** index.html credentials section and about.html. */
   since: 2024,
   geo: { latitude: 38.8339, longitude: -104.8214 },
@@ -112,7 +115,8 @@ const live = gbpData();
 export const GOOGLE = {
   rating: live?.rating ?? 5,
   count: live?.count ?? 10,
-  url: SHOP.mapsUrl,
+  /** Every review on Google: the rating badges and "Read all reviews". */
+  url: "https://search.google.com/local/reviews?placeid=ChIJkatxyWHhgIAR2dfD8Cm-yz4",
   /** Google's "write a review" page for the shop (its Place ID). */
   writeReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJkatxyWHhgIAR2dfD8Cm-yz4",
   checked: live ? live.fetchedAt.slice(0, 10) : "2026-10-13",
