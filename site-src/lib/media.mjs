@@ -26,5 +26,9 @@ export const PHOTOS = {
   owner: { src: "/images/alexander_kinnaman_portrait.jpg", alt: "Alex Kinnaman, owner and printer at ARK Screen Printing" },
 };
 
-/** Images the gallery and proof sections show, in order. */
-export const WORK = ["/images/gallery/img_0563.jpg", "/images/gallery/img_0113.jpg", "/images/gallery/img_0230.jpg", "/images/img_0769.jpg", "/images/gallery/img_0114.jpg", "/images/gallery/img_0783.jpg", "/images/gallery-img-0305.jpg", "/images/img_0351.jpg"];
+/** Images the gallery and proof sections show, in order; the home and About
+ *  galleries show the first six. Owner, 2026-10-16: the Alan Walker Red
+ *  Rocks tee, the Starmaker print and the USAF Academy Prep crest in; the
+ *  "Stronger Together" and "100% Homeschooled" tees, the Red Feather work
+ *  shirt and the USAF Prep left-chest and boxed-order photos out. */
+export const WORK = ["/images/gallery/img_0563.jpg", "/images/gallery/alan-walker-red-rocks-tee.webp", "/images/gallery/img_0230.jpg", "/images/gallery/starmaker-tee-print.webp", "/images/gallery/img_0114.jpg", "/images/gallery/usafa-prep-crest-print.webp", "/images/gallery-img-0305.jpg", "/images/img_0351.jpg"];

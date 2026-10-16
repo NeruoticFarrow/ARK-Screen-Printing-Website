@@ -1,4 +1,3 @@
-import fs from "node:fs";
 import { APP, FACTS, SHOP, SITE } from "../lib/facts.mjs";
 import { esc, ldScript } from "../lib/html.mjs";
 import { icon } from "../lib/icons.mjs";
@@ -24,16 +23,6 @@ export const HOME_FAQ = [
   { q: "Is local pickup available?", a: [`Yes — ${FACTS.pickup.toLowerCase()} in ${SHOP.city}, or we'll ship your order anywhere in the US.`] },
   { q: "How fast is it?", a: [`Your price shows as you fill in the form, your free mockup follows in ${FACTS.mockupWithin} (${FACTS.replyHours}), and once you approve it and pay, we start your order ${FACTS.printStart} — ${FACTS.sameDayWork}. Most screen-print orders are ready in ${FACTS.turnaround.screen}.`] },
 ];
-
-const GALLERY = JSON.parse(fs.readFileSync(new URL("../content/gallery.json", import.meta.url), "utf8"));
-/** The home gallery's work: the curated list, with the recent USAF Academy
- *  Prep School order in place of the "Stronger Together" and "100%
- *  Homeschooled" shirts (owner, 2026-10-16). */
-const HOME_SWAPS = {
-  "/images/gallery/img_0113.jpg": "/images/gallery/usafa-prep-left-chest.webp",
-  "/images/gallery/img_0783.jpg": "/images/gallery/usafa-prep-order-boxed.webp",
-};
-const HOME_WORK = WORK.map((src) => (HOME_SWAPS[src] ? GALLERY.find((g) => g.src === HOME_SWAPS[src]) ?? { src: HOME_SWAPS[src], alt: "" } : src));
 
 export function renderHome(ctx) {
   const hero = `<section class="hero" aria-labelledby="hero-title"><div class="container hero-grid">
@@ -72,7 +61,7 @@ export function renderHome(ctx) {
 
   const work = `<section class="section" aria-labelledby="work-title"><div class="container">
   ${sectionHead("work-title", "Printed in our shop, not a *warehouse*.", "Real orders from our presses.", { aside: textLink("/gallery", "See more of our work", "work_gallery") })}
-  <div class="doodled">${doodle("strokes", "section-doodle section-doodle--strokes", " data-appear")}${galleryGrid(recentWork(HOME_WORK, 6))}</div>
+  <div class="doodled">${doodle("strokes", "section-doodle section-doodle--strokes", " data-appear")}${galleryGrid(recentWork(WORK, 6))}</div>
 </div></section>`;
 
   const groups = `<section class="section section--sand" aria-labelledby="groups-title"><div class="container">

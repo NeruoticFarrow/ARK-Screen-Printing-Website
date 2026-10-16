@@ -177,6 +177,36 @@
       }
     ]
   },
+  "/images/gallery/alan-walker-red-rocks-tee.webp": {
+    "original": "/images/gallery/alan-walker-red-rocks-tee.webp",
+    "width": 1500,
+    "height": 2000,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-alan-walker-red-rocks-tee-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-alan-walker-red-rocks-tee-960.webp"
+      }
+    ]
+  },
+  "/images/gallery/starmaker-tee-print.webp": {
+    "original": "/images/gallery/starmaker-tee-print.webp",
+    "width": 1125,
+    "height": 1500,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-starmaker-tee-print-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-starmaker-tee-print-960.webp"
+      }
+    ]
+  },
   "/images/gallery/img_0114.jpg": {
     "original": "/images/gallery/img_0114.jpg",
     "width": 3024,
@@ -196,22 +226,18 @@
       }
     ]
   },
-  "/images/gallery/img_0783.jpg": {
-    "original": "/images/gallery/img_0783.jpg",
-    "width": 3024,
-    "height": 4032,
+  "/images/gallery/usafa-prep-crest-print.webp": {
+    "original": "/images/gallery/usafa-prep-crest-print.webp",
+    "width": 1593,
+    "height": 2000,
     "variants": [
       {
         "width": 480,
-        "file": "/assets/img/gallery-img-0783-480.webp"
+        "file": "/assets/img/gallery-usafa-prep-crest-print-480.webp"
       },
       {
         "width": 960,
-        "file": "/assets/img/gallery-img-0783-960.webp"
-      },
-      {
-        "width": 1600,
-        "file": "/assets/img/gallery-img-0783-1600.webp"
+        "file": "/assets/img/gallery-usafa-prep-crest-print-960.webp"
       }
     ]
   },
@@ -628,6 +654,25 @@
       {
         "width": 1600,
         "file": "/assets/img/gallery-img-0770-1600.webp"
+      }
+    ]
+  },
+  "/images/gallery/img_0783.jpg": {
+    "original": "/images/gallery/img_0783.jpg",
+    "width": 3024,
+    "height": 4032,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-img-0783-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-img-0783-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/gallery-img-0783-1600.webp"
       }
     ]
   },
@@ -1449,36 +1494,6 @@
       }
     ]
   },
-  "/images/gallery/starmaker-tee-print.webp": {
-    "original": "/images/gallery/starmaker-tee-print.webp",
-    "width": 1125,
-    "height": 1500,
-    "variants": [
-      {
-        "width": 480,
-        "file": "/assets/img/gallery-starmaker-tee-print-480.webp"
-      },
-      {
-        "width": 960,
-        "file": "/assets/img/gallery-starmaker-tee-print-960.webp"
-      }
-    ]
-  },
-  "/images/gallery/usafa-prep-crest-print.webp": {
-    "original": "/images/gallery/usafa-prep-crest-print.webp",
-    "width": 1593,
-    "height": 2000,
-    "variants": [
-      {
-        "width": 480,
-        "file": "/assets/img/gallery-usafa-prep-crest-print-480.webp"
-      },
-      {
-        "width": 960,
-        "file": "/assets/img/gallery-usafa-prep-crest-print-960.webp"
-      }
-    ]
-  },
   "/images/gallery/hsso-soccer-crest-print.webp": {
     "original": "/images/gallery/hsso-soccer-crest-print.webp",
     "width": 1500,
@@ -1536,21 +1551,6 @@
       {
         "width": 960,
         "file": "/assets/img/gallery-giro-di-california-badge-960.webp"
-      }
-    ]
-  },
-  "/images/gallery/alan-walker-red-rocks-tee.webp": {
-    "original": "/images/gallery/alan-walker-red-rocks-tee.webp",
-    "width": 1500,
-    "height": 2000,
-    "variants": [
-      {
-        "width": 480,
-        "file": "/assets/img/gallery-alan-walker-red-rocks-tee-480.webp"
-      },
-      {
-        "width": 960,
-        "file": "/assets/img/gallery-alan-walker-red-rocks-tee-960.webp"
       }
     ]
   },

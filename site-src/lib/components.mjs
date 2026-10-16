@@ -319,11 +319,14 @@ const CATEGORY_ALT = {
  *  caption or, failing that, by its Google category. */
 const gbpItem = (p) => ({ src: p.src, alt: p.alt || CATEGORY_ALT[p.category] || "Recent work from ARK Screen Printing" });
 
+/** The gallery's descriptions, for curated photos given by path alone. */
+const GALLERY_ALT = new Map(JSON.parse(fs.readFileSync(new URL("../content/gallery.json", import.meta.url), "utf8")).map((g) => [g.src, g.alt]));
+
 /** Real work: the newest Business Profile photos first (when synced), then
  *  the curated photos, without repeats. */
 export function recentWork(curated, n = Infinity) {
   const seen = new Set();
-  return [...GBP_PHOTOS.map(gbpItem), ...curated.map((c) => (typeof c === "string" ? { src: c, alt: "" } : c))]
+  return [...GBP_PHOTOS.map(gbpItem), ...curated.map((c) => (typeof c === "string" ? { src: c, alt: GALLERY_ALT.get(c) ?? "" } : c))]
     .filter((it) => !seen.has(it.src) && seen.add(it.src))
     .slice(0, n);
 }

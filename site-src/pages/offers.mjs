@@ -67,12 +67,16 @@ export const POD_FAQ = [
   { q: "Would a bulk order suit me better?", a: [`If you'd rather buy upfront — for an event, a team or staff — a bulk order gives the lowest price per shirt (screen printing from ${FACTS.screenFrom}). <a href="/get-a-quote#quote">Price a bulk order</a>.`] },
 ];
 
-/** Real prints for the page's gallery (described; the hero's deck is decoration). */
+/** Real prints for the page's gallery (described; the hero's deck is
+ *  decoration). The Alan Walker Red Rocks tee and the USAF Academy Prep crest
+ *  were added by the owner, 2026-10-16. */
 const POD_WORK = [
   "/images/gallery/awaken-camp-tee-on-press.webp",
   "/images/gallery/starmaker-tee-print.webp",
+  "/images/gallery/alan-walker-red-rocks-tee.webp",
   "/images/gallery/loac-tee-back.webp",
   "/images/gallery/hsso-soccer-crest-print.webp",
+  "/images/gallery/usafa-prep-crest-print.webp",
   "/images/gallery/team-powers-quarter-zip-print.webp",
   "/images/gallery/giro-di-california-badge.webp",
 ];
