@@ -47,7 +47,10 @@ export const SHOP = {
   cityLine: "Colorado Springs, CO 80922",
   /** index.html footer and LocalBusiness schema. */
   hours: "Monday – Sunday, 7:30am – 7pm",
-  mapsUrl: "https://maps.app.goo.gl/ncwEPkwtvKs4gBBY8",
+  /** The shop on Google Maps (its Place ID). The old maps.app.goo.gl short
+   *  link was a share of one review (Jessi Wood’s), so every map and rating
+   *  link opened that review (owner, 2026-10-16). */
+  mapsUrl: "https://www.google.com/maps/search/?api=1&query=ARK+Screen+Printing&query_place_id=ChIJkatxyWHhgIAR2dfD8Cm-yz4",
   /** index.html credentials section and about.html. */
   since: 2024,
   geo: { latitude: 38.8339, longitude: -104.8214 },
@@ -69,21 +72,12 @@ export const FACTS = {
     /** custom-hats-colorado-springs.html. */
     rush: "Rush orders in as little as a week — ask first",
   },
-  /** Owner, 2026-10-15 (was "24 hours" on thank-you.html). */
-  replyWithin: "ten minutes",
-  /** Said beside the reply promise where there's room. */
-  replyHours: "7:30am–7pm Mountain Time, every day",
-  /** Owner, 2026-10-15: the proof follows moments after we're in touch, and
-   *  printing can begin the same day it's approved. */
+  /** Owner, 2026-10-17: free digital mockups are the response promise. */
+  mockupWithin: "10 minutes",
+  mockupPromise: "Your free digital mockup will be ready within 10 minutes of confirming the details with you—no commitment required.",
+  /** The proof comes before production, and printing can begin the same day
+   *  it is approved. */
   proofSpeed: "moments later",
-  /** The lead offer (owner, 2026-10-15): a free mockup of the customer's
-   *  design, no obligation, usually within about 10 minutes in business hours.
-   *  The secondary: free artwork cleanup. No discount offer. */
-  mockupWithin: "about 10 minutes",
-  /** Owner, 2026-10-16: after the quote form, a call within five minutes;
-   *  the free mockup follows ten minutes after that call. */
-  callWithin: "5 minutes",
-  mockupAfterCall: "ten minutes",
   printStart: "the same day",
   /** Owner, 2026-10-16: what "starts the same day" means — the work begins
    *  that day, the order isn't printed that day. */
@@ -112,7 +106,8 @@ const live = gbpData();
 export const GOOGLE = {
   rating: live?.rating ?? 5,
   count: live?.count ?? 10,
-  url: SHOP.mapsUrl,
+  /** Every review on Google: the rating badges and "Read all reviews". */
+  url: "https://search.google.com/local/reviews?placeid=ChIJkatxyWHhgIAR2dfD8Cm-yz4",
   /** Google's "write a review" page for the shop (its Place ID). */
   writeReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJkatxyWHhgIAR2dfD8Cm-yz4",
   checked: live ? live.fetchedAt.slice(0, 10) : "2026-10-13",

@@ -37,7 +37,7 @@ export function quoteButton(placement, o = {}) {
 }
 
 export function callButton(placement, o = {}) {
-  return `<a class="btn btn--ghost btn--lg" href="${esc(SHOP.phoneHref)}" data-cta="${esc(placement)}">${icon("phone")}${esc(o.label ?? `Call or text ${SHOP.phoneDisplay}`)}</a>`;
+  return `<a class="btn btn--ghost btn--lg" href="${esc(SHOP.smsHref)}" data-cta="${esc(placement)}">${icon("chatCircleText")}${esc(o.label ?? `Text ${SHOP.phoneDisplay} (preferred)`)}</a>`;
 }
 
 export function ctaRow(placement, o = {}) {
@@ -49,7 +49,7 @@ export function reassure(lines) {
 }
 
 /** The risk reducers under every primary CTA — each one true (facts.mjs). */
-export const REASSURANCE = [`Free mockup in ${FACTS.mockupWithin}`, "Free artwork cleanup", "No obligation · no minimum order"];
+export const REASSURANCE = [`Free digital mockup within ${FACTS.mockupWithin} of confirming details`, "Free artwork cleanup", "No commitment required"];
 
 /** The lead offer as a colour-block tile: the free mockup first, free
  *  artwork cleanup second, one action. */
@@ -57,11 +57,11 @@ export function offerTile(placement, o = {}) {
   return `<section class="section--tight" aria-labelledby="${esc(placement)}-title"><div class="container"><div class="offer" data-appear>
   <div class="offer-main">
     <p class="kicker">Free · no obligation</p>
-    <h2 id="${esc(placement)}-title" class="h3">${accent(`See your design on the shirt in *${FACTS.mockupWithin}*.`)}</h2>
-    <p>Send your logo or idea and we'll send back a free mockup of it on your garment — usually within ${esc(FACTS.mockupWithin)} (${esc(FACTS.replyHours)}). No obligation to order.</p>
+    <h2 id="${esc(placement)}-title" class="h3">${accent(`See your design on the shirt within *${FACTS.mockupWithin}* of confirming details.`)}</h2>
+    <p>Send your logo or idea. ${esc(FACTS.mockupPromise)}</p>
   </div>
   <ul class="offer-list">
-    <li>${icon("image")}<span><b>Free mockup</b><small>Your design on the real garment, in ${esc(FACTS.mockupWithin)}.</small></span></li>
+    <li>${icon("image")}<span><b>Free digital mockup</b><small>Your design on the real garment within ${esc(FACTS.mockupWithin)} of confirming the details with you — no commitment required.</small></span></li>
     <li>${icon("paintBrush")}<span><b>Free artwork cleanup</b><small>A sketch, a photo, a rough logo — we'll clean it up free.</small></span></li>
   </ul>
   <div class="offer-cta">${quoteButton(placement, { onPage: o.onPage, label: "Get My Free Mockup" })}</div>
@@ -72,8 +72,8 @@ export function offerTile(placement, o = {}) {
  *  one action: after proof, after the offer, after the page's own content). */
 export function ctaBand(placement, o = {}) {
   return `<section class="section--tight" aria-label="${esc(o.label ?? "See Your Price Instantly")}"><div class="container"><div class="cta-band" data-appear>
-  <p><b>${esc(o.title ?? "Ready when you are.")}</b> ${esc(o.text ?? `See your price as you go, get a free mockup in ${FACTS.mockupWithin} (${FACTS.replyHours}), and we start your order ${FACTS.printStart}.`)}</p>
-  <div class="cta-band-actions">${quoteButton(placement, { onPage: o.onPage, label: o.label })}<a class="text-link" href="${esc(SHOP.phoneHref)}" data-cta="${esc(placement)}_call">${icon("phone")}Call or text ${esc(SHOP.phoneDisplay)}</a></div>
+  <p><b>${esc(o.title ?? "Ready when you are.")}</b> ${esc(o.text ?? `See your price as you go. ${FACTS.mockupPromise} We start your order ${FACTS.printStart} once you approve the proof and pay the invoice.`)}</p>
+  <div class="cta-band-actions">${quoteButton(placement, { onPage: o.onPage, label: o.label })}<a class="text-link" href="${esc(SHOP.smsHref)}" data-cta="${esc(placement)}_text">${icon("chatCircleText")}Text ${esc(SHOP.phoneDisplay)} (preferred)</a></div>
 </div></div></section>`;
 }
 
@@ -92,7 +92,7 @@ export function localStrip(placement = "strip") {
   return `<div class="local-strip">
   <span>${icon("mapPin")}<a href="${esc(SHOP.mapsUrl)}" target="_blank" rel="noopener" data-cta="${esc(placement)}_map">${esc(SHOP.cityLine)}<span class="visually-hidden"> (opens Google Maps)</span></a></span>
   <span>${icon("clock")}${esc(SHOP.hours)}</span>
-  <span>${icon("phone")}<a href="${esc(SHOP.phoneHref)}" data-cta="${esc(placement)}_call">Call</a> or <a href="${esc(SHOP.smsHref)}" data-cta="${esc(placement)}_text">text</a> ${esc(SHOP.phoneDisplay)}</span>
+  <span>${icon("chatCircleText")}<a href="${esc(SHOP.smsHref)}" data-cta="${esc(placement)}_text">Text ${esc(SHOP.phoneDisplay)} (preferred)</a> or <a href="${esc(SHOP.phoneHref)}" data-cta="${esc(placement)}_call">call</a></span>
 </div>`;
 }
 
@@ -103,6 +103,12 @@ const DOODLES = {
   strokes: `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" focusable="false"><path pathLength="1" d="M16 48 56 14"/><path pathLength="1" d="M22 68 74 26"/><path pathLength="1" d="M36 84 86 44"/></svg>`,
 };
 const capitalise = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+/** "We print for": the scrolling audience strip, the same on every page that
+ *  shows one (owner, 2026-10-16) — the home page's, with its 25 audiences. */
+export function audienceStrip() {
+  return `<section class="section--tight"><div class="container">${ticker("We print for", HOME_AUDIENCES)}</div></section>`;
+}
 
 export function swash(word) {
   return `<em class="accent swash">${esc(word)}<svg class="swash-line" viewBox="0 0 120 16" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path pathLength="1" d="M4 11C36 4 80 3 116 9"/></svg></em>`;
@@ -128,7 +134,7 @@ function orderCard() {
   <span class="oc-title">How your order goes <span class="badge badge--sky">4 steps</span></span>
   <ol>
     <li>${icon("lightning")}<span><b>Your price</b> — instantly</span></li>
-    <li>${icon("image")}<span><b>Free mockup</b> — about 10 min, 7:30am–7pm</span></li>
+    <li>${icon("image")}<span><b>Free digital mockup</b> — within 10 min of confirming details</span></li>
     <li>${icon("sealCheck")}<span><b>Approve it</b> — no obligation till then</span></li>
     <li>${icon("printer")}<span><b>We start</b> — the same day</span></li>
   </ol>
@@ -170,7 +176,7 @@ export function rulesTile(id = "rules-title", o = {}) {
   const stats = [
     { figure: "1+", label: "shirts: no minimum order (DTF, full colour)" },
     { figure: `${FACTS.screenFrom}+`, label: "shirts: screen printing" },
-    { figure: "10 min", label: "a reply, 7:30am–7pm every day" },
+    { figure: "10 min", label: "free digital mockup after confirming details" },
     { figure: "Same day", label: "we start your order once you approve the proof" },
   ];
   return `<div class="tile tile--navy on-dark" data-appear>
@@ -190,8 +196,8 @@ export function rulesTile(id = "rules-title", o = {}) {
  *  confirm (a call, or an email if we miss you) → you approve the proof →
  *  we invoice and print. The proof comes before anything is printed. */
 export const PROCESS = [
-  { title: "See your price instantly", text: "Pick the garment, the quantity and where it's printed — the form shows your price as you go. About two minutes, or call or text and talk it through." },
-  { title: `Your free mockup in ${FACTS.mockupWithin}`, text: `We're in touch within ${FACTS.replyWithin} (${FACTS.replyHours}) with a free mockup of your design on the garment — no obligation. Rough artwork? We'll clean it up free.` },
+  { title: "See your price instantly", text: "Pick the garment, the quantity and where it's printed — the form shows your price as you go. About two minutes. Prefer to talk it through? Text us." },
+  { title: `Your free digital mockup within ${FACTS.mockupWithin} of confirming details`, text: `${FACTS.mockupPromise} Rough artwork? We'll clean it up free.` },
   { title: "Approve it, then pay", text: "Tweak the mockup until it's right. Nothing is printed until you approve it and pay the invoice." },
   { title: "We start the same day", text: `Approve the proof and pay the invoice, and we start your order the same day — ${FACTS.sameDayWork}. Most screen-print orders are ready in ${FACTS.turnaround.screen}. ${FACTS.pickup}, or we ship anywhere in the US.` },
 ];
@@ -297,7 +303,7 @@ export function ownerSection(id, o = {}) {
   <div>
     <p class="kicker">Meet the printer</p>
     <h2 id="${esc(id)}" class="h2">${accent(o.title ?? "Real people, *real* presses.")}</h2>
-    <p class="lead" style="margin-top:18px">ARK is a small, owner-run print shop in ${esc(SHOP.city)}. Call, text or send a quote and a real person at ARK answers — not a call centre — and keeps your order on track from mockup to pickup. ${esc(SHOP.owner)}, the owner, has pulled the prints since ${SHOP.since}.</p>
+    <p class="lead" style="margin-top:18px">ARK is a small, owner-run print shop in ${esc(SHOP.city)}. Text, call or share your project details and a real person at ARK answers — not a call centre — and keeps your order on track from mockup to pickup. ${esc(SHOP.owner)}, the owner, has pulled the prints since ${SHOP.since}.</p>
     <ul class="checklist" style="margin-top:22px">
       <li>${icon("sealCheck")}<span><b>Licensed and insured</b><small>A fully licensed Colorado business with liability insurance.</small></span></li>
       <li>${icon("palette")}<span><b>Premium inks</b><small>${esc(FACTS.inks)}.</small></span></li>
@@ -397,16 +403,16 @@ export function quoteBand(o = {}) {
   <div class="quote-band">
     <div class="quote-next">
       <h2 id="quote-title" class="h2">${accent(o.title ?? "See your live *price*.")}</h2>
-      <p class="lead">${esc(o.intro ?? `Tell us the garment, the quantity, your artwork and your date. Your price shows as you go. Send it, and we'll call you within ${FACTS.callWithin} to go over it; ${FACTS.mockupAfterCall} after that call, your free mockup is in your inbox.`)}</p>
+      <p class="lead">${esc(o.intro ?? `Tell us the garment, the quantity, your artwork and your date. Your price shows as you go. ${FACTS.mockupPromise}`)}</p>
       <ul class="checklist">
-        <li>${icon("phone")}<span><b>A call within ${esc(FACTS.callWithin)}</b><small>A real person at ARK — not a call centre — to confirm the details (${esc(FACTS.replyHours)}).</small></span></li>
-        <li>${icon("image")}<span><b>Your free mockup ${esc(FACTS.mockupAfterCall)} later</b><small>Your design on the garment, ${esc(FACTS.mockupAfterCall)} after we hang up — no obligation.</small></span></li>
+        <li>${icon("lightning")}<span><b>Your price, live</b><small>Pick the garment, quantity and print details to see the price as you go.</small></span></li>
+        <li>${icon("image")}<span><b>Free digital mockup within ${esc(FACTS.mockupWithin)} of confirming details</b><small>Your design on the garment — no commitment required.</small></span></li>
         <li>${icon("paintBrush")}<span><b>Free artwork cleanup</b><small>Send whatever you have — a sketch, a photo, a rough logo.</small></span></li>
         <li>${icon("printer")}<span><b>We start the same day</b><small>${esc(capitalise(FACTS.sameDayWork))} — most orders are ready in ${esc(FACTS.turnaround.screen)}. ${esc(FACTS.pickup)}, or we ship anywhere in the US.</small></span></li>
       </ul>
-      <div class="quote-alt"><b>Rather talk it through?</b><a href="${esc(SHOP.phoneHref)}" data-cta="quote_call">Call</a> or <a href="${esc(SHOP.smsHref)}" data-cta="quote_text">text</a> ${esc(SHOP.phoneDisplay)} — ${esc(SHOP.hours)}. We reply within ${esc(FACTS.replyWithin)}.</div>
+      <div class="quote-alt"><b>Rather talk it through?</b><a href="${esc(SHOP.smsHref)}" data-cta="quote_text">Text ${esc(SHOP.phoneDisplay)} (preferred)</a> or <a href="${esc(SHOP.phoneHref)}" data-cta="quote_call">call</a> — ${esc(SHOP.hours)}.</div>
     </div>
-    <div class="quote-frame"><iframe src="${esc(SITE.quoteEmbed)}" title="ARK quote form" data-quote-frame ${o.eager ? "" : 'loading="lazy" '}allow="clipboard-write"></iframe></div>
+    <div class="quote-frame"><iframe src="${esc(SITE.quoteEmbed)}" title="ARK instant price form" data-quote-frame ${o.eager ? "" : 'loading="lazy" '}allow="clipboard-write"></iframe></div>
   </div>
 </div></section>`;
 }

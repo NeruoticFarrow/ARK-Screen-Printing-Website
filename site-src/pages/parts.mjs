@@ -19,7 +19,7 @@ export function pageHero(o) {
   <div>
     ${o.crumbs ? crumbs(o.crumbs) : ""}
     ${o.eyebrow ? `<p class="kicker eyebrow">${esc(o.eyebrow)}</p>` : ""}
-    ${o.noCta ? "" : `<p class="offer-flag">${icon("image")}Free mockup in ${esc(FACTS.mockupWithin)} · no obligation</p>`}
+    ${o.noCta ? "" : `<p class="offer-flag">${icon("image")}Free mockup within ${esc(FACTS.mockupWithin)} of confirming details · no commitment</p>`}
     <h1 id="page-title" class="h1">${accent(o.h1)}</h1>
     ${o.lead ? `<p class="lead">${esc(o.lead)}</p>` : ""}
     ${o.meta ? `<p class="cta-note">${esc(o.meta)}</p>` : ""}
@@ -83,8 +83,4 @@ export function pointsSection(points, title = "What you *get*.") {
   ${sectionHead("points-title", title)}
   <ul class="features">${points.map((p) => `<li class="card feature" data-appear>${p.iconHtml}<h3 class="h4">${esc(p.title)}</h3><p>${esc(p.text)}</p></li>`).join("")}</ul>
 </div></section>`;
-}
-
-export function usesSection(uses, title = "Who we print *for*.") {
-  return `<section class="section--tight"><div class="container"><div class="ticker" style="border-block:1px solid var(--hairline)"><span class="label">${accent(title).replace(/<[^>]+>/g, "")}</span><ul class="chips">${uses.map((u) => `<li class="chip">${esc(u)}</li>`).join("")}</ul></div></div></section>`;
 }
