@@ -373,6 +373,39 @@
       }
     ]
   },
+  "/images/catalog/tee-gildan-5000.webp": {
+    "original": "/images/catalog/tee-gildan-5000.webp",
+    "width": 360,
+    "height": 360,
+    "variants": [
+      {
+        "width": 360,
+        "file": "/assets/img/catalog-tee-gildan-5000-360.webp"
+      }
+    ]
+  },
+  "/images/catalog/tee-next-level-3600.webp": {
+    "original": "/images/catalog/tee-next-level-3600.webp",
+    "width": 360,
+    "height": 360,
+    "variants": [
+      {
+        "width": 360,
+        "file": "/assets/img/catalog-tee-next-level-3600-360.webp"
+      }
+    ]
+  },
+  "/images/catalog/tee-as-colour-5001.webp": {
+    "original": "/images/catalog/tee-as-colour-5001.webp",
+    "width": 360,
+    "height": 360,
+    "variants": [
+      {
+        "width": 360,
+        "file": "/assets/img/catalog-tee-as-colour-5001-360.webp"
+      }
+    ]
+  },
   "/images/alex-signature.png": {
     "original": "/images/alex-signature.png",
     "width": 1412,
