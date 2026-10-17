@@ -8,6 +8,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import vm from "node:vm";
 import { parseHTML } from "linkedom";
 import { PPC_PAGES } from "./content/services.mjs";
 
@@ -88,6 +89,23 @@ for (const genFile of generated) {
     const id = a.getAttribute("href").slice(1);
     if (id && !d.getElementById(id)) fail(file, `in-page link to missing #${id}`);
   }
+}
+
+// The print-on-demand calculator (assets/pod-pricing.js, built into site.js)
+// against the bases the Studio itself worked out for the price feed's
+// examples (content/studio-pricing.json): a rule change the calculator
+// doesn't follow fails the build instead of misquoting a creator.
+{
+  const sandbox = {};
+  vm.runInNewContext(fs.readFileSync(path.join(ROOT, "site-src/assets/pod-pricing.js"), "utf8"), sandbox);
+  const feed = JSON.parse(fs.readFileSync(path.join(ROOT, "site-src/content/studio-pricing.json"), "utf8"));
+  if (!feed.calculator || !Array.isArray(feed.examples) || !feed.examples.length) fail("studio-pricing.json", "no calculator rules or worked examples");
+  else for (const e of feed.examples) {
+    const tee = feed.garments.find((g) => g.key === e.garment);
+    const got = tee ? sandbox.podPricing.base(feed.calculator, tee, e.method, e.units, e.locations).base : null;
+    if (got !== e.base) fail("studio-pricing.json", `calculator base ${got} is not the Studio's ${e.base} (${e.garment}, ${e.method}, ${e.units})`);
+  }
+  if (!fs.readFileSync(path.join(SITE, "assets/site.js"), "utf8").includes("var podPricing")) fail("assets/site.js", "the pricing engine wasn't built in");
 }
 
 if (problems.length) {

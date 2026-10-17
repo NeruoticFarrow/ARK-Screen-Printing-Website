@@ -32,7 +32,11 @@ const runRule = () => {
   const [a, b] = STORES.screenColours;
   return `${a.from}+ orders in a run are screen printed when the art fits the colour limits (up to ${a.colours} colours from ${a.from}, up to ${b.colours} from ${b.from}); otherwise they're DTF printed. Campaign orders print after the closing date, within ${STORES.campaignPrintDays} business days of the blanks arriving, then ship.`;
 };
-const payoutRule = () => `Earnings become available ${STORES.payoutAfterShipDays} days after an order ships and are paid by PayPal once a month when you have $${STORES.minimumPayoutUsd} or more. A W-9 is needed once payouts pass the IRS reporting threshold.`;
+const payoutFees = () => {
+  const f = STORES.stripePayoutFees;
+  return `Stripe's payout fees come out of each payout: $${f.monthlyUsd} in a month you're paid, plus ${f.percent}% + $${f.perPayoutUsd.toFixed(2)} per payout.`;
+};
+const payoutRule = () => `Earnings become available ${STORES.payoutAfterShipDays} days after an order ships and are paid to your bank through Stripe once a month when you have $${STORES.minimumPayoutUsd} or more. ${payoutFees()}`;
 
 const studioButton = (placement, label, o = {}) =>
   `<a class="btn ${o.onDark ? "btn--accent" : o.ghost ? "btn--ghost" : "btn--primary"} btn--lg" href="/print-on-demand" data-cta="${esc(placement)}">${esc(label)} ${icon("arrowRight")}</a>`;
@@ -115,22 +119,22 @@ export function renderPrintOnDemand() {
   <div class="doodled">${doodle("loop", "section-doodle section-doodle--loop", " data-appear")}${stepsList([
     { title: "Design and price it", text: "Upload your art, place it and pick colours. See the base and set your price — what you keep updates as you type." },
     { title: "Launch your store", text: "Run a campaign with a closing date, or print on demand so it's always on sale. A printer reviews your file first." },
-    { title: "We print, ship and pay you", text: `Printed in our ${SHOP.city} shop and shipped with tracking within ${STORES.onDemandShipDays} business days. Your earnings are paid monthly by PayPal.` },
+    { title: "We print, ship and pay you", text: `Printed in our ${SHOP.city} shop and shipped with tracking within ${STORES.onDemandShipDays} business days. Your earnings are paid monthly to your bank through Stripe.` },
   ])}</div>
   <div class="cta-row">${storeButton("after_steps_store")}${priceButton("after_steps_price", { ghost: true })}</div>
 </div></section>`;
 
   const rule = `<section class="section" id="the-run" aria-labelledby="run-title"><div class="container">
-  ${runRuleTile("run-title", `${runRule()} What you keep is the same either way.`, `<div class="cta-row">${textLink("/dtf-vs-screen-printing", "DTF vs screen printing", "pod_methods")}</div>`)}
+  ${runRuleTile("run-title", `${runRule()} In a campaign, a screen-printed run's lower price is yours: the difference is added to your earnings when the run closes.`, `<div class="cta-row">${textLink("/dtf-vs-screen-printing", "DTF vs screen printing", "pod_methods")}</div>`)}
 </div></section>`;
 
   const pricing = `<section class="section section--sand" id="pricing" aria-labelledby="pricing-title"><div class="container">
-  ${sectionHead("pricing-title", "See your price — and what you *keep*.", "Pick a tee, try your price and slide to how many you'd sell. The base is the blank, the print, packing and our margin — the same number the Studio shows you. Everything above it is yours.")}
+  ${sectionHead("pricing-title", "See your price — and what you *keep*.", "Pick a tee and its prints, choose a store or a campaign, slide to how many you'd sell and try your price. The base is the tee, the print and bagging, folding and sorting — the same number the Studio shows you. Everything above it is yours.")}
   ${calculator()}
   ${calculatorFootnote()}
   <ul class="checklist pod-facts">
     <li>${icon("truck")}<span><b>Shipping</b><small>${esc(shippingText())}, paid by your buyer. US addresses, tracked, within ${esc(STORES.onDemandShipDays)} business days.</small></span></li>
-    <li>${icon("currencyDollar")}<span><b>Payouts</b><small>Paid monthly by PayPal once you have $${STORES.minimumPayoutUsd} or more, ${STORES.payoutAfterShipDays} days after an order ships.</small></span></li>
+    <li>${icon("currencyDollar")}<span><b>Payouts</b><small>Paid monthly to your bank through Stripe once you have $${STORES.minimumPayoutUsd} or more, ${STORES.payoutAfterShipDays} days after an order ships. ${esc(payoutFees())}</small></span></li>
     <li>${icon("storefront")}<span><b>No fees</b><small>$0 to open, no monthly fee and no listing fee.</small></span></li>
   </ul>
   <div class="cta-row">${storeButton("after_calc_store")}</div>
@@ -201,7 +205,7 @@ export function renderPrintOnDemand() {
 export const FUNDRAISING_FAQ = [
   { q: "How does the money work?", a: [
     `<b>Bulk order:</b> you buy the shirts at our price and sell them at your price — the difference is your fundraiser. Screen printing starts at ${FACTS.screenFrom} shirts and gives the lowest price per shirt.`,
-    `<b>Online store:</b> you set the price; each sale's base (the blank, the print, packing and our margin) comes out, and everything above it is earned by the store. Set your organisation's PayPal account as the payout method so the earnings go to the organisation. ${payoutRule()}`,
+    `<b>Online store:</b> you set the price; each sale's base (the tee, the print and packing) comes out, and everything above it is earned by the store. Connect your organisation's bank account through Stripe so the earnings go to the organisation. ${payoutRule()}`,
   ] },
   { q: "How far ahead should we start?", a: [`Give yourself about three weeks before your event: a day or two for the quote and proof, then most screen-print orders are done in ${FACTS.turnaround.screen}. Short on time? Call ${SHOP.phoneDisplay} — rush is often possible.`] },
   { q: "Can we use our school or team logo?", a: ["Yes, if you have permission to use it. Many schools, districts and leagues have a process for approving their logos and mascots — check before you order, and we'll print what's approved."] },
@@ -243,7 +247,7 @@ export function renderFundraising() {
       <h3 class="h3" style="margin:6px 0 14px">An online fundraiser store</h3>
       <ul class="checklist">
         <li>${icon("storefront")}<span><b>$0 to open</b><small>No monthly or listing fees. Supporters pick a size and pay online.</small></span></li>
-        <li>${icon("currencyDollar")}<span><b>Everything above the base is earned</b><small>Set your organisation's PayPal account as the payout method — paid monthly once earnings reach $${STORES.minimumPayoutUsd}.</small></span></li>
+        <li>${icon("currencyDollar")}<span><b>Everything above the base is earned</b><small>Connect your organisation's bank account through Stripe — paid monthly once earnings reach $${STORES.minimumPayoutUsd}.</small></span></li>
         <li>${icon("truck")}<span><b>We print and ship every order</b><small>No cash to collect, no leftover boxes. Run it with a closing date and the whole run prints after it closes — ${FACTS.screenFrom}+ in screen print when the art fits the colour limits.</small></span></li>
       </ul>
       <div class="cta-row">${studioButton("ways_studio", "Start a fundraiser store", { ghost: true })}</div>

@@ -40,7 +40,12 @@ const areaBySlug = Object.fromEntries([...close, ...towns].map((a) => [a.slug, a
 
 // ── Assets.
 const bridge = fs.readFileSync(path.join(ROOT, "site-src/content/conversion-bridge.js"), "utf8").trim();
-const js = fs.readFileSync(path.join(ROOT, "site-src/assets/site.js"), "utf8").replace("/* @@CONVERSION_BRIDGE@@ */", bridge);
+// The print-on-demand calculator's pricing engine, also run at build time for
+// the page's worked example (lib/studio.mjs).
+const podPricing = fs.readFileSync(path.join(ROOT, "site-src/assets/pod-pricing.js"), "utf8").trim();
+const js = fs.readFileSync(path.join(ROOT, "site-src/assets/site.js"), "utf8")
+  .replace("/* @@CONVERSION_BRIDGE@@ */", bridge)
+  .replace("/* @@POD_PRICING@@ */", () => podPricing);
 const css = SITE_CSS.replace(/\n\s*/g, "\n").trim() + "\n";
 const version = crypto.createHash("sha256").update(css + js).digest("hex").slice(0, 10);
 fs.mkdirSync(path.join(SITE_DIR, "assets"), { recursive: true });

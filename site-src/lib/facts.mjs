@@ -140,6 +140,10 @@ export const STORES = {
   /** server/creator/ledger/rules.ts PAYOUT_RULES. */
   payoutAfterShipDays: 21,
   minimumPayoutUsd: 20,
+  /** Payouts go to the creator's bank through Stripe Connect, Stripe's fees
+   *  coming out of each payout (owner, 2026-10-16; ark-designer
+   *  server/creator/ledger/rules.ts STRIPE_CONNECT_FEES). */
+  stripePayoutFees: { monthlyUsd: 2, percent: 0.25, perPayoutUsd: 0.25 },
   /** shared/creatorPricing.ts screen.colourLimits (owner, 2026-10-16): 24+ up to
    *  3 colours, 40+ up to 6 — the quote form's rule too. */
   screenColours: [{ from: 24, colours: 3 }, { from: 40, colours: 6 }],
@@ -153,8 +157,6 @@ export const STORES = {
   shippingFirstUsd: 8,
   shippingEachMoreUsd: 3,
   shippingMaxMoreItems: 9,
-  /** The print every quoted base assumes (the Studio's PLANNING_LOCATION). */
-  planningPrint: "one full-front print up to 10 × 12 in",
   /** A typical tee price for worked examples — always labelled as one. */
   examplePriceUsd: 24.99,
   sizeExchangeDays: 30,
