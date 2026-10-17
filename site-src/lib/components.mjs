@@ -49,7 +49,7 @@ export function reassure(lines) {
 }
 
 /** The risk reducers under every primary CTA — each one true (facts.mjs). */
-export const REASSURANCE = [`Free digital mockup within ${FACTS.mockupWithin}`, "Free artwork cleanup", "No commitment required"];
+export const REASSURANCE = [`Free digital mockup within ${FACTS.mockupWithin} of confirmation`, "Free artwork cleanup", "No commitment required"];
 
 /** The lead offer as a colour-block tile: the free mockup first, free
  *  artwork cleanup second, one action. */
@@ -57,11 +57,11 @@ export function offerTile(placement, o = {}) {
   return `<section class="section--tight" aria-labelledby="${esc(placement)}-title"><div class="container"><div class="offer" data-appear>
   <div class="offer-main">
     <p class="kicker">Free · no obligation</p>
-    <h2 id="${esc(placement)}-title" class="h3">${accent(`See your design on the shirt in *${FACTS.mockupWithin}*.`)}</h2>
+    <h2 id="${esc(placement)}-title" class="h3">${accent(`See your design on the shirt within *${FACTS.mockupWithin}* of confirmation.`)}</h2>
     <p>Send your logo or idea. ${esc(FACTS.mockupPromise)}</p>
   </div>
   <ul class="offer-list">
-    <li>${icon("image")}<span><b>Free digital mockup</b><small>Your design on the real garment within ${esc(FACTS.mockupWithin)} — no commitment required.</small></span></li>
+    <li>${icon("image")}<span><b>Free digital mockup</b><small>Your design on the real garment within ${esc(FACTS.mockupWithin)} after we confirm the details with you — no commitment required.</small></span></li>
     <li>${icon("paintBrush")}<span><b>Free artwork cleanup</b><small>A sketch, a photo, a rough logo — we'll clean it up free.</small></span></li>
   </ul>
   <div class="offer-cta">${quoteButton(placement, { onPage: o.onPage, label: "Get My Free Mockup" })}</div>
@@ -134,7 +134,7 @@ function orderCard() {
   <span class="oc-title">How your order goes <span class="badge badge--sky">4 steps</span></span>
   <ol>
     <li>${icon("lightning")}<span><b>Your price</b> — instantly</span></li>
-    <li>${icon("image")}<span><b>Free digital mockup</b> — within 10 min</span></li>
+    <li>${icon("image")}<span><b>Free digital mockup</b> — within 10 min of confirmation</span></li>
     <li>${icon("sealCheck")}<span><b>Approve it</b> — no obligation till then</span></li>
     <li>${icon("printer")}<span><b>We start</b> — the same day</span></li>
   </ol>
@@ -176,7 +176,7 @@ export function rulesTile(id = "rules-title", o = {}) {
   const stats = [
     { figure: "1+", label: "shirts: no minimum order (DTF, full colour)" },
     { figure: `${FACTS.screenFrom}+`, label: "shirts: screen printing" },
-    { figure: "10 min", label: "free digital mockup" },
+    { figure: "10 min", label: "free digital mockup after confirmation" },
     { figure: "Same day", label: "we start your order once you approve the proof" },
   ];
   return `<div class="tile tile--navy on-dark" data-appear>
@@ -197,7 +197,7 @@ export function rulesTile(id = "rules-title", o = {}) {
  *  we invoice and print. The proof comes before anything is printed. */
 export const PROCESS = [
   { title: "See your price instantly", text: "Pick the garment, the quantity and where it's printed — the form shows your price as you go. About two minutes. Prefer to talk it through? Text us." },
-  { title: `Your free digital mockup in ${FACTS.mockupWithin}`, text: `${FACTS.mockupPromise} Rough artwork? We'll clean it up free.` },
+  { title: `Your free digital mockup within ${FACTS.mockupWithin} of confirmation`, text: `${FACTS.mockupPromise} Rough artwork? We'll clean it up free.` },
   { title: "Approve it, then pay", text: "Tweak the mockup until it's right. Nothing is printed until you approve it and pay the invoice." },
   { title: "We start the same day", text: `Approve the proof and pay the invoice, and we start your order the same day — ${FACTS.sameDayWork}. Most screen-print orders are ready in ${FACTS.turnaround.screen}. ${FACTS.pickup}, or we ship anywhere in the US.` },
 ];
@@ -406,7 +406,7 @@ export function quoteBand(o = {}) {
       <p class="lead">${esc(o.intro ?? `Tell us the garment, the quantity, your artwork and your date. Your price shows as you go. ${FACTS.mockupPromise}`)}</p>
       <ul class="checklist">
         <li>${icon("lightning")}<span><b>Your price, live</b><small>Pick the garment, quantity and print details to see the price as you go.</small></span></li>
-        <li>${icon("image")}<span><b>Free digital mockup within ${esc(FACTS.mockupWithin)}</b><small>Your design on the garment — no commitment required.</small></span></li>
+        <li>${icon("image")}<span><b>Free digital mockup within ${esc(FACTS.mockupWithin)} of confirmation</b><small>Your design on the garment — no commitment required.</small></span></li>
         <li>${icon("paintBrush")}<span><b>Free artwork cleanup</b><small>Send whatever you have — a sketch, a photo, a rough logo.</small></span></li>
         <li>${icon("printer")}<span><b>We start the same day</b><small>${esc(capitalise(FACTS.sameDayWork))} — most orders are ready in ${esc(FACTS.turnaround.screen)}. ${esc(FACTS.pickup)}, or we ship anywhere in the US.</small></span></li>
       </ul>

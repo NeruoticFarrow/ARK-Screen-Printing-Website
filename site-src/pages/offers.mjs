@@ -255,7 +255,7 @@ export function renderFundraising() {
   ${sectionHead("timeline-title", "Work back from your *date*.", "About three weeks is comfortable for a bulk order. Short on time? Call — rush is often possible.")}
   ${stepsList([
     { title: "About 3 weeks out: start your order", text: `Garment, quantity, artwork and the date. See your price live as you build it.` },
-    { title: "Your free digital mockup in 10 minutes", text: `${FACTS.mockupPromise} We'll clean up rough artwork free too. Using a school or team logo? Have the permission ready.` },
+    { title: "Your free digital mockup after confirmation", text: `${FACTS.mockupPromise} We'll clean up rough artwork free too. Using a school or team logo? Have the permission ready.` },
     { title: "We start the same day", text: `Approve the proof and pay the invoice, and we start your order the same day — ${FACTS.sameDayWork}. Most screen-print orders are done in ${FACTS.turnaround.screen}.` },
     { title: "Sell it", text: `${FACTS.pickup}, or we ship. Tell supporters how much of each sale goes to your cause.` },
   ])}
