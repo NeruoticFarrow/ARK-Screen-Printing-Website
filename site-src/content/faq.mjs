@@ -10,15 +10,15 @@ import { APP, FACTS, SHOP } from "../lib/facts.mjs";
 import { esc } from "../lib/html.mjs";
 
 const phone = `<a href="${esc(SHOP.phoneHref)}">${esc(SHOP.phoneDisplay)}</a>`;
-const capital = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+const text = `<a href="${esc(SHOP.smsHref)}">${esc(SHOP.phoneDisplay)}</a>`;
 
 export const FAQ_GROUPS = [
   {
     title: "Ordering and price",
     items: [
-      { q: "How do I get a price?", a: [`Fill in our <a href="/get-a-quote#quote">quote form</a> — your price shows as you go, and it takes about two minutes. Send it and we'll call you within ${FACTS.callWithin} to go over the details (${FACTS.replyHours}). Rather talk first? Call or text ${phone}.`] },
+      { q: "How do I get a price?", a: [`Fill in our <a href="/get-a-quote#quote">instant-price form</a> — your price shows as you go, and it takes about two minutes. ${FACTS.mockupPromise} Rather talk first? Text ${text} (preferred), or call ${phone}.`] },
       { q: "Is there a minimum order?", a: [`No minimum order. Screen printing starts at ${FACTS.screenFrom} shirts — that's where making a screen for each ink colour pays off. Under ${FACTS.screenFrom}, we print with DTF: full colour, no setup, even for a single shirt.`] },
-      { q: "Is the mockup really free?", a: [`Yes. ${capital(FACTS.mockupAfterCall)} after our call, you get a free mockup of your design on your garment — no obligation to order. Tweak it until it's right.`] },
+      { q: "Is the mockup really free?", a: [`Yes. ${FACTS.mockupPromise} Tweak it until it's right.`] },
       { q: "How do I pay, and when does printing start?", a: [`Once the details are set, we send an invoice. Approve your mockup and pay the invoice, and we start your order ${FACTS.printStart} — ${FACTS.sameDayWork}.`] },
       { q: "How long will my order take?", a: [`Screen printing takes ${FACTS.turnaround.screen}, DTF ${FACTS.turnaround.dtf} and embroidery ${FACTS.turnaround.embroidery} from when you approve your artwork. ${FACTS.turnaround.rush}.`] },
     ],
@@ -26,9 +26,9 @@ export const FAQ_GROUPS = [
   {
     title: "Printing",
     items: [
-      { q: "Screen printing or DTF — which do I need?", a: [`Screen printing gives the most durable, vibrant print and the lowest price per shirt from ${FACTS.screenFrom}. DTF suits smaller orders and full-colour artwork, with no setup. Not sure? We'll recommend one with your quote — or read <a href="/dtf-vs-screen-printing">DTF vs screen printing</a>.`] },
+      { q: "Screen printing or DTF — which do I need?", a: [`Screen printing gives the most durable, vibrant print and the lowest price per shirt from ${FACTS.screenFrom}. DTF suits smaller orders and full-colour artwork, with no setup. Not sure? We'll recommend one after you share your order details — or read <a href="/dtf-vs-screen-printing">DTF vs screen printing</a>.`] },
       { q: "What inks do you use?", a: [`${FACTS.inks} — the best inks on the market for what each one does.`] },
-      { q: "Can you match Pantone colours?", a: ["Yes — we custom-mix inks to match Pantone colours for brand consistency. Tell us the colours with your quote."] },
+      { q: "Can you match Pantone colours?", a: ["Yes — we custom-mix inks to match Pantone colours for brand consistency. Tell us the colours with your order details."] },
       { q: "How many colours can my design have?", a: ["Our manual presses print up to six spot colours, and more with simulated process and CMYK prints. Full-colour designs can also print with DTF."] },
       { q: "Can you print over seams, zippers or pockets?", a: ["Yes — it's a matter of planning for them before we print. Tell us where you want the print and we'll confirm the placement on your mockup."] },
       { q: "Do you do embroidery?", a: [`Yes — hats, polos, jackets and more, in about ${FACTS.turnaround.embroidery}. See <a href="/custom-embroidery">custom embroidery</a>.`] },
@@ -44,8 +44,8 @@ export const FAQ_GROUPS = [
   {
     title: "Pickup and your order",
     items: [
-      { q: "Can I pick up my order?", a: [`${FACTS.pickup} in ${SHOP.city}, or we can ship your order — tell us which on your quote.`] },
-      { q: "What if something's wrong with my order?", a: [`${FACTS.guarantee} Every order is printed to your design, so we can't take returns for a change of mind — but if something arrives wrong or defective, call or text ${phone} and we'll fix it.`] },
+      { q: "Can I pick up my order?", a: [`${FACTS.pickup} in ${SHOP.city}, or we can ship your order — tell us which when you share your order details.`] },
+      { q: "What if something's wrong with my order?", a: [`${FACTS.guarantee} Every order is printed to your design, so we can't take returns for a change of mind — but if something arrives wrong or defective, text ${text} (preferred) or call ${phone} and we'll fix it.`] },
       { q: "Can everyone in my group order and pay for their own?", a: [`Yes — with a free online store, each person picks their size and pays, and we print every order. See <a href="/print-on-demand">print on demand</a>, or <a href="/fundraising">fundraising</a> if you're raising money.`] },
     ],
   },

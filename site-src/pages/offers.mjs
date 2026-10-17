@@ -254,8 +254,8 @@ export function renderFundraising() {
   const timeline = `<section class="section section--sand" aria-labelledby="timeline-title"><div class="container">
   ${sectionHead("timeline-title", "Work back from your *date*.", "About three weeks is comfortable for a bulk order. Short on time? Call — rush is often possible.")}
   ${stepsList([
-    { title: "About 3 weeks out: request your quote", text: `Garment, quantity, artwork and the date. We reply within ${FACTS.replyWithin} (${FACTS.replyHours}).` },
-    { title: "Your free mockup in about 10 minutes", text: "See the design on the garment — free, no obligation; we'll clean up rough artwork free too. Using a school or team logo? Have the permission ready." },
+    { title: "About 3 weeks out: start your order", text: `Garment, quantity, artwork and the date. See your price live as you build it.` },
+    { title: "Your free digital mockup in 10 minutes", text: `${FACTS.mockupPromise} We'll clean up rough artwork free too. Using a school or team logo? Have the permission ready.` },
     { title: "We start the same day", text: `Approve the proof and pay the invoice, and we start your order the same day — ${FACTS.sameDayWork}. Most screen-print orders are done in ${FACTS.turnaround.screen}.` },
     { title: "Sell it", text: `${FACTS.pickup}, or we ship. Tell supporters how much of each sale goes to your cause.` },
   ])}
@@ -264,7 +264,7 @@ export function renderFundraising() {
   const rules = `<section class="section"><div class="container">${rulesTile("rules-title", { onPage: true })}</div></section>`;
   const proof = `<section class="section section--sand" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What customers *say*.", { onPage: true })}</div></section>`;
   const faq = `<section class="section" aria-labelledby="faq-title"><div class="container">${sectionHead("faq-title", "Organisers *ask*.")}${faqList(FUNDRAISING_FAQ)}</div></section>`;
-  const quote = quoteBand({ title: "Get your fundraiser *quote*.", intro: `Tell us your group, the garment, the quantity and your date. We reply within ${FACTS.replyWithin} ${FACTS.replyHours.replace(/,.*/, "")}, and you approve a proof before anything prints.` });
+  const quote = quoteBand({ title: "Build your fundraiser *price*.", intro: `Tell us your group, the garment, the quantity and your date. Your price shows as you go. ${FACTS.mockupPromise}` });
   return {
     title, description,
     canonical: `${SITE.origin}/${slug}`,

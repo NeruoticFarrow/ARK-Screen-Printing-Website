@@ -72,21 +72,12 @@ export const FACTS = {
     /** custom-hats-colorado-springs.html. */
     rush: "Rush orders in as little as a week — ask first",
   },
-  /** Owner, 2026-10-15 (was "24 hours" on thank-you.html). */
-  replyWithin: "ten minutes",
-  /** Said beside the reply promise where there's room. */
-  replyHours: "7:30am–7pm Mountain Time, every day",
-  /** Owner, 2026-10-15: the proof follows moments after we're in touch, and
-   *  printing can begin the same day it's approved. */
+  /** Owner, 2026-10-17: free digital mockups are the response promise. */
+  mockupWithin: "10 minutes",
+  mockupPromise: "Every order includes a free digital mockup within 10 minutes—no commitment required.",
+  /** The proof comes before production, and printing can begin the same day
+   *  it is approved. */
   proofSpeed: "moments later",
-  /** The lead offer (owner, 2026-10-15): a free mockup of the customer's
-   *  design, no obligation, usually within about 10 minutes in business hours.
-   *  The secondary: free artwork cleanup. No discount offer. */
-  mockupWithin: "about 10 minutes",
-  /** Owner, 2026-10-16: after the quote form, a call within five minutes;
-   *  the free mockup follows ten minutes after that call. */
-  callWithin: "5 minutes",
-  mockupAfterCall: "ten minutes",
   printStart: "the same day",
   /** Owner, 2026-10-16: what "starts the same day" means — the work begins
    *  that day, the order isn't printed that day. */

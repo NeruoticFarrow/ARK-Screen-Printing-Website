@@ -80,7 +80,7 @@ export function renderAbout(ctx) {
 </figure></div></section>`;
   const proof = `<section class="section section--sand" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What customers *say*.")}</div></section>`;
   const work = `<section class="section" aria-labelledby="work-title"><div class="container">${sectionHead("work-title", "Real work hot off the *press*.", undefined, { aside: textLink("/gallery", "See the gallery", "about_gallery") })}${galleryGrid(recentWork(WORK, 6))}</div></section>`;
-  const closing = finalCta("Let's print *yours*.", "Tell us what you need — we reply within ten minutes during business hours and send a proof before anything prints.");
+  const closing = finalCta("Let's print *yours*.", `Tell us what you need. ${FACTS.mockupPromise}`);
   return base(page, { current: "about", ogImage: abs(PHOTOS.owner.src), main: hero + strip + owner + intro + story + why + letter + proof + work + closing });
 }
 
@@ -94,7 +94,7 @@ export function renderFaq(ctx) {
   const list = `<section class="section"><div class="container narrow">${FAQ_GROUPS.slice(0, half).map(group).join("")}</div></section>` + ctaBand("faq_mid") + `<section class="section"><div class="container narrow">${FAQ_GROUPS.slice(half).map(group).join("")}</div></section>`;
   const ask = `<section class="section section--sand"><div class="container"><div class="tile tile--sky" data-appear>
   <h2 class="h3">${accent("Didn't find your *answer*?")}</h2>
-  <p style="margin-top:12px">Call or text ${esc(SHOP.phoneDisplay)} (${esc(SHOP.hours)}) or email <a href="mailto:${esc(SHOP.email)}">${esc(SHOP.email)}</a> — a real person at ARK answers.</p>
+  <p style="margin-top:12px"><a href="${esc(SHOP.smsHref)}">Text ${esc(SHOP.phoneDisplay)} (preferred)</a>, <a href="${esc(SHOP.phoneHref)}">call</a>, or email <a href="mailto:${esc(SHOP.email)}">${esc(SHOP.email)}</a> — a real person at ARK answers.</p>
   ${ctaRow("faq_ask")}
 </div></div></section>`;
   // Google's FAQ data follows the questions on the page, not the migrated ones.
@@ -107,7 +107,7 @@ export function renderGallery(ctx) {
   const hero = pageHero({ h1: page.hero.h1, lead: page.hero.lead[0], crumbs: [{ name: "Home", href: "/" }, { name: "Our work" }] });
   const all = recentWork(GALLERY);
   const grid = `<section class="section"><div class="container">${galleryGrid(all.slice(0, 9), { lightbox: true })}</div></section>` + ctaBand("gallery_mid", { title: "Like what you see?" }) + `<section class="section"><div class="container">${galleryGrid(all.slice(9), { lightbox: true, dialog: false })}</div></section>`;
-  const closing = finalCta("Your logo, *printed here*.", "Send your artwork or an idea — we reply within ten minutes during business hours and send a proof before anything prints.");
+  const closing = finalCta("Your logo, *printed here*.", `Send your artwork or an idea. ${FACTS.mockupPromise}`);
   return base(page, { current: "gallery", ogImage: abs(PHOTOS.press.src), main: hero + grid + closing });
 }
 
@@ -118,7 +118,7 @@ export function renderTestimonials(ctx) {
   // then the two-row ticker, live from Google via the Starwall feed
   // (REVIEWS_FEED) until the Business Profile sync takes over.
   const list = `<section class="section" aria-labelledby="reviews-title"><div class="container">${proofSection("reviews-title", "What customers *say*.", { live: true, leaveReview: true, note: `Recent Google reviews of our ${SHOP.city} print shop — why customers choose us, and what to expect.` })}</div></section>`;
-  const closing = finalCta("Be our next *five stars*.", "Tell us what you need — we reply within ten minutes during business hours and send a proof before anything prints.");
+  const closing = finalCta("Be our next *five stars*.", `Tell us what you need. ${FACTS.mockupPromise}`);
   return base(page, { current: "testimonials", main: hero + list + closing });
 }
 
@@ -129,7 +129,7 @@ export function renderServiceAreas(ctx) {
   const grid = (list) => `<ul class="features" style="grid-template-columns:repeat(auto-fill,minmax(250px,1fr))">${list.map(card).join("")}</ul>`;
   const close = `<section class="section" aria-labelledby="close-title"><div class="container">${sectionHead("close-title", "Close-in *Colorado Springs* areas.", "ARK is based in Colorado Springs; these are focused local-service pages, not separate store locations.")}${grid(ctx.areas.close)}</div></section>`;
   const towns = `<section class="section section--sand" aria-labelledby="towns-title"><div class="container">${sectionHead("towns-title", "Additional communities we *serve*.", `${FACTS.pickup}, or we ship to you.`)}${grid(ctx.areas.towns)}</div></section>`;
-  const closing = finalCta("Wherever you are in the *region*.", "Every order is printed in our Colorado Springs shop — we reply within ten minutes during business hours and send a proof before anything prints.");
+  const closing = finalCta("Wherever you are in the *region*.", `Every order is printed in our Colorado Springs shop. ${FACTS.mockupPromise}`);
   return base(page, { current: "service-areas", main: hero + close + ctaBand("areas_mid", { title: "Wherever you are in the region." }) + towns + closing });
 }
 
@@ -137,7 +137,7 @@ export function renderQuote(ctx) {
   const { page } = ctx;
   const hero = `<section class="page-hero" aria-labelledby="page-title"><div class="container">
   <h1 id="page-title" class="h1">${accent("See your price, *instantly*.")}</h1>
-  <p class="lead">About two minutes — your price shows as you go. Send it and we'll call you within ${esc(FACTS.callWithin)}; ${esc(FACTS.mockupAfterCall)} after that call, a free mockup of your design on the garment is in your inbox (${esc(FACTS.replyHours)}). No obligation — approve it and we start your order ${esc(FACTS.printStart)}.</p>
+  <p class="lead">About two minutes — your price shows as you go. ${esc(FACTS.mockupPromise)} Approve it and we start your order ${esc(FACTS.printStart)}.</p>
   ${reassure(REASSURANCE)}
 </div></section>`;
   const quote = quoteBand({ eager: true, title: "Your *project*.", intro: "Garment, quantity, print locations, artwork and your date — whatever you know so far is enough to start." });
@@ -149,16 +149,16 @@ export function renderThankYou(ctx) {
   const { page } = ctx;
   const main = `<section class="page-hero"><div class="container narrow">
   <h1 class="h1">${accent("Thank you — we've got your *request*.")}</h1>
-  <p class="lead">We'll call you within ${esc(FACTS.callWithin)} (${esc(FACTS.replyHours)}), and your free mockup follows ${esc(FACTS.mockupAfterCall)} after that call — no obligation.</p>
+  <p class="lead">Your instant price and project details are saved. ${esc(FACTS.mockupPromise)}</p>
 </div></section>
 <section class="section section--sand"><div class="container narrow">
   <h2 class="h3" style="margin-bottom:20px">What happens next</h2>
   <ol class="next-steps">
-    <li><span><b>We call you</b>Within ${esc(FACTS.callWithin)} — and a text or email if we miss you — to confirm the details.</span></li>
-    <li><span><b>Your free mockup</b>Your design on the garment, ${esc(FACTS.mockupAfterCall)} after that call. Rough artwork? We'll clean it up free.</span></li>
+    <li><span><b>Your instant price</b>You saw your price live as you built your order. We have the details you submitted.</span></li>
+    <li><span><b>Your free digital mockup</b>${esc(FACTS.mockupPromise)} Rough artwork? We'll clean it up free.</span></li>
     <li><span><b>We start the same day</b>Approve the proof and pay the invoice, and we start your order that day — ${esc(FACTS.sameDayWork)}. Most screen-print orders are ready in ${esc(FACTS.turnaround.screen)}.</span></li>
   </ol>
-  <div class="quote-alt" style="margin-top:28px"><b>Questions in the meantime?</b><a href="${esc(SHOP.phoneHref)}">Call</a> or <a href="${esc(SHOP.smsHref)}">text</a> ${esc(SHOP.phoneDisplay)} · <a href="mailto:${esc(SHOP.email)}">${esc(SHOP.email)}</a></div>
+  <div class="quote-alt" style="margin-top:28px"><b>Questions in the meantime?</b><a href="${esc(SHOP.smsHref)}">Text ${esc(SHOP.phoneDisplay)} (preferred)</a> or <a href="${esc(SHOP.phoneHref)}">call</a> · <a href="mailto:${esc(SHOP.email)}">${esc(SHOP.email)}</a></div>
   <div class="cta-row"><a class="btn btn--ghost" href="/">Back to the home page</a><a class="btn btn--ghost" href="/gallery">See our work</a></div>
 </div></section>`;
   // The Google Ads conversion snippets, byte for byte from the old page.
