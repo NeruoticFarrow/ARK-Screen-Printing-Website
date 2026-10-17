@@ -74,7 +74,7 @@ export const FACTS = {
   },
   /** Owner, 2026-10-17: free digital mockups are the response promise. */
   mockupWithin: "10 minutes",
-  mockupPromise: "Once we've confirmed the details with you, we'll send your free digital mockup within 10 minutes—no commitment required.",
+  mockupPromise: "Your free digital mockup will be ready within 10 minutes of confirming the details with you—no commitment required.",
   /** The proof comes before production, and printing can begin the same day
    *  it is approved. */
   proofSpeed: "moments later",

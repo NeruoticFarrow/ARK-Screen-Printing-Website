@@ -27,7 +27,7 @@ export const SERVICE_PAGES = {
       { icon: "printer", title: "The right method for your quantity", text: `Screen printing from ${FACTS.screenFrom} shirts, DTF for anything smaller or full-colour art. We recommend the right one.` },
       { icon: "tShirt", title: "No minimum order", text: "A single shirt for a gift or a few hundred for an event — same shop, same care." },
       { icon: "paintBrush", title: "Free artwork cleanup", text: "Send a logo, a sketch, a photo or an idea — we'll clean it up for print, free." },
-      { icon: "image", title: "A free mockup first", text: "Once we've confirmed the details with you, your design is on the garment within 10 minutes — free, no commitment required. Nothing prints until you approve it." },
+      { icon: "image", title: "A free mockup first", text: "Your design is on the garment within 10 minutes of confirming the details with you — free, no commitment required. Nothing prints until you approve it." },
     ],
     uses: ["Teams & schools", "Businesses & staff", "Events & races", "Churches & groups", "Bands & brands", "Reunions & gifts"],
     faq: [
@@ -60,7 +60,7 @@ export const SERVICE_PAGES = {
     points: [
       { icon: "palette", title: "Premium inks", text: `${FACTS.inks}.` },
       { icon: "stack", title: `Built for runs of ${FACTS.screenFrom}+`, text: `Screen printing starts at ${FACTS.screenFrom} shirts — the screens are made once, then every print is fast and the price per shirt drops.` },
-      { icon: "image", title: "A free mockup first", text: "Once we've confirmed the details with you, your design is on the garment within 10 minutes — free, no commitment required. Nothing prints until you approve it." },
+      { icon: "image", title: "A free mockup first", text: "Your design is on the garment within 10 minutes of confirming the details with you — free, no commitment required. Nothing prints until you approve it." },
       { icon: "clock", title: `Most orders in ${FACTS.turnaround.screen}`, text: "Rush is often possible — call or text before you order." },
     ],
     uses: ["Teams & schools", "Businesses", "Events", "Bands & brands", "Fundraisers"],
@@ -103,7 +103,7 @@ export const PPC_PAGES = {
       { icon: "buildings", title: "Reorders that match", text: "A reorder starts from your approved proof — the same logo, ink colours and placement as the first run." },
       { icon: "needle", title: "Printed or embroidered", text: "A printed left-chest logo or a stitched one — both done in-house." },
       { icon: "tShirt", title: "No minimum order", text: "Outfit two new hires or the whole crew." },
-      { icon: "image", title: "A free mockup first", text: "Once we've confirmed the details with you, your design is on the garment within 10 minutes — free, no commitment required. Nothing prints until you approve it." },
+      { icon: "image", title: "A free mockup first", text: "Your design is on the garment within 10 minutes of confirming the details with you — free, no commitment required. Nothing prints until you approve it." },
     ],
     uses: ["Contractors & trades", "Restaurants & cafés", "Shops & salons", "Offices & clinics", "Event staff"],
   },

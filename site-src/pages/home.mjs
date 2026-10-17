@@ -27,7 +27,7 @@ export const HOME_FAQ = [
 export function renderHome(ctx) {
   const hero = `<section class="hero" aria-labelledby="hero-title"><div class="container hero-grid">
   <div>
-    <p class="offer-flag">${icon("image")}Free mockup within ${FACTS.mockupWithin} after details are confirmed · no commitment</p>
+    <p class="offer-flag">${icon("image")}Free mockup within ${FACTS.mockupWithin} of confirming details · no commitment</p>
     <h1 id="hero-title" class="display">Screen printing in Colorado Springs, ${swash("done here")}.</h1>
     <p class="lead">Custom shirts, hoodies, hats and embroidery for teams, businesses, churches and events — printed in our own ${esc(SHOP.city)} shop, with a real person ready when you text or call. ${esc(FACTS.mockupPromise)}</p>
     ${ctaRow("hero", { onPage: true })}
@@ -50,7 +50,7 @@ export function renderHome(ctx) {
   const rules = `<section class="section" id="rules" aria-labelledby="rules-title"><div class="container">${rulesTile("rules-title", { onPage: true })}</div></section>`;
 
   const how = `<section class="section section--sand" id="how" aria-labelledby="how-title"><div class="container">
-  ${sectionHead("how-title", "How an order *works*.", "Your price instantly. Once we confirm the details with you, your free digital mockup follows within 10 minutes. Nothing prints until you approve it.")}
+  ${sectionHead("how-title", "How an order *works*.", "Your price instantly. Your free digital mockup follows within 10 minutes of confirming the details with you. Nothing prints until you approve it.")}
   <div class="doodled">${doodle("loop", "section-doodle section-doodle--loop", " data-appear")}${stepsList()}</div>
   ${ctaRow("after_steps", { onPage: true })}
 </div></section>`;
