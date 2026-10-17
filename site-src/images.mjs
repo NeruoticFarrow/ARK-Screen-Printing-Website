@@ -11,7 +11,7 @@ import sharp from "sharp";
 import { PHOTOS, WORK } from "./lib/media.mjs";
 import { imageKey } from "./lib/images.mjs";
 import { gbpData } from "./lib/gbp-data.mjs";
-import { CATEGORIES } from "./lib/studio.mjs";
+import { CATEGORIES, TEE_PHOTOS } from "./lib/studio.mjs";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..");
 const SITE = path.join(ROOT, "ark-site-review");
@@ -20,7 +20,7 @@ const WIDTHS = [480, 960, 1600];
 
 /** Every image src the content and templates reference. */
 function referenced() {
-  const set = new Set([...Object.values(PHOTOS).map((p) => p.src), ...WORK, ...CATEGORIES.map((c) => c.photo)]);
+  const set = new Set([...Object.values(PHOTOS).map((p) => p.src), ...WORK, ...CATEGORIES.map((c) => c.photo), ...Object.values(TEE_PHOTOS)]);
   const dir = path.join(ROOT, "site-src/content/pages");
   for (const f of fs.readdirSync(dir)) {
     const page = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8"));

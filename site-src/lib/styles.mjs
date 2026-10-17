@@ -344,6 +344,9 @@ span.rt-av{display:grid;place-items:center;color:#fff;font:600 1.125rem/1 var(--
 .option label:hover{border-color:var(--tan)}
 .option .dot{display:grid;place-items:center;width:22px;height:22px;flex:none;border-radius:8px;background:var(--surface);border:1.5px solid var(--line)}
 .option .name{flex:1;font-weight:600;color:var(--navy)}
+.option .opt-photo{display:block;width:64px;height:64px;flex:none;overflow:hidden;border-radius:10px;background:#fff;border:1px solid var(--hairline)}
+.option .opt-photo picture,.option .opt-photo img{display:block;width:100%;height:100%;object-fit:contain}
+@media (max-width:420px){.option .opt-photo{width:52px;height:52px}.option label{gap:10px}}
 .option .name small{display:block;margin-top:2px;font-weight:400;font-size:.8125rem;color:var(--muted)}
 .option b{font-weight:600;color:var(--navy)}
 .option input:checked + label{background:var(--sand);border-color:var(--tan)}

@@ -59,6 +59,17 @@ export const shippingText = () => {
  *  below the tee's base — then ARK's suggested price for it. */
 const examplePrice = (g) => (STORES.examplePriceUsd > g.dtfBase ? STORES.examplePriceUsd : g.suggestedRetail);
 
+/** Each reference tee's photo, shown beside its name in the calculator
+ *  (owner, 2026-10-17): the Studio catalogue's front images (ark-designer
+ *  client/public/images/creator-catalog), trimmed onto a white square like
+ *  the category photos. A tee the price feed adds later shows without one. */
+export const TEE_PHOTOS = {
+  "ss_activewear/5000": "/images/catalog/tee-gildan-5000.webp",
+  "ss_activewear/3600": "/images/catalog/tee-next-level-3600.webp",
+  "as_colour/5001": "/images/catalog/tee-as-colour-5001.webp",
+};
+const teePhoto = (g) => (TEE_PHOTOS[g.key] ? `<span class="opt-photo">${picture(TEE_PHOTOS[g.key], { alt: "", sizes: "64px" })}</span>` : "");
+
 /** The profit calculator: a complete worked example in the HTML (it reads
  *  without script); site.js makes it live. What you keep = your price − the
  *  tee's base, never below zero — the Studio's own arithmetic. */
@@ -72,7 +83,7 @@ export function calculator(o = {}) {
   const keep = Math.max(0, price - first.dtfBase);
   const method = units >= screenMinimum ? "Screen printed by hand" : "DTF printed";
   const options = garments
-    .map((g, i) => `<div class="option"><input type="radio" name="calc-garment" id="${p}-g${i}" value="${esc(g.key)}"${i === 0 ? " checked" : ""}><label for="${p}-g${i}"><span class="dot" aria-hidden="true"></span><span class="name">${esc(g.label)}<small>Base ${money(g.dtfBase)} · suggested ${money(g.suggestedRetail)}</small></span><b>${money(g.dtfBase)}</b></label></div>`)
+    .map((g, i) => `<div class="option"><input type="radio" name="calc-garment" id="${p}-g${i}" value="${esc(g.key)}"${i === 0 ? " checked" : ""}><label for="${p}-g${i}"><span class="dot" aria-hidden="true"></span>${teePhoto(g)}<span class="name">${esc(g.label)}<small>Base ${money(g.dtfBase)} · suggested ${money(g.suggestedRetail)}</small></span><b>${money(g.dtfBase)}</b></label></div>`)
     .join("");
   const data = { screenMinimum, garments: garments.map((g) => ({ key: g.key, dtfBase: g.dtfBase, suggestedRetail: g.suggestedRetail })) };
   return `<div class="calc" data-calculator>
