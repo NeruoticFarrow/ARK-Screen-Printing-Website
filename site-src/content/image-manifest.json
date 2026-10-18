@@ -1497,6 +1497,25 @@
       }
     ]
   },
+  "/images/gallery/media-vest-back-print.webp": {
+    "original": "/images/gallery/media-vest-back-print.webp",
+    "width": 1834,
+    "height": 2000,
+    "variants": [
+      {
+        "width": 480,
+        "file": "/assets/img/gallery-media-vest-back-print-480.webp"
+      },
+      {
+        "width": 960,
+        "file": "/assets/img/gallery-media-vest-back-print-960.webp"
+      },
+      {
+        "width": 1600,
+        "file": "/assets/img/gallery-media-vest-back-print-1600.webp"
+      }
+    ]
+  },
   "/images/gallery/awaken-camp-tee-on-press.webp": {
     "original": "/images/gallery/awaken-camp-tee-on-press.webp",
     "width": 1500,
