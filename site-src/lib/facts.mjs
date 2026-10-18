@@ -57,6 +57,16 @@ export const SHOP = {
   sameAs: ["https://www.facebook.com/arkscreenprinting", "https://www.instagram.com/arkscreenprinting"],
 };
 
+/** The paid-search landing pages' own number (owner, 2026-10-18): every
+ *  number those pages show — header, sticky bar, text and call buttons,
+ *  footer — is this one; build.mjs swaps it in and check.mjs keeps the two
+ *  lines apart. The rest of the site keeps SHOP's number. */
+export const PPC_LINE = {
+  phoneDisplay: "(719) 203-9508",
+  phoneHref: "tel:+17192039508",
+  smsHref: "sms:+17192039508",
+};
+
 export const FACTS = {
   /** index.html, custom-*.html, local pages. */
   noMinimum: true,
