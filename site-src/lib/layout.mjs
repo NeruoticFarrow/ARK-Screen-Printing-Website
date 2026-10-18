@@ -62,7 +62,7 @@ function header(o) {
       ${nav}
     </ul></nav>
     <div class="header-actions">
-      <a class="header-phone" href="${esc(SHOP.smsHref)}" data-cta="nav_text">${icon("chatCircleText")}${esc(SHOP.phoneDisplay)} · Text preferred</a>
+      <a class="header-contact header-contact--nav" href="${esc(SHOP.smsHref)}" data-cta="nav_text">${icon("chatCircleText")}<span class="label">${esc(SHOP.phoneDisplay)} · Text preferred</span></a>
       <a class="header-call" href="${esc(SHOP.phoneHref)}" data-cta="nav_call_icon">${icon("phone")}<span class="visually-hidden">Call ${esc(SHOP.phoneDisplay)}</span></a>
       <a class="btn btn--primary header-cta" href="${quoteHref(o)}" data-cta="nav_quote" aria-label="See Your Price Instantly"><span class="label-long">See Your Price Instantly</span><span class="label-short">See Your Price</span></a>
       <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-toggle>${icon("list", "icon open")}${icon("x", "icon close")}<span class="menu-label">Menu</span></button>

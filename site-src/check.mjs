@@ -11,6 +11,7 @@ import path from "node:path";
 import vm from "node:vm";
 import { parseHTML } from "linkedom";
 import { PPC_PAGES } from "./content/services.mjs";
+import { PPC_LINE, SHOP } from "./lib/facts.mjs";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..");
 const SITE = path.join(ROOT, "ark-site-review");
@@ -68,6 +69,18 @@ for (const genFile of generated) {
   if (!html.includes("googletagmanager.com/gtag/js?id=G-3HRP9PCVCH") || !html.includes("gtag('config', 'AW-1374047993')")) fail(file, "analytics tags missing");
   if (html.includes("api.netlify.com")) fail(file, "stray api.netlify.com script");
   if (PPC_PAGES[src.slug] && !/noindex/.test(d.querySelector('meta[name="robots"]')?.getAttribute("content") ?? "")) fail(file, "paid page is indexable");
+  // Paid pages carry the PPC line and only it; every other page, the shop's.
+  const digits = (href) => href.replace(/\D/g, "").slice(-10);
+  const [mainLine, ppcLine] = [digits(SHOP.phoneHref), digits(PPC_LINE.phoneHref)];
+  const linesShown = [...d.querySelectorAll('a[href^="tel:"], a[href^="sms:"]')].map((a) => digits(a.getAttribute("href")));
+  if (PPC_PAGES[src.slug]) {
+    if (html.includes(SHOP.phoneDisplay) || linesShown.includes(mainLine)) fail(file, "paid page shows the main number");
+    if (!d.querySelector(".header-contact")?.textContent.includes(PPC_LINE.phoneDisplay)) fail(file, "paid page header lacks the PPC number");
+  } else if (html.includes(PPC_LINE.phoneDisplay) || linesShown.includes(ppcLine)) {
+    fail(file, "the PPC number is on a page that isn't paid search");
+  }
+  // One look for the header's number everywhere (owner, 2026-10-18).
+  if (d.querySelector(".site-header") && src.slug !== "thank-you" && !d.querySelector(".site-header .header-contact")) fail(file, "header phone isn't the pill");
   if (src.robots && d.querySelector('meta[name="robots"]')?.getAttribute("content") !== src.robots && !PPC_PAGES[src.slug]) fail(file, "robots changed");
   if (src.slug === "thank-you" && (html.match(/gtag\('event', 'conversion'/g) ?? []).length !== 2) fail(file, "conversion tags missing");
 
