@@ -67,7 +67,7 @@ export const POD_FAQ = [
   { q: "How do I get paid?", a: [payoutRule()] },
   { q: "Can I sell a limited run instead?", a: [`Yes. Run a campaign with a closing date and we print the whole run together. ${runRule()} Every order prints either way.`] },
   { q: "What do my buyers get?", a: [`Tracking on every order, free size exchanges within ${STORES.sizeExchangeDays} days and defects made right within ${STORES.defectDays} days of delivery.`] },
-  { q: "Can I open a store today?", a: [STORES.signupOpen ? `Yes — <a href="${esc(APP.studioStart)}">start your store</a>. It's free.` : `Stores are invite-only while we finish testing. <a href="${esc(STORE_CTA.href)}">Request an invite</a> by email and we'll set you up.`] },
+  { q: "Can I open a store today?", a: [STORES.signupOpen ? `Yes — <a href="${esc(APP.studioStart)}">open your store</a>. It's free.` : `Stores are invite-only while we finish testing. <a href="${esc(STORE_CTA.href)}">Request an invite</a> by email and we'll set you up.`] },
   { q: "Would a bulk order suit me better?", a: [`If you'd rather buy upfront — for an event, a team or staff — a bulk order gives the lowest price per shirt (screen printing from ${FACTS.screenFrom}). <a href="/get-a-quote#quote">Price a bulk order</a>.`] },
 ];
 

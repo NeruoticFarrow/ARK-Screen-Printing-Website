@@ -20,7 +20,7 @@ import { doodle, floatChip, layer, SEAL, sticker } from "./components.mjs";
  *  it opens (STORES.signupOpen). */
 export const STORE_CTA = STORES.signupOpen
   ? {
-      label: "Start your store — free",
+      label: "Open your store — free",
       href: APP.studioStart,
       note: "",
       reassurance: ["Free to start", "No credit card", "No inventory to buy"],
