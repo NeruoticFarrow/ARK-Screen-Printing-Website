@@ -413,10 +413,8 @@ it on outside click and Escape). */
 .nav-panel a .icon{width:20px;height:20px;color:var(--blue)}
 .nav-panel a:hover{background:var(--sand)}
 .nav-panel a[aria-current="page"]{background:var(--sand);font-weight:600}
-.header-phone{display:none;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:var(--pill);color:var(--navy);font:600 .9375rem/1 var(--text);text-decoration:none}
-.header-phone .icon{width:18px;height:18px;color:var(--blue)}
-.header-phone:hover{background:var(--sand);color:var(--navy)}
-@media (min-width:1180px){.header-phone{display:inline-flex}}
+.header-contact--nav{display:none}
+@media (min-width:1180px){.header-contact--nav{display:inline-flex}}
 .header-call{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--navy);color:var(--navy)}
 .header-call .icon{width:20px;height:20px}
 @media (min-width:960px){.header-call{display:none}}

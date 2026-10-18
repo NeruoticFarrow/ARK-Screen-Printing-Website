@@ -7,6 +7,7 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
+import { PPC_LINE, SHOP } from "./lib/facts.mjs";
 import { shell } from "./lib/layout.mjs";
 import { SITE_CSS } from "./lib/styles.mjs";
 import { PPC_PAGES } from "./content/services.mjs";
@@ -62,7 +63,12 @@ for (const page of Object.values(pages)) {
   else if (areaBySlug[page.slug]) out = renderLocal(ctx);
   else if (/^(custom-|dtf-)/.test(page.slug)) out = renderService(ctx);
   else { unrouted.push(page.slug); continue; }
-  fs.writeFileSync(path.join(SITE_DIR, page.file), shell({ ...out, css: version }));
+  let html = shell({ ...out, css: version });
+  // A paid-search page shows its own line wherever the page shows a number.
+  if (PPC_PAGES[page.slug]) {
+    for (const key of ["phoneDisplay", "phoneHref", "smsHref"]) html = html.split(SHOP[key]).join(PPC_LINE[key]);
+  }
+  fs.writeFileSync(path.join(SITE_DIR, page.file), html);
   count++;
 }
 if (unrouted.length) throw new Error(`no template for: ${unrouted.join(", ")}`);
