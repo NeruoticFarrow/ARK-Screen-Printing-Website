@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import vm from "node:vm";
 import { APP, SHOP, STORES } from "./facts.mjs";
 import { accent, esc } from "./html.mjs";
 import { icon } from "./icons.mjs";
@@ -19,7 +20,7 @@ import { doodle, floatChip, layer, SEAL, sticker } from "./components.mjs";
  *  it opens (STORES.signupOpen). */
 export const STORE_CTA = STORES.signupOpen
   ? {
-      label: "Start your store — free",
+      label: "Open your store — free",
       href: APP.studioStart,
       note: "",
       reassurance: ["Free to start", "No credit card", "No inventory to buy"],
@@ -55,9 +56,29 @@ export const shippingText = () => {
   return `${usd(STORES.shippingFirstUsd)} for the first item and ${usd(STORES.shippingEachMoreUsd)} for each additional item, up to ${usd(cap)} an order`;
 };
 
-/** The example price for a tee: the typical price, unless that would sit
- *  below the tee's base — then ARK's suggested price for it. */
-const examplePrice = (g) => (STORES.examplePriceUsd > g.dtfBase ? STORES.examplePriceUsd : g.suggestedRetail);
+/** The pricing engine (assets/pod-pricing.js): the Studio's arithmetic, run
+ *  here for the page's worked example and built into site.js for the live
+ *  calculator. */
+export const podPricing = (() => {
+  const sandbox = {};
+  vm.runInNewContext(fs.readFileSync(new URL("../assets/pod-pricing.js", import.meta.url), "utf8"), sandbox);
+  return sandbox.podPricing;
+})();
+
+/** Print sizes a visitor can pick, in inches. Large is the Studio's planning
+ *  print, the size every base assumed before the calculator took prints. */
+const PRINT_SIZES = { "4x4": [4, 4], "8x10": [8, 10], "10x12": [10, 12], "12x16": [12, 16] };
+const SIZE_LABELS = { none: "None", "4x4": "Small · 4 × 4 in", "8x10": "Medium · 8 × 10 in", "10x12": "Large · 10 × 12 in", "12x16": "Full · 12 × 16 in" };
+/** Where a print can go and the sizes each place takes; the calculator starts
+ *  on one large front. */
+const PRINT_SPOTS = [
+  { id: "front", label: "Front", sizes: ["none", "4x4", "8x10", "10x12", "12x16"], start: "10x12" },
+  { id: "back", label: "Back", sizes: ["none", "4x4", "8x10", "10x12", "12x16"], start: "none" },
+  { id: "chest", label: "Left chest", sizes: ["none", "4x4"], start: "none" },
+];
+/** Ink colours a print can have; full-colour art or a photo is DTF printed. */
+const COLOUR_CHOICES = [["1", "1 ink color"], ["2", "2 ink colors"], ["3", "3 ink colors"], ["4", "4 ink colors"], ["5", "5 ink colors"], ["6", "6 ink colors"], ["full", "Full color or a photo"]];
+const MAX_UNITS = 500;
 
 /** Each reference tee's photo, shown beside its name in the calculator
  *  (owner, 2026-10-17): the Studio catalogue's front images (ark-designer
@@ -70,51 +91,83 @@ export const TEE_PHOTOS = {
 };
 const teePhoto = (g) => (TEE_PHOTOS[g.key] ? `<span class="opt-photo">${picture(TEE_PHOTOS[g.key], { alt: "", sizes: "64px" })}</span>` : "");
 
-/** The profit calculator: a complete worked example in the HTML (it reads
- *  without script); site.js makes it live. What you keep = your price − the
- *  tee's base, never below zero — the Studio's own arithmetic. */
+/** The profit calculator (owner, 2026-10-17: "show our true pricing … use the
+ *  quote form calculations … give people the ability to toy with that
+ *  calculator"): the tee, its prints and their ink colours, store or
+ *  campaign, how many sell and the price — every base worked out by the
+ *  Studio's own arithmetic (podPricing) from the rules in force. A complete
+ *  worked example in the HTML (it reads without script); site.js makes it
+ *  live. What you keep = your price − the base, never below zero. */
 export function calculator(o = {}) {
-  const { garments, screenMinimum } = STUDIO_PRICING;
+  const { garments, calculator: rules } = STUDIO_PRICING;
   const p = o.idPrefix ?? "calc";
-  // A modest run by default — an example, not a projection.
+  // A modest run by default — an example, not a projection — of one large
+  // one-colour front, sold from a store.
   const units = o.units ?? 30;
-  const first = garments[0];
-  const price = examplePrice(first);
-  const keep = Math.max(0, price - first.dtfBase);
-  const method = units >= screenMinimum ? "Screen printed by hand" : "DTF printed";
-  const options = garments
-    .map((g, i) => `<div class="option"><input type="radio" name="calc-garment" id="${p}-g${i}" value="${esc(g.key)}"${i === 0 ? " checked" : ""}><label for="${p}-g${i}"><span class="dot" aria-hidden="true"></span>${teePhoto(g)}<span class="name">${esc(g.label)}<small>Base ${money(g.dtfBase)} · suggested ${money(g.suggestedRetail)}</small></span><b>${money(g.dtfBase)}</b></label></div>`)
-    .join("");
-  const data = { screenMinimum, garments: garments.map((g) => ({ key: g.key, dtfBase: g.dtfBase, suggestedRetail: g.suggestedRetail })) };
+  const prints = [{ widthIn: 10, heightIn: 12, colours: 1 }];
+  const quoteFor = (g) => podPricing.quote(rules, g, { units, campaign: false, locations: prints });
+  const q = quoteFor(garments[0]);
+  const words = podPricing.describe(q);
+  const price = STORES.examplePriceUsd > q.base ? STORES.examplePriceUsd : podPricing.suggest(rules, q.base);
+  const keep = Math.max(0, podPricing.round(price - q.base));
+  // The parts add up to the base to the cent: the print line closes it.
+  const garment = podPricing.round(q.garment);
+  const packing = podPricing.round(q.packing);
+  const options = garments.map((g, i) => {
+    const base = quoteFor(g).base;
+    return `<div class="option"><input type="radio" name="calc-garment" id="${p}-g${i}" value="${esc(g.key)}"${i === 0 ? " checked" : ""}><label for="${p}-g${i}"><span class="dot" aria-hidden="true"></span>${teePhoto(g)}<span class="name">${esc(g.label)}<small>Suggested price <span data-tee-suggest="${esc(g.key)}">${money(podPricing.suggest(rules, base))}</span></small></span><b data-tee-base="${esc(g.key)}">${money(base)}</b></label></div>`;
+  }).join("");
+  const spots = PRINT_SPOTS.map((s) => `<div class="print-row">
+        <label class="print-spot" for="${p}-${s.id}">${esc(s.label)}</label>
+        <select id="${p}-${s.id}" data-print-size="${s.id}">${s.sizes.map((z) => `<option value="${z}"${z === s.start ? " selected" : ""}>${esc(SIZE_LABELS[z])}</option>`).join("")}</select>
+        <select data-print-colours="${s.id}" aria-label="${esc(s.label)}: ink colors"${s.start === "none" ? " disabled" : ""}>${COLOUR_CHOICES.map(([v, l]) => `<option value="${v}"${v === "1" ? " selected" : ""}>${esc(l)}</option>`).join("")}</select>
+      </div>`).join("");
+  const data = { rules, sizes: PRINT_SIZES, garments: garments.map((g) => ({ key: g.key, garment: g.garment, garmentBulk: g.garmentBulk })) };
   return `<div class="calc" data-calculator>
   <div class="calc-form">
     <fieldset>
       <legend class="field-label">Pick a tee</legend>
       <div class="options">${options}</div>
     </fieldset>
+    <fieldset class="calc-prints">
+      <legend class="field-label">Your prints</legend>
+      ${spots}
+      <p class="field-hint">Ink colors count when a campaign run is screen printed; DTF prints any number of colors.</p>
+    </fieldset>
+    <fieldset>
+      <legend class="field-label">How it sells</legend>
+      <div class="options options--pair">
+        <div class="option"><input type="radio" name="calc-mode" id="${p}-store" value="store" checked><label for="${p}-store"><span class="dot" aria-hidden="true"></span><span class="name">Store<small>Always open. Each order is printed as it comes in, DTF.</small></span></label></div>
+        <div class="option"><input type="radio" name="calc-mode" id="${p}-campaign" value="campaign"><label for="${p}-campaign"><span class="dot" aria-hidden="true"></span><span class="name">Campaign<small>Sells until a closing date, then prints as one run: screen printed from ${rules.screen.minUnits}.</small></span></label></div>
+      </div>
+    </fieldset>
+    <div class="field">
+      <label class="field-label" for="${p}-units">Garments sold: <output data-calc-units-out for="${p}-units">${units}</output></label>
+      <input class="range" id="${p}-units" type="range" min="1" max="${MAX_UNITS}" step="1" value="${units}" data-calc-units>
+      <div class="range-scale" aria-hidden="true"><span>1</span><span>${MAX_UNITS}</span></div>
+    </div>
     <div class="field">
       <label class="field-label" for="${p}-price">Your price per tee</label>
       <div class="price-field"><span aria-hidden="true">$</span><input id="${p}-price" type="number" inputmode="decimal" min="1" max="500" step="0.01" value="${price.toFixed(2)}" data-calc-price aria-describedby="${p}-price-hint"></div>
-      <p class="field-hint" id="${p}-price-hint">Try your own price. Each tee lists our suggested price; the lowest you can set is its base.</p>
-    </div>
-    <div class="field">
-      <label class="field-label" for="${p}-units">Garments sold: <output data-calc-units-out for="${p}-units">${units}</output></label>
-      <input class="range" id="${p}-units" type="range" min="1" max="250" step="1" value="${units}" data-calc-units>
-      <div class="range-scale" aria-hidden="true"><span>1</span><span>250</span></div>
+      <p class="field-hint" id="${p}-price-hint">Try your own price. Each tee lists our suggested price; the lowest you can set is the base of a tee printed on its own.</p>
     </div>
   </div>
   <div class="tile tile--navy on-dark result">
     ${SEAL}
     <div aria-live="polite" aria-atomic="true">
       <span class="label">You'd keep</span>
-      <div class="result-total" data-out="total">${money(keep * units)}</div>
+      <div class="result-total" data-out="total">${money(podPricing.round(keep * units))}</div>
       <p class="result-sub">for <span data-out="units">${units}</span> sold</p>
     </div>
     <ul class="result-rows">
-      <li><span>Base per tee</span><b data-out="base">${money(first.dtfBase)}</b></li>
+      <li><span>Base per tee</span><b data-out="base">${money(q.base)}</b></li>
+      <li class="result-part"><span>The tee</span><b data-out="garment">${money(garment)}</b></li>
+      <li class="result-part"><span data-out="print-label">${esc(words.printLabel)}</span><b data-out="print">${money(podPricing.round(q.base - garment - packing))}</b></li>
+      <li class="result-part"><span>Bagging, folding and sorting</span><b data-out="packing">${money(packing)}</b></li>
       <li><span>You keep per tee</span><b data-out="keep">${money(keep)}</b></li>
-      <li><span>A run this size is</span><b data-out="method">${method}</b></li>
+      <li><span>Printed</span><b data-out="method">${esc(words.method)}</b></li>
     </ul>
+    <p class="calc-reason" data-out="note"${words.note ? "" : " hidden"}>${esc(words.note)}</p>
     <p class="calc-warning" data-out="warning" hidden></p>
     <p class="calc-note">Buyers pay your price plus shipping: ${esc(shippingText())}. An example of the arithmetic, not a sales forecast.</p>
   </div>
@@ -122,8 +175,11 @@ export function calculator(o = {}) {
 <script type="application/json" id="calculator-data">${JSON.stringify(data).replace(/</g, "\\u003c")}</script>`;
 }
 
+/** How the bases are built, in the rules' own numbers. */
 export function calculatorFootnote() {
-  return `<p class="calc-foot">Bases are for ${esc(STORES.planningPrint)} on sizes up to XL, under the price rules in force (version ${STUDIO_PRICING.version}): the blank, the print, packing and our margin. 2XL and up cost the buyer more and you keep the same. Your release's base depends on its artwork's size and placements — the Studio shows it before you set a price. What you keep is the same whether a run is screen printed or DTF printed.</p>`;
+  const r = STUDIO_PRICING.calculator;
+  const bulkFrom = r.screen.bulkTiers.length ? Math.min(...r.screen.bulkTiers.map((t) => t.minUnits)) : null;
+  return `<p class="calc-foot">These are the Studio's own bases, under the price rules in force (version ${STUDIO_PRICING.version}), priced like any order on our quote form: the tee at our garment price, then the print. A tee printed on its own is DTF: transfer film from our gang sheets and ${usd(r.dtf.pressFeePerLocation)} a print to press, ${usd(r.dtf.extraLocationFee)} more for each print after the first. A campaign run of ${r.screen.minUnits} or more is screen printed by hand: ${usd(r.screen.screenFeePerScreen)} a screen and ${usd(r.screen.adminFeePerRun)} setup, spread over the run, plus the impressions${bulkFrom ? ` — with bulk rates from ${bulkFrom}` : ""}. Every tee also carries ${usd(r.packingPerGarment)} to bag it in a polymailer, fold it and sort it. Sizes up to XL; 2XL and up cost the buyer more and you keep the same.</p>`;
 }
 
 /** Product categories, as the designer groups them (ark-designer client/src/

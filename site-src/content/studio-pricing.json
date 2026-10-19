@@ -1,26 +1,502 @@
 {
   "source": "https://design.arkscreenprinting.com/studio/pricing.json",
   "fetchedAt": "2026-10-17",
-  "version": 2,
+  "version": 3,
   "screenMinimum": 24,
   "garments": [
     {
       "key": "ss_activewear/5000",
       "label": "Gildan Unisex Heavy Cotton™ T-Shirt",
-      "dtfBase": 15,
-      "suggestedRetail": 27.49
+      "dtfBase": 18,
+      "suggestedRetail": 32.49,
+      "garment": 6,
+      "garmentBulk": 6.666666666666667
     },
     {
       "key": "ss_activewear/3600",
       "label": "Next Level Unisex Cotton Tee",
-      "dtfBase": 17.2,
-      "suggestedRetail": 30.99
+      "dtfBase": 20.2,
+      "suggestedRetail": 36.49,
+      "garment": 8.2,
+      "garmentBulk": 9.11111111111111
     },
     {
       "key": "as_colour/5001",
       "label": "AS Colour Staple Tee",
-      "dtfBase": 20.3,
-      "suggestedRetail": 36.99
+      "dtfBase": 23.3,
+      "suggestedRetail": 41.99,
+      "garment": 11.3,
+      "garmentBulk": 12.555555555555557
+    }
+  ],
+  "calculator": {
+    "dtf": {
+      "pressFeePerLocation": 2,
+      "extraLocationFee": 3,
+      "materialMarkupMultiplier": 2,
+      "gangSheets": [
+        {
+          "widthIn": 22.5,
+          "lengthIn": 24,
+          "rawCost": 14
+        },
+        {
+          "widthIn": 22.5,
+          "lengthIn": 36,
+          "rawCost": 21
+        },
+        {
+          "widthIn": 22.5,
+          "lengthIn": 48,
+          "rawCost": 28
+        },
+        {
+          "widthIn": 22.5,
+          "lengthIn": 60,
+          "rawCost": 35
+        },
+        {
+          "widthIn": 22.5,
+          "lengthIn": 80,
+          "rawCost": 46.67
+        },
+        {
+          "widthIn": 22.5,
+          "lengthIn": 120,
+          "rawCost": 70
+        }
+      ],
+      "minIn": 2,
+      "maxWidthIn": 13,
+      "maxHeightIn": 19
+    },
+    "screen": {
+      "screenFeePerScreen": 35,
+      "adminFeePerRun": 27,
+      "impressionRates": [
+        {
+          "upToColours": 3,
+          "rate": 1.43
+        },
+        {
+          "rate": 0.9
+        }
+      ],
+      "extraLocationFee": 3,
+      "minUnits": 24,
+      "maxColours": 6,
+      "colourLimits": [
+        {
+          "minUnits": 24,
+          "maxColours": 3
+        },
+        {
+          "minUnits": 40,
+          "maxColours": 6
+        }
+      ],
+      "bulkTiers": [
+        {
+          "minUnits": 100,
+          "firstColourRate": 0.95,
+          "additionalColourRate": 0.35,
+          "additionalLocationRate": 2
+        },
+        {
+          "minUnits": 144,
+          "firstColourRate": 0.85,
+          "additionalColourRate": 0.3,
+          "additionalLocationRate": 1.5
+        },
+        {
+          "minUnits": 288,
+          "firstColourRate": 0.7,
+          "additionalColourRate": 0.2,
+          "additionalLocationRate": 1
+        },
+        {
+          "minUnits": 500,
+          "firstColourRate": 0.65,
+          "additionalColourRate": 0.2,
+          "additionalLocationRate": 1
+        }
+      ]
+    },
+    "packingPerGarment": 3,
+    "suggestedRetailMultiplier": 1.8
+  },
+  "examples": [
+    {
+      "garment": "ss_activewear/5000",
+      "units": 1,
+      "method": "dtf",
+      "locations": [
+        {
+          "widthIn": 10,
+          "heightIn": 12,
+          "colours": 1
+        }
+      ],
+      "base": 18
+    },
+    {
+      "garment": "ss_activewear/5000",
+      "units": 1,
+      "method": "dtf",
+      "locations": [
+        {
+          "widthIn": 11,
+          "heightIn": 14,
+          "colours": 2
+        },
+        {
+          "widthIn": 4,
+          "heightIn": 4,
+          "colours": 1
+        }
+      ],
+      "base": 25.68
+    },
+    {
+      "garment": "ss_activewear/5000",
+      "units": 24,
+      "method": "screen_print",
+      "locations": [
+        {
+          "widthIn": 10,
+          "heightIn": 12,
+          "colours": 1
+        }
+      ],
+      "base": 13.01
+    },
+    {
+      "garment": "ss_activewear/5000",
+      "units": 48,
+      "method": "screen_print",
+      "locations": [
+        {
+          "widthIn": 11,
+          "heightIn": 14,
+          "colours": 2
+        },
+        {
+          "widthIn": 4,
+          "heightIn": 4,
+          "colours": 1
+        }
+      ],
+      "base": 19.04
+    },
+    {
+      "garment": "ss_activewear/5000",
+      "units": 100,
+      "method": "screen_print",
+      "locations": [
+        {
+          "widthIn": 10,
+          "heightIn": 12,
+          "colours": 1
+        }
+      ],
+      "base": 11.24
+    },
+    {
+      "garment": "ss_activewear/5000",
+      "units": 144,
+      "method": "screen_print",
+      "locations": [
+        {
+          "widthIn": 12,
+          "heightIn": 16,
+          "colours": 3
+        },
+        {
+          "widthIn": 4,
+          "heightIn": 4,
+          "colours": 1
+        }
+      ],
+      "base": 14.63
+    },
+    {
+      "garment": "ss_activewear/5000",
+      "units": 288,
+      "method": "screen_print",
+      "locations": [
+        {
+          "widthIn": 12,
+          "heightIn": 16,
+          "colours": 3
+        },
+        {
+          "widthIn": 12,
+          "heightIn": 16,
+          "colours": 2
+        }
+      ],
+      "base": 13.37
+    },
+    {
+      "garment": "ss_activewear/5000",
+      "units": 500,
+      "method": "screen_print",
+      "locations": [
+        {
+          "widthIn": 12,
+          "heightIn": 16,
+          "colours": 6
+        }
+      ],
+      "base": 11.79
+    },
+    {
+      "garment": "ss_activewear/3600",
+      "units": 1,
+      "method": "dtf",
+      "locations": [
+        {
+          "widthIn": 10,
+          "heightIn": 12,
+          "colours": 1
+        }
+      ],
+      "base": 20.2
+    },
+    {
+      "garment": "ss_activewear/3600",
+      "units": 1,
+      "method": "dtf",
+      "locations": [
+        {
+          "widthIn": 11,
+          "heightIn": 14,
+          "colours": 2
+        },
+        {
+          "widthIn": 4,
+          "heightIn": 4,
+          "colours": 1
+        }
+      ],
+      "base": 27.88
+    },
+    {
+      "garment": "ss_activewear/3600",
+      "units": 24,
+      "method": "screen_print",
+      "locations": [
+        {
+          "widthIn": 10,
+          "heightIn": 12,
+          "colours": 1
+        }
+      ],
+      "base": 15.21
+    },
+    {
+      "garment": "ss_activewear/3600",
+      "units": 48,
+      "method": "screen_print",
+      "locations": [
+        {
+          "widthIn": 11,
+          "heightIn": 14,
+          "colours": 2
+        },
+        {
+          "widthIn": 4,
+          "heightIn": 4,
+          "colours": 1
+        }
+      ],
+      "base": 21.24
+    },
+    {
+      "garment": "ss_activewear/3600",
+      "units": 100,
+      "method": "screen_print",
+      "locations": [
+        {
+          "widthIn": 10,
+          "heightIn": 12,
+          "colours": 1
+        }
+      ],
+      "base": 13.68
+    },
+    {
+      "garment": "ss_activewear/3600",
+      "units": 144,
+      "method": "screen_print",
+      "locations": [
+        {
+          "widthIn": 12,
+          "heightIn": 16,
+          "colours": 3
+        },
+        {
+          "widthIn": 4,
+          "heightIn": 4,
+          "colours": 1
+        }
+      ],
+      "base": 17.07
+    },
+    {
+      "garment": "ss_activewear/3600",
+      "units": 288,
+      "method": "screen_print",
+      "locations": [
+        {
+          "widthIn": 12,
+          "heightIn": 16,
+          "colours": 3
+        },
+        {
+          "widthIn": 12,
+          "heightIn": 16,
+          "colours": 2
+        }
+      ],
+      "base": 15.81
+    },
+    {
+      "garment": "ss_activewear/3600",
+      "units": 500,
+      "method": "screen_print",
+      "locations": [
+        {
+          "widthIn": 12,
+          "heightIn": 16,
+          "colours": 6
+        }
+      ],
+      "base": 14.24
+    },
+    {
+      "garment": "as_colour/5001",
+      "units": 1,
+      "method": "dtf",
+      "locations": [
+        {
+          "widthIn": 10,
+          "heightIn": 12,
+          "colours": 1
+        }
+      ],
+      "base": 23.3
+    },
+    {
+      "garment": "as_colour/5001",
+      "units": 1,
+      "method": "dtf",
+      "locations": [
+        {
+          "widthIn": 11,
+          "heightIn": 14,
+          "colours": 2
+        },
+        {
+          "widthIn": 4,
+          "heightIn": 4,
+          "colours": 1
+        }
+      ],
+      "base": 30.98
+    },
+    {
+      "garment": "as_colour/5001",
+      "units": 24,
+      "method": "screen_print",
+      "locations": [
+        {
+          "widthIn": 10,
+          "heightIn": 12,
+          "colours": 1
+        }
+      ],
+      "base": 18.31
+    },
+    {
+      "garment": "as_colour/5001",
+      "units": 48,
+      "method": "screen_print",
+      "locations": [
+        {
+          "widthIn": 11,
+          "heightIn": 14,
+          "colours": 2
+        },
+        {
+          "widthIn": 4,
+          "heightIn": 4,
+          "colours": 1
+        }
+      ],
+      "base": 24.34
+    },
+    {
+      "garment": "as_colour/5001",
+      "units": 100,
+      "method": "screen_print",
+      "locations": [
+        {
+          "widthIn": 10,
+          "heightIn": 12,
+          "colours": 1
+        }
+      ],
+      "base": 17.13
+    },
+    {
+      "garment": "as_colour/5001",
+      "units": 144,
+      "method": "screen_print",
+      "locations": [
+        {
+          "widthIn": 12,
+          "heightIn": 16,
+          "colours": 3
+        },
+        {
+          "widthIn": 4,
+          "heightIn": 4,
+          "colours": 1
+        }
+      ],
+      "base": 20.52
+    },
+    {
+      "garment": "as_colour/5001",
+      "units": 288,
+      "method": "screen_print",
+      "locations": [
+        {
+          "widthIn": 12,
+          "heightIn": 16,
+          "colours": 3
+        },
+        {
+          "widthIn": 12,
+          "heightIn": 16,
+          "colours": 2
+        }
+      ],
+      "base": 19.26
+    },
+    {
+      "garment": "as_colour/5001",
+      "units": 500,
+      "method": "screen_print",
+      "locations": [
+        {
+          "widthIn": 12,
+          "heightIn": 16,
+          "colours": 6
+        }
+      ],
+      "base": 17.68
     }
   ]
 }

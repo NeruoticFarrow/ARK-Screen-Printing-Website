@@ -369,6 +369,18 @@ span.rt-av{display:grid;place-items:center;color:#fff;font:600 1.125rem/1 var(--
 .calc-warning{margin:0;color:var(--tan);font-weight:600}
 .calc-note{margin:0;font-size:.875rem;color:var(--on-dark)}
 .calc-foot{margin-top:18px;max-width:72ch;font-size:.875rem;color:var(--muted)}
+.calc-form fieldset + fieldset{margin-top:22px}
+.calc-prints .print-row{display:grid;grid-template-columns:minmax(84px,auto) 1fr 1fr;align-items:center;gap:10px;margin-top:12px}
+.print-spot{font-weight:600;color:var(--navy)}
+.calc select{width:100%;min-width:0;height:48px;padding:0 12px;border-radius:var(--r-md);background:var(--parchment);border:1.5px solid var(--line);font:500 .9375rem/1.2 var(--text);color:var(--navy)}
+.calc select:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.calc select:disabled{opacity:.5}
+.calc-prints .field-hint{margin-top:10px}
+@media (max-width:560px){.calc-prints .print-row{grid-template-columns:1fr 1fr}.print-spot{grid-column:1 / -1}}
+.options--pair{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.result-rows .result-part{padding:5px 0 5px 14px;border-top:0;font-size:.875rem;color:var(--on-dark)}
+.result-rows .result-part b{font-weight:500}
+.calc-reason{margin:0;font-size:.9375rem;color:var(--parchment)}
 .pod-facts{margin-top:26px}
 @media (min-width:900px){.pod-facts{grid-template-columns:repeat(3,minmax(0,1fr))}}
 /* FAQ: each question a card; its answer opens inside it, indented under the

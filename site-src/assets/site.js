@@ -263,46 +263,97 @@
       .catch(function () { clearTimeout(timer); });
   }
 
-  // Print on demand: the profit calculator (ported from the Studio's pages).
-  // The bases come with the page (content/studio-pricing.json); this only
-  // does the Studio's arithmetic — what you keep = your price − the tee's
-  // base, never below zero — and says when a price sits below the base.
+  // Print on demand: the profit calculator (owner, 2026-10-17: our true
+  // pricing, the quote form's arithmetic, variables to toy with). podPricing,
+  // built in below, is the Studio's price arithmetic; the rules and the tees
+  // come with the page (content/studio-pricing.json). What you keep = your
+  // price − the base, never below zero. The lowest price the Studio takes is
+  // the base of a tee printed on its own (DTF), whatever the run.
+  /* @@POD_PRICING@@ */
   var calc = doc.querySelector("[data-calculator]");
   var calcData = doc.getElementById("calculator-data");
   if (calc && calcData) {
     var pricing = null;
     try { pricing = JSON.parse(calcData.textContent || "{}"); } catch (e) { pricing = null; }
     var tees = pricing && Array.isArray(pricing.garments) ? pricing.garments : [];
+    var rules = pricing && pricing.rules;
+    var sizes = (pricing && pricing.sizes) || {};
     var priceIn = calc.querySelector("[data-calc-price]");
     var unitsIn = calc.querySelector("[data-calc-units]");
     var unitsOut = calc.querySelector("[data-calc-units-out]");
     var calcUsed = false;
     var dollars = function (n) { return "$" + n.toFixed(2); };
-    var cents = function (n) { return Math.round(n * 100) / 100; };
     var setOut = function (name, text) { var n = calc.querySelector('[data-out="' + name + '"]'); if (n) n.textContent = text; };
     var chosen = function () {
       var checked = calc.querySelector('input[name="calc-garment"]:checked');
       for (var i = 0; i < tees.length; i += 1) if (checked && tees[i].key === checked.value) return tees[i];
       return tees[0];
     };
+    // The prints as the Studio prices them: each spot's size and ink colours
+    // ("full" is full-colour art, which only DTF prints). A spot set to None
+    // greys out its colours.
+    var design = function () {
+      var prints = [];
+      var fullColour = false;
+      calc.querySelectorAll("[data-print-size]").forEach(function (sizeIn) {
+        var spot = sizeIn.getAttribute("data-print-size");
+        var coloursIn = calc.querySelector('[data-print-colours="' + spot + '"]');
+        var size = sizes[sizeIn.value];
+        if (coloursIn) coloursIn.disabled = !size;
+        if (!size) return;
+        var colours = coloursIn ? coloursIn.value : "1";
+        if (colours === "full") fullColour = true;
+        prints.push({ widthIn: size[0], heightIn: size[1], colours: colours === "full" ? 99 : Number(colours) || 1 });
+      });
+      return { prints: prints, fullColour: fullColour };
+    };
     var renderCalc = function () {
       var tee = chosen();
-      if (!tee || !priceIn || !unitsIn) return;
-      var price = Number(priceIn.value);
+      if (!tee || !rules || !priceIn || !unitsIn) return;
       var units = Math.max(1, Math.round(Number(unitsIn.value) || 1));
+      var mode = calc.querySelector('input[name="calc-mode"]:checked');
+      var d = design();
+      // No print picked: the Studio's planning print, a 10 × 12 in front.
+      var prints = d.prints.length ? d.prints : [{ widthIn: 10, heightIn: 12, colours: 1 }];
+      var opts = { units: units, campaign: !!mode && mode.value === "campaign", locations: prints, fullColour: d.fullColour };
+      var onItsOwn = { units: units, campaign: false, locations: prints };
+      var q = podPricing.quote(rules, tee, opts);
+      var floor = podPricing.quote(rules, tee, onItsOwn).base;
+      var words = podPricing.describe(q);
+      var price = Number(priceIn.value);
       var valid = isFinite(price) && price > 0;
-      var keep = valid ? Math.max(0, cents(price - tee.dtfBase)) : 0;
+      var keep = valid ? Math.max(0, podPricing.round(price - q.base)) : 0;
+      // The parts add up to the base to the cent: the print line closes it.
+      var garment = podPricing.round(q.garment);
+      var packing = podPricing.round(q.packing);
       if (unitsOut) unitsOut.textContent = String(units);
-      setOut("base", dollars(tee.dtfBase));
-      setOut("keep", dollars(keep));
-      setOut("total", dollars(cents(keep * units)));
       setOut("units", String(units));
-      setOut("method", units >= pricing.screenMinimum ? "Screen printed by hand" : "DTF printed");
+      setOut("base", dollars(q.base));
+      setOut("garment", dollars(garment));
+      setOut("print-label", words.printLabel);
+      setOut("print", dollars(podPricing.round(q.base - garment - packing)));
+      setOut("packing", dollars(packing));
+      setOut("keep", dollars(keep));
+      setOut("total", dollars(podPricing.round(keep * units)));
+      setOut("method", words.method);
+      var note = calc.querySelector('[data-out="note"]');
+      if (note) {
+        var text = d.prints.length ? words.note : "No print chosen: showing a 10 × 12 in front.";
+        note.textContent = text;
+        note.hidden = !text;
+      }
+      // Each tee's base and suggested price follow the design and the run.
+      tees.forEach(function (t) {
+        var baseOut = calc.querySelector('[data-tee-base="' + t.key + '"]');
+        var suggestOut = calc.querySelector('[data-tee-suggest="' + t.key + '"]');
+        if (baseOut) baseOut.textContent = dollars(podPricing.quote(rules, t, opts).base);
+        if (suggestOut) suggestOut.textContent = dollars(podPricing.suggest(rules, podPricing.quote(rules, t, onItsOwn).base));
+      });
       var warning = calc.querySelector('[data-out="warning"]');
       if (warning) {
-        var below = valid && price < tee.dtfBase;
+        var below = valid && price < floor;
         warning.hidden = !below;
-        warning.textContent = below ? "Below the " + dollars(tee.dtfBase) + " base — the Studio won't let a price lose money, so the lowest you can set is the base." : "";
+        warning.textContent = below ? "Below the " + dollars(floor) + " base of a tee printed on its own — the Studio won't let a price lose money, so that's the lowest you can set." : "";
       }
     };
     var calcInput = function () {

@@ -27,11 +27,16 @@ async function main() {
   const res = await fetch(FEED, { headers: { accept: "application/json" }, signal: AbortSignal.timeout(10_000) });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const data = await res.json();
+  // Since price rules v3 (2026-10-17) the feed also carries each tee's garment
+  // price (and bulk price), the calculator rules and worked examples. The
+  // calculator works every base out from them, so a feed without them keeps
+  // the committed copy.
   const garments = (Array.isArray(data?.garments) ? data.garments : [])
-    .filter((g) => g && typeof g.key === "string" && money(g.dtfBase) && money(g.suggestedRetail))
-    .map((g) => ({ key: g.key, label: [g.brand, g.name].filter(Boolean).join(" ").trim() || g.key, dtfBase: g.dtfBase, suggestedRetail: g.suggestedRetail }));
+    .filter((g) => g && typeof g.key === "string" && money(g.dtfBase) && money(g.suggestedRetail) && money(g.garment) && (g.garmentBulk === null || money(g.garmentBulk)))
+    .map((g) => ({ key: g.key, label: [g.brand, g.name].filter(Boolean).join(" ").trim() || g.key, dtfBase: g.dtfBase, suggestedRetail: g.suggestedRetail, garment: g.garment, garmentBulk: g.garmentBulk }));
   if (!garments.length || !Number.isInteger(data.version) || !Number.isInteger(data.screenMinimum)) throw new Error("unexpected shape");
-  const next = { source: FEED, fetchedAt: new Date().toISOString().slice(0, 10), version: data.version, screenMinimum: data.screenMinimum, garments };
+  if (!data.calculator?.dtf || !data.calculator?.screen || !Array.isArray(data.examples) || !data.examples.length) throw new Error("no calculator rules in the feed yet");
+  const next = { source: FEED, fetchedAt: new Date().toISOString().slice(0, 10), version: data.version, screenMinimum: data.screenMinimum, garments, calculator: data.calculator, examples: data.examples };
   fs.writeFileSync(FILE, `${JSON.stringify(next, null, 2)}\n`);
   console.log(`studio: ${garments.length} reference tees under price rules v${data.version}`);
 }
