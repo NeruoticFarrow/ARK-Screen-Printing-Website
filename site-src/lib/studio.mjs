@@ -165,9 +165,9 @@ export function runRuleTile(id, text, after = "") {
   const [a, b] = STORES.screenColours;
   const stats = [
     { figure: "$0", label: "to open a store" },
-    { figure: `${a.from}+`, label: `garments, up to ${a.colours} ink colours: screen printed by hand` },
+    { figure: `${a.from}+`, label: `garments, up to ${a.colours} ink colors: screen printed by hand` },
     { figure: STORES.onDemandShipDays, label: "business days to ship a print-on-demand order" },
-    { figure: `${b.from}+`, label: `garments for up to ${b.colours} ink colours on screen` },
+    { figure: `${b.from}+`, label: `garments for up to ${b.colours} ink colors on screen` },
   ];
   return `<div class="tile tile--navy on-dark" data-appear>
   ${SEAL}

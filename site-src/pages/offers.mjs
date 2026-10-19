@@ -30,7 +30,7 @@ const storeNote = () => (STORES.signupOpen ? "" : `<p class="cta-note">The store
 
 const runRule = () => {
   const [a, b] = STORES.screenColours;
-  return `${a.from}+ orders in a run are screen printed when the art fits the colour limits (up to ${a.colours} colours from ${a.from}, up to ${b.colours} from ${b.from}); otherwise they're DTF printed. Campaign orders print after the closing date, within ${STORES.campaignPrintDays} business days of the blanks arriving, then ship.`;
+  return `${a.from}+ orders in a run are screen printed when the art fits the color limits (up to ${a.colours} colors from ${a.from}, up to ${b.colours} from ${b.from}); otherwise they're DTF printed. Campaign orders print after the closing date, within ${STORES.campaignPrintDays} business days of the blanks arriving, then ship.`;
 };
 const payoutRule = () => `Earnings become available ${STORES.payoutAfterShipDays} days after an order ships and are paid by PayPal once a month when you have $${STORES.minimumPayoutUsd} or more. A W-9 is needed once payouts pass the IRS reporting threshold.`;
 
@@ -113,7 +113,7 @@ export function renderPrintOnDemand() {
   const how = `<section class="section section--sand" id="how" aria-labelledby="how-title"><div class="container">
   ${sectionHead("how-title", "Three steps. We do the *printing*.", "You make the release and decide how it sells. We print, pack, ship and look after your buyers.")}
   <div class="doodled">${doodle("loop", "section-doodle section-doodle--loop", " data-appear")}${stepsList([
-    { title: "Design and price it", text: "Upload your art, place it and pick colours. See the base and set your price — what you keep updates as you type." },
+    { title: "Design and price it", text: "Upload your art, place it and pick colors. See the base and set your price — what you keep updates as you type." },
     { title: "Launch your store", text: "Run a campaign with a closing date, or print on demand so it's always on sale. A printer reviews your file first." },
     { title: "We print, ship and pay you", text: `Printed in our ${SHOP.city} shop and shipped with tracking within ${STORES.onDemandShipDays} business days. Your earnings are paid monthly by PayPal.` },
   ])}</div>
@@ -201,13 +201,13 @@ export function renderPrintOnDemand() {
 export const FUNDRAISING_FAQ = [
   { q: "How does the money work?", a: [
     `<b>Bulk order:</b> you buy the shirts at our price and sell them at your price — the difference is your fundraiser. Screen printing starts at ${FACTS.screenFrom} shirts and gives the lowest price per shirt.`,
-    `<b>Online store:</b> you set the price; each sale's base (the blank, the print, packing and our margin) comes out, and everything above it is earned by the store. Set your organisation's PayPal account as the payout method so the earnings go to the organisation. ${payoutRule()}`,
+    `<b>Online store:</b> you set the price; each sale's base (the blank, the print, packing and our margin) comes out, and everything above it is earned by the store. Set your organization's PayPal account as the payout method so the earnings go to the organization. ${payoutRule()}`,
   ] },
   { q: "How far ahead should we start?", a: [`Give yourself about three weeks before your event: a day or two for the quote and proof, then most screen-print orders are done in ${FACTS.turnaround.screen}. Short on time? Call ${SHOP.phoneDisplay} — rush is often possible.`] },
   { q: "Can we use our school or team logo?", a: ["Yes, if you have permission to use it. Many schools, districts and leagues have a process for approving their logos and mascots — check before you order, and we'll print what's approved."] },
   { q: "Is there a minimum?", a: [`No minimum order. Screen printing starts at ${FACTS.screenFrom} shirts; smaller orders are printed with DTF. In an online store, every order prints.`] },
   { q: "What should we tell supporters?", a: ["Say plainly how much of each sale goes to your cause — for example, “$8 from every shirt funds the band trip” (an illustration: use your own numbers, and make sure they match the price you set)."] },
-  { q: "Are purchases donations?", a: ["No. ARK sells and ships the shirts; we don't collect donations or issue tax receipts. Whether any part of a purchase is deductible is for your organisation to say — ask your accountant."] },
+  { q: "Are purchases donations?", a: ["No. ARK sells and ships the shirts; we don't collect donations or issue tax receipts. Whether any part of a purchase is deductible is for your organization to say — ask your accountant."] },
   { q: "Do you deliver?", a: [`${FACTS.pickup} in ${SHOP.city}, or we ship your order. With an online store, each supporter's order ships to them.`] },
 ];
 
@@ -243,8 +243,8 @@ export function renderFundraising() {
       <h3 class="h3" style="margin:6px 0 14px">An online fundraiser store</h3>
       <ul class="checklist">
         <li>${icon("storefront")}<span><b>$0 to open</b><small>No monthly or listing fees. Supporters pick a size and pay online.</small></span></li>
-        <li>${icon("currencyDollar")}<span><b>Everything above the base is earned</b><small>Set your organisation's PayPal account as the payout method — paid monthly once earnings reach $${STORES.minimumPayoutUsd}.</small></span></li>
-        <li>${icon("truck")}<span><b>We print and ship every order</b><small>No cash to collect, no leftover boxes. Run it with a closing date and the whole run prints after it closes — ${FACTS.screenFrom}+ in screen print when the art fits the colour limits.</small></span></li>
+        <li>${icon("currencyDollar")}<span><b>Everything above the base is earned</b><small>Set your organization's PayPal account as the payout method — paid monthly once earnings reach $${STORES.minimumPayoutUsd}.</small></span></li>
+        <li>${icon("truck")}<span><b>We print and ship every order</b><small>No cash to collect, no leftover boxes. Run it with a closing date and the whole run prints after it closes — ${FACTS.screenFrom}+ in screen print when the art fits the color limits.</small></span></li>
       </ul>
       <div class="cta-row">${studioButton("ways_studio", "Start a fundraiser store", { ghost: true })}</div>
       ${storeNote()}
