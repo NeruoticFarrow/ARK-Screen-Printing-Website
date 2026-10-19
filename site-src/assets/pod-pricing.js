@@ -157,8 +157,8 @@ var podPricing = (function () {
     if (q.capped) note = "Screen printing this run costs no less than DTF, so you pay the base of a tee printed on its own.";
     else if (q.method === "screen_print") note = q.bulk ? "Bulk rates from " + q.bulk.minUnits + " garments." : "";
     else if (reason && reason.code === "minimum") note = "A campaign run is screen printed from " + reason.from + " garments.";
-    else if (reason && reason.code === "fullColour") note = "Full-colour art is DTF printed.";
-    else if (reason && reason.code === "colours") note = reason.from ? "More than " + reason.allowed + " ink colours are screen printed from " + reason.from + " garments." : "Too many ink colours to screen print.";
+    else if (reason && reason.code === "fullColour") note = "Full-color art is DTF printed.";
+    else if (reason && reason.code === "colours") note = reason.from ? "More than " + reason.allowed + " ink colors are screen printed from " + reason.from + " garments." : "Too many ink colors to screen print.";
     return {
       method: q.method === "screen_print" ? "Screen printed by hand" : reason && reason.code === "store" ? "DTF, as each order comes in" : "DTF printed",
       printLabel: q.capped ? "The print (at the DTF price)" : q.method === "screen_print" ? "The print, screens and setup" : "The print (DTF)",

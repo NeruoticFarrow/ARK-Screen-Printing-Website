@@ -77,7 +77,7 @@ const PRINT_SPOTS = [
   { id: "chest", label: "Left chest", sizes: ["none", "4x4"], start: "none" },
 ];
 /** Ink colours a print can have; full-colour art or a photo is DTF printed. */
-const COLOUR_CHOICES = [["1", "1 ink colour"], ["2", "2 ink colours"], ["3", "3 ink colours"], ["4", "4 ink colours"], ["5", "5 ink colours"], ["6", "6 ink colours"], ["full", "Full colour or a photo"]];
+const COLOUR_CHOICES = [["1", "1 ink color"], ["2", "2 ink colors"], ["3", "3 ink colors"], ["4", "4 ink colors"], ["5", "5 ink colors"], ["6", "6 ink colors"], ["full", "Full color or a photo"]];
 const MAX_UNITS = 500;
 
 /** Each reference tee's photo, shown beside its name in the calculator
@@ -120,7 +120,7 @@ export function calculator(o = {}) {
   const spots = PRINT_SPOTS.map((s) => `<div class="print-row">
         <label class="print-spot" for="${p}-${s.id}">${esc(s.label)}</label>
         <select id="${p}-${s.id}" data-print-size="${s.id}">${s.sizes.map((z) => `<option value="${z}"${z === s.start ? " selected" : ""}>${esc(SIZE_LABELS[z])}</option>`).join("")}</select>
-        <select data-print-colours="${s.id}" aria-label="${esc(s.label)}: ink colours"${s.start === "none" ? " disabled" : ""}>${COLOUR_CHOICES.map(([v, l]) => `<option value="${v}"${v === "1" ? " selected" : ""}>${esc(l)}</option>`).join("")}</select>
+        <select data-print-colours="${s.id}" aria-label="${esc(s.label)}: ink colors"${s.start === "none" ? " disabled" : ""}>${COLOUR_CHOICES.map(([v, l]) => `<option value="${v}"${v === "1" ? " selected" : ""}>${esc(l)}</option>`).join("")}</select>
       </div>`).join("");
   const data = { rules, sizes: PRINT_SIZES, garments: garments.map((g) => ({ key: g.key, garment: g.garment, garmentBulk: g.garmentBulk })) };
   return `<div class="calc" data-calculator>
@@ -132,7 +132,7 @@ export function calculator(o = {}) {
     <fieldset class="calc-prints">
       <legend class="field-label">Your prints</legend>
       ${spots}
-      <p class="field-hint">Ink colours count when a campaign run is screen printed; DTF prints any number of colours.</p>
+      <p class="field-hint">Ink colors count when a campaign run is screen printed; DTF prints any number of colors.</p>
     </fieldset>
     <fieldset>
       <legend class="field-label">How it sells</legend>
@@ -221,9 +221,9 @@ export function runRuleTile(id, text, after = "") {
   const [a, b] = STORES.screenColours;
   const stats = [
     { figure: "$0", label: "to open a store" },
-    { figure: `${a.from}+`, label: `garments, up to ${a.colours} ink colours: screen printed by hand` },
+    { figure: `${a.from}+`, label: `garments, up to ${a.colours} ink colors: screen printed by hand` },
     { figure: STORES.onDemandShipDays, label: "business days to ship a print-on-demand order" },
-    { figure: `${b.from}+`, label: `garments for up to ${b.colours} ink colours on screen` },
+    { figure: `${b.from}+`, label: `garments for up to ${b.colours} ink colors on screen` },
   ];
   return `<div class="tile tile--navy on-dark" data-appear>
   ${SEAL}

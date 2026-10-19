@@ -9,13 +9,13 @@ export const PHOTOS = {
   /** A finished order, folded and boxed (real). */
   boxed: { src: "/images/gallery-img-0305.jpg", alt: "A finished order of printed work shirts, folded in a box at the shop" },
   /** Business shirts with a left-chest logo (real). */
-  business: { src: "/images/img_0769.jpg", alt: "A grey work shirt with a one-colour business logo printed by ARK" },
+  business: { src: "/images/img_0769.jpg", alt: "A gray work shirt with a one-color business logo printed by ARK" },
   /** A two-sided tee from a local brand (real). */
   brandTee: { src: "/images/gallery/img_0563.jpg", alt: "A black tee printed front and back with a small chest logo" },
   /** A team tee (real). */
   team: { src: "/images/gallery/img_0113.jpg", alt: "A navy team tee printed in gold with a bird of prey and the words Stronger Together" },
   /** A one-colour illustration print on a light tee (real). */
-  illustration: { src: "/images/gallery/img_0230.jpg", alt: "A cream tee with a detailed one-colour red illustration" },
+  illustration: { src: "/images/gallery/img_0230.jpg", alt: "A cream tee with a detailed one-color red illustration" },
   /** Folded tees with a chest and sleeve print (real). */
   folded: { src: "/images/stpfrontfoldedds.jpg", alt: "Two folded black tees with white chest and sleeve prints" },
   /** A large back print (real). */
