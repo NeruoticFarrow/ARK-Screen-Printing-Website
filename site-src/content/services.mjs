@@ -24,7 +24,7 @@ export const SERVICE_PAGES = {
     tile: "Screen printed or DTF, front, back and sleeves. One shirt or a thousand.",
     photo: PHOTOS.folded,
     points: [
-      { icon: "printer", title: "The right method for your quantity", text: `Screen printing from ${FACTS.screenFrom} shirts, DTF for anything smaller or full-colour art. We recommend the right one.` },
+      { icon: "printer", title: "The right method for your quantity", text: `Screen printing from ${FACTS.screenFrom} shirts, DTF for anything smaller or full-color art. We recommend the right one.` },
       { icon: "tShirt", title: "No minimum order", text: "A single shirt for a gift or a few hundred for an event — same shop, same care." },
       { icon: "paintBrush", title: "Free artwork cleanup", text: "Send a logo, a sketch, a photo or an idea — we'll clean it up for print, free." },
       { icon: "image", title: "A free mockup first", text: "Your design is on the garment within 10 minutes of confirming the details with you — free, no commitment required. Nothing prints until you approve it." },
@@ -66,7 +66,7 @@ export const SERVICE_PAGES = {
     uses: ["Teams & schools", "Businesses", "Events", "Bands & brands", "Fundraisers"],
     faq: [
       { q: "What's the minimum for screen printing?", a: [`${FACTS.screenFrom} shirts. Under ${FACTS.screenFrom} we print with DTF, so there's no minimum order overall.`] },
-      { q: "What inks do you use?", a: [`${FACTS.inks}. Water-based and discharge inks give a soft print that's part of the fabric; plastisol gives bright, opaque colour on any shirt.`] },
+      { q: "What inks do you use?", a: [`${FACTS.inks}. Water-based and discharge inks give a soft print that's part of the fabric; plastisol gives bright, opaque color on any shirt.`] },
       { q: "How long does screen printing take?", a: turnaroundAnswer },
       { q: "Can you help with my design?", a: artAnswer },
     ],
@@ -80,8 +80,8 @@ export const SERVICE_PAGES = {
     lead: `Embroidered and printed caps for crews, teams and brands — no minimum order, about two weeks standard, and rush in as little as a week if you ask first.`,
   },
   "dtf-printing-colorado-springs": {
-    tile: "Full-colour transfers with no setup — ideal for small orders.",
-    lead: `Full-colour DTF prints pressed in-house — no minimum, no setup fees, and ready in ${FACTS.turnaround.dtf} from artwork approval.`,
+    tile: "Full-color transfers with no setup — ideal for small orders.",
+    lead: `Full-color DTF prints pressed in-house — no minimum, no setup fees, and ready in ${FACTS.turnaround.dtf} from artwork approval.`,
   },
   // The two offer pages render from pages/offers.mjs; these lines feed the home tiles.
   fundraising: { tile: "Raise money with shirts: a bulk order for your event, or a free online store." },
@@ -100,7 +100,7 @@ export const PPC_PAGES = {
     service: "custom-shirts",
     photo: PHOTOS.business,
     points: [
-      { icon: "buildings", title: "Reorders that match", text: "A reorder starts from your approved proof — the same logo, ink colours and placement as the first run." },
+      { icon: "buildings", title: "Reorders that match", text: "A reorder starts from your approved proof — the same logo, ink colors and placement as the first run." },
       { icon: "needle", title: "Printed or embroidered", text: "A printed left-chest logo or a stitched one — both done in-house." },
       { icon: "tShirt", title: "No minimum order", text: "Outfit two new hires or the whole crew." },
       { icon: "image", title: "A free mockup first", text: "Your design is on the garment within 10 minutes of confirming the details with you — free, no commitment required. Nothing prints until you approve it." },

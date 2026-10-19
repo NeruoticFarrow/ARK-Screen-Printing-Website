@@ -17,7 +17,7 @@ export const FAQ_GROUPS = [
     title: "Ordering and price",
     items: [
       { q: "How do I get a price?", a: [`Fill in our <a href="/get-a-quote#quote">instant-price form</a> — your price shows as you go, and it takes about two minutes. ${FACTS.mockupPromise} Rather talk first? Text ${text} (preferred), or call ${phone}.`] },
-      { q: "Is there a minimum order?", a: [`No minimum order. Screen printing starts at ${FACTS.screenFrom} shirts — that's where making a screen for each ink colour pays off. Under ${FACTS.screenFrom}, we print with DTF: full colour, no setup, even for a single shirt.`] },
+      { q: "Is there a minimum order?", a: [`No minimum order. Screen printing starts at ${FACTS.screenFrom} shirts — that's where making a screen for each ink color pays off. Under ${FACTS.screenFrom}, we print with DTF: full color, no setup, even for a single shirt.`] },
       { q: "Is the mockup really free?", a: [`Yes. ${FACTS.mockupPromise} Tweak it until it's right.`] },
       { q: "How do I pay, and when does printing start?", a: [`Once the details are set, we send an invoice. Approve your mockup and pay the invoice, and we start your order ${FACTS.printStart} — ${FACTS.sameDayWork}.`] },
       { q: "How long will my order take?", a: [`Screen printing takes ${FACTS.turnaround.screen}, DTF ${FACTS.turnaround.dtf} and embroidery ${FACTS.turnaround.embroidery} from when you approve your artwork. ${FACTS.turnaround.rush}.`] },
@@ -26,10 +26,10 @@ export const FAQ_GROUPS = [
   {
     title: "Printing",
     items: [
-      { q: "Screen printing or DTF — which do I need?", a: [`Screen printing gives the most durable, vibrant print and the lowest price per shirt from ${FACTS.screenFrom}. DTF suits smaller orders and full-colour artwork, with no setup. Not sure? We'll recommend one after you share your order details — or read <a href="/dtf-vs-screen-printing">DTF vs screen printing</a>.`] },
+      { q: "Screen printing or DTF — which do I need?", a: [`Screen printing gives the most durable, vibrant print and the lowest price per shirt from ${FACTS.screenFrom}. DTF suits smaller orders and full-color artwork, with no setup. Not sure? We'll recommend one after you share your order details — or read <a href="/dtf-vs-screen-printing">DTF vs screen printing</a>.`] },
       { q: "What inks do you use?", a: [`${FACTS.inks} — the best inks on the market for what each one does.`] },
-      { q: "Can you match Pantone colours?", a: ["Yes — we custom-mix inks to match Pantone colours for brand consistency. Tell us the colours with your order details."] },
-      { q: "How many colours can my design have?", a: ["Our manual presses print up to six spot colours, and more with simulated process and CMYK prints. Full-colour designs can also print with DTF."] },
+      { q: "Can you match Pantone colors?", a: ["Yes — we custom-mix inks to match Pantone colors for brand consistency. Tell us the colors with your order details."] },
+      { q: "How many colors can my design have?", a: ["Our manual presses print up to six spot colors, and more with simulated process and CMYK prints. Full-color designs can also print with DTF."] },
       { q: "Can you print over seams, zippers or pockets?", a: ["Yes — it's a matter of planning for them before we print. Tell us where you want the print and we'll confirm the placement on your mockup."] },
       { q: "Do you do embroidery?", a: [`Yes — hats, polos, jackets and more, in about ${FACTS.turnaround.embroidery}. See <a href="/custom-embroidery">custom embroidery</a>.`] },
     ],

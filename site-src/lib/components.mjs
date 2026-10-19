@@ -174,7 +174,7 @@ export function heroArt() {
 /** The rules, stated plainly with the reason (navy tile, big numbers). */
 export function rulesTile(id = "rules-title", o = {}) {
   const stats = [
-    { figure: "1+", label: "shirts: no minimum order (DTF, full colour)" },
+    { figure: "1+", label: "shirts: no minimum order (DTF, full color)" },
     { figure: `${FACTS.screenFrom}+`, label: "shirts: screen printing" },
     { figure: "10 min", label: "free digital mockup after confirming details" },
     { figure: "Same day", label: "we start your order once you approve the proof" },
@@ -184,7 +184,7 @@ export function rulesTile(id = "rules-title", o = {}) {
   <div class="rule">
     <div>
       <h2 id="${esc(id)}" class="h2">${accent(o.title ?? "One shirt or a thousand — *no* minimum.")}</h2>
-      <p>Screen printing needs a screen made for each ink colour, so it starts at ${FACTS.screenFrom} shirts — that's where it pays off. Under ${FACTS.screenFrom}, we print with DTF: no screens, no setup, full colour, even for a single shirt. Tell us your quantity and we'll recommend the right method — you don't need to know which one you want.</p>
+      <p>Screen printing needs a screen made for each ink color, so it starts at ${FACTS.screenFrom} shirts — that's where it pays off. Under ${FACTS.screenFrom}, we print with DTF: no screens, no setup, full color, even for a single shirt. Tell us your quantity and we'll recommend the right method — you don't need to know which one you want.</p>
       <div class="cta-row">${quoteButton("rules_quote", { onDark: true, onPage: o.onPage })}${textLink("/dtf-vs-screen-printing", "DTF vs screen printing", "rules_compare")}</div>
     </div>
     <ul class="stats">${stats.map((s) => `<li><span class="stat-figure">${esc(s.figure)}</span><span class="stat-label">${esc(s.label)}</span></li>`).join("")}</ul>
@@ -303,7 +303,7 @@ export function ownerSection(id, o = {}) {
   <div>
     <p class="kicker">Meet the printer</p>
     <h2 id="${esc(id)}" class="h2">${accent(o.title ?? "Real people, *real* presses.")}</h2>
-    <p class="lead" style="margin-top:18px">ARK is a small, owner-run print shop in ${esc(SHOP.city)}. Text, call or share your project details and a real person at ARK answers — not a call centre — and keeps your order on track from mockup to pickup. ${esc(SHOP.owner)}, the owner, has pulled the prints since ${SHOP.since}.</p>
+    <p class="lead" style="margin-top:18px">ARK is a small, owner-run print shop in ${esc(SHOP.city)}. Text, call or share your project details and a real person at ARK answers — not a call center — and keeps your order on track from mockup to pickup. ${esc(SHOP.owner)}, the owner, has pulled the prints since ${SHOP.since}.</p>
     <ul class="checklist" style="margin-top:22px">
       <li>${icon("sealCheck")}<span><b>Licensed and insured</b><small>A fully licensed Colorado business with liability insurance.</small></span></li>
       <li>${icon("palette")}<span><b>Premium inks</b><small>${esc(FACTS.inks)}.</small></span></li>
