@@ -397,9 +397,11 @@ export function faqJsonLd(items) {
 }
 
 /** The quote form (ark-quote-form, embedded) beside what happens next and the
- *  phone. site.js passes ad click IDs and UTM tags through to the form. */
+ *  phone. The #quote target is on the frame—not the explanatory copy—so mobile
+ *  price CTAs land directly at the form. site.js passes ad click IDs and UTM
+ *  tags through to the form. */
 export function quoteBand(o = {}) {
-  return `<section class="section${o.plain ? "" : " section--sand"}" id="quote" aria-labelledby="quote-title"><div class="container">
+  return `<section class="section${o.plain ? "" : " section--sand"}" aria-labelledby="quote-title"><div class="container">
   <div class="quote-band">
     <div class="quote-next">
       <h2 id="quote-title" class="h2">${accent(o.title ?? "See your live *price*.")}</h2>
@@ -412,7 +414,7 @@ export function quoteBand(o = {}) {
       </ul>
       <div class="quote-alt"><b>Rather talk it through?</b><a href="${esc(SHOP.smsHref)}" data-cta="quote_text">Text ${esc(SHOP.phoneDisplay)} (preferred)</a> or <a href="${esc(SHOP.phoneHref)}" data-cta="quote_call">call</a> — ${esc(SHOP.hours)}.</div>
     </div>
-    <div class="quote-frame"><iframe src="${esc(SITE.quoteEmbed)}" title="ARK instant price form" data-quote-frame ${o.eager ? "" : 'loading="lazy" '}allow="clipboard-write"></iframe></div>
+    <div class="quote-frame" id="quote"><iframe src="${esc(SITE.quoteEmbed)}" title="ARK instant price form" data-quote-frame ${o.eager ? "" : 'loading="lazy" '}allow="clipboard-write"></iframe></div>
   </div>
 </div></section>`;
 }
