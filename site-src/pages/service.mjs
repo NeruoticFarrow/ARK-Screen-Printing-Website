@@ -1,7 +1,7 @@
 import { FACTS, SERVICES, SHOP } from "../lib/facts.mjs";
 import { icon } from "../lib/icons.mjs";
 import {
-  areasList, audienceStrip, ctaBand, faqList, localStrip, offerTile, proofSection, quoteBand, rulesTile, sectionHead, stepsList, textLink, ctaRow,
+  areasList, audienceStrip, ctaBand, faqList, heroArt, localStrip, offerTile, proofSection, quoteBand, rulesTile, sectionHead, stepsList, textLink, ctaRow,
 } from "../lib/components.mjs";
 import { PPC_MINIMUM, PPC_MINIMUM_ANSWER, PPC_MINIMUM_RULES, PPC_PAGES, SERVICE_PAGES } from "../content/services.mjs";
 import { abs, migratedBlocks, pageHero, pageJsonLd, pointsSection } from "./parts.mjs";
@@ -24,6 +24,11 @@ const ppcPoints = (points) => points.map((point) => {
   return point;
 });
 const ppcFaq = (items) => items.map((item) => (/minimum/i.test(item.q) ? { ...item, a: PPC_MINIMUM_ANSWER } : item));
+const PPC_H1_SWASH = "Done Here";
+const PPC_H1_ENDING = ` ${PPC_H1_SWASH}.`;
+const ppcH1Base = (headline) => headline.endsWith(PPC_H1_ENDING)
+  ? headline.slice(0, -PPC_H1_ENDING.length)
+  : headline;
 
 export function renderService(ctx) {
   const { page } = ctx;
@@ -81,7 +86,15 @@ export function renderPpc(ctx) {
   const svc = SERVICE_PAGES[cfg.service];
   const photo = page.hero?.image ?? cfg.photo ?? svc.photo;
   const pointsData = ppcPoints(cfg.points ?? svc.points);
-  const hero = pageHero({ h1: page.hero?.h1 ?? page.title, lead: page.hero?.lead?.[0], meta: `${PPC_MINIMUM} garment minimum`, photo, onPage: true });
+  const hero = pageHero({
+    h1: ppcH1Base(page.hero?.h1 ?? page.title),
+    h1Swash: PPC_H1_SWASH,
+    lead: page.hero?.lead?.[0],
+    meta: `${PPC_MINIMUM} garment minimum`,
+    photo,
+    visual: heroArt({ mainPhoto: photo, minimumLabel: `${PPC_MINIMUM} garment minimum`, tagLabel: "Printed in-house" }),
+    onPage: true,
+  });
   const strip = `<section class="section--tight"><div class="container">${localStrip("ppc_strip")}</div></section>` + offerTile("ppc_offer", { onPage: true });
   const points = pointsSection(withIcons(pointsData), "Why order from *ARK*.");
   const uses = audienceStrip();

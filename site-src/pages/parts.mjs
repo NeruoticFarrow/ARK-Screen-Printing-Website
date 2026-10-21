@@ -1,6 +1,6 @@
 import { accent, esc, ldScript } from "../lib/html.mjs";
 import { imageInfo, picture } from "../lib/images.mjs";
-import { crumbs, ctaRow, faqJsonLd, faqList, prose, ratingLink, REASSURANCE, reassure, sectionHead } from "../lib/components.mjs";
+import { crumbs, ctaRow, faqJsonLd, faqList, prose, ratingLink, REASSURANCE, reassure, sectionHead, swash } from "../lib/components.mjs";
 import { FACTS, SITE } from "../lib/facts.mjs";
 import { icon } from "../lib/icons.mjs";
 
@@ -12,22 +12,24 @@ import { icon } from "../lib/icons.mjs";
 export function pageHero(o) {
   const info = o.photo ? imageInfo(o.photo.src) : null;
   const wide = Boolean(info && info.width / info.height >= 0.9);
+  const headline = o.h1Swash ? `${accent(o.h1)} ${swash(o.h1Swash)}.` : accent(o.h1);
   const photo = o.photo
     ? `<figure class="hero-photo-card">${picture(o.photo.src, { alt: o.photo.alt ?? "", sizes: wide ? "(min-width: 960px) 640px, 92vw" : "(min-width: 960px) 560px, 92vw", priority: true })}${o.caption ? `<figcaption>${esc(o.caption)}</figcaption>` : ""}</figure>`
     : "";
-  return `<section class="page-hero" aria-labelledby="page-title"><div class="container ${photo ? `hero-grid${wide ? " hero-grid--photo" : ""}` : ""}">
+  const visual = o.visual ?? photo;
+  return `<section class="page-hero" aria-labelledby="page-title"><div class="container ${visual ? `hero-grid${wide ? " hero-grid--photo" : ""}` : ""}">
   <div>
     ${o.crumbs ? crumbs(o.crumbs) : ""}
     ${o.eyebrow ? `<p class="kicker eyebrow">${esc(o.eyebrow)}</p>` : ""}
     ${o.noCta ? "" : `<p class="offer-flag">${icon("image")}Free mockup within ${esc(FACTS.mockupWithin)} of confirming details · no commitment</p>`}
-    <h1 id="page-title" class="h1">${accent(o.h1)}</h1>
+    <h1 id="page-title" class="h1">${headline}</h1>
     ${o.lead ? `<p class="lead">${esc(o.lead)}</p>` : ""}
     ${o.meta ? `<p class="cta-note">${esc(o.meta)}</p>` : ""}
     ${o.noCta ? "" : ctaRow("hero", { onPage: o.onPage })}
     ${o.noCta ? "" : reassure(REASSURANCE)}
     ${o.noRating ? "" : `<div class="hero-proof">${ratingLink("hero_rating")}</div>`}
   </div>
-  ${photo}
+  ${visual}
 </div></section>`;
 }
 

@@ -146,6 +146,7 @@ function orderCard() {
  *  Settles in once and drifts with the scroll on desktop (site.js); still for
  *  prefers-reduced-motion. Every picture is ARK's own work. */
 export function heroArt(o = {}) {
+  const mainPhoto = o.mainPhoto ?? PHOTOS.press;
   const card = (p) => picture(p.src, { alt: "", sizes: "180px" });
   return `<div class="hero-art" data-parallax>
   <div class="collage collage--back" aria-hidden="true">
@@ -158,8 +159,8 @@ export function heroArt(o = {}) {
   </div>
   <div class="hero-tile on-dark">
     ${SEAL}
-    <div class="hero-photo">${picture(PHOTOS.press.src, { alt: PHOTOS.press.alt, sizes: "(min-width: 960px) 380px, 80vw", priority: true })}</div>
-    <span class="chip chip--tan hero-tag">${icon("printer")}On our press</span>
+    <div class="hero-photo">${picture(mainPhoto.src, { alt: mainPhoto.alt ?? "", sizes: "(min-width: 960px) 380px, 80vw", priority: true })}</div>
+    <span class="chip chip--tan hero-tag">${icon("printer")}${o.tagLabel ?? "On our press"}</span>
   </div>
   <div class="collage collage--front" aria-hidden="true">
     ${doodle("strokes", "cl-strokes", layer(0.18, 7))}
