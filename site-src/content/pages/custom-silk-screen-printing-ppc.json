@@ -2,7 +2,7 @@
   "file": "custom-silk-screen-printing-ppc.html",
   "slug": "custom-silk-screen-printing-ppc",
   "title": "Custom Screen Printing | ARK Screen Printing",
-  "description": "Custom screen printing for any apparel — t-shirts, hoodies, work shirts and more. Printed in-house, ships nationwide. Get a quote from ARK Screen Printing.",
+  "description": "Custom screen printing for orders of 12+ garments — t-shirts, hoodies, work shirts and more. Printed in-house, ships nationwide. Get a quote from ARK Screen Printing.",
   "canonical": "https://arkscreenprinting.com/custom-silk-screen-printing-ppc",
   "robots": "noindex",
   "jsonLd": [
@@ -25,7 +25,7 @@
         "@type": "Country",
         "name": "United States"
       },
-      "description": "Custom screen printing for any apparel — t-shirts, hoodies, work shirts. Printed in-house with no middleman markup. Ships nationwide."
+      "description": "Custom screen printing for orders of 12+ garments — t-shirts, hoodies, and work shirts. Printed in-house with no middleman markup. Ships nationwide."
     },
     {
       "@context": "https://schema.org",

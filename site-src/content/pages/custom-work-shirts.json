@@ -2,7 +2,7 @@
   "file": "custom-work-shirts.html",
   "slug": "custom-work-shirts",
   "title": "Custom Work Shirts | ARK Screen Printing",
-  "description": "Custom work shirts printed in-house with no middleman markup. Bulk pricing, fast turnaround, ships nationwide. Get a quote from ARK Screen Printing.",
+  "description": "Custom work shirts for orders of 12+ garments, printed in-house with no middleman markup. Bulk pricing, fast turnaround, ships nationwide. Get a quote from ARK Screen Printing.",
   "canonical": "https://arkscreenprinting.com/custom-work-shirts",
   "robots": "noindex",
   "jsonLd": [
@@ -25,7 +25,7 @@
         "@type": "Country",
         "name": "United States"
       },
-      "description": "Custom work shirts printed in-house with no middleman markup. Bulk pricing, fast turnaround, ships nationwide."
+      "description": "Custom work shirts for orders of 12+ garments, printed in-house with no middleman markup. Bulk pricing, fast turnaround, ships nationwide."
     },
     {
       "@context": "https://schema.org",

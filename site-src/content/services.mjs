@@ -6,6 +6,22 @@ import { PHOTOS } from "../lib/media.mjs";
 // what the thin pages lacked (what you get, who it's for, answers) — every
 // statement drawn from facts.mjs or from the site's own pages.
 
+/** Paid-search pages qualify for profitable orders; normal service pages do not use this rule. */
+export const PPC_MINIMUM = 12;
+export const PPC_MINIMUM_ANSWER = [
+  `Yes. Our minimum is ${PPC_MINIMUM} garments per order. For ${PPC_MINIMUM}–23 garments, we may recommend DTF; screen printing starts at ${FACTS.screenFrom} shirts.`,
+];
+export const PPC_MINIMUM_RULES = {
+  title: `${PPC_MINIMUM} garment minimum.`,
+  description: `Orders start at ${PPC_MINIMUM} garments. For ${PPC_MINIMUM}–23 garments, we use DTF; screen printing starts at ${FACTS.screenFrom} shirts. Tell us your quantity and we'll recommend the right method.`,
+  stats: [
+    { figure: `${PPC_MINIMUM}+`, label: "garments per order" },
+    { figure: `${FACTS.screenFrom}+`, label: "shirts: screen printing" },
+    { figure: "10 min", label: "free digital mockup after confirming details" },
+    { figure: "Same day", label: "we start your order once you approve the proof" },
+  ],
+};
+
 const minimumAnswer = [
   `There isn't one. Screen printing starts at ${FACTS.screenFrom} shirts; smaller orders — even a single piece — are printed with DTF, which needs no screens and no setup.`,
 ];

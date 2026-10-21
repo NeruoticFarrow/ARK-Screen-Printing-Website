@@ -2,7 +2,7 @@
   "file": "custom-hoodies-ppc.html",
   "slug": "custom-hoodies-ppc",
   "title": "Custom Hoodies | ARK Screen Printing",
-  "description": "Bulk custom hoodies printed in-house with no middleman markup. Fast turnaround, ships nationwide. Get a quote from ARK Screen Printing.",
+  "description": "Bulk custom hoodies for orders of 12+ garments, printed in-house with no middleman markup. Fast turnaround, ships nationwide. Get a quote from ARK Screen Printing.",
   "canonical": "https://arkscreenprinting.com/custom-hoodies-ppc",
   "robots": "noindex",
   "jsonLd": [
@@ -25,7 +25,7 @@
         "@type": "Country",
         "name": "United States"
       },
-      "description": "Bulk custom hoodies printed in-house with no middleman markup. Fast turnaround, ships nationwide."
+      "description": "Bulk custom hoodies for orders of 12+ garments, printed in-house with no middleman markup. Fast turnaround, ships nationwide."
     },
     {
       "@context": "https://schema.org",

@@ -2,7 +2,7 @@
   "file": "custom-shirts-ppc.html",
   "slug": "custom-shirts-ppc",
   "title": "Custom T-Shirts | ARK Screen Printing",
-  "description": "Custom t-shirts printed in-house with no middleman markup. Fast turnaround, ships nationwide. Get a quote from ARK Screen Printing.",
+  "description": "Custom t-shirts for orders of 12+ garments, printed in-house with no middleman markup. Fast turnaround, ships nationwide. Get a quote from ARK Screen Printing.",
   "canonical": "https://arkscreenprinting.com/custom-shirts-ppc",
   "robots": "noindex",
   "jsonLd": [
@@ -25,7 +25,7 @@
         "@type": "Country",
         "name": "United States"
       },
-      "description": "Custom t-shirts printed in-house with no middleman markup. Fast turnaround, ships nationwide."
+      "description": "Custom t-shirts for orders of 12+ garments, printed in-house with no middleman markup. Fast turnaround, ships nationwide."
     },
     {
       "@context": "https://schema.org",

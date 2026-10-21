@@ -6,7 +6,7 @@ import {
   areasList, audienceStrip, ctaRow, doodle, offerTile, recentWork, faqJsonLd, faqList, galleryGrid, heroArt, localStrip, ownerSection, proofSection,
   quoteBand, ratingLink, REASSURANCE, reassure, rulesTile, sectionHead, serviceTiles, stepsList, swash, textLink,
 } from "../lib/components.mjs";
-import { SERVICE_PAGES } from "../content/services.mjs";
+import { PPC_MINIMUM, PPC_MINIMUM_ANSWER, PPC_MINIMUM_RULES, SERVICE_PAGES } from "../content/services.mjs";
 
 // The home page, local-first (knowledge base chapter 25 §11.2): what, where
 // and how to start on the first screen; local proof in plain sight; who we
@@ -24,24 +24,12 @@ export const HOME_FAQ = [
   { q: "How fast is it?", a: [`Your price shows as you fill in the form. ${FACTS.mockupPromise} Once you approve it and pay, we start your order ${FACTS.printStart} — ${FACTS.sameDayWork}. Most screen-print orders are ready in ${FACTS.turnaround.screen}.`] },
 ];
 
-const PPC_MINIMUM = 12;
 const PPC_HOME_FAQ = [
-  { q: "Is there a minimum order?", a: [`Yes. Our minimum is ${PPC_MINIMUM} garments per order. For 12–23 garments, we may recommend DTF; screen printing starts at ${FACTS.screenFrom} shirts.`] },
+  { q: "Is there a minimum order?", a: PPC_MINIMUM_ANSWER },
   ...HOME_FAQ.slice(1, 4),
   { q: "Do you do embroidery?", a: [`Yes — polos, hats, jackets and bags, with free digitizing on every ${PPC_MINIMUM}+ garment order. See <a href="/custom-embroidery">custom embroidery</a>.`] },
   ...HOME_FAQ.slice(5),
 ];
-
-const PPC_RULES = {
-  title: `${PPC_MINIMUM} garment minimum.`,
-  description: `Orders start at ${PPC_MINIMUM} garments. For 12–23 garments, we use DTF; screen printing starts at ${FACTS.screenFrom} shirts. Tell us your quantity and we'll recommend the right method.`,
-  stats: [
-    { figure: `${PPC_MINIMUM}+`, label: "garments per order" },
-    { figure: `${FACTS.screenFrom}+`, label: "shirts: screen printing" },
-    { figure: "10 min", label: "free digital mockup after confirming details" },
-    { figure: "Same day", label: "we start your order once you approve the proof" },
-  ],
-};
 
 /** Renders the public homepage or its noindex paid-search counterpart. */
 export function renderHome(ctx, { ppc = false } = {}) {
@@ -71,7 +59,7 @@ export function renderHome(ctx, { ppc = false } = {}) {
   <div class="doodled">${doodle("burst", "section-doodle section-doodle--burst", " data-appear")}${serviceTiles(lines)}</div>
 </div></section>`;
 
-  const rules = `<section class="section" id="rules" aria-labelledby="rules-title"><div class="container">${rulesTile("rules-title", { onPage: true, ...(ppc ? PPC_RULES : {}) })}</div></section>`;
+  const rules = `<section class="section" id="rules" aria-labelledby="rules-title"><div class="container">${rulesTile("rules-title", { onPage: true, ...(ppc ? PPC_MINIMUM_RULES : {}) })}</div></section>`;
 
   const how = `<section class="section section--sand" id="how" aria-labelledby="how-title"><div class="container">
   ${sectionHead("how-title", "How an order *works*.", "Your price instantly. Your free digital mockup follows within 10 minutes of confirming the details with you. Nothing prints until you approve it.")}

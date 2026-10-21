@@ -3,7 +3,7 @@ import { icon } from "../lib/icons.mjs";
 import {
   areasList, audienceStrip, ctaBand, faqList, localStrip, offerTile, proofSection, quoteBand, rulesTile, sectionHead, stepsList, textLink, ctaRow,
 } from "../lib/components.mjs";
-import { PPC_PAGES, SERVICE_PAGES } from "../content/services.mjs";
+import { PPC_MINIMUM, PPC_MINIMUM_ANSWER, PPC_MINIMUM_RULES, PPC_PAGES, SERVICE_PAGES } from "../content/services.mjs";
 import { abs, migratedBlocks, pageHero, pageJsonLd, pointsSection } from "./parts.mjs";
 
 // Service pages (custom shirts, hoodies, embroidery, hats, screen printing,
@@ -12,6 +12,18 @@ import { abs, migratedBlocks, pageHero, pageJsonLd, pointsSection } from "./part
 // page, a phone sticky CTA).
 
 const withIcons = (points) => points.map((p) => ({ ...p, iconHtml: icon(p.icon) }));
+const PPC_MINIMUM_POINT = {
+  title: `${PPC_MINIMUM} garment minimum`,
+  text: `Orders start at ${PPC_MINIMUM} garments. We use DTF for ${PPC_MINIMUM}–23 garments and screen printing for ${FACTS.screenFrom}+ shirts.`,
+};
+const ppcPoints = (points) => points.map((point) => {
+  if (point.title === "No minimum order") return { ...point, ...PPC_MINIMUM_POINT };
+  if (point.title === "The right method for your quantity") {
+    return { ...point, text: `DTF for ${PPC_MINIMUM}–23 garments or full-color art; screen printing from ${FACTS.screenFrom} shirts. We recommend the right method.` };
+  }
+  return point;
+});
+const ppcFaq = (items) => items.map((item) => (/minimum/i.test(item.q) ? { ...item, a: PPC_MINIMUM_ANSWER } : item));
 
 export function renderService(ctx) {
   const { page } = ctx;
@@ -68,20 +80,20 @@ export function renderPpc(ctx) {
   const cfg = PPC_PAGES[page.slug];
   const svc = SERVICE_PAGES[cfg.service];
   const photo = page.hero?.image ?? cfg.photo ?? svc.photo;
-  const pointsData = cfg.points ?? svc.points;
-  const hero = pageHero({ h1: page.hero?.h1 ?? page.title, lead: page.hero?.lead?.[0], photo, onPage: true });
+  const pointsData = ppcPoints(cfg.points ?? svc.points);
+  const hero = pageHero({ h1: page.hero?.h1 ?? page.title, lead: page.hero?.lead?.[0], meta: `${PPC_MINIMUM} garment minimum`, photo, onPage: true });
   const strip = `<section class="section--tight"><div class="container">${localStrip("ppc_strip")}</div></section>` + offerTile("ppc_offer", { onPage: true });
   const points = pointsSection(withIcons(pointsData), "Why order from *ARK*.");
   const uses = audienceStrip();
   const proof = `<section class="section section--sand" aria-labelledby="proof-title"><div class="container">${proofSection("proof-title", "What customers *say*.", { onPage: true })}</div></section>`;
-  const rules = `<section class="section"><div class="container">${rulesTile("rules-title", { onPage: true })}</div></section>`;
+  const rules = `<section class="section"><div class="container">${rulesTile("rules-title", { onPage: true, ...PPC_MINIMUM_RULES })}</div></section>`;
   const how = `<section class="section section--sand" aria-labelledby="how-title"><div class="container">
   ${sectionHead("how-title", "How an order *works*.", "Your price instantly. Your free mockup follows within 10 minutes of confirming the details with you. After you approve it and pay, we start your order the same day.")}
   ${stepsList()}
   ${ctaRow("after_steps", { onPage: true })}
 </div></section>`;
   // Objections answered without a click (FAQ open on paid pages).
-  const faq = `<section class="section" aria-labelledby="faq-title"><div class="container">${sectionHead("faq-title", "Before you *ask*.")}${faqList(svc.faq, { open: true })}</div></section>`;
+  const faq = `<section class="section" aria-labelledby="faq-title"><div class="container">${sectionHead("faq-title", "Before you *ask*.")}${faqList(ppcFaq(svc.faq), { open: true })}</div></section>`;
   const quote = quoteBand({ eager: true });
 
   return {
