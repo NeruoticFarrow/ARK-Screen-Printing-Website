@@ -58,6 +58,7 @@ for (const page of Object.values(pages)) {
   const ctx = { page, areas, area: areaBySlug[page.slug] };
   let out;
   if (page.slug === "index") out = renderHome(ctx);
+  else if (page.slug === "home-ppc") out = renderHome(ctx, { ppc: true });
   else if (SIMPLE[page.slug]) out = SIMPLE[page.slug](ctx);
   else if (PPC_PAGES[page.slug]) out = renderPpc(ctx);
   else if (areaBySlug[page.slug]) out = renderLocal(ctx);

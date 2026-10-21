@@ -93,6 +93,7 @@ export const SERVICE_PAGES = {
 
 /** The paid-search landing pages (noindex): one service each, minimal chrome. */
 export const PPC_PAGES = {
+  "home-ppc": {},
   "custom-shirts-ppc": { service: "custom-shirts" },
   "custom-hoodies-ppc": { service: "custom-hoodies" },
   "custom-silk-screen-printing-ppc": { service: "custom-silk-screen-printing" },

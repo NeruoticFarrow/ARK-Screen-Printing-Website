@@ -24,7 +24,8 @@ export const HOME_FAQ = [
   { q: "How fast is it?", a: [`Your price shows as you fill in the form. ${FACTS.mockupPromise} Once you approve it and pay, we start your order ${FACTS.printStart} — ${FACTS.sameDayWork}. Most screen-print orders are ready in ${FACTS.turnaround.screen}.`] },
 ];
 
-export function renderHome(ctx) {
+/** Renders the public homepage or its noindex paid-search counterpart. */
+export function renderHome(ctx, { ppc = false } = {}) {
   const hero = `<section class="hero" aria-labelledby="hero-title"><div class="container hero-grid">
   <div>
     <p class="offer-flag">${icon("image")}Free mockup within ${FACTS.mockupWithin} of confirming details · no commitment</p>
@@ -108,13 +109,14 @@ export function renderHome(ctx) {
   return {
     title: ctx.page.title,
     description: ctx.page.description,
-    canonical: `${SITE.origin}/`,
-    robots: null,
+    canonical: ctx.page.canonical,
+    robots: ctx.page.robots,
     ogImage: `${SITE.origin}${PHOTOS.press.src}`,
-    chrome: "full",
-    current: "home",
+    chrome: ppc ? "minimal" : "full",
+    current: ppc ? "none" : "home",
     hasQuote: true,
-    page: "home",
+    sticky: ppc ? true : undefined,
+    page: ppc ? ctx.page.slug : "home",
     jsonLd: ld,
     main: hero + strip + audiences + services + rules + how + proof + owner + work + groups + areas + faq + quote,
   };

@@ -274,8 +274,7 @@ export function reviewsTicker(o = {}) {
   return `<div class="rt${rated ? " rt--rated" : ""}" data-ticker${feed ? ` data-reviews-feed="${esc(feed)}"` : ""} role="region" aria-label="Google reviews">
   ${rows.map((items, k) => row(items, k)).join("")}
   <button class="ticker-toggle rt-toggle" type="button" data-ticker-toggle aria-pressed="false" hidden>${icon("pause", "icon i-pause")}${icon("play", "icon i-play")}<span class="visually-hidden">Pause the moving reviews</span></button>
-  ${note}
-</div>`;
+${note ? `  ${note}\n` : ""}</div>`;
 }
 
 /** The reviews block: the rating, a heading and the ticker, as in the
