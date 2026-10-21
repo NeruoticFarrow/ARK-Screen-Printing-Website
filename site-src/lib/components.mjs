@@ -145,7 +145,7 @@ function orderCard() {
  *  a collage of real prints, doodles, the shop's sticker and floating facts.
  *  Settles in once and drifts with the scroll on desktop (site.js); still for
  *  prefers-reduced-motion. Every picture is ARK's own work. */
-export function heroArt() {
+export function heroArt(o = {}) {
   const card = (p) => picture(p.src, { alt: "", sizes: "180px" });
   return `<div class="hero-art" data-parallax>
   <div class="collage collage--back" aria-hidden="true">
@@ -163,7 +163,7 @@ export function heroArt() {
   </div>
   <div class="collage collage--front" aria-hidden="true">
     ${doodle("strokes", "cl-strokes", layer(0.18, 7))}
-    ${floatChip("tShirt", "No minimum order", "fc-a", layer(0.08, 8))}
+    ${floatChip("tShirt", o.minimumLabel ?? "No minimum order", "fc-a", layer(0.08, 8))}
     ${floatChip("sealCheck", "Proof before we print", "fc-b", layer(0.05, 9))}
     ${sticker(layer(0.12, 10, ' data-spin="0.12"'))}
   </div>
@@ -173,18 +173,19 @@ export function heroArt() {
 
 /** The rules, stated plainly with the reason (navy tile, big numbers). */
 export function rulesTile(id = "rules-title", o = {}) {
-  const stats = [
+  const stats = o.stats ?? [
     { figure: "1+", label: "shirts: no minimum order (DTF, full color)" },
     { figure: `${FACTS.screenFrom}+`, label: "shirts: screen printing" },
     { figure: "10 min", label: "free digital mockup after confirming details" },
     { figure: "Same day", label: "we start your order once you approve the proof" },
   ];
+  const description = o.description ?? `Screen printing needs a screen made for each ink color, so it starts at ${FACTS.screenFrom} shirts — that's where it pays off. Under ${FACTS.screenFrom}, we print with DTF: no screens, no setup, full color, even for a single shirt. Tell us your quantity and we'll recommend the right method — you don't need to know which one you want.`;
   return `<div class="tile tile--navy on-dark" data-appear>
   ${SEAL}
   <div class="rule">
     <div>
       <h2 id="${esc(id)}" class="h2">${accent(o.title ?? "One shirt or a thousand — *no* minimum.")}</h2>
-      <p>Screen printing needs a screen made for each ink color, so it starts at ${FACTS.screenFrom} shirts — that's where it pays off. Under ${FACTS.screenFrom}, we print with DTF: no screens, no setup, full color, even for a single shirt. Tell us your quantity and we'll recommend the right method — you don't need to know which one you want.</p>
+      <p>${description}</p>
       <div class="cta-row">${quoteButton("rules_quote", { onDark: true, onPage: o.onPage })}${textLink("/dtf-vs-screen-printing", "DTF vs screen printing", "rules_compare")}</div>
     </div>
     <ul class="stats">${stats.map((s) => `<li><span class="stat-figure">${esc(s.figure)}</span><span class="stat-label">${esc(s.label)}</span></li>`).join("")}</ul>

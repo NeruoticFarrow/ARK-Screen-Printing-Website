@@ -24,6 +24,25 @@ export const HOME_FAQ = [
   { q: "How fast is it?", a: [`Your price shows as you fill in the form. ${FACTS.mockupPromise} Once you approve it and pay, we start your order ${FACTS.printStart} — ${FACTS.sameDayWork}. Most screen-print orders are ready in ${FACTS.turnaround.screen}.`] },
 ];
 
+const PPC_MINIMUM = 12;
+const PPC_HOME_FAQ = [
+  { q: "Is there a minimum order?", a: [`Yes. Our minimum is ${PPC_MINIMUM} garments per order. For 12–23 garments, we may recommend DTF; screen printing starts at ${FACTS.screenFrom} shirts.`] },
+  ...HOME_FAQ.slice(1, 4),
+  { q: "Do you do embroidery?", a: [`Yes — polos, hats, jackets and bags, with free digitizing on every ${PPC_MINIMUM}+ garment order. See <a href="/custom-embroidery">custom embroidery</a>.`] },
+  ...HOME_FAQ.slice(5),
+];
+
+const PPC_RULES = {
+  title: `${PPC_MINIMUM} garment minimum.`,
+  description: `Orders start at ${PPC_MINIMUM} garments. For 12–23 garments, we use DTF; screen printing starts at ${FACTS.screenFrom} shirts. Tell us your quantity and we'll recommend the right method.`,
+  stats: [
+    { figure: `${PPC_MINIMUM}+`, label: "garments per order" },
+    { figure: `${FACTS.screenFrom}+`, label: "shirts: screen printing" },
+    { figure: "10 min", label: "free digital mockup after confirming details" },
+    { figure: "Same day", label: "we start your order once you approve the proof" },
+  ],
+};
+
 /** Renders the public homepage or its noindex paid-search counterpart. */
 export function renderHome(ctx, { ppc = false } = {}) {
   const hero = `<section class="hero" aria-labelledby="hero-title"><div class="container hero-grid">
@@ -35,7 +54,7 @@ export function renderHome(ctx, { ppc = false } = {}) {
     ${reassure(REASSURANCE)}
     <div class="hero-proof">${ratingLink("hero_rating")}</div>
   </div>
-  ${heroArt()}
+  ${heroArt({ minimumLabel: ppc ? `${PPC_MINIMUM} garment minimum` : undefined })}
 </div></section>`;
 
   const strip = `<section class="section--tight"><div class="container">${localStrip("home_strip")}</div></section>` + offerTile("home_offer", { onPage: true });
@@ -43,12 +62,16 @@ export function renderHome(ctx, { ppc = false } = {}) {
   const audiences = audienceStrip();
 
   const lines = Object.fromEntries(Object.entries(SERVICE_PAGES).map(([k, v]) => [k, v.tile]));
+  if (ppc) {
+    lines["custom-shirts"] = `Screen printed or DTF, front, back and sleeves. ${PPC_MINIMUM} garment minimum.`;
+    lines["dtf-printing-colorado-springs"] = `Full-color transfers with no setup — ideal for orders of ${PPC_MINIMUM}–23 garments.`;
+  }
   const services = `<section class="section section--flush-top" aria-labelledby="services-title"><div class="container">
   ${sectionHead("services-title", "What we *print*.", "Every job is printed or stitched in our shop — so we can tell you exactly how it'll come out.", { aside: textLink("/dtf-vs-screen-printing", "Which method is right?", "services_methods") })}
   <div class="doodled">${doodle("burst", "section-doodle section-doodle--burst", " data-appear")}${serviceTiles(lines)}</div>
 </div></section>`;
 
-  const rules = `<section class="section" id="rules" aria-labelledby="rules-title"><div class="container">${rulesTile("rules-title", { onPage: true })}</div></section>`;
+  const rules = `<section class="section" id="rules" aria-labelledby="rules-title"><div class="container">${rulesTile("rules-title", { onPage: true, ...(ppc ? PPC_RULES : {}) })}</div></section>`;
 
   const how = `<section class="section section--sand" id="how" aria-labelledby="how-title"><div class="container">
   ${sectionHead("how-title", "How an order *works*.", "Your price instantly. Your free digital mockup follows within 10 minutes of confirming the details with you. Nothing prints until you approve it.")}
@@ -79,9 +102,10 @@ export function renderHome(ctx, { ppc = false } = {}) {
   ${areasList(ctx.areas.close)}
 </div></section>`;
 
+  const faqs = ppc ? PPC_HOME_FAQ : HOME_FAQ;
   const faq = `<section class="section section--sand" id="faq" aria-labelledby="faq-title"><div class="container">
   ${sectionHead("faq-title", "Straight *answers*.", undefined, { aside: textLink("/faq", "All questions", "faq_all") })}
-  ${faqList(HOME_FAQ)}
+  ${faqList(faqs)}
 </div></section>`;
 
   const quote = quoteBand({ plain: true });
@@ -94,7 +118,9 @@ export function renderHome(ctx, { ppc = false } = {}) {
     url: SITE.origin,
     logo: `${SITE.origin}/assets/brand/ark-logo-120.png`,
     image: `${SITE.origin}${PHOTOS.press.src}`,
-    description: "Custom screen printing, DTF printing, and embroidery in Colorado Springs. No minimum orders, done in-house at ARK Screen Printing.",
+    description: ppc
+      ? `Custom screen printing, DTF printing, and embroidery in Colorado Springs. ${PPC_MINIMUM} garment minimum, done in-house at ARK Screen Printing.`
+      : "Custom screen printing, DTF printing, and embroidery in Colorado Springs. No minimum orders, done in-house at ARK Screen Printing.",
     telephone: SHOP.phoneDisplay,
     email: SHOP.email,
     priceRange: "$$",
@@ -104,7 +130,7 @@ export function renderHome(ctx, { ppc = false } = {}) {
     hasMap: SHOP.mapsUrl,
     sameAs: SHOP.sameAs,
     areaServed: { "@type": "City", name: SHOP.city },
-  }) + ldScript({ "@context": "https://schema.org", "@type": "WebSite", name: SHOP.name, url: SITE.origin }) + faqJsonLd(HOME_FAQ);
+  }) + ldScript({ "@context": "https://schema.org", "@type": "WebSite", name: SHOP.name, url: SITE.origin }) + faqJsonLd(faqs);
 
   return {
     title: ctx.page.title,
