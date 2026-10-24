@@ -3,7 +3,7 @@
 // bridge for the quote form is inserted below by build.mjs, byte for byte from
 // the old global.js.
 (function setupQuoteFormConversionBridge() {
-    const QUOTE_FORM_ORIGIN = 'https://ark-quote-form-production.up.railway.app';
+    const QUOTE_FORM_ORIGIN = 'https://quotes.arkscreenprinting.com';
     const PARTIAL_LEAD_SAVED_EVENT = 'ark-quote-form:partial-lead-saved';
     const CONVERSION_DESTINATION = 'AW-11274669650/hhhlCObY9sMcENKcl4Aq';
     let conversionReported = false;
