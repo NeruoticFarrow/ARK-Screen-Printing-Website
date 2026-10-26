@@ -17,5 +17,11 @@
             'send_to': CONVERSION_DESTINATION
         });
         conversionReported = true;
+
+        // Use the same successful save and duplicate guard as Google Ads.
+        // Route only to GA4; never send the customer's contact information.
+        window.gtag('event', 'generate_lead', {
+            'send_to': 'G-3HRP9PCVCH'
+        });
     });
 })();
