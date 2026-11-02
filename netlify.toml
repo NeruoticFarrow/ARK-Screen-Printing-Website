@@ -12,3 +12,8 @@
 
 [build.environment]
   NODE_VERSION = "22"
+
+# The blog's webhook (netlify/functions/ryze-webhook.mjs, served at
+# /api/ryze-webhook): Ryze AI posts articles there.
+[functions]
+  directory = "netlify/functions"

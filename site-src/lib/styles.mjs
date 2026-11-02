@@ -158,6 +158,32 @@ const ADDITIONS = `
 /* The quick-answer callout (comparison and hub pages). */
 .callout{padding:22px 26px;border-radius:var(--r-lg);background:var(--sky);color:var(--ink)}
 .callout p{font-size:1.0625rem}
+
+/* The blog (pages/blog.mjs): article cards, the article's cover photo at its
+   own proportions, and its body in the .prose column. */
+.blog-grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));margin:0;padding:0;list-style:none}
+.blog-grid > li{display:flex}
+.blog-card{display:flex;flex-direction:column;width:100%;padding:0;text-decoration:none;color:inherit;transition:transform .2s ease,box-shadow .2s ease}
+.blog-card:hover{transform:translateY(-2px);box-shadow:var(--lift)}
+.blog-card-img{display:block;aspect-ratio:16/9;background:var(--sand)}
+.blog-card-img img{width:100%;height:100%;object-fit:cover}
+.blog-card-body{display:grid;gap:10px;align-content:start;flex:1;padding:22px 24px 24px}
+.blog-card-body .h4{margin:0;color:var(--navy)}
+.blog-card-excerpt{color:var(--muted);font-size:.9375rem}
+.blog-card .text-link{margin-top:auto}
+.blog-meta{font:600 .75rem/1.3 var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--brown)}
+.blog-hero .blog-meta{margin:0 0 12px}
+.blog-cover-wrap{max-width:1000px}
+.blog-cover{margin:0;border-radius:var(--r-xl);overflow:hidden;background:var(--sand);box-shadow:var(--lift)}
+.blog-cover img{width:100%;height:auto}
+.blog-body img{border-radius:var(--r-lg);height:auto}
+.blog-body blockquote{margin:0;padding:4px 0 4px 20px;border-left:4px solid var(--tan);font:500 1.1875rem/1.5 var(--display);color:var(--navy)}
+.blog-body figure{margin:0}
+.blog-body figcaption{margin-top:8px;font-size:.875rem;color:var(--muted)}
+.blog-body pre{overflow-x:auto;padding:16px;border-radius:var(--r-md);background:var(--sand)}
+.blog-embed{position:relative;aspect-ratio:16/9;border-radius:var(--r-lg);overflow:hidden}
+.blog-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+@media (prefers-reduced-motion:reduce){.blog-card{transition:none}.blog-card:hover{transform:none}}
 `;
 
 
