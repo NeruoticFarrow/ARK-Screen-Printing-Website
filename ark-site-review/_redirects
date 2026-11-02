@@ -48,3 +48,10 @@
 
 /screen-printing-and-embroidery        /    301
 /screen-printing-and-embroidery.html   /    301
+
+# ─── Duplicate addresses ─────────────────────────────────────────────────────
+# Old .html addresses that were still serving a second copy of a page with a
+# canonical pointing elsewhere. Forcing the redirect because the static file
+# exists and would otherwise shadow the rule.
+/index.html                             /    301!
+/screen-printing-victor.html            /screen-printing-victor    301!
