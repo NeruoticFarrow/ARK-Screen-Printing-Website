@@ -26,7 +26,7 @@ export const SITE = {
   ga4: "G-3HRP9PCVCH",
   adsConfig: "AW-1374047993",
   /** The quote form app (repo ark-quote-form), embedded as an iframe. */
-  quoteEmbed: "https://ark-quote-form-production.up.railway.app/embed",
+  quoteEmbed: "https://quotes.arkscreenprinting.com/embed",
 };
 
 export const SHOP = {
