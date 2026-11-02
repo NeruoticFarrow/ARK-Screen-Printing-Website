@@ -21,6 +21,12 @@
             'send_to': CONVERSION_DESTINATION
         });
         conversionReported = true;
+
+        // Use the same successful save and duplicate guard as Google Ads.
+        // Route only to GA4; never send the customer's contact information.
+        window.gtag('event', 'generate_lead', {
+            'send_to': 'G-3HRP9PCVCH'
+        });
     });
 })();
 
@@ -384,14 +390,33 @@
     if (quote) new IntersectionObserver(function (e) { atQuote = e[0].isIntersecting; update(); }).observe(quote);
   }
 
-  // Attribution: ad click IDs and UTM tags reach the quote form, from this
-  // page's URL or from the landing page earlier in the visit.
+  // Observed acquisition evidence, scoped to this browser session. No customer
+  // identity or full page query is stored; absence of an ad ID is NOT organic.
   var KEYS = ["gclid", "gbraid", "wbraid", "fbclid", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
   var params = new URLSearchParams(window.location.search);
   var carried = {};
   try { carried = JSON.parse(store("ark_attr") || "{}") || {}; } catch (e) { carried = {}; }
+  var ref = null;
+  try { ref = document.referrer ? new URL(document.referrer) : null; } catch (e) {}
+  var external = ref && ref.hostname !== window.location.hostname;
+  var tagged = KEYS.some(function (k) { return !!params.get(k); });
+  var age = Date.now() - Number(carried.ark_captured_at || 0);
+  // A new external arrival or campaign must not inherit old paid click IDs.
+  if (external || tagged || !carried.ark_captured_at || age > 30 * 60 * 1000) {
+    carried = { ark_landing: window.location.pathname.slice(0, 500), ark_captured_at: String(Date.now()) };
+    if (external) carried.ark_referrer = ref.origin;
+  }
   KEYS.forEach(function (k) { var v = params.get(k); if (v) carried[k] = v.slice(0, 200); });
-  if (Object.keys(carried).length) store("ark_attr", JSON.stringify(carried));
+  var medium = String(carried.utm_medium || "").toLowerCase();
+  var paid = /^(cpc|ppc|paid|paidsearch|paid_search|paid-social|paid_social|display|cpm)$/.test(medium);
+  var googleRef = ref && /(^|\.)google\.(com|[a-z]{2}|co\.[a-z]{2}|com\.[a-z]{2})$/.test(ref.hostname);
+  carried.ark_source = "Unknown";
+  if (carried.gclid || carried.gbraid || carried.wbraid || (paid && /^(google|googleads|google_ads)$/i.test(carried.utm_source || ""))) carried.ark_source = "Google Ads";
+  else if (paid) carried.ark_source = "Other paid";
+  else if (!carried.utm_source && !carried.utm_medium && (googleRef || /(^|\.)google\.(com|[a-z]{2}|co\.[a-z]{2}|com\.[a-z]{2})$/.test((function () { try { return new URL(carried.ark_referrer).hostname; } catch (e) { return ""; } })()))) carried.ark_source = "Google search";
+  else if (/^google$/i.test(carried.utm_source || "") && medium === "organic") carried.ark_source = "Google search";
+  else if (carried.ark_referrer && !carried.utm_source && !carried.utm_medium) carried.ark_source = "Referral";
+  store("ark_attr", JSON.stringify(carried));
   doc.querySelectorAll("[data-quote-frame]").forEach(function (frame) {
     var keys = Object.keys(carried);
     if (!keys.length) return;
