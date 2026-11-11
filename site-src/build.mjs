@@ -92,12 +92,25 @@ for (const post of posts) fs.writeFileSync(path.join(BLOG_DIR, `${post.slug}.htm
 fs.writeFileSync(path.join(SITE_DIR, "sitemap-blog.xml"), blogSitemap(posts));
 count += 1 + posts.length;
 
+// Approved, unlisted client preview. Standalone React bundle, fonts and
+// product images are embedded; it deliberately does not inherit site-wide
+// analytics or connect to the real store, CRM, or checkout.
+fs.copyFileSync(path.join(ROOT, "site-src/previews/rmpc.html"), path.join(SITE_DIR, "rmpc.html"));
+
 // ── Long cache for fingerprinted assets, fonts and optimised images.
 fs.writeFileSync(path.join(SITE_DIR, "_headers"), `# Written by site-src/build.mjs.
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 /fonts/gf/*
   Cache-Control: public, max-age=31536000, immutable
+/rmpc
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: public, max-age=0, must-revalidate
+  Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'
+/rmpc.html
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: public, max-age=0, must-revalidate
+  Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'
 `);
 
 console.log(`built ${count} pages (${posts.length} blog posts) · css ${(css.length / 1024).toFixed(1)} KB · js ${(js.length / 1024).toFixed(1)} KB · v=${version} · areas ${close.length} close + ${towns.length} towns`);

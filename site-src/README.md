@@ -51,6 +51,14 @@ npm run images     # after adding a photo: WebP sizes + content/image-manifest.j
    - Bearer token: the same value as `RYZE_WEBHOOK_TOKEN`.
    - Blog URL: `https://arkscreenprinting.com/blog`.
 
+## Unlisted client previews
+
+The owner-approved RMPC sample store is hosted at `https://arkscreenprinting.com/rmpc`. Its self-contained source is `previews/rmpc.html`; the build copies it to `ark-site-review/rmpc.html`, and `_redirects` serves it at `/rmpc`. Edit or replace the source, not only the published copy.
+
+This is a shopping demonstration, not a live creator store. It embeds its product images and fonts and intentionally does not inherit the marketing site's analytics, quote conversion events, store APIs, or checkout. Its dedicated headers block network/form submissions and prevent search-engine indexing; it is accessible to anyone with the link, not password-protected. Seven pricing/cart tests and desktop/mobile simulated checkout were verified in the sample workspace before inclusion.
+
+Prices default to the client's 50-piece Quote A, with owner preview controls for 25/50/100 pieces. No retail fundraising markup, tax, firm preorder deadline, or delivery commitment is configured. Event pickup is illustrative. No payments, orders, CRM leads, or emails are created.
+
 ## Google reviews and photos (Business Profile sync)
 
 **How it works:**
