@@ -103,6 +103,42 @@ for (const genFile of generated) {
   }
 }
 
+// The blog (blog/): the same checks on each page's frame. A broken link inside
+// an article's own text (it comes from Ryze AI) is only a warning, so one bad
+// link can't stop every deploy.
+const BLOG = path.join(SITE, "blog");
+const warnings = [];
+for (const name of fs.existsSync(BLOG) ? fs.readdirSync(BLOG).filter((f) => f.endsWith(".html")) : []) {
+  const file = `blog/${name}`;
+  const html = fs.readFileSync(path.join(BLOG, name), "utf8");
+  const { document: d } = parseHTML(html);
+  checked++;
+  if (d.querySelectorAll("h1").length !== 1) fail(file, `${d.querySelectorAll("h1").length} h1 elements`);
+  if (!d.title) fail(file, "no title");
+  if (!d.querySelector('link[rel="canonical"]')?.getAttribute("href")?.startsWith("https://arkscreenprinting.com/blog")) fail(file, "canonical isn't under /blog");
+  if (!html.includes("googletagmanager.com/gtag/js?id=G-3HRP9PCVCH") || !html.includes("gtag('config', 'AW-1374047993')")) fail(file, "analytics tags missing");
+  if (html.includes(PPC_LINE.phoneDisplay)) fail(file, "the PPC number is on a blog page");
+  for (const s of d.querySelectorAll('script[type="application/ld+json"]')) {
+    try { JSON.parse(s.textContent); } catch { fail(file, "JSON-LD does not parse"); }
+  }
+  const ids = [...d.querySelectorAll("[id]")].map((e) => e.id);
+  const dup = ids.filter((id, i) => ids.indexOf(id) !== i);
+  if (dup.length) fail(file, `duplicate ids: ${[...new Set(dup)].join(", ")}`);
+  const local = (h) => h && h.startsWith("/") && !h.startsWith("//");
+  for (const a of d.querySelectorAll(".blog-body a[href]")) {
+    if (local(a.getAttribute("href")) && !resolves(a.getAttribute("href"))) warnings.push(`${file}: article links to ${a.getAttribute("href")}, which isn't a page`);
+  }
+  d.querySelector(".blog-body")?.remove();
+  const refs = [
+    ...[...d.querySelectorAll("a[href]")].map((a) => a.getAttribute("href")),
+    ...[...d.querySelectorAll("img[src]")].map((i) => i.getAttribute("src")),
+    ...[...d.querySelectorAll("link[href]")].map((l) => l.getAttribute("href")),
+    ...[...d.querySelectorAll("script[src]")].map((s) => s.getAttribute("src")),
+  ].filter(local);
+  for (const h of new Set(refs)) if (!resolves(h)) fail(file, `broken reference ${h}`);
+}
+if (warnings.length) console.warn(warnings.map((w) => `warning: ${w}`).join("\n"));
+
 // Client previews are not marketing templates and must not inherit quote
 // conversion tracking. Verify their source is preserved and their browser
 // cannot send form or API requests, even if the demo JavaScript fails.

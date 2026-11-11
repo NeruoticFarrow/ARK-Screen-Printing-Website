@@ -15,6 +15,7 @@ import { renderHome } from "./pages/home.mjs";
 import { renderFundraising, renderPrintOnDemand } from "./pages/offers.mjs";
 import { renderLocal } from "./pages/local.mjs";
 import { renderPpc, renderService } from "./pages/service.mjs";
+import { blogSitemap, loadPosts, renderBlogIndex, renderBlogPost } from "./pages/blog.mjs";
 import { renderAbout, renderFaq, renderGallery, renderQuote, renderServiceAreas, renderTestimonials, renderThankYou } from "./pages/simple.mjs";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..");
@@ -80,6 +81,17 @@ for (const [file, render] of [["print-on-demand.html", renderPrintOnDemand], ["f
   count++;
 }
 
+// ── The blog (articles from Ryze AI, content/blog/). Rewritten from scratch
+// each build, so an unpublished article's page goes away.
+const BLOG_DIR = path.join(SITE_DIR, "blog");
+const posts = loadPosts(path.join(ROOT, "site-src/content/blog"));
+fs.rmSync(BLOG_DIR, { recursive: true, force: true });
+fs.mkdirSync(BLOG_DIR, { recursive: true });
+fs.writeFileSync(path.join(BLOG_DIR, "index.html"), shell({ ...renderBlogIndex(posts), css: version }));
+for (const post of posts) fs.writeFileSync(path.join(BLOG_DIR, `${post.slug}.html`), shell({ ...renderBlogPost(post, posts), css: version }));
+fs.writeFileSync(path.join(SITE_DIR, "sitemap-blog.xml"), blogSitemap(posts));
+count += 1 + posts.length;
+
 // Approved, unlisted client preview. Standalone React bundle, fonts and
 // product images are embedded; it deliberately does not inherit site-wide
 // analytics or connect to the real store, CRM, or checkout.
@@ -101,4 +113,4 @@ fs.writeFileSync(path.join(SITE_DIR, "_headers"), `# Written by site-src/build.m
   Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'
 `);
 
-console.log(`built ${count} pages · css ${(css.length / 1024).toFixed(1)} KB · js ${(js.length / 1024).toFixed(1)} KB · v=${version} · areas ${close.length} close + ${towns.length} towns`);
+console.log(`built ${count} pages (${posts.length} blog posts) · css ${(css.length / 1024).toFixed(1)} KB · js ${(js.length / 1024).toFixed(1)} KB · v=${version} · areas ${close.length} close + ${towns.length} towns`);

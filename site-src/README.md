@@ -29,6 +29,27 @@ npm run images     # after adding a photo: WebP sizes + content/image-manifest.j
 | Live reviews on the Reviews page: the newest Google reviews from the owner's Starwall feed, read fresh in the browser by `assets/site.js` (never stored, per Google's terms); `""` turns it off and the picks above show instead | `REVIEWS_FEED` in `lib/facts.mjs` |
 | The Google Ads conversion bridge and the thank-you conversion tags (byte for byte from the old site) | `content/conversion-bridge.js`, `content/thank-you-conversions.json` |
 | The browser script | `assets/site.js` |
+| The blog: articles from Ryze AI, its templates, and the webhook that receives them | `content/blog/<slug>.json`, `pages/blog.mjs`, `../netlify/functions/ryze-webhook.mjs` (see below) |
+
+## The blog (articles from Ryze AI)
+
+**How it works:**
+- Ryze AI POSTs each article to `https://arkscreenprinting.com/api/ryze-webhook` (`netlify/functions/ryze-webhook.mjs`) with a bearer token.
+- The function upserts it by slug: it commits `site-src/content/blog/<slug>.json`, and a copy of the featured image in `ark-site-review/images/blog/`, to `main` in one commit. Sending the same article again changes nothing.
+- That commit makes Netlify rebuild. `pages/blog.mjs` writes `/blog`, `/blog/<slug>` and `sitemap-blog.xml` from the files.
+- Only articles whose `status` is published (or missing) are shown. A draft or archived article stays in the repo but its page is removed at the next build.
+- The article body is cleaned at build time: scripts, styles, forms, event handlers and iframes (other than YouTube, Vimeo and Loom) are removed, and its H1s become H2s.
+- The blog pages are **not committed** (`.gitignore`): they are rebuilt from the JSON at every build. To remove an article, delete its JSON file.
+
+**One-time setup:**
+
+1. **Make a bearer token.** Use any long random string, for example from PowerShell: `-join ((1..48) | % { '{0:x}' -f (Get-Random -Max 16) })`.
+2. **Make a GitHub token.** Under GitHub → *Settings → Developer settings → Fine-grained tokens*, create a token with access to **this repository only** and **Contents: Read and write**.
+3. **Add both to Netlify.** Under *Site configuration → Environment variables*, add `RYZE_WEBHOOK_TOKEN` (the bearer token) and `GITHUB_TOKEN`, then redeploy.
+4. **Fill in Ryze.**
+   - Webhook URL: `https://arkscreenprinting.com/api/ryze-webhook`.
+   - Bearer token: the same value as `RYZE_WEBHOOK_TOKEN`.
+   - Blog URL: `https://arkscreenprinting.com/blog`.
 
 ## Unlisted client previews
 
