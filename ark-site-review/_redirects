@@ -55,3 +55,6 @@
 # exists and would otherwise shadow the rule.
 /index.html                             /    301!
 /screen-printing-victor.html            /screen-printing-victor    301!
+
+# ─── Unlisted RMPC sample storefront (no real payments or orders) ──────────────
+/rmpc                                   /rmpc.html    200
