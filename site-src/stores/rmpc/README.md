@@ -53,7 +53,9 @@ The export's *Front print* column says which design each garment carries, so eac
 
 ## Stripe webhooks
 
-None needed here. The ARK designer's webhook receives these sessions' events too (same Stripe account), and leaves sessions with a `metadata.channel` alone.
+None needed here: the export reads the orders straight from Stripe.
+
+The ARK designer's webhook receives these sessions' events too, because it's the same Stripe account. It leaves any session with a `metadata.channel` alone once [ark-designer#125](https://github.com/NeruoticFarrow/ark-designer/pull/125) is released. Until then, an RMPC buyer who leaves checkout gets the designer's abandoned-cart email.
 
 ## Local check
 
