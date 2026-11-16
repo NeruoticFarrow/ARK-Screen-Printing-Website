@@ -17,6 +17,7 @@ import { renderLocal } from "./pages/local.mjs";
 import { renderPpc, renderService } from "./pages/service.mjs";
 import { blogSitemap, loadPosts, renderBlogIndex, renderBlogPost } from "./pages/blog.mjs";
 import { renderAbout, renderFaq, renderGallery, renderQuote, renderServiceAreas, renderTestimonials, renderThankYou } from "./pages/simple.mjs";
+import { buildRmpcStore } from "./stores/rmpc/build.mjs";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..");
 const SITE_DIR = path.join(ROOT, "ark-site-review");
@@ -92,12 +93,17 @@ for (const post of posts) fs.writeFileSync(path.join(BLOG_DIR, `${post.slug}.htm
 fs.writeFileSync(path.join(SITE_DIR, "sitemap-blog.xml"), blogSitemap(posts));
 count += 1 + posts.length;
 
-// Approved, unlisted client preview. Standalone React bundle, fonts and
-// product images are embedded; it deliberately does not inherit site-wide
-// analytics or connect to the real store, CRM, or checkout.
-fs.copyFileSync(path.join(ROOT, "site-src/previews/rmpc.html"), path.join(SITE_DIR, "rmpc.html"));
+// The RMPC season store: an unlisted client store with its own checkout
+// (site-src/stores/rmpc, netlify/functions/rmpc-*.mjs). One self-contained page
+// with React, fonts and product images bundled in; it deliberately does not
+// inherit the site's analytics or quote conversion events.
+const store = await buildRmpcStore(path.join(SITE_DIR, "rmpc.html"));
+count++;
 
-// ── Long cache for fingerprinted assets, fonts and optimised images.
+// ── Long cache for fingerprinted assets, fonts and optimised images. The
+// store page may only talk to its own origin (the checkout function) and
+// can't be framed or indexed; Stripe's page opens by navigation.
+const RMPC_CSP = "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'self'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'";
 fs.writeFileSync(path.join(SITE_DIR, "_headers"), `# Written by site-src/build.mjs.
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
@@ -106,11 +112,11 @@ fs.writeFileSync(path.join(SITE_DIR, "_headers"), `# Written by site-src/build.m
 /rmpc
   X-Robots-Tag: noindex, nofollow
   Cache-Control: public, max-age=0, must-revalidate
-  Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'
+  Content-Security-Policy: ${RMPC_CSP}
 /rmpc.html
   X-Robots-Tag: noindex, nofollow
   Cache-Control: public, max-age=0, must-revalidate
-  Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'
+  Content-Security-Policy: ${RMPC_CSP}
 `);
 
-console.log(`built ${count} pages (${posts.length} blog posts) · css ${(css.length / 1024).toFixed(1)} KB · js ${(js.length / 1024).toFixed(1)} KB · v=${version} · areas ${close.length} close + ${towns.length} towns`);
+console.log(`built ${count} pages (${posts.length} blog posts) · css ${(css.length / 1024).toFixed(1)} KB · js ${(js.length / 1024).toFixed(1)} KB · v=${version} · areas ${close.length} close + ${towns.length} towns · rmpc store ${(store.bytes / 1024).toFixed(0)} KB`);

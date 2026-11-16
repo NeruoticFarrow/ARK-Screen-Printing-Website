@@ -1,0 +1,10 @@
+/* Additions to the approved styles (styles.css) for the live store. */
+
+/* The top strip: preorder status on the left, the Stripe note on the right
+   where the sample's "Preview pricing" button sat. */
+.preview-dot.live{background:#6b8c61}
+.preview-strip .strip-note{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:0}
+@media (max-width:570px){.preview-strip .strip-note{font-size:9px;gap:4px}.preview-strip .strip-note svg{width:11px}}
+
+/* A checkout that couldn't start says why, above the button. */
+.cart-summary>p.checkout-error{background:#fdf1ee;border:1px solid #f0d3cb;color:#8a3324;font-size:11px;line-height:1.6;padding:10px 12px;border-radius:3px;margin:0 0 14px}

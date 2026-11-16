@@ -13,7 +13,12 @@
 [build.environment]
   NODE_VERSION = "22"
 
-# The blog's webhook (netlify/functions/ryze-webhook.mjs, served at
-# /api/ryze-webhook): Ryze AI posts articles there.
+# The blog's webhook (netlify/functions/ryze-webhook.mjs), where Ryze AI posts
+# articles; the RMPC store's checkout and order export
+# (netlify/functions/rmpc-*.mjs); and the Stripe webhook that emails the client
+# each order (netlify/functions/stripe-webhook.mjs). Each function declares its own /api/…
+# path. Their keys, secrets and the export password are Netlify environment
+# variables, never files here.
 [functions]
   directory = "netlify/functions"
+  node_bundler = "esbuild"
