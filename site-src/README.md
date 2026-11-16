@@ -30,13 +30,16 @@ npm run images     # after adding a photo: WebP sizes + content/image-manifest.j
 | The Google Ads conversion bridge and the thank-you conversion tags (byte for byte from the old site) | `content/conversion-bridge.js`, `content/thank-you-conversions.json` |
 | The browser script | `assets/site.js` |
 
-## Unlisted client previews
+## The RMPC season store (unlisted client store)
 
-The owner-approved RMPC sample store is hosted at `https://arkscreenprinting.com/rmpc`. Its self-contained source is `previews/rmpc.html`; the build copies it to `ark-site-review/rmpc.html`, and `_redirects` serves it at `/rmpc`. Edit or replace the source, not only the published copy.
+`https://arkscreenprinting.com/rmpc` is RMPC's 2027 season store, and it takes real orders. Its source is `stores/rmpc/` (see the README there); the build bundles it into `ark-site-review/rmpc.html`, and `_redirects` serves it at `/rmpc`.
 
-This is a shopping demonstration, not a live creator store. It embeds its product images and fonts and intentionally does not inherit the marketing site's analytics, quote conversion events, store APIs, or checkout. Its dedicated headers block network/form submissions and prevent search-engine indexing; it is accessible to anyone with the link, not password-protected. Seven pricing/cart tests and desktop/mobile simulated checkout were verified in the sample workspace before inclusion.
-
-Prices default to the client's 50-piece Quote A, with owner preview controls for 25/50/100 pieces. No retail fundraising markup, tax, firm preorder deadline, or delivery commitment is configured. Event pickup is illustrative. No payments, orders, CRM leads, or emails are created.
+- **Prices:** `stores/rmpc/catalog.mjs`. Tees $29.99, crewnecks $59.99, every size the same.
+- **Checkout:** the bag posts to `/api/rmpc/checkout` (`netlify/functions/rmpc-checkout.mjs`), which re-prices every line from the catalogue and opens Stripe Checkout in ARK's Stripe account. Stripe collects the buyer's details, sales tax (Stripe Tax) and the payment.
+- **Orders:** `/api/rmpc/orders` (`netlify/functions/rmpc-orders.mjs`), password-protected: paid orders, the money, and the garments to print, with CSV downloads.
+- **Netlify environment variables:** `RMPC_STRIPE_SECRET_KEY` and `RMPC_ORDERS_PASSWORD` (and optionally `RMPC_AUTOMATIC_TAX=off`).
+- **What it doesn't do:** it inherits none of the site's analytics or quote conversion events, stays `noindex`, and its headers let it talk only to its own checkout.
+- **Tests:** `npm test` (prices, checkout and the export).
 
 ## Google reviews and photos (Business Profile sync)
 

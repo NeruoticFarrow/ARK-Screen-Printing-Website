@@ -12,3 +12,10 @@
 
 [build.environment]
   NODE_VERSION = "22"
+
+# The RMPC store's checkout and order export (netlify/functions/rmpc-*.mjs).
+# Each function declares its own /api/rmpc/… path. Their Stripe key and the
+# export password are Netlify environment variables, never files here.
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
