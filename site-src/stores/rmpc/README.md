@@ -1,6 +1,6 @@
 # RMPC season store
 
-`https://arkscreenprinting.com/rmpc`: Rocky Mountain Parkour Championships' 2027 season collection. It's the owner-approved sample storefront, rebuilt as readable source with the same markup and styles, and it sells for real through Stripe Checkout in ARK's Stripe account.
+`https://arkscreenprinting.com/rmpc`: Rocky Mountain Parkour Championships' 2027 season collection. It's the owner-approved sample storefront, rebuilt as readable source with the same markup and styles, and it sells for real through Stripe Checkout in ARK's Stripe account. RMPC also shows it on their own site, [embedded](#on-rmpcs-site).
 
 | What | File |
 |---|---|
@@ -9,7 +9,7 @@
 | Styles: the approved ones unchanged, plus the live-checkout additions | `styles.css`, `store.css` |
 | Product photos and fonts (bundled into the page) | `images/`, `fonts/` |
 | Bundles everything into `ark-site-review/rmpc.html` | `build.mjs` (run by `npm run build`) |
-| Checkout: bag → Stripe Checkout session | `netlify/functions/rmpc-checkout.mjs` |
+| Checkout: bag → Stripe Checkout session, and where a checkout stands | `netlify/functions/rmpc-checkout.mjs` |
 | Order export: summary page and CSVs | `netlify/functions/rmpc-orders.mjs` |
 | Order email to the client (Stripe webhook) | `netlify/functions/stripe-webhook.mjs` |
 | Tests | `tests/` (`npm test`) |
@@ -21,7 +21,7 @@
    - The function re-prices every line from `catalog.mjs`. It never uses a price from the browser.
    - It creates a Stripe Checkout session and the buyer pays on Stripe's page.
    - Stripe collects their name, email, phone and address, adds sales tax with Stripe Tax, and emails the receipt.
-3. **Back on the store:** the buyer lands on `/rmpc?checkout=success`, which shows the confirmation and empties the bag.
+3. **Back on the store:** the buyer lands on `/rmpc?checkout=success`, which shows the confirmation and empties the bag. A page that sent a buyer to Stripe also looks the checkout up when it next loads (`GET /api/rmpc/checkout?session_id=…`), so a bag that was paid for empties even if the buyer never came back through that link.
 4. **The client hears about it:** Stripe sends `checkout.session.completed` to `/api/stripe-webhook`, which emails the order to `RMPC_ORDER_NOTIFICATION_EMAIL`: buyer name and email, delivery (city and state when shipped), garments and money. The street address and phone stay in ARK's export.
 5. **Production:** the order is in Stripe, tagged `metadata.channel = rmpc-store` with its garments in `metadata.items_*`.
    - `/api/rmpc/orders` lists every paid order: buyer, delivery, garments, money, refunds.
@@ -49,6 +49,24 @@ Netlify applies a changed variable at the next deploy (Deploys → Trigger deplo
 - **Change a price:** edit `PRICE_CENTS`.
 - **Change the pickup wording:** edit `STORE.pickup`.
   - The owner rule is that ARK's address is never offered as a pickup counter.
+- **Embed the store on another site:** add its address to `STORE.embedOn`, e.g. `"https://shop.example.com"`. Run `npm run build`, then commit.
+
+## On RMPC's site
+
+RMPC shows the store on their Squarespace site, rmparkour.com, in an iframe. Paste this into a Code Block on the page. To add one, edit the page, add a block, choose **Code**, keep it in HTML mode and leave **Display Source** off.
+
+```html
+<iframe src="https://arkscreenprinting.com/rmpc" title="RMPC Season Store" style="display:block;width:100%;height:90vh;min-height:640px;border:0" allow="clipboard-write"></iframe>
+```
+
+- **Squarespace plan:** an iframe in a Code Block needs the Core, Plus or Advanced plan, or one of some legacy plans. Squarespace may also hide code blocks from you while you're logged in, so check the page in a private window.
+- **Who can frame it:** the sites listed in `STORE.embedOn` (`catalog.mjs`). That list becomes the `frame-ancestors` of `/rmpc`'s Content-Security-Policy. Today it holds rmparkour.com, www.rmparkour.com and Squarespace's own domains, which serve its editor and previews. Any other site shows an empty frame.
+- **Size:** the frame has a fixed height and scrolls inside. That way the product and bag panels open inside it, where the buyer can see them.
+- **Checkout:** Stripe Checkout can't load inside a frame, so the Checkout button sends the whole tab to Stripe. If the page around the store stops that, the bag shows a *Continue to secure checkout* link instead.
+- **After paying:** Stripe returns the buyer to `arkscreenprinting.com/rmpc`, which reads the order back from Stripe and shows it.
+  - Browsers keep a framed page's storage separate for each site, so the embedded store's bag isn't there.
+  - The embedded store empties its own bag the next time it loads, once the checkout lookup says the order went through.
+- **Leaving checkout:** for embedded orders Stripe shows no back link, because it would land on arkscreenprinting.com, where that bag isn't. The browser's Back button returns the buyer to RMPC's page with the bag as it was.
 
 ## RMPC's share
 
