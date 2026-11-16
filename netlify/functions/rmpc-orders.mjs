@@ -53,12 +53,18 @@ function oneLine(address) {
     .filter(Boolean).join(", ");
 }
 
+/** Where a session ships. Webhook events follow the endpoint's API version,
+ *  so older shapes (shipping_details, then shipping) are read too. */
+export function shippingDetails(session) {
+  return session.collected_information?.shipping_details ?? session.shipping_details ?? session.shipping ?? null;
+}
+
 /** A paid Checkout session as an order row set. */
 export function toOrder(session) {
   const charge = session.payment_intent && typeof session.payment_intent === "object" ? session.payment_intent.latest_charge : null;
   const refunded = charge && typeof charge === "object" ? charge.amount_refunded ?? 0 : 0;
   const total = session.amount_total ?? 0;
-  const shipping = session.collected_information?.shipping_details ?? null;
+  const shipping = shippingDetails(session);
   return {
     ref: orderRef(session.id),
     sessionId: session.id,
@@ -101,7 +107,7 @@ export async function paidOrders(secretKey, fetchImpl = fetch) {
   return orders.sort((a, b) => a.created - b.created);
 }
 
-function describe(item) {
+export function describeItem(item) {
   const product = productById(item.productId);
   const garment = GARMENTS[item.variant];
   return {
@@ -134,7 +140,7 @@ export function ordersCsv(orders) {
   ]];
   for (const order of orders) {
     order.items.forEach((item, i) => {
-      const d = describe(item);
+      const d = describeItem(item);
       const first = i === 0;
       rows.push([
         order.ref, order.date, order.status, order.name, order.email, order.phone, order.delivery, order.shipTo,
@@ -172,14 +178,14 @@ export function sizesCsv(orders) {
   const counts = sizeCounts(orders);
   const rows = [["Product", "Front print", "Garment", "Fit", "Size", "Colour", "Qty"]];
   for (const c of counts) {
-    const d = describe(c);
+    const d = describeItem(c);
     rows.push([d.product, d.front, d.garment, d.fit, c.size, COLOUR, c.quantity]);
   }
   rows.push(["Total", "", "", "", "", "", counts.reduce((n, c) => n + c.quantity, 0)]);
   return csv(rows);
 }
 
-const escapeHtml = (s) => String(s).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]);
+export const escapeHtml = (s) => String(s).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]);
 
 export function summaryHtml(orders) {
   const live = orders.filter((o) => o.status !== "Refunded");
@@ -187,7 +193,7 @@ export function summaryHtml(orders) {
   const counts = sizeCounts(orders);
   const garments = counts.reduce((n, c) => n + c.quantity, 0);
   const rows = counts.map((c) => {
-    const d = describe(c);
+    const d = describeItem(c);
     return `<tr><td>${escapeHtml(d.product)}</td><td>${escapeHtml(d.garment)}</td><td>${escapeHtml(d.fit)}</td><td>${escapeHtml(c.size)}</td><td class="n">${c.quantity}</td></tr>`;
   }).join("");
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>RMPC store orders</title>
