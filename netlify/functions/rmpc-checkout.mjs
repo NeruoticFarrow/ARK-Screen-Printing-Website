@@ -8,12 +8,13 @@
 // as the ARK designer's checkout does) and emails the receipt.
 //
 // Environment (Netlify → Site configuration → Environment variables):
-//   RMPC_STRIPE_SECRET_KEY  required. A Stripe secret or restricted key. Use a
-//                           test key (sk_test_…/rk_test_…) for deploy previews
-//                           and the live key for production. Unset = checkout
-//                           answers "isn't switched on yet".
-//   RMPC_AUTOMATIC_TAX      optional. "off" stops Stripe Tax for these orders
-//                           (only if Stripe Tax isn't set up on the account).
+//   STRIPE_SECRET_KEY    required. ARK's Stripe secret or restricted key,
+//                        shared with anything else on the site that takes
+//                        payments. Use a test key (sk_test_…/rk_test_…) for
+//                        deploy previews and the live key for production.
+//                        Unset = checkout answers "isn't switched on yet".
+//   RMPC_AUTOMATIC_TAX   optional. "off" stops Stripe Tax for these orders
+//                        (only if Stripe Tax isn't set up on the account).
 
 import { STORE, SHIPPING_RULE_TEXT, encodeItems, ordersClosed, priceOrder } from "../../site-src/stores/rmpc/catalog.mjs";
 import { stripeRequest } from "../lib/stripe.mjs";
@@ -74,7 +75,7 @@ export function sessionParams(order, origin, { automaticTax = true } = {}) {
 export function createCheckoutHandler({ env = process.env, fetchImpl = fetch, now = () => Date.now() } = {}) {
   return async function handler(req) {
     if (req.method !== "POST") return json(405, { error: "Use POST." });
-    const secretKey = env.RMPC_STRIPE_SECRET_KEY;
+    const secretKey = env.STRIPE_SECRET_KEY;
     if (!secretKey) return json(503, { error: "Checkout isn't switched on yet. Please try again soon." });
     if (ordersClosed(now())) return json(409, { error: "Preorders for this season are closed." });
     // JSON only: a cross-site form post can't send it, and a cross-site

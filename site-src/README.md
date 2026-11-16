@@ -37,7 +37,7 @@ npm run images     # after adding a photo: WebP sizes + content/image-manifest.j
 - **Prices:** `stores/rmpc/catalog.mjs`. Tees $29.99, crewnecks $59.99, every size the same.
 - **Checkout:** the bag posts to `/api/rmpc/checkout` (`netlify/functions/rmpc-checkout.mjs`), which re-prices every line from the catalogue and opens Stripe Checkout in ARK's Stripe account. Stripe collects the buyer's details, sales tax (Stripe Tax) and the payment.
 - **Orders:** `/api/rmpc/orders` (`netlify/functions/rmpc-orders.mjs`), password-protected: paid orders, the money, and the garments to print, with CSV downloads.
-- **Netlify environment variables:** `RMPC_STRIPE_SECRET_KEY` and `RMPC_ORDERS_PASSWORD` (and optionally `RMPC_AUTOMATIC_TAX=off`).
+- **Netlify environment variables:** `STRIPE_SECRET_KEY` (ARK's Stripe key, not RMPC-only) and `RMPC_ORDERS_PASSWORD` (and optionally `RMPC_AUTOMATIC_TAX=off`).
 - **What it doesn't do:** it inherits none of the site's analytics or quote conversion events, stays `noindex`, and its headers let it talk only to its own checkout.
 - **Tests:** `npm test` (prices, checkout and the export).
 

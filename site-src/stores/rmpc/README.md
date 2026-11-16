@@ -29,7 +29,7 @@
 
 | Variable | What |
 |---|---|
-| `RMPC_STRIPE_SECRET_KEY` | **Required.** A Stripe secret or restricted key for ARK's account. Give *Deploy Previews* a test key and *Production* the live key. Unset = the bag answers "Checkout isn't switched on yet". |
+| `STRIPE_SECRET_KEY` | **Required.** ARK's Stripe secret or restricted key. It isn't RMPC-only: anything else on the site that takes payments can read it too. Give *Deploy Previews* a test key and *Production* the live key. Unset = the bag answers "Checkout isn't switched on yet". |
 | `RMPC_ORDERS_PASSWORD` | **Required for the export.** 12+ characters. The browser asks for a user name (anything) and this password. |
 | `RMPC_AUTOMATIC_TAX` | Optional. `off` stops Stripe Tax for these orders. Use it only if Stripe Tax isn't set up on the account. |
 

@@ -6,7 +6,7 @@
 //
 // Password-protected: the browser asks for a user name (anything) and the
 // password in RMPC_ORDERS_PASSWORD. Unset or shorter than 12 characters = the
-// export stays locked. Reads with RMPC_STRIPE_SECRET_KEY.
+// export stays locked. Reads Stripe with STRIPE_SECRET_KEY.
 
 import crypto from "node:crypto";
 import { COLOUR, GARMENTS, PRODUCTS, STORE, decodeItems, orderRef, productById, usd } from "../../site-src/stores/rmpc/catalog.mjs";
@@ -209,8 +209,8 @@ export function createOrdersHandler({ env = process.env, fetchImpl = fetch } = {
     if (!authorised(req, password)) {
       return text(401, "Sign in with the RMPC_ORDERS_PASSWORD password.", { "WWW-Authenticate": 'Basic realm="RMPC orders", charset="UTF-8"' });
     }
-    const secretKey = env.RMPC_STRIPE_SECRET_KEY;
-    if (!secretKey) return text(503, "Set RMPC_STRIPE_SECRET_KEY in Netlify first.");
+    const secretKey = env.STRIPE_SECRET_KEY;
+    if (!secretKey) return text(503, "Set STRIPE_SECRET_KEY in Netlify first.");
 
     let orders;
     try {

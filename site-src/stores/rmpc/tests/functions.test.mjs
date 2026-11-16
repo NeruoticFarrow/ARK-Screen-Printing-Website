@@ -30,7 +30,7 @@ test("encodeForm writes Stripe's nested form fields", () => {
 
 test("checkout creates a Stripe session priced from the catalogue", async () => {
   const stripe = fakeStripe();
-  const handler = createCheckoutHandler({ env: { RMPC_STRIPE_SECRET_KEY: KEY }, fetchImpl: stripe.fetchImpl });
+  const handler = createCheckoutHandler({ env: { STRIPE_SECRET_KEY: KEY }, fetchImpl: stripe.fetchImpl });
   const res = await handler(checkoutRequest({ ...BAG, lines: [{ ...BAG.lines[0], unitCents: 1 }] }));
   assert.equal(res.status, 200);
   assert.deepEqual(await res.json(), { url: "https://checkout.stripe.com/c/pay/cs_test_123" });
@@ -59,7 +59,7 @@ test("checkout creates a Stripe session priced from the catalogue", async () => 
 
 test("shipped orders collect a U.S. address and pay the shipping rule", async () => {
   const stripe = fakeStripe();
-  const handler = createCheckoutHandler({ env: { RMPC_STRIPE_SECRET_KEY: KEY, RMPC_AUTOMATIC_TAX: "off" }, fetchImpl: stripe.fetchImpl });
+  const handler = createCheckoutHandler({ env: { STRIPE_SECRET_KEY: KEY, RMPC_AUTOMATIC_TAX: "off" }, fetchImpl: stripe.fetchImpl });
   const res = await handler(checkoutRequest({ ...BAG, delivery: "ship" }));
   assert.equal(res.status, 200);
   const { form } = stripe.calls[0];
@@ -71,7 +71,7 @@ test("shipped orders collect a U.S. address and pay the shipping rule", async ()
 
 test("checkout refuses politely when it can't take the order", async () => {
   const stripe = fakeStripe();
-  const live = createCheckoutHandler({ env: { RMPC_STRIPE_SECRET_KEY: KEY }, fetchImpl: stripe.fetchImpl });
+  const live = createCheckoutHandler({ env: { STRIPE_SECRET_KEY: KEY }, fetchImpl: stripe.fetchImpl });
   assert.equal((await createCheckoutHandler({ env: {}, fetchImpl: stripe.fetchImpl })(checkoutRequest(BAG))).status, 503, "no key yet");
   assert.equal((await live(new Request(`${ORIGIN}/api/rmpc/checkout`))).status, 405);
   assert.equal((await live(checkoutRequest(BAG, { "Content-Type": "text/plain" }))).status, 415);
@@ -81,7 +81,7 @@ test("checkout refuses politely when it can't take the order", async () => {
   assert.match((await bad.json()).error, /isn't available/);
   assert.equal(stripe.calls.length, 0, "nothing reached Stripe");
 
-  const refused = createCheckoutHandler({ env: { RMPC_STRIPE_SECRET_KEY: KEY }, fetchImpl: fakeStripe({ error: { message: "Stripe Tax is not set up" } }, 400).fetchImpl });
+  const refused = createCheckoutHandler({ env: { STRIPE_SECRET_KEY: KEY }, fetchImpl: fakeStripe({ error: { message: "Stripe Tax is not set up" } }, 400).fetchImpl });
   const original = console.error;
   console.error = () => {};
   try {
@@ -148,7 +148,7 @@ test("the export is locked without the password and lists only this store's paid
     return new Response(JSON.stringify(pages[calls.length - 1]), { status: 200 });
   };
   const password = "correct horse battery";
-  const handler = createOrdersHandler({ env: { RMPC_STRIPE_SECRET_KEY: KEY, RMPC_ORDERS_PASSWORD: password }, fetchImpl });
+  const handler = createOrdersHandler({ env: { STRIPE_SECRET_KEY: KEY, RMPC_ORDERS_PASSWORD: password }, fetchImpl });
   const get = (path, pass) => handler(new Request(`${ORIGIN}${path}`, { headers: pass === undefined ? {} : { Authorization: `Basic ${Buffer.from(`ark:${pass}`).toString("base64")}` } }));
 
   assert.equal((await createOrdersHandler({ env: { RMPC_ORDERS_PASSWORD: "short" }, fetchImpl })(new Request(`${ORIGIN}/api/rmpc/orders`))).status, 503);
