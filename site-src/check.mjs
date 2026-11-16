@@ -121,7 +121,10 @@ else {
   const headers = fs.readFileSync(path.join(SITE, "_headers"), "utf8");
   for (const route of ["/rmpc", "/rmpc.html"]) {
     const block = headers.split("\n").slice(headers.split("\n").indexOf(route) + 1).filter((line, i, lines) => !lines.slice(0, i + 1).some((s) => s && !s.startsWith("  "))).join("\n");
-    if (!headers.split("\n").includes(route) || !block.includes("X-Robots-Tag: noindex, nofollow") || !block.includes("connect-src 'self';") || !block.includes("form-action 'none'") || !block.includes("frame-ancestors 'none'")) fail("rmpc.html", `unsafe store headers for ${route}`);
+    // Framing: only named https sites, never every site (*) or every https one.
+    const framers = block.match(/frame-ancestors ([^;\n]+)/)?.[1].trim().split(/\s+/) ?? [];
+    const framersNamed = framers.length > 0 && framers.every((src) => src === "'self'" || src === "'none'" || /^https:\/\/(\*\.)?[a-z0-9-]+(\.[a-z0-9-]+)+$/.test(src));
+    if (!headers.split("\n").includes(route) || !block.includes("X-Robots-Tag: noindex, nofollow") || !block.includes("connect-src 'self';") || !block.includes("form-action 'none'") || !framersNamed) fail("rmpc.html", `unsafe store headers for ${route}`);
   }
   for (const fn of ["rmpc-checkout.mjs", "rmpc-orders.mjs", "stripe-webhook.mjs"]) {
     if (!fs.existsSync(path.join(ROOT, "netlify/functions", fn))) fail("rmpc.html", `netlify/functions/${fn} missing`);

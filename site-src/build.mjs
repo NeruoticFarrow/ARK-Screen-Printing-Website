@@ -17,6 +17,7 @@ import { renderLocal } from "./pages/local.mjs";
 import { renderPpc, renderService } from "./pages/service.mjs";
 import { renderAbout, renderFaq, renderGallery, renderQuote, renderServiceAreas, renderTestimonials, renderThankYou } from "./pages/simple.mjs";
 import { buildRmpcStore } from "./stores/rmpc/build.mjs";
+import { STORE as RMPC_STORE } from "./stores/rmpc/catalog.mjs";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..");
 const SITE_DIR = path.join(ROOT, "ark-site-review");
@@ -89,9 +90,10 @@ const store = await buildRmpcStore(path.join(SITE_DIR, "rmpc.html"));
 count++;
 
 // ── Long cache for fingerprinted assets, fonts and optimised images. The
-// store page may only talk to its own origin (the checkout function) and
-// can't be framed or indexed; Stripe's page opens by navigation.
-const RMPC_CSP = "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'self'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'";
+// store page may only talk to its own origin (the checkout function), isn't
+// indexed, and can be framed only by the sites in its STORE.embedOn (RMPC's
+// own site); Stripe's page opens by navigating the whole tab.
+const RMPC_CSP = `default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'self'; form-action 'none'; base-uri 'none'; frame-ancestors 'self' ${RMPC_STORE.embedOn.join(" ")}`;
 fs.writeFileSync(path.join(SITE_DIR, "_headers"), `# Written by site-src/build.mjs.
 /assets/*
   Cache-Control: public, max-age=31536000, immutable

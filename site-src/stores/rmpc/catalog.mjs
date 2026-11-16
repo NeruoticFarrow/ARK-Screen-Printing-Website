@@ -16,6 +16,12 @@ export const STORE = {
   /** The payment's description in the Stripe dashboard. */
   orderDescription: "RMPC 2027 Season Store order",
   path: "/rmpc",
+  /** Sites that may show the store in an iframe. They go into the
+   *  frame-ancestors of /rmpc's Content-Security-Policy, which
+   *  site-src/build.mjs writes. Today that's RMPC's own Squarespace site, plus
+   *  Squarespace's domains for its editor and site previews. Any other site
+   *  gets an empty frame. */
+  embedOn: ["https://rmparkour.com", "https://www.rmparkour.com", "https://*.squarespace.com"],
   currency: "usd",
   /** When preorders close, as an ISO date and time with its offset, e.g.
    *  "2027-01-10T23:59:00-07:00". After it, the page stops taking orders and the
