@@ -1,7 +1,8 @@
 # Runs the same build Netlify runs (netlify.toml) on every pull request and on
 # main: npm ci, the Business Profile sync (skipped here — no credentials in CI),
-# image optimisation, the page build and the page checks. A red check means the
-# Netlify deploy would fail too.
+# image optimisation, the page build and the page checks, then the RMPC
+# store's tests. A red check means the Netlify deploy would fail too (or, for
+# the tests, that the store would charge something other than its price list).
 name: Site build check
 on:
   pull_request:
@@ -18,6 +19,8 @@ jobs:
           cache: npm
       - run: npm ci --no-audit --no-fund
       - run: npm run netlify-build
+      - name: RMPC store tests (prices, checkout, order export)
+        run: npm test
       - name: Generated pages are committed and up to date
         run: |
           git add -A ark-site-review

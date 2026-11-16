@@ -103,23 +103,28 @@ for (const genFile of generated) {
   }
 }
 
-// Client previews are not marketing templates and must not inherit quote
-// conversion tracking. Verify their source is preserved and their browser
-// cannot send form or API requests, even if the demo JavaScript fails.
-const previewPath = path.join(SITE, "rmpc.html");
-if (!fs.existsSync(previewPath)) fail("rmpc.html", "client preview missing");
+// The RMPC client store is not a marketing template and must not inherit
+// analytics or quote conversion tracking. It stays unlisted, self-contained,
+// and able to talk only to its own checkout function.
+const storePath = path.join(SITE, "rmpc.html");
+if (!fs.existsSync(storePath)) fail("rmpc.html", "RMPC store page missing");
 else {
-  const preview = fs.readFileSync(previewPath, "utf8");
-  const source = fs.readFileSync(path.join(ROOT, "site-src/previews/rmpc.html"), "utf8");
-  if (preview !== source) fail("rmpc.html", "does not match preview source");
-  if (!preview.includes('name="robots" content="noindex, nofollow"')) fail("rmpc.html", "must stay noindex");
-  if (!preview.includes('rel="canonical" href="https://arkscreenprinting.com/rmpc"')) fail("rmpc.html", "wrong canonical slug");
-  if ((preview.match(/data:image\/webp;base64,/g) ?? []).length < 9) fail("rmpc.html", "product assets are not embedded");
-  if (/googletagmanager\.com|gtag\(['"]event['"],\s*['"]conversion/.test(preview)) fail("rmpc.html", "demo must not send conversions");
+  const store = fs.readFileSync(storePath, "utf8");
+  if (!store.includes('name="robots" content="noindex, nofollow"')) fail("rmpc.html", "must stay noindex");
+  if (!store.includes('rel="canonical" href="https://arkscreenprinting.com/rmpc"')) fail("rmpc.html", "wrong canonical slug");
+  if ((store.match(/data:image\/webp;base64,/g) ?? []).length < 7) fail("rmpc.html", "product images are not embedded");
+  if (!store.includes("data:image/png;base64,")) fail("rmpc.html", "the RMPC crown is not embedded");
+  if ((store.match(/data:font\/ttf;base64,/g) ?? []).length < 8) fail("rmpc.html", "fonts are not embedded");
+  if (/googletagmanager\.com|gtag\(|fbq\(/.test(store)) fail("rmpc.html", "the store must not load analytics or send conversions");
+  if (!store.includes('"/api/rmpc/checkout"')) fail("rmpc.html", "the bag does not post to /api/rmpc/checkout");
+  if (/(src|href)="(https?:)?\/\//.test(store.replace(/<link rel="canonical"[^>]*>/, ""))) fail("rmpc.html", "loads something from another origin");
   const headers = fs.readFileSync(path.join(SITE, "_headers"), "utf8");
   for (const route of ["/rmpc", "/rmpc.html"]) {
     const block = headers.split("\n").slice(headers.split("\n").indexOf(route) + 1).filter((line, i, lines) => !lines.slice(0, i + 1).some((s) => s && !s.startsWith("  "))).join("\n");
-    if (!headers.split("\n").includes(route) || !block.includes("X-Robots-Tag: noindex, nofollow") || !block.includes("connect-src 'none'") || !block.includes("form-action 'none'")) fail("rmpc.html", `unsafe demo headers for ${route}`);
+    if (!headers.split("\n").includes(route) || !block.includes("X-Robots-Tag: noindex, nofollow") || !block.includes("connect-src 'self';") || !block.includes("form-action 'none'") || !block.includes("frame-ancestors 'none'")) fail("rmpc.html", `unsafe store headers for ${route}`);
+  }
+  for (const fn of ["rmpc-checkout.mjs", "rmpc-orders.mjs", "stripe-webhook.mjs"]) {
+    if (!fs.existsSync(path.join(ROOT, "netlify/functions", fn))) fail("rmpc.html", `netlify/functions/${fn} missing`);
   }
 }
 

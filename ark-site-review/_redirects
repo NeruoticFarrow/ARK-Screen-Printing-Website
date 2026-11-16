@@ -56,5 +56,8 @@
 /index.html                             /    301!
 /screen-printing-victor.html            /screen-printing-victor    301!
 
-# ─── Unlisted RMPC sample storefront (no real payments or orders) ──────────────
+# ─── Unlisted RMPC season store ──────────────────────────────────────────────
+# Takes real orders: the bag posts to /api/rmpc/checkout (a Netlify Function,
+# netlify/functions/rmpc-checkout.mjs), which opens Stripe Checkout. The
+# functions answer their own /api/rmpc/… paths; no rule is needed for them.
 /rmpc                                   /rmpc.html    200
