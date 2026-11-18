@@ -4,3 +4,7 @@ node_modules/
 site-src/.cache/
 ark-site-review/images/gbp/
 ark-site-review/assets/img/gbp/
+# Blog pages: written at each build from site-src/content/blog/ (the Ryze
+# webhook commits only the article, so committed pages would always be behind).
+ark-site-review/blog/
+ark-site-review/sitemap-blog.xml
