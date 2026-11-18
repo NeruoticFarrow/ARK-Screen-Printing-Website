@@ -10,12 +10,12 @@
 import { StrictMode, useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
-  BRANDS_BY_TYPE, COLOUR, GARMENTS, MAX_QUANTITY, PRODUCTS as CATALOG, SHIPPING_RULE_SHORT, SHIPPING_RULE_TEXT,
-  SIZE_UPCHARGE_CENTS, STORE, bagTotals, closingDateLabel, lineKey, normaliseLine, orderRef, ordersClosed,
+  BRANDS_BY_TYPE, COLOUR, DELIVERY, GARMENTS, MAX_QUANTITY, PRODUCTS as CATALOG, SHIPPING_RULE_TEXT,
+  SIZE_UPCHARGE_CENTS, STORE, bagTotals, closingDateLabel, deliveryKey, lineKey, normaliseLine, orderRef, ordersClosed,
   priceRange, sizesFor, unitPriceCents, variantKey,
 } from "./catalog.mjs";
 import {
-  ArrowRight, ArrowUpRight, ChevronDown, ChevronRight, CircleCheck, Copy, Info, MapPin, Minus, Plus, ShoppingBag, Truck, X,
+  ArrowRight, ArrowUpRight, ChevronDown, ChevronRight, CircleCheck, Copy, Info, MapPin, Minus, Plus, ShoppingBag, Store as StoreIcon, Truck, X,
 } from "./icons.jsx";
 import crown from "./images/rmpc-crown.png";
 import wordmark from "./images/rmpc-wordmark.webp";
@@ -71,7 +71,7 @@ function readPending() {
     if (!stored || !Array.isArray(stored.cart)) return null;
     return {
       cart: stored.cart.map(normaliseLine).filter(Boolean),
-      delivery: stored.delivery === "ship" ? "ship" : "pickup",
+      delivery: deliveryKey(stored.delivery),
       id: typeof stored.id === "string" ? stored.id : null,
     };
   } catch {
@@ -97,7 +97,13 @@ function writeStorage(key, value) {
   }
 }
 
-const DeliveryIcon = ({ name }) => (name === "pickup" ? <MapPin size={21} /> : <Truck size={21} />);
+const DELIVERY_ICONS = { pickup: MapPin, store: StoreIcon, ship: Truck };
+const DeliveryIcon = ({ name }) => {
+  const Icon = DELIVERY_ICONS[name] ?? MapPin;
+  return <Icon size={21} />;
+};
+/** The bag's and the confirmation's name for what delivery costs. */
+const deliveryCostLabel = (delivery) => (delivery === "ship" ? "Shipping & handling" : DELIVERY[deliveryKey(delivery)].label);
 
 function Store() {
   const [cart, setCart] = useState(readBag);
@@ -179,7 +185,7 @@ function Store() {
           lookUpCheckout(sessionId).then((found) => {
             if (found.status !== "complete" || !Array.isArray(found.lines)) return;
             const cart = found.lines.map(normaliseLine).filter(Boolean);
-            const delivery = found.delivery === "ship" ? "ship" : "pickup";
+            const delivery = deliveryKey(found.delivery);
             setConfirmation((shown) => (shown?.ref === ref ? { ...shown, cart, delivery } : shown));
           }).catch(() => {});
         }
@@ -377,7 +383,7 @@ function Store() {
 
         <div className="benefit-bar">
           <div><CircleCheck size={18} /><span>Youth &amp; adult options</span></div>
-          <div><MapPin size={18} /><span>Free event pickup</span></div>
+          <div><MapPin size={18} /><span>Free event or store pickup</span></div>
           <div><ShoppingBag size={18} /><span>Made to order, not overstocked</span></div>
           <div><Truck size={18} /><span>Or shipped to your door</span></div>
         </div>
@@ -464,7 +470,7 @@ function Store() {
             </div>
             <div>
               <span>03</span>
-              <div><h3>Pick up. Or ship out.</h3><p>Choose free event pickup or shipping when you check out. We'll email you when your order is ready.</p></div>
+              <div><h3>Pick up. Or ship out.</h3><p>Choose free pickup, at an RMPC event or at ARK in Colorado Springs, or shipping when you check out. We'll email you when your order is ready.</p></div>
             </div>
           </div>
         </section>
@@ -482,7 +488,7 @@ function Store() {
             </details>
             <details>
               <summary>How does delivery work?<ChevronDown size={18} /></summary>
-              <p>Choose free event pickup or shipping in your bag. {STORE.pickup.sentence} Shipping is {SHIPPING_RULE_TEXT}, to U.S. addresses.</p>
+              <p>Choose in your bag. Event pickup is free at an RMPC event, and we'll email you the details before it. Store pickup is free at ARK Screen Printing, {DELIVERY.store.address}, and we'll email you when your order is ready. Shipping is {SHIPPING_RULE_TEXT}, to U.S. addresses.</p>
             </details>
             <details>
               <summary>How do I pay?<ChevronDown size={18} /></summary>
@@ -577,7 +583,7 @@ function Store() {
                   <ShoppingBag size={18} />
                 </button>
               </div>
-              <div className="detail-delivery"><MapPin size={17} /><span>Free event pickup or shipping, chosen in your bag.</span></div>
+              <div className="detail-delivery"><MapPin size={17} /><span>Free event or store pickup, or shipping, chosen in your bag.</span></div>
               <details className="size-info">
                 <summary>Size &amp; preorder information <ChevronDown size={16} /></summary>
                 <p>Youth tees: XS–XL. Youth crewnecks: S–XL. Adults: S–2XL. {closesOn ? `Preorders close ${closesOn}; ` : ""}ARK prints the whole run after preorders close.</p>
@@ -601,7 +607,7 @@ function Store() {
             <CircleCheck size={54} />
             <span className="confirmation-label">ORDER CONFIRMED{confirmation.ref ? ` · ORDER ${confirmation.ref}` : ""}</span>
             <h3>A little team spirit,<br />coming right up.</h3>
-            <p>Thank you! Stripe is emailing your receipt. ARK prints the collection after preorders close{closesOn ? ` on ${closesOn}` : ""}, and we'll email you when your order is {confirmation.delivery === "ship" ? "on its way" : confirmation.delivery === "pickup" ? "ready for pickup" : "ready"}.</p>
+            <p>Thank you! Stripe is emailing your receipt. ARK prints the collection after preorders close{closesOn ? ` on ${closesOn}` : ""}, and we'll email you when your order is {confirmation.delivery === "ship" ? "on its way" : confirmation.delivery === "store" ? `ready for pickup at ${DELIVERY.store.short}` : confirmation.delivery ? "ready for pickup" : "ready"}.</p>
             {confirmation.cart.length > 0 && (
               <div className="confirmation-summary">
                 {confirmation.cart.map((line) => (
@@ -611,8 +617,8 @@ function Store() {
                   </div>
                 ))}
                 <div>
-                  <span>{confirmation.delivery === "pickup" ? STORE.pickup.label : "Shipping"}</span>
-                  <b>{confirmation.delivery === "pickup" ? "Free" : money(confirmationTotals.shipping)}</b>
+                  <span>{deliveryCostLabel(confirmation.delivery)}</span>
+                  <b>{confirmation.delivery === "ship" ? money(confirmationTotals.shipping) : "Free"}</b>
                 </div>
                 <div className="confirmation-total"><span>Total before sales tax</span><b>{money(confirmationTotals.total)}</b></div>
               </div>
@@ -646,21 +652,21 @@ function Store() {
             </div>
             <div className="cart-delivery">
               <h3>How would you like to get it?</h3>
-              {["pickup", "ship"].map((option) => (
+              {Object.keys(DELIVERY).map((option) => (
                 <button key={option} className={`delivery-option ${delivery === option ? "active" : ""}`} onClick={() => setDelivery(option)}>
                   <DeliveryIcon name={option} />
                   <span>
-                    <b>{option === "pickup" ? STORE.pickup.label : "Ship to my door"}</b>
-                    <small>{option === "pickup" ? STORE.pickup.short : SHIPPING_RULE_SHORT}</small>
+                    <b>{DELIVERY[option].label}</b>
+                    <small>{DELIVERY[option].short}</small>
                   </span>
-                  <strong>{option === "pickup" ? "Free" : money(bagTotals(cart, "ship").shipping)}</strong>
+                  <strong>{option === "ship" ? money(bagTotals(cart, "ship").shipping) : "Free"}</strong>
                   <span className="radio-dot" />
                 </button>
               ))}
             </div>
             <div className="cart-summary">
               <div><span>Subtotal</span><b>{money(totals.subtotal)}</b></div>
-              <div><span>{delivery === "pickup" ? STORE.pickup.label : "Shipping"}</span><b>{money(totals.shipping)}</b></div>
+              <div><span>{deliveryCostLabel(delivery)}</span><b>{money(totals.shipping)}</b></div>
               <div className="cart-total"><span>Total before tax</span><b>{money(totals.total)}</b></div>
               <p>Sales tax is added at checkout.</p>
               {checkoutError && <p className="checkout-error" role="alert">{checkoutError}</p>}

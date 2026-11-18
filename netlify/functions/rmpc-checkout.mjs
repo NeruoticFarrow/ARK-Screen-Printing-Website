@@ -8,7 +8,7 @@
 // site. The answer is the garments and the order reference, never the buyer.
 //
 // Trust boundary: the browser sends only what was chosen (product, garment,
-// size, quantity, pickup or shipping). Every price, the shipping charge and the
+// size, quantity, event pickup, store pickup or shipping). Every price, the shipping charge and the
 // line names come from site-src/stores/rmpc/catalog.mjs. Stripe then collects
 // the buyer's name, email, phone and address, works out sales tax (Stripe Tax,
 // as the ARK designer's checkout does) and emails the receipt.
@@ -22,7 +22,7 @@
 //   RMPC_AUTOMATIC_TAX   optional. "off" stops Stripe Tax for these orders
 //                        (only if Stripe Tax isn't set up on the account).
 
-import { STORE, SHIPPING_RULE_TEXT, decodeItems, encodeItems, orderRef, ordersClosed, priceOrder } from "../../site-src/stores/rmpc/catalog.mjs";
+import { DELIVERY, STORE, decodeItems, deliveryKey, encodeItems, orderRef, ordersClosed, priceOrder } from "../../site-src/stores/rmpc/catalog.mjs";
 import { stripeRequest } from "../lib/stripe.mjs";
 
 export const config = { path: "/api/rmpc/checkout" };
@@ -42,7 +42,7 @@ export function sessionParams(order, origin, { automaticTax = true, embedded = f
   const metadata = { channel: STORE.channel, delivery: order.delivery, garments: String(order.count), ...encodeItems(order.lines) };
   const fulfilment = ship
     ? "This is a preorder: ARK Screen Printing prints the collection in Colorado Springs after orders close, then ships your order."
-    : `This is a preorder: ARK Screen Printing prints the collection in Colorado Springs after orders close. ${STORE.pickup.sentence}`;
+    : `This is a preorder: ARK Screen Printing prints the collection in Colorado Springs after orders close. ${DELIVERY[order.delivery].sentence}`;
   return {
     mode: "payment",
     line_items: order.lines.map((line) => ({
@@ -64,7 +64,8 @@ export function sessionParams(order, origin, { automaticTax = true, embedded = f
             shipping_rate_data: {
               type: "fixed_amount",
               fixed_amount: { amount: order.shippingCents, currency: STORE.currency },
-              display_name: "Standard shipping",
+              // Every store's handling fee is part of this amount (../../site-src/stores/rules.mjs).
+              display_name: "Shipping & handling",
             },
           }],
         }
@@ -72,7 +73,7 @@ export function sessionParams(order, origin, { automaticTax = true, embedded = f
     automatic_tax: { enabled: automaticTax },
     custom_text: {
       submit: { message: fulfilment },
-      ...(ship ? { shipping_address: { message: `Shipping is ${SHIPPING_RULE_TEXT}. U.S. addresses only.` } } : {}),
+      ...(ship ? { shipping_address: { message: DELIVERY.ship.sentence } } : {}),
     },
     metadata,
     payment_intent_data: { description: STORE.orderDescription, metadata },
@@ -103,7 +104,7 @@ async function checkoutStatus(req, secretKey, fetchImpl) {
     status: session.status,
     paid: session.payment_status === "paid",
     ref: orderRef(session.id),
-    delivery: session.metadata.delivery === "ship" ? "ship" : "pickup",
+    delivery: deliveryKey(session.metadata.delivery),
     lines: decodeItems(session.metadata).map(({ productId, variant, size, quantity }) => ({ productId, variant, size, quantity })),
   });
 }

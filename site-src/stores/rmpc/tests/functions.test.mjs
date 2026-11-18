@@ -57,16 +57,31 @@ test("checkout creates a Stripe session priced from the catalogue", async () => 
   assert.equal(form.get("cancel_url"), `${ORIGIN}/rmpc?checkout=cancelled`);
 });
 
-test("shipped orders collect a U.S. address and pay the shipping rule", async () => {
+test("shipped orders collect a U.S. address and pay $4.50 handling plus the shipping rule", async () => {
   const stripe = fakeStripe();
   const handler = createCheckoutHandler({ env: { STRIPE_SECRET_KEY: KEY, RMPC_AUTOMATIC_TAX: "off" }, fetchImpl: stripe.fetchImpl });
   const res = await handler(checkoutRequest({ ...BAG, delivery: "ship" }));
   assert.equal(res.status, 200);
   const { form } = stripe.calls[0];
   assert.equal(form.get("shipping_address_collection[allowed_countries][0]"), "US");
-  assert.equal(form.get("shipping_options[0][shipping_rate_data][fixed_amount][amount]"), "1400");
+  assert.equal(form.get("shipping_options[0][shipping_rate_data][fixed_amount][amount]"), "1850", "3 garments: $4.50 + $8 + $3 + $3");
+  assert.equal(form.get("shipping_options[0][shipping_rate_data][display_name]"), "Shipping & handling");
+  assert.match(form.get("custom_text[shipping_address][message]"), /\$4\.50 handling fee/);
   assert.equal(form.get("billing_address_collection"), "auto");
   assert.equal(form.get("automatic_tax[enabled]"), "false");
+});
+
+test("store pickup is free at Saddle Ridge Dr, and records itself on the order", async () => {
+  const stripe = fakeStripe();
+  const handler = createCheckoutHandler({ env: { STRIPE_SECRET_KEY: KEY }, fetchImpl: stripe.fetchImpl });
+  assert.equal((await handler(checkoutRequest({ ...BAG, delivery: "store" }))).status, 200);
+  const { form } = stripe.calls[0];
+  assert.equal(form.get("metadata[delivery]"), "store");
+  assert.equal(form.get("payment_intent_data[metadata][delivery]"), "store");
+  assert.equal(form.get("shipping_options[0][shipping_rate_data][fixed_amount][amount]"), null, "no shipping or handling");
+  assert.equal(form.get("shipping_address_collection[allowed_countries][0]"), null);
+  assert.equal(form.get("billing_address_collection"), "required", "Stripe Tax still needs an address");
+  assert.match(form.get("custom_text[submit][message]"), /Pick up your order free at ARK Screen Printing, 4852 Saddle Ridge Dr, Colorado Springs, CO 80922/);
 });
 
 test("from the store embedded on RMPC's site, Stripe shows no back link", async () => {
@@ -175,6 +190,15 @@ function session(overrides = {}) {
     ...overrides,
   };
 }
+
+test("the export names each delivery: Ship, Event pickup or Store pickup", () => {
+  assert.equal(toOrder(session()).delivery, "Ship");
+  assert.equal(toOrder(session({ metadata: { ...session().metadata, delivery: "pickup" } })).delivery, "Event pickup");
+  const store = toOrder(session({ metadata: { ...session().metadata, delivery: "store" } }));
+  assert.equal(store.delivery, "Store pickup");
+  assert.equal(store.shipTo, "", "nothing to ship to");
+  assert.match(ordersCsv([store]).split("\r\n")[0], /,Shipping & handling,/);
+});
 
 test("the export reads orders, buyers and garments from the sessions", () => {
   const order = toOrder(session());
