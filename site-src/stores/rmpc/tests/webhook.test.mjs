@@ -97,7 +97,8 @@ test("a paid RMPC order emails the client once, through Resend, from ARK's sende
   assert.match(body.text, /Delivery: Shipping to Colorado Springs, CO/);
   assert.match(body.text, /2 × RMPC Team Tee, Gildan 5000B Youth Black, size M: \$59\.98/);
   assert.match(body.text, /1 × RMPC Athlete Crewneck, Independent SS3000 Adult Black, size 2XL: \$59\.99/);
-  assert.match(body.text, /Shipping: \$14\.00\nSales tax: \$9\.56\nTotal paid: \$143\.53/);
+  assert.match(body.text, /Shipping & handling: \$14\.00\nSales tax: \$9\.56\nTotal paid: \$143\.53/);
+  assert.match(body.html, /Shipping &amp; handling/);
   assert.doesNotMatch(body.text, /1 Main St|\+1719/, "the street address and phone stay in ARK's export");
   assert.match(body.html, /Sam &lt;b&gt;Taylor&lt;\/b&gt;/, "what the buyer typed is escaped");
   assert.doesNotMatch(body.html, /<b>Taylor/);
@@ -106,6 +107,8 @@ test("a paid RMPC order emails the client once, through Resend, from ARK's sende
 test("pickup orders say so, and older webhook API versions still read", () => {
   const pickup = orderEmail(rmpcSession({ metadata: { ...rmpcSession().metadata, delivery: "pickup" }, collected_information: null }));
   assert.match(pickup.text, /Delivery: Event pickup/);
+  const store = orderEmail(rmpcSession({ metadata: { ...rmpcSession().metadata, delivery: "store" }, collected_information: null }));
+  assert.match(store.text, /Delivery: Store pickup/);
   const older = orderEmail(rmpcSession({ collected_information: undefined, shipping_details: { name: "Sam Taylor", address: { city: "Denver", state: "CO" } } }));
   assert.match(older.text, /Delivery: Shipping to Denver, CO/);
 });

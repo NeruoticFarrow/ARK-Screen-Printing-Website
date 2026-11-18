@@ -4,7 +4,8 @@
 
 | What | File |
 |---|---|
-| Prices, garments, sizes, shipping, pickup wording, closing date | `catalog.mjs` |
+| Prices, garments, sizes, delivery options and wording, closing date | `catalog.mjs` |
+| The handling fee and shipping rule every store uses | `../rules.mjs` ([rules](../README.md)) |
 | The page (React) | `app.jsx`, `icons.jsx` |
 | Styles: the approved ones unchanged, plus the live-checkout additions | `styles.css`, `store.css` |
 | Product photos and fonts (bundled into the page) | `images/`, `fonts/` |
@@ -16,7 +17,12 @@
 
 ## How an order flows
 
-1. **The bag:** the buyer picks a design, garment, fit, size and quantity, then event pickup or shipping. The bag lives in their browser.
+1. **The bag:** the buyer picks a design, garment, fit, size and quantity. Then they choose how to get the order:
+   - **Event pickup:** free, at an RMPC event.
+   - **Store pickup:** free, at 4852 Saddle Ridge Dr, Colorado Springs, CO 80922.
+   - **Shipping:** $4.50 handling plus $8 for the first garment and $3 for each additional one, with the shipping part capped at $35.
+
+   The bag lives in their browser.
 2. **Checkout:** the bag posts to `/api/rmpc/checkout`.
    - The function re-prices every line from `catalog.mjs`. It never uses a price from the browser.
    - It creates a Stripe Checkout session and the buyer pays on Stripe's page.
@@ -47,8 +53,10 @@ Netlify applies a changed variable at the next deploy (Deploys → Trigger deplo
   - After it, the page stops taking orders and the checkout function refuses them.
 - **Charge more for 2XL:** set `SIZE_UPCHARGE_CENTS["2XL"]`, e.g. `200` for +$2. The page and the checkout both pick it up.
 - **Change a price:** edit `PRICE_CENTS`.
-- **Change the pickup wording:** edit `STORE.pickup`.
-  - The owner rule is that ARK's address is never offered as a pickup counter.
+- **Change a delivery option's wording or the store pickup address:** edit `DELIVERY`.
+  - Each key is what the order records in `metadata.delivery`. `pickup` is event pickup, as earlier orders recorded it, so keep the keys as they are.
+  - Store pickup at 4852 Saddle Ridge Dr is Alex's call (2026-11-18).
+- **Shipping or handling:** these are every store's rule, so change them in `../rules.mjs`.
 - **Embed the store on another site:** add its address to `STORE.embedOn`, e.g. `"https://shop.example.com"`. Run `npm run build`, then commit.
 
 ## On RMPC's site

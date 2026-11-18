@@ -5,8 +5,11 @@
 // a price from the browser: it re-reads every line against this file, so what
 // a buyer sees and what Stripe collects come from the same numbers.
 //
-// Change a price, the size range, the pickup wording or the closing date here,
-// then run `npm run build` and commit. Amounts are in cents.
+// Change a price, the size range, the delivery wording or the closing date
+// here, then run `npm run build` and commit. Amounts are in cents. The handling
+// fee and the shipping rule are every store's (../rules.mjs).
+
+import { HANDLING_CENTS, SHIPPING_RULE, shippingAndHandlingCents } from "../rules.mjs";
 
 export const STORE = {
   /** Marks this store's Stripe Checkout sessions (metadata.channel), so the
@@ -29,16 +32,10 @@ export const STORE = {
   ordersCloseAt: null,
   /** The order export only lists sessions from this date on. */
   ordersSince: "2026-11-01T00:00:00Z",
-  /** Event pickup, free. The owner rule (2026-10-15) is that ARK's own address
-   *  is never offered as a pickup counter, so pickup is at an RMPC event. */
-  pickup: {
-    label: "Event pickup",
-    short: "We'll email pickup details",
-    sentence: "Pick up your order free at an RMPC event. We'll email you the pickup details before the event.",
-  },
-  /** The ARK designer's shipping rule (ark-designer shared/const.ts):
-   *  $8 for the first garment, $3 for each additional one, at most $35. */
-  shipping: { firstCents: 800, eachAdditionalCents: 300, maxCents: 3500, countries: ["US"] },
+  /** Shipped orders: every store's handling fee and shipping rule
+   *  (../rules.mjs): $4.50 handling, plus $8 for the first garment and $3 for
+   *  each additional one, at most $35. */
+  shipping: { handlingCents: HANDLING_CENTS, ...SHIPPING_RULE, countries: ["US"] },
   contact: { phoneDisplay: "(719) 280-2638", phoneHref: "tel:+17192802638", email: "alex@arkscreenprinting.com" },
 };
 
@@ -121,9 +118,38 @@ export function usd(cents) {
   return cents % 100 === 0 ? `$${cents / 100}` : `$${(cents / 100).toFixed(2)}`;
 }
 
-/** The shipping rule in words, built from the numbers above. */
-export const SHIPPING_RULE_TEXT = `${usd(STORE.shipping.firstCents)} for the first garment and ${usd(STORE.shipping.eachAdditionalCents)} for each additional garment, up to ${usd(STORE.shipping.maxCents)} an order`;
-export const SHIPPING_RULE_SHORT = `${usd(STORE.shipping.firstCents)} first item + ${usd(STORE.shipping.eachAdditionalCents)} each extra · max ${usd(STORE.shipping.maxCents)}`;
+/** The shipping rule in words, built from the numbers above. "Shipping is …" */
+const { handlingCents: HANDLING, firstCents: FIRST, eachAdditionalCents: EACH, maxCents: MAX } = STORE.shipping;
+export const SHIPPING_RULE_TEXT = `a ${usd(HANDLING)} handling fee plus ${usd(FIRST)} for the first garment and ${usd(EACH)} for each additional garment, up to ${usd(HANDLING + MAX)} an order`;
+export const SHIPPING_RULE_SHORT = `${usd(HANDLING)} handling + ${usd(FIRST)} first item + ${usd(EACH)} each extra · max ${usd(HANDLING + MAX)}`;
+
+/** How an order reaches the buyer, in the order the bag offers them. Each key
+ *  is what a Checkout session's metadata.delivery records, so "pickup" stays
+ *  event pickup, as it was for the orders placed before store pickup. */
+export const DELIVERY = {
+  pickup: {
+    label: "Event pickup",
+    short: "We'll email pickup details",
+    sentence: "Pick up your order free at an RMPC event. We'll email you the pickup details before the event.",
+  },
+  /** Alex, 2026-11-18. */
+  store: {
+    label: "Store pickup",
+    short: "4852 Saddle Ridge Dr, Colorado Springs",
+    address: "4852 Saddle Ridge Dr, Colorado Springs, CO 80922",
+    sentence: "Pick up your order free at ARK Screen Printing, 4852 Saddle Ridge Dr, Colorado Springs, CO 80922. We'll email you when it's ready.",
+  },
+  ship: {
+    label: "Ship to my door",
+    short: SHIPPING_RULE_SHORT,
+    sentence: `Shipping is ${SHIPPING_RULE_TEXT}, to U.S. addresses.`,
+  },
+};
+
+/** A delivery the store offers, or "pickup" (event pickup) for anything else. */
+export function deliveryKey(value) {
+  return typeof value === "string" && Object.hasOwn(DELIVERY, value) ? value : "pickup";
+}
 
 /** The short reference a buyer and the order export both show for a Stripe
  *  Checkout session: its last eight characters. */
@@ -131,10 +157,10 @@ export function orderRef(sessionId) {
   return typeof sessionId === "string" && sessionId.length >= 8 ? sessionId.slice(-8).toUpperCase() : "";
 }
 
-/** Shipping for `count` garments, in cents. Nothing ships for an empty bag. */
+/** Shipping and handling for `count` garments, in cents. Nothing ships for
+ *  an empty bag. */
 export function shippingCents(count) {
-  const { firstCents, eachAdditionalCents, maxCents } = STORE.shipping;
-  return count > 0 ? Math.min(maxCents, firstCents + (count - 1) * eachAdditionalCents) : 0;
+  return shippingAndHandlingCents(count, STORE.shipping);
 }
 
 export function lineKey(productId, variant, size) {
@@ -169,7 +195,7 @@ export function bagTotals(lines, delivery) {
  *  `{ ok: false, error }` with a message the buyer can act on. */
 export function priceOrder(input) {
   const delivery = input?.delivery;
-  if (delivery !== "pickup" && delivery !== "ship") return { ok: false, error: "Choose event pickup or shipping." };
+  if (typeof delivery !== "string" || !Object.hasOwn(DELIVERY, delivery)) return { ok: false, error: "Choose event pickup, store pickup or shipping." };
   const raw = input?.lines;
   if (!Array.isArray(raw) || raw.length === 0) return { ok: false, error: "Your bag is empty." };
   if (raw.length > MAX_LINES) return { ok: false, error: `A bag can hold up to ${MAX_LINES} different items. Split it into two orders.` };

@@ -9,7 +9,7 @@
 // export stays locked. Reads Stripe with STRIPE_SECRET_KEY.
 
 import crypto from "node:crypto";
-import { COLOUR, GARMENTS, PRODUCTS, STORE, decodeItems, orderRef, productById, usd } from "../../site-src/stores/rmpc/catalog.mjs";
+import { COLOUR, DELIVERY, GARMENTS, PRODUCTS, STORE, decodeItems, deliveryKey, orderRef, productById, usd } from "../../site-src/stores/rmpc/catalog.mjs";
 import { stripeRequest } from "../lib/stripe.mjs";
 
 export const config = { path: ["/api/rmpc/orders", "/api/rmpc/orders.csv", "/api/rmpc/sizes.csv"] };
@@ -74,7 +74,8 @@ export function toOrder(session) {
     name: session.customer_details?.name ?? shipping?.name ?? "",
     email: session.customer_details?.email ?? "",
     phone: session.customer_details?.phone ?? "",
-    delivery: session.metadata?.delivery === "ship" ? "Ship" : "Event pickup",
+    // "Ship", "Event pickup" or "Store pickup".
+    delivery: deliveryKey(session.metadata?.delivery) === "ship" ? "Ship" : DELIVERY[deliveryKey(session.metadata?.delivery)].label,
     shipTo: session.metadata?.delivery === "ship" ? [shipping?.name, oneLine(shipping?.address)].filter(Boolean).join(", ") : "",
     items: decodeItems(session.metadata),
     subtotal: session.amount_subtotal ?? 0,
@@ -136,7 +137,7 @@ export function ordersCsv(orders) {
   const rows = [[
     "Order", "Date (Mountain)", "Status", "Name", "Email", "Phone", "Delivery", "Ship to",
     "Product", "Front print", "Garment", "Fit", "Size", "Colour", "Qty", "Unit price", "Line total",
-    "Order subtotal", "Shipping", "Sales tax", "Order total", "Refunded",
+    "Order subtotal", "Shipping & handling", "Sales tax", "Order total", "Refunded",
   ]];
   for (const order of orders) {
     order.items.forEach((item, i) => {
@@ -201,7 +202,7 @@ export function summaryHtml(orders) {
 dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:0 0 24px}dl div{border:1px solid #e4e4df;border-radius:6px;padding:12px}dt{font-size:12px;color:#5c656d}dd{margin:4px 0 0;font-size:20px;font-weight:600}
 table{width:100%;border-collapse:collapse;margin:0 0 24px}th,td{text-align:left;padding:8px;border-bottom:1px solid #e4e4df}.n{text-align:right}a{color:#101b28;font-weight:600}</style></head><body>
 <h1>RMPC store orders</h1><p>Paid orders from Stripe, as of ${escapeHtml(denverTime(Math.floor(Date.now() / 1000)))} Mountain. Fully refunded orders are left out of the counts.</p>
-<dl><div><dt>Orders</dt><dd>${live.length}</dd></div><div><dt>Garments to print</dt><dd>${garments}</dd></div><div><dt>Garment sales</dt><dd>${usd(sum(live, "subtotal"))}</dd></div><div><dt>Shipping collected</dt><dd>${usd(sum(live, "shipping"))}</dd></div><div><dt>Sales tax collected</dt><dd>${usd(sum(live, "tax"))}</dd></div><div><dt>Refunded</dt><dd>${usd(sum(orders, "refunded"))}</dd></div></dl>
+<dl><div><dt>Orders</dt><dd>${live.length}</dd></div><div><dt>Garments to print</dt><dd>${garments}</dd></div><div><dt>Garment sales</dt><dd>${usd(sum(live, "subtotal"))}</dd></div><div><dt>Shipping &amp; handling collected</dt><dd>${usd(sum(live, "shipping"))}</dd></div><div><dt>Sales tax collected</dt><dd>${usd(sum(live, "tax"))}</dd></div><div><dt>Refunded</dt><dd>${usd(sum(orders, "refunded"))}</dd></div></dl>
 <p><a href="/api/rmpc/orders.csv">Download every order (CSV)</a> · <a href="/api/rmpc/sizes.csv">Download the print counts (CSV)</a></p>
 <table><thead><tr><th>Product</th><th>Garment</th><th>Fit</th><th>Size</th><th class="n">Qty</th></tr></thead><tbody>${rows || `<tr><td colspan="5">No paid orders yet.</td></tr>`}</tbody></table>
 </body></html>`;

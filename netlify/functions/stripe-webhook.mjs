@@ -73,10 +73,10 @@ function shipsTo(session) {
 export function orderEmail(session) {
   const order = toOrder(session);
   const garments = order.items.reduce((n, item) => n + item.quantity, 0);
-  const delivery = order.delivery === "Ship" ? `Shipping${shipsTo(session) ? ` to ${shipsTo(session)}` : ""}` : STORE.pickup.label;
+  const delivery = order.delivery === "Ship" ? `Shipping${shipsTo(session) ? ` to ${shipsTo(session)}` : ""}` : order.delivery;
   const buyer = [order.name, order.email].filter(Boolean);
   const lines = order.items.map((item) => ({ ...describeItem(item), size: item.size, quantity: item.quantity, totalCents: item.unitCents * item.quantity }));
-  const money = [["Garments", order.subtotal], ["Shipping", order.shipping], ["Sales tax", order.tax], ["Total paid", order.total]];
+  const money = [["Garments", order.subtotal], ["Shipping & handling", order.shipping], ["Sales tax", order.tax], ["Total paid", order.total]];
 
   const subject = `New ${STORE.name} order ${order.ref}: ${garments} garment${garments === 1 ? "" : "s"}, ${usd(order.total)}`;
   const cellStyle = "padding:6px 8px;border-bottom:1px solid #e4e4df;text-align:left";
@@ -89,7 +89,7 @@ export function orderEmail(session) {
 <thead><tr><th style="${cellStyle}">Item</th><th style="${cellStyle}">Garment</th><th style="${cellStyle}">Size</th><th style="${cellStyle};text-align:right">Qty</th><th style="${cellStyle};text-align:right">Price</th></tr></thead>
 <tbody>${lines.map((l) => `<tr><td style="${cellStyle}">${escapeHtml(l.product)}</td><td style="${cellStyle}">${escapeHtml(`${l.garment} · ${l.fit} · ${COLOUR}`)}</td><td style="${cellStyle}">${escapeHtml(l.size)}</td><td style="${cellStyle};text-align:right">${l.quantity}</td><td style="${cellStyle};text-align:right">${usd(l.totalCents)}</td></tr>`).join("")}</tbody>
 </table>
-<table style="border-collapse:collapse;margin:0 0 16px">${money.map(([label, cents]) => `<tr><td style="padding:2px 16px 2px 0">${label}</td><td style="padding:2px 0;text-align:right">${usd(cents)}</td></tr>`).join("")}</table>
+<table style="border-collapse:collapse;margin:0 0 16px">${money.map(([label, cents]) => `<tr><td style="padding:2px 16px 2px 0">${escapeHtml(label)}</td><td style="padding:2px 0;text-align:right">${usd(cents)}</td></tr>`).join("")}</table>
 <p style="margin:0;color:#5c656d">ARK Screen Printing prints and delivers every order. Reply to this email with any questions.</p>
 </div>`;
   const text = [
