@@ -131,6 +131,30 @@ else {
   }
 }
 
+// The Best of the Springs sample store: unlisted and self-contained like the
+// RMPC store, and with no checkout yet it may talk to nothing at all.
+const botsPath = path.join(SITE, "bos.html");
+if (!fs.existsSync(botsPath)) fail("bos.html", "Best of the Springs store page missing");
+else {
+  const store = fs.readFileSync(botsPath, "utf8");
+  const file = "bos.html";
+  if (!store.includes('name="robots" content="noindex, nofollow"')) fail(file, "must stay noindex");
+  if (!store.includes('rel="canonical" href="https://arkscreenprinting.com/bos"')) fail(file, "wrong canonical slug");
+  if ((store.match(/data:image\/webp;base64,/g) ?? []).length < 16) fail(file, "garment templates or artwork are not embedded");
+  if ((store.match(/data:font\/woff2;base64,/g) ?? []).length < 7) fail(file, "fonts are not embedded");
+  if (/googletagmanager\.com|gtag\(|fbq\(/.test(store)) fail(file, "the store must not load analytics or send conversions");
+  if (/(src|href)="(https?:)?\/\//.test(store.replace(/<link rel="canonical"[^>]*>/, ""))) fail(file, "loads something from another origin");
+  const headers = fs.readFileSync(path.join(SITE, "_headers"), "utf8");
+  for (const route of ["/bos", "/bos.html"]) {
+    const lines = headers.split("\n");
+    const at = lines.indexOf(route);
+    const end = lines.findIndex((line, i) => i > at && line && !line.startsWith("  "));
+    const block = at < 0 ? "" : lines.slice(at + 1, end < 0 ? undefined : end).join("\n");
+    if (at < 0 || !block.includes("X-Robots-Tag: noindex, nofollow") || !block.includes("connect-src 'none';") || !block.includes("form-action 'none'") || !/frame-ancestors 'self'$/m.test(block)) fail(file, `unsafe store headers for ${route}`);
+  }
+  if (!/^\/bos\s+\/bos\.html\s+200$/m.test(fs.readFileSync(path.join(SITE, "_redirects"), "utf8"))) fail(file, "_redirects must serve the store at /bos");
+}
+
 if (problems.length) {
   console.error(problems.join("\n"));
   console.error(`\n${problems.length} problem(s) across ${checked} pages`);

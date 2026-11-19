@@ -1,6 +1,9 @@
 # Client stores
 
-Each store ARK builds for a client lives in its own folder here, and `stores/rmpc/` is the first. It's also the template for the next one: copy its catalogue, page and functions, then change the client's details.
+Each store ARK builds for a client lives in its own folder here:
+
+- `stores/rmpc/`: the RMPC season store, which takes real orders through Stripe Checkout. It's the template for a store that sells: copy its catalogue, page and functions, then change the client's details.
+- `stores/bots/`: the Best of the Springs store for The Gazette, a sample that doesn't take orders yet. It draws every product in every colour AS Colour makes, from garment templates (see its README).
 
 ## Rules every store follows
 
