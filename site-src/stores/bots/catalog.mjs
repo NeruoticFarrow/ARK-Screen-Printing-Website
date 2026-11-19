@@ -140,7 +140,7 @@ export const PRODUCTS = [
     collection: "2027",
     colour: "berry",
     cardView: "back",
-    blurb: "The 2027 crown on the chest and across the back.",
+    blurb: "The 2027 Crown on the chest and across the back.",
     prints: {
       front: { art: "logo-2027", box: [536, 224, 132], place: "Left chest", size: "5.1″ × 4.9″" },
       back: { art: "logo-2027", box: [334, 136, 344], place: "Full back", size: "13.3″ × 12.9″" },
@@ -179,7 +179,7 @@ export const PRODUCTS = [
     collection: "winners",
     colour: "navy",
     cardView: "back",
-    blurb: "2026 Winner on the chest, the 2027 crown across the back. Won it once, going for it again.",
+    blurb: "2026 Winner on the chest, the 2027 Crown across the back. Won it once, going for it again.",
     prints: {
       front: { art: "winner-2026", box: [546, 244, 153], place: "Left chest", size: "5.9″ × 3.3″" },
       back: { art: "logo-2027", box: [334, 136, 344], place: "Full back", size: "13.3″ × 12.9″" },
