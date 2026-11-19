@@ -61,3 +61,7 @@
 # netlify/functions/rmpc-checkout.mjs), which opens Stripe Checkout. The
 # functions answer their own /api/rmpc/… paths; no rule is needed for them.
 /rmpc                                   /rmpc.html    200
+
+# ─── Unlisted Best of the Springs sample store ───────────────────────────────
+# A sample for The Gazette to review (site-src/stores/bots): no checkout yet.
+/best-of-the-springs                    /best-of-the-springs.html    200
