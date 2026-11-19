@@ -131,7 +131,9 @@ export const SIZE_UPCHARGE_CENTS = { "2XL": 300, "3XL": 300, "4XL": 500, "5XL": 
 
 /** Where each print sits, from Alex's proofs. `box` is [left, top, width] on
  *  the garment's 1000px canvas (its height follows the artwork), and `size`
- *  is the print size the proof gives. `art` names a file in images/art/. */
+ *  is the print size the proof gives. `art` names a file in images/art/. The
+ *  tees' back prints sit about an inch (26px) lower than in the proofs, to
+ *  clear the collar (Alex, 2026-11-19). */
 export const PRODUCTS = [
   {
     id: "crown-2027-tee",
@@ -143,7 +145,7 @@ export const PRODUCTS = [
     blurb: "The 2027 Crown on the chest and across the back.",
     prints: {
       front: { art: "logo-2027", box: [536, 224, 132], place: "Left chest", size: "5.1″ × 4.9″" },
-      back: { art: "logo-2027", box: [334, 136, 344], place: "Full back", size: "13.3″ × 12.9″" },
+      back: { art: "logo-2027", box: [334, 162, 344], place: "Full back", size: "13.3″ × 12.9″" },
     },
   },
   {
@@ -156,7 +158,7 @@ export const PRODUCTS = [
     blurb: "Voted the best in 2026? Wear it: the Winner mark on the chest and across the back.",
     prints: {
       front: { art: "winner-2026", box: [531, 235, 168], place: "Left chest", size: "6.5″ × 3.7″" },
-      back: { art: "winner-2026", box: [319, 170, 401], place: "Full back", size: "15.5″ × 8.7″" },
+      back: { art: "winner-2026", box: [319, 196, 401], place: "Full back", size: "15.5″ × 8.7″" },
     },
   },
   {
@@ -169,7 +171,7 @@ export const PRODUCTS = [
     blurb: "The black Winner badge on the chest and big across the back. It reads on every color.",
     prints: {
       front: { art: "winner-badge", box: [543, 250, 153], place: "Left chest", size: "5.9″ × 3.4″" },
-      back: { art: "winner-badge", box: [332, 183, 396], place: "Full back", size: "15.3″ × 8.8″" },
+      back: { art: "winner-badge", box: [332, 209, 396], place: "Full back", size: "15.3″ × 8.8″" },
     },
   },
   {
@@ -182,7 +184,7 @@ export const PRODUCTS = [
     blurb: "2026 Winner on the chest, the 2027 Crown across the back. Won it once, going for it again.",
     prints: {
       front: { art: "winner-2026", box: [546, 244, 153], place: "Left chest", size: "5.9″ × 3.3″" },
-      back: { art: "logo-2027", box: [334, 136, 344], place: "Full back", size: "13.3″ × 12.9″" },
+      back: { art: "logo-2027", box: [334, 162, 344], place: "Full back", size: "13.3″ × 12.9″" },
     },
   },
   {
