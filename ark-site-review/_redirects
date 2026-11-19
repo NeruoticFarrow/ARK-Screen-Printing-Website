@@ -68,3 +68,11 @@
 # had forwards there.
 /bos                                    /bos.html    200
 /best-of-the-springs                    /bos    301
+
+# ─── Client store dashboard ──────────────────────────────────────────────────
+# Where each made-for-you store's client signs in to see its orders, print
+# counts and profit (site-src/dashboard). One page answers /dashboard and every
+# path under it; the page reads its data from /api/dashboard/… (a Netlify
+# Function, netlify/functions/dashboard-api.mjs), which needs no rule.
+/dashboard                              /dashboard.html    200
+/dashboard/*                            /dashboard.html    200

@@ -19,3 +19,21 @@
   X-Robots-Tag: noindex, nofollow
   Cache-Control: public, max-age=0, must-revalidate
   Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'self'
+/dashboard
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: public, max-age=0, must-revalidate
+  Referrer-Policy: no-referrer
+  X-Content-Type-Options: nosniff
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-NKKjy76DLqosGx93+U1e+zw1YTUUim3gCeLyVCCicLM='; style-src 'sha256-MnpdZSm3pEe1kqzYTqJ7FdE50YUGO1/c34eD4Liciq0='; img-src 'self'; font-src 'self'; connect-src 'self'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'
+/dashboard/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: public, max-age=0, must-revalidate
+  Referrer-Policy: no-referrer
+  X-Content-Type-Options: nosniff
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-NKKjy76DLqosGx93+U1e+zw1YTUUim3gCeLyVCCicLM='; style-src 'sha256-MnpdZSm3pEe1kqzYTqJ7FdE50YUGO1/c34eD4Liciq0='; img-src 'self'; font-src 'self'; connect-src 'self'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'
+/dashboard.html
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: public, max-age=0, must-revalidate
+  Referrer-Policy: no-referrer
+  X-Content-Type-Options: nosniff
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-NKKjy76DLqosGx93+U1e+zw1YTUUim3gCeLyVCCicLM='; style-src 'sha256-MnpdZSm3pEe1kqzYTqJ7FdE50YUGO1/c34eD4Liciq0='; img-src 'self'; font-src 'self'; connect-src 'self'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'

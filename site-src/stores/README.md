@@ -5,6 +5,8 @@ Each store ARK builds for a client lives in its own folder here:
 - `stores/rmpc/`: the RMPC season store, which takes real orders through Stripe Checkout. It's the template for a store that sells: copy its catalogue, page and functions, then change the client's details.
 - `stores/bots/`: the Best of the Springs store for The Gazette, a sample that doesn't take orders yet. It draws every product in every colour AS Colour makes, from garment templates (see its README).
 
+Each store's client sees its orders, print counts and profit on the client dashboard at `/dashboard` (`site-src/dashboard/`). A store that takes orders joins it with an entry in `netlify/lib/dashboard/stores.mjs`; ARK adds the client's email addresses and the store's cost sheet on the dashboard's ARK settings page, never in this repository.
+
 ## Rules every store follows
 
 `rules.mjs` holds these, and each store's `catalog.mjs` reads them from there. A new store starts with them and doesn't keep its own copy.

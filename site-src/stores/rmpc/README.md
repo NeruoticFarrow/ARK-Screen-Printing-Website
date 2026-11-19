@@ -12,6 +12,7 @@
 | Bundles everything into `ark-site-review/rmpc.html` | `build.mjs` (run by `npm run build`) |
 | Checkout: bag → Stripe Checkout session, and where a checkout stands | `netlify/functions/rmpc-checkout.mjs` |
 | Order export: summary page and CSVs | `netlify/functions/rmpc-orders.mjs` |
+| The client's view: orders, print counts, profit | `/dashboard` (`site-src/dashboard/`) |
 | Order email to the client (Stripe webhook) | `netlify/functions/stripe-webhook.mjs` |
 | Tests | `tests/` (`npm test`) |
 

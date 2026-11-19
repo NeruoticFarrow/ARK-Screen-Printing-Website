@@ -12,7 +12,7 @@
     "gbp:sync": "node site-src/sync/gbp-sync.mjs",
     "netlify-build": "node site-src/sync/gbp-sync.mjs && node site-src/sync/studio-pricing.mjs && node site-src/images.mjs && node site-src/build.mjs && node site-src/check.mjs",
     "studio:sync": "node site-src/sync/studio-pricing.mjs",
-    "test": "node --test \"site-src/stores/rmpc/tests/*.test.mjs\" \"site-src/stores/bots/tests/*.test.mjs\""
+    "test": "node --test \"site-src/stores/rmpc/tests/*.test.mjs\" \"site-src/stores/bots/tests/*.test.mjs\" \"site-src/dashboard/tests/*.test.mjs\""
   },
   "devDependencies": {
     "esbuild": "0.28.2",
@@ -20,5 +20,8 @@
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "sharp": "0.35.3"
+  },
+  "dependencies": {
+    "@netlify/blobs": "11.1.7"
   }
 }

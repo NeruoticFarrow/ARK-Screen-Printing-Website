@@ -6,6 +6,7 @@
 //
 // usage: npm run check   (exit code 1 on any failure)
 
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { parseHTML } from "linkedom";
@@ -153,6 +154,41 @@ else {
     if (at < 0 || !block.includes("X-Robots-Tag: noindex, nofollow") || !block.includes("connect-src 'none';") || !block.includes("form-action 'none'") || !/frame-ancestors 'self'$/m.test(block)) fail(file, `unsafe store headers for ${route}`);
   }
   if (!/^\/bos\s+\/bos\.html\s+200$/m.test(fs.readFileSync(path.join(SITE, "_redirects"), "utf8"))) fail(file, "_redirects must serve the store at /bos");
+}
+
+// The client store dashboard shows buyers' names and emails: unlisted, never
+// framed, no analytics, nothing from another origin, no referrer, and only its
+// own inline bundle may run (the CSP names its hashes, not 'unsafe-inline').
+const dashboardPath = path.join(SITE, "dashboard.html");
+if (!fs.existsSync(dashboardPath)) fail("dashboard.html", "client dashboard page missing");
+else {
+  const page = fs.readFileSync(dashboardPath, "utf8");
+  const file = "dashboard.html";
+  if (!page.includes('name="robots" content="noindex, nofollow"')) fail(file, "must stay noindex");
+  if (!page.includes('name="referrer" content="no-referrer"')) fail(file, "must send no referrer");
+  if (!page.includes('rel="canonical" href="https://arkscreenprinting.com/dashboard"')) fail(file, "wrong canonical slug");
+  if (/googletagmanager\.com|gtag\(|fbq\(/.test(page)) fail(file, "the dashboard must not load analytics");
+  if (/(src|href)="(https?:)?\/\//.test(page.replace(/<link rel="canonical"[^>]*>/, ""))) fail(file, "loads something from another origin");
+  if (!page.includes('"/api/dashboard"')) fail(file, "the page does not talk to /api/dashboard");
+  for (const ref of ["/assets/brand/ark-logo-120.png", "/fonts/gf/inter-400.woff2", "/fonts/gf/fraunces-latin.woff2"]) {
+    if (page.includes(ref) && !existsExact(ref.slice(1))) fail(file, `broken reference ${ref}`);
+  }
+  const inline = (tag) => page.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)</${tag}>`))?.[1] ?? "";
+  const hash = (text) => `'sha256-${crypto.createHash("sha256").update(text, "utf8").digest("base64")}'`;
+  const lines = fs.readFileSync(path.join(SITE, "_headers"), "utf8").split("\n");
+  for (const route of ["/dashboard", "/dashboard/*", "/dashboard.html"]) {
+    const at = lines.indexOf(route);
+    const end = lines.findIndex((line, i) => i > at && line && !line.startsWith("  "));
+    const block = at < 0 ? "" : lines.slice(at + 1, end < 0 ? undefined : end).join("\n");
+    const csp = block.match(/Content-Security-Policy: (.+)/)?.[1] ?? "";
+    const safe = at >= 0 && block.includes("X-Robots-Tag: noindex, nofollow") && block.includes("Referrer-Policy: no-referrer")
+      && csp.includes(`script-src ${hash(inline("script"))};`) && csp.includes(`style-src ${hash(inline("style"))};`)
+      && csp.includes("connect-src 'self';") && /frame-ancestors 'none'$/.test(csp) && !csp.includes("unsafe");
+    if (!safe) fail(file, `unsafe or stale headers for ${route} (rebuild with npm run build)`);
+  }
+  const redirects = fs.readFileSync(path.join(SITE, "_redirects"), "utf8");
+  if (!/^\/dashboard\s+\/dashboard\.html\s+200$/m.test(redirects) || !/^\/dashboard\/\*\s+\/dashboard\.html\s+200$/m.test(redirects)) fail(file, "_redirects must serve the dashboard at /dashboard and below");
+  if (!fs.existsSync(path.join(ROOT, "netlify/functions/dashboard-api.mjs"))) fail(file, "netlify/functions/dashboard-api.mjs missing");
 }
 
 if (problems.length) {
