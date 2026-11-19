@@ -1,6 +1,6 @@
 # Best of the Springs store (sample)
 
-`https://arkscreenprinting.com/best-of-the-springs`: tees and totes for The Gazette's Best of the Springs, built from Alex's six proofs for The Gazette to review. It's a **sample**: the bag works and adds up pickup or shipping, but there's no checkout, and the page makes no requests at all. The page is unlisted (`noindex`).
+`https://arkscreenprinting.com/bos`: tees and totes for The Gazette's Best of the Springs, built from Alex's six proofs for The Gazette to review. It's a **sample**: the bag works and adds up pickup or shipping, but there's no checkout, and the page makes no requests at all. The page is unlisted (`noindex`).
 
 | What | File |
 |---|---|
@@ -11,7 +11,7 @@
 | Garment templates, made from AS Colour's photos | `images/garments/`, made by `tools/garment-maps.mjs` |
 | Print artwork, made from The Gazette's logo files | `images/art/`, made by `tools/art.mjs` |
 | Fonts: Noto Serif Display, Noto Serif, Open Sans (SIL OFL) | `fonts/` |
-| Bundles everything into `ark-site-review/best-of-the-springs.html` | `build.mjs` (run by `npm run build`) |
+| Bundles everything into `ark-site-review/bos.html` | `build.mjs` (run by `npm run build`) |
 | Tests | `tests/` (`npm test`) |
 
 ## The products
@@ -50,7 +50,7 @@ Store pickup at 4852 Saddle Ridge Dr, event pickup, and shipping at $4.50 handli
 
 1. Add a checkout the way the RMPC store does (`../rmpc/README.md`): a Netlify function that re-prices the bag from `catalog.mjs` and opens Stripe Checkout.
 2. Set `STORE.sample` to `false` and switch the bag's checkout button on.
-3. In `site-src/build.mjs`, give `/best-of-the-springs` `connect-src 'self'` so the page can reach its checkout, and update the check in `site-src/check.mjs`.
+3. In `site-src/build.mjs`, give `/bos` and `/bos.html` `connect-src 'self'` so the page can reach its checkout, and update the check in `site-src/check.mjs`.
 
 ## Common changes
 

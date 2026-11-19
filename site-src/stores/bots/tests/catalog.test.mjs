@@ -13,7 +13,7 @@ const IMAGES = path.join(HERE, "..", "images");
 
 test("it's a sample: the page says so and takes no orders", () => {
   assert.equal(STORE.sample, true);
-  assert.equal(STORE.path, "/best-of-the-springs");
+  assert.equal(STORE.path, "/bos");
 });
 
 test("every colour AS Colour makes: 75 Staple Tee, 23 Carrie Tote, 5 Two-Tone Carrie", () => {

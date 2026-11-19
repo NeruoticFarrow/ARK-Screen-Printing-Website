@@ -1,5 +1,5 @@
 // Builds the Best of the Springs sample store into
-// ark-site-review/best-of-the-springs.html: app.jsx with React, the styles,
+// ark-site-review/bos.html: app.jsx with React, the styles,
 // fonts, garment templates and artwork bundled into one self-contained page
 // that makes no requests at all. site-src/build.mjs runs it.
 //

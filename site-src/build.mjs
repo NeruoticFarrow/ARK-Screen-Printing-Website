@@ -93,7 +93,7 @@ count++;
 // The Best of the Springs store: a sample for The Gazette to review
 // (site-src/stores/bots). Self-contained like the RMPC store, but with no
 // checkout yet, so it may make no requests at all.
-const botsStore = await buildBotsStore(path.join(SITE_DIR, "best-of-the-springs.html"));
+const botsStore = await buildBotsStore(path.join(SITE_DIR, "bos.html"));
 count++;
 
 // ── Long cache for fingerprinted assets, fonts and optimised images. The
@@ -115,11 +115,11 @@ fs.writeFileSync(path.join(SITE_DIR, "_headers"), `# Written by site-src/build.m
   X-Robots-Tag: noindex, nofollow
   Cache-Control: public, max-age=0, must-revalidate
   Content-Security-Policy: ${RMPC_CSP}
-/best-of-the-springs
+/bos
   X-Robots-Tag: noindex, nofollow
   Cache-Control: public, max-age=0, must-revalidate
   Content-Security-Policy: ${BOTS_CSP}
-/best-of-the-springs.html
+/bos.html
   X-Robots-Tag: noindex, nofollow
   Cache-Control: public, max-age=0, must-revalidate
   Content-Security-Policy: ${BOTS_CSP}

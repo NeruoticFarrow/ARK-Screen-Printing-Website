@@ -14,7 +14,7 @@ import { HANDLING_CENTS, SHIPPING_RULE, shippingAndHandlingCents } from "../rule
 export const STORE = {
   name: "Best of the Springs Shop",
   client: "The Gazette",
-  path: "/best-of-the-springs",
+  path: "/bos",
   /** A sample: the page says so, and the bag has no checkout. */
   sample: true,
   currency: "usd",

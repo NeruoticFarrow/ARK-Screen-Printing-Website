@@ -64,4 +64,7 @@
 
 # ─── Unlisted Best of the Springs sample store ───────────────────────────────
 # A sample for The Gazette to review (site-src/stores/bots): no checkout yet.
-/best-of-the-springs                    /best-of-the-springs.html    200
+# It lives at /bos (owner, 2026-11-19); the longer address its first preview
+# had forwards there.
+/bos                                    /bos.html    200
+/best-of-the-springs                    /bos    301
