@@ -14,7 +14,7 @@ const HERE = path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z
 
 export const STORE_HEAD = {
   title: "Best of the Springs Shop · The Gazette",
-  description: "Tees and totes for The Gazette's Best of the Springs: the 2027 crown and 2026 Winner gear, in every AS Colour color, printed in Colorado Springs by ARK Screen Printing.",
+  description: "Tees and totes for The Gazette's Best of the Springs: the 2027 Crown and 2026 Winner gear, in every AS Colour color, printed in Colorado Springs by ARK Screen Printing.",
   canonical: `https://arkscreenprinting.com${STORE.path}`,
 };
 

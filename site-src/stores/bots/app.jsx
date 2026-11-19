@@ -378,9 +378,9 @@ function Store() {
             <div className="hero-copy">
               <img className="hero-logo" src={officialLogo} alt="2027 Best of the Springs, The Gazette" width="640" height="640" />
               <div>
-                <h1>Wear the crown.</h1>
+                <h1>Wear the Crown.</h1>
                 <p className="lede">
-                  Every year Gazette readers pick their favorite local businesses in six categories. Celebrate the Best of the Springs with tees and totes in the 2027 crown, and
+                  Every year Gazette readers pick their favorite local businesses in six categories. Celebrate the Best of the Springs with tees and totes in the 2027 Crown, and
                   Winner gear for the businesses readers voted the best in 2026.
                 </p>
                 <div className="hero-actions">
@@ -486,7 +486,7 @@ function Store() {
                 ["Can I order now?", "Not yet. This is a sample for The Gazette to review. Once the designs and prices are approved, the bag checks out for real."],
                 [
                   "Why is the lettering plum on some colors?",
-                  "White ink barely shows on white, cream and pastel garments, so on those colors the white lettering prints in Best of the Springs plum. The gold crown and the Winner badge print the same on every color.",
+                  "White ink barely shows on white, cream and pastel garments, so on those colors the white lettering prints in Best of the Springs plum. The gold Crown and the Winner badge print the same on every color.",
                 ],
                 [
                   "What sizes do the tees come in?",
