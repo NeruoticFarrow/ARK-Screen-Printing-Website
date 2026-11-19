@@ -14,10 +14,12 @@
   NODE_VERSION = "22"
 
 # The RMPC store's checkout and order export (netlify/functions/rmpc-*.mjs),
-# and the Stripe webhook that emails the client each order
-# (netlify/functions/stripe-webhook.mjs). Each function declares its own /api/…
-# path. Their keys, secrets and the export password are Netlify environment
-# variables, never files here.
+# the Stripe webhook that emails the client each order
+# (netlify/functions/stripe-webhook.mjs), and the client dashboard's API
+# (netlify/functions/dashboard-api.mjs, which keeps its lists and cost sheets
+# in Netlify Blobs). Each function declares its own /api/… path. Their keys,
+# secrets and the export password are Netlify environment variables, never
+# files here.
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"

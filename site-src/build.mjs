@@ -18,6 +18,7 @@ import { renderPpc, renderService } from "./pages/service.mjs";
 import { renderAbout, renderFaq, renderGallery, renderQuote, renderServiceAreas, renderTestimonials, renderThankYou } from "./pages/simple.mjs";
 import { buildRmpcStore } from "./stores/rmpc/build.mjs";
 import { buildBotsStore } from "./stores/bots/build.mjs";
+import { buildDashboard, dashboardCsp } from "./dashboard/build.mjs";
 import { STORE as RMPC_STORE } from "./stores/rmpc/catalog.mjs";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..");
@@ -96,12 +97,28 @@ count++;
 const botsStore = await buildBotsStore(path.join(SITE_DIR, "bos.html"));
 count++;
 
+// The client store dashboard (site-src/dashboard): each made-for-you store's
+// client signs in to see its orders, print counts and profit. One page for
+// /dashboard and everything under it; the data comes from
+// netlify/functions/dashboard-api.mjs.
+const dashboard = await buildDashboard(path.join(SITE_DIR, "dashboard.html"));
+count++;
+
 // ── Long cache for fingerprinted assets, fonts and optimised images. The
 // store page may only talk to its own origin (the checkout function), isn't
 // indexed, and can be framed only by the sites in its STORE.embedOn (RMPC's
 // own site); Stripe's page opens by navigating the whole tab.
 const RMPC_CSP = `default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'self'; form-action 'none'; base-uri 'none'; frame-ancestors 'self' ${RMPC_STORE.embedOn.join(" ")}`;
 const BOTS_CSP = "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'self'";
+// The dashboard shows buyers' names and emails, so it runs only its own
+// bundle (by hash), is never framed, and sends no referrer (its sign-in links
+// carry a one-time token).
+const DASHBOARD_CSP = dashboardCsp(dashboard);
+const dashboardHeaders = `  X-Robots-Tag: noindex, nofollow
+  Cache-Control: public, max-age=0, must-revalidate
+  Referrer-Policy: no-referrer
+  X-Content-Type-Options: nosniff
+  Content-Security-Policy: ${DASHBOARD_CSP}`;
 fs.writeFileSync(path.join(SITE_DIR, "_headers"), `# Written by site-src/build.mjs.
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
@@ -123,6 +140,12 @@ fs.writeFileSync(path.join(SITE_DIR, "_headers"), `# Written by site-src/build.m
   X-Robots-Tag: noindex, nofollow
   Cache-Control: public, max-age=0, must-revalidate
   Content-Security-Policy: ${BOTS_CSP}
+/dashboard
+${dashboardHeaders}
+/dashboard/*
+${dashboardHeaders}
+/dashboard.html
+${dashboardHeaders}
 `);
 
-console.log(`built ${count} pages · css ${(css.length / 1024).toFixed(1)} KB · js ${(js.length / 1024).toFixed(1)} KB · v=${version} · areas ${close.length} close + ${towns.length} towns · rmpc store ${(store.bytes / 1024).toFixed(0)} KB · bots store ${(botsStore.bytes / 1024).toFixed(0)} KB`);
+console.log(`built ${count} pages · css ${(css.length / 1024).toFixed(1)} KB · js ${(js.length / 1024).toFixed(1)} KB · v=${version} · areas ${close.length} close + ${towns.length} towns · rmpc store ${(store.bytes / 1024).toFixed(0)} KB · bots store ${(botsStore.bytes / 1024).toFixed(0)} KB · dashboard ${(dashboard.bytes / 1024).toFixed(0)} KB`);

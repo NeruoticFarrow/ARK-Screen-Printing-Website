@@ -10,6 +10,7 @@
 
 import crypto from "node:crypto";
 import { COLOUR, DELIVERY, GARMENTS, PRODUCTS, STORE, decodeItems, deliveryKey, orderRef, productById, usd } from "../../site-src/stores/rmpc/catalog.mjs";
+import { csv, money } from "../lib/csv.mjs";
 import { stripeRequest } from "../lib/stripe.mjs";
 
 export const config = { path: ["/api/rmpc/orders", "/api/rmpc/orders.csv", "/api/rmpc/sizes.csv"] };
@@ -65,6 +66,7 @@ export function toOrder(session) {
   const refunded = charge && typeof charge === "object" ? charge.amount_refunded ?? 0 : 0;
   const total = session.amount_total ?? 0;
   const shipping = shippingDetails(session);
+  const delivery = deliveryKey(session.metadata?.delivery);
   return {
     ref: orderRef(session.id),
     sessionId: session.id,
@@ -75,8 +77,13 @@ export function toOrder(session) {
     email: session.customer_details?.email ?? "",
     phone: session.customer_details?.phone ?? "",
     // "Ship", "Event pickup" or "Store pickup".
-    delivery: deliveryKey(session.metadata?.delivery) === "ship" ? "Ship" : DELIVERY[deliveryKey(session.metadata?.delivery)].label,
-    shipTo: session.metadata?.delivery === "ship" ? [shipping?.name, oneLine(shipping?.address)].filter(Boolean).join(", ") : "",
+    delivery: delivery === "ship" ? "Ship" : DELIVERY[delivery].label,
+    /** The DELIVERY key: "pickup" (event pickup), "store" or "ship". */
+    deliveryKey: delivery,
+    shipTo: delivery === "ship" ? [shipping?.name, oneLine(shipping?.address)].filter(Boolean).join(", ") : "",
+    /** Town and state alone, for the client's dashboard (the street stays here). */
+    shipCity: delivery === "ship" ? shipping?.address?.city ?? "" : "",
+    shipState: delivery === "ship" ? shipping?.address?.state ?? "" : "",
     items: decodeItems(session.metadata),
     subtotal: session.amount_subtotal ?? 0,
     shipping: session.total_details?.amount_shipping ?? 0,
@@ -118,20 +125,6 @@ export function describeItem(item) {
     fit: garment ? (garment.fit === "adult" ? "Adult" : "Youth") : "",
   };
 }
-
-// Spreadsheet-safe CSV: quoted where needed, and a cell a buyer typed that
-// starts like a formula is prefixed with ' so Excel/Sheets shows it as text.
-function cell(value) {
-  let s = value === null || value === undefined ? "" : String(value);
-  if (/^[=+\-@\t\r]/.test(s)) s = `'${s}`;
-  return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
-}
-
-function csv(rows) {
-  return `${rows.map((row) => row.map(cell).join(",")).join("\r\n")}\r\n`;
-}
-
-const money = (cents) => (cents / 100).toFixed(2);
 
 export function ordersCsv(orders) {
   const rows = [[
