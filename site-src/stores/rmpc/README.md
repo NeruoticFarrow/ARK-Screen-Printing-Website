@@ -28,7 +28,7 @@
    - It creates a Stripe Checkout session and the buyer pays on Stripe's page.
    - Stripe collects their name, email, phone and address, adds sales tax with Stripe Tax, and emails the receipt.
 3. **Back on the store:** the buyer lands on `/rmpc?checkout=success`, which shows the confirmation and empties the bag. A page that sent a buyer to Stripe also looks the checkout up when it next loads (`GET /api/rmpc/checkout?session_id=…`), so a bag that was paid for empties even if the buyer never came back through that link.
-4. **The client hears about it:** Stripe sends `checkout.session.completed` to `/api/stripe-webhook`, which emails the order to `RMPC_ORDER_NOTIFICATION_EMAIL`: buyer name and email, delivery (city and state when shipped), garments and money. The street address and phone stay in ARK's export.
+4. **The client hears about it:** Stripe sends `checkout.session.completed` to `/api/stripe-webhook`, which emails the order to each address in `RMPC_ORDER_NOTIFICATION_EMAIL`, one email per address: buyer name and email, delivery (city and state when shipped), garments and money. The street address and phone stay in ARK's export.
 5. **Production:** the order is in Stripe, tagged `metadata.channel = rmpc-store` with its garments in `metadata.items_*`.
    - `/api/rmpc/orders` lists every paid order: buyer, delivery, garments, money, refunds.
    - `/api/rmpc/sizes.csv` is the count to print.
@@ -41,10 +41,12 @@
 | `RMPC_ORDERS_PASSWORD` | **Required for the export.** 12+ characters. The browser asks for a user name (anything) and this password. |
 | `STRIPE_WEBHOOK_SECRET` | **Required for the order emails.** The signing secret (`whsec_…`) of the webhook endpoint below, from its page in Stripe. Not the designer's: each endpoint has its own. |
 | `RESEND_API_KEY` | **Required for the order emails.** A Resend key that can send from arkscreenprinting.com, the domain the designer already sends from. |
-| `RMPC_ORDER_NOTIFICATION_EMAIL` | **Required for the order emails.** Who gets each order: the client's address, or several separated by commas. |
+| `RMPC_ORDER_NOTIFICATION_EMAIL` | **Required for the order emails.** Who gets each order: the client's address, or several separated by commas. Each address gets its own email. |
 | `RMPC_AUTOMATIC_TAX` | Optional. `off` stops Stripe Tax for these orders. Use it only if Stripe Tax isn't set up on the account. |
 
 Netlify applies a changed variable at the next deploy (Deploys → Trigger deploy).
+
+To see what the live deploy has, open `https://arkscreenprinting.com/api/stripe-webhook`. It shows whether the signing secret and the Resend key are set and how many addresses the order email goes to, in counts only.
 
 ## Common changes
 
@@ -89,7 +91,27 @@ One, for the client's order emails. In Stripe → Developers → Webhooks, add a
 - **URL:** `https://arkscreenprinting.com/api/stripe-webhook`
 - **Events:** `checkout.session.completed` and `checkout.session.async_payment_succeeded`
 
-Then put its signing secret in Netlify as `STRIPE_WEBHOOK_SECRET`. The endpoint gets every Checkout session on the account and answers anything that isn't this store's with a 200 and nothing else. A failed email is answered 500, so Stripe retries it, and Resend's idempotency key stops a retry from sending it twice. The export doesn't need the webhook: it reads the orders straight from Stripe.
+Then put its signing secret in Netlify as `STRIPE_WEBHOOK_SECRET`. The endpoint gets every Checkout session on the account and answers anything that isn't this store's with a 200 and nothing else. The export doesn't need the webhook: it reads the orders straight from Stripe.
+
+A paid order whose email can't go out gets a 503 when a setting is missing and a 500 when Resend refuses it, so Stripe retries it for up to three days. Stripe shows the answer under each delivery. It lists every address with one of three results:
+
+- `sent`, with Resend's email id.
+- `already sent`.
+- `failed`, with Resend's reason.
+
+Resend's idempotency key is per order and address, so a retry sends only what didn't go out. An address added to the list later gets an order when its event is resent from Stripe. Within 24 hours of the first send, nobody else gets it twice. After that, every address gets it again.
+
+### When an order email doesn't arrive
+
+Open the order's event in Stripe (Developers → Webhooks → this endpoint → Event deliveries) and read the answer:
+
+- **400 Invalid signature:** `STRIPE_WEBHOOK_SECRET` isn't this endpoint's current signing secret.
+- **503:** a setting is missing, and the answer names it.
+- **500:** Resend refused, and the answer says why. "API key is invalid" means `RESEND_API_KEY` needs a current key.
+- **200, but an address isn't listed:** it isn't in the Production value of `RMPC_ORDER_NOTIFICATION_EMAIL`.
+- **200 and the address says `sent`:** Resend took it. Look in that mailbox's spam, then find the email id in Resend → Emails to see whether it bounced or was suppressed.
+
+After changing a variable, deploy, then click Resend on the event in Stripe.
 
 The ARK designer's webhook receives these sessions' events too, because it's the same Stripe account. It leaves any session with a `metadata.channel` alone once [ark-designer#125](https://github.com/NeruoticFarrow/ark-designer/pull/125) is released. Until then, an RMPC buyer who leaves checkout gets the designer's abandoned-cart email.
 
