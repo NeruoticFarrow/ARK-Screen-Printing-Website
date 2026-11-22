@@ -10,12 +10,12 @@
 import { StrictMode, useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
-  BRANDS_BY_TYPE, COLOUR, GARMENTS, MAX_QUANTITY, PRODUCTS as CATALOG, SHIPPING_RULE_SHORT, SHIPPING_RULE_TEXT,
-  SIZE_UPCHARGE_CENTS, STORE, bagTotals, closingDateLabel, lineKey, normaliseLine, orderRef, ordersClosed,
+  BRANDS_BY_TYPE, COLOUR, DELIVERY, GARMENTS, MAX_QUANTITY, PRODUCTS as CATALOG, SHIPPING_RULE_TEXT,
+  SIZE_UPCHARGE_CENTS, STORE, bagTotals, closingDateLabel, deliveryKey, lineKey, normaliseLine, orderRef, ordersClosed,
   priceRange, sizesFor, unitPriceCents, variantKey,
 } from "./catalog.mjs";
 import {
-  ArrowRight, ArrowUpRight, ChevronDown, ChevronRight, CircleCheck, Copy, Info, MapPin, Minus, Plus, ShoppingBag, Truck, X,
+  ArrowRight, ArrowUpRight, ChevronDown, ChevronRight, CircleCheck, Copy, Info, MapPin, Minus, Plus, ShoppingBag, Store as StoreIcon, Truck, X,
 } from "./icons.jsx";
 import crown from "./images/rmpc-crown.png";
 import wordmark from "./images/rmpc-wordmark.webp";
@@ -39,6 +39,18 @@ const BAG_KEY = "rmpc_store_bag_v1";
 const PENDING_KEY = "rmpc_store_pending_v1";
 const CHECKOUT_URL = "/api/rmpc/checkout";
 
+// Shown in an iframe, as on RMPC's own Squarespace site (catalog.mjs
+// STORE.embedOn). Stripe Checkout refuses to load inside a frame, so checkout
+// takes over the whole tab, and the iframe keeps its own storage, apart from
+// arkscreenprinting.com's.
+const EMBEDDED = (() => {
+  try {
+    return window.self !== window.top;
+  } catch {
+    return true;
+  }
+})();
+
 const money = (cents) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(cents / 100);
 const fitLabel = (variant) => (GARMENTS[variant]?.fit === "youth" ? "Youth" : "Adult");
 
@@ -51,14 +63,29 @@ function readBag() {
   }
 }
 
+// The checkout this page last sent the buyer to: the bag as it was, and the
+// Stripe session's id (from before the embed, a pending checkout had no id).
 function readPending() {
   try {
     const stored = JSON.parse(localStorage.getItem(PENDING_KEY) || "null");
     if (!stored || !Array.isArray(stored.cart)) return null;
-    return { cart: stored.cart.map(normaliseLine).filter(Boolean), delivery: stored.delivery === "ship" ? "ship" : "pickup" };
+    return {
+      cart: stored.cart.map(normaliseLine).filter(Boolean),
+      delivery: deliveryKey(stored.delivery),
+      id: typeof stored.id === "string" ? stored.id : null,
+    };
   } catch {
     return null;
   }
+}
+
+/** Where a checkout stands (GET /api/rmpc/checkout): its status (open,
+ *  complete or expired), order reference, delivery and garments. */
+async function lookUpCheckout(id) {
+  const res = await fetch(`${CHECKOUT_URL}?session_id=${encodeURIComponent(id)}`, { cache: "no-store" });
+  if (res.status === 400 || res.status === 404) return { status: "unknown" };
+  if (!res.ok) throw new Error(`The checkout lookup answered ${res.status}`);
+  return res.json();
 }
 
 function writeStorage(key, value) {
@@ -70,7 +97,13 @@ function writeStorage(key, value) {
   }
 }
 
-const DeliveryIcon = ({ name }) => (name === "pickup" ? <MapPin size={21} /> : <Truck size={21} />);
+const DELIVERY_ICONS = { pickup: MapPin, store: StoreIcon, ship: Truck };
+const DeliveryIcon = ({ name }) => {
+  const Icon = DELIVERY_ICONS[name] ?? MapPin;
+  return <Icon size={21} />;
+};
+/** The bag's and the confirmation's name for what delivery costs. */
+const deliveryCostLabel = (delivery) => (delivery === "ship" ? "Shipping & handling" : DELIVERY[deliveryKey(delivery)].label);
 
 function Store() {
   const [cart, setCart] = useState(readBag);
@@ -86,6 +119,9 @@ function Store() {
   const [confirmation, setConfirmation] = useState(null);
   const [checkingOut, setCheckingOut] = useState(false);
   const [checkoutError, setCheckoutError] = useState("");
+  // Embedded: the Stripe link, for when the page around the store doesn't let
+  // it move the tab on its own.
+  const [handoff, setHandoff] = useState("");
   const productDialog = useRef(null);
   const bagDialog = useRef(null);
 
@@ -115,24 +151,94 @@ function Store() {
     };
   }, []);
 
-  // Back from Stripe: ?checkout=success shows the confirmation and empties the
-  // bag; ?checkout=cancelled reopens the bag as it was.
+  // Back from Stripe, or back on the page some other way after leaving for it:
+  //  - ?checkout=success (Stripe's success_url) shows the confirmation. The bag
+  //    empties when it's the checkout this page started. A checkout from the
+  //    store embedded on RMPC's site has its bag in the iframe, so its garments
+  //    are read back from Stripe, and the bag here stays as it is.
+  //  - ?checkout=cancelled reopens the bag as it was. The checkout stays
+  //    pending: the buyer can still go forward to Stripe's page and pay.
+  //  - Otherwise a checkout this page started is looked up, and once Stripe has
+  //    the order the bag empties and the confirmation shows. That's how the
+  //    embedded store hears about an order: Stripe returns the buyer to
+  //    arkscreenprinting.com/rmpc, not to the iframe.
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const outcome = params.get("checkout");
-    if (!outcome) return;
+    if (!outcome) {
+      settlePendingCheckout();
+      return;
+    }
     window.history.replaceState(null, "", window.location.pathname + window.location.hash);
     if (outcome === "success") {
+      const sessionId = params.get("session_id") ?? "";
+      const ref = orderRef(sessionId);
       const pending = readPending();
-      setConfirmation({ cart: pending?.cart ?? [], delivery: pending?.delivery ?? "pickup", ref: orderRef(params.get("session_id")) });
-      setCart([]);
+      if (pending && (!pending.id || pending.id === sessionId)) {
+        setConfirmation({ cart: pending.cart, delivery: pending.delivery, ref });
+        setCart([]);
+        writeStorage(PENDING_KEY, null);
+      } else {
+        // Pickup or shipping isn't known until the lookup answers.
+        setConfirmation({ cart: [], delivery: null, ref });
+        if (sessionId) {
+          lookUpCheckout(sessionId).then((found) => {
+            if (found.status !== "complete" || !Array.isArray(found.lines)) return;
+            const cart = found.lines.map(normaliseLine).filter(Boolean);
+            const delivery = deliveryKey(found.delivery);
+            setConfirmation((shown) => (shown?.ref === ref ? { ...shown, cart, delivery } : shown));
+          }).catch(() => {});
+        }
+      }
     }
-    writeStorage(PENDING_KEY, null);
-    if (outcome === "success" || outcome === "cancelled") {
-      bagDialog.current?.showModal();
-      document.body.style.overflow = "hidden";
-    }
+    if (outcome === "success" || outcome === "cancelled") showBagDialog();
   }, []);
+
+  // Back from Stripe through the browser's back/forward cache, the page is
+  // exactly as it left: mid-checkout. Start over, and see whether that
+  // checkout was paid in the meantime.
+  useEffect(() => {
+    const onShow = (event) => {
+      if (!event.persisted) return;
+      setCheckingOut(false);
+      setHandoff("");
+      settlePendingCheckout();
+    };
+    window.addEventListener("pageshow", onShow);
+    return () => window.removeEventListener("pageshow", onShow);
+  }, []);
+
+  // A changed bag needs a new checkout.
+  useEffect(() => {
+    if (!handoff) return;
+    setHandoff("");
+    setCheckingOut(false);
+  }, [cart, delivery]);
+
+  async function settlePendingCheckout() {
+    const pending = readPending();
+    if (!pending?.id) return;
+    let found;
+    try {
+      found = await lookUpCheckout(pending.id);
+    } catch {
+      return; // Offline, or checkout is down: look again next visit.
+    }
+    if (found.status === "complete") {
+      writeStorage(PENDING_KEY, null);
+      setCart([]);
+      setConfirmation({ cart: pending.cart, delivery: pending.delivery, ref: found.ref || orderRef(pending.id) });
+      showBagDialog();
+    } else if (found.status !== "open") {
+      // Expired, or a checkout Stripe doesn't know: nothing left to wait for.
+      writeStorage(PENDING_KEY, null);
+    }
+  }
+
+  function showBagDialog() {
+    if (!bagDialog.current?.open) bagDialog.current?.showModal();
+    document.body.style.overflow = "hidden";
+  }
 
   function openProduct(next) {
     setProduct(next);
@@ -178,11 +284,26 @@ function Store() {
       const res = await fetch(CHECKOUT_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ delivery, lines: cart.map(({ productId, variant: v, size: s, quantity: q }) => ({ productId, variant: v, size: s, quantity: q })) }),
+        body: JSON.stringify({
+          delivery,
+          ...(EMBEDDED ? { embedded: true } : {}),
+          lines: cart.map(({ productId, variant: v, size: s, quantity: q }) => ({ productId, variant: v, size: s, quantity: q })),
+        }),
       });
       const body = await res.json().catch(() => ({}));
       if (!res.ok || typeof body.url !== "string") throw new Error(body.error || "Checkout is unavailable right now. Please try again in a few minutes.");
-      writeStorage(PENDING_KEY, { cart, delivery, at: Date.now() });
+      writeStorage(PENDING_KEY, { cart, delivery, at: Date.now(), id: typeof body.id === "string" ? body.id : null });
+      if (EMBEDDED) {
+        // A frame may move the whole tab once the buyer has clicked in it, and
+        // the link is there in case the page around the store says no.
+        setHandoff(body.url);
+        try {
+          window.top.location.href = body.url;
+        } catch {
+          // Refused: the buyer clicks the link instead.
+        }
+        return;
+      }
       window.location.assign(body.url);
     } catch (err) {
       setCheckoutError(err instanceof Error && err.message !== "Failed to fetch" ? err.message : "We couldn't reach checkout. Check your connection and try again.");
@@ -262,7 +383,7 @@ function Store() {
 
         <div className="benefit-bar">
           <div><CircleCheck size={18} /><span>Youth &amp; adult options</span></div>
-          <div><MapPin size={18} /><span>Free event pickup</span></div>
+          <div><MapPin size={18} /><span>Free event or store pickup</span></div>
           <div><ShoppingBag size={18} /><span>Made to order, not overstocked</span></div>
           <div><Truck size={18} /><span>Or shipped to your door</span></div>
         </div>
@@ -323,7 +444,7 @@ function Store() {
             <div className="section-kicker">MORE THAN A COMPETITION</div>
             <h2>Your people.<br />Your next move.</h2>
             <p>Rocky Mountain Parkour Championships brings young athletes and their families together in Colorado Springs. This collection is for everyone who shows up, cheers loud, and takes the next leap.</p>
-            <a href="https://rmparkour.com/" target="_blank" rel="noreferrer">Meet Rocky Mountain Parkour Championships <ArrowUpRight size={17} /></a>
+            <a href="https://rmparkour.com/" target={EMBEDDED ? "_top" : "_blank"} rel="noreferrer">Meet Rocky Mountain Parkour Championships <ArrowUpRight size={17} /></a>
           </div>
           <span className="community-season">20<br />27</span>
         </section>
@@ -349,7 +470,7 @@ function Store() {
             </div>
             <div>
               <span>03</span>
-              <div><h3>Pick up. Or ship out.</h3><p>Choose free event pickup or shipping when you check out. We'll email you when your order is ready.</p></div>
+              <div><h3>Pick up. Or ship out.</h3><p>Choose free pickup, at an RMPC event or at ARK in Colorado Springs, or shipping when you check out. We'll email you when your order is ready.</p></div>
             </div>
           </div>
         </section>
@@ -367,7 +488,7 @@ function Store() {
             </details>
             <details>
               <summary>How does delivery work?<ChevronDown size={18} /></summary>
-              <p>Choose free event pickup or shipping in your bag. {STORE.pickup.sentence} Shipping is {SHIPPING_RULE_TEXT}, to U.S. addresses.</p>
+              <p>Choose in your bag. Event pickup is free at an RMPC event, and we'll email you the details before it. Store pickup is free at ARK Screen Printing, {DELIVERY.store.address}, and we'll email you when your order is ready. Shipping is {SHIPPING_RULE_TEXT}, to U.S. addresses.</p>
             </details>
             <details>
               <summary>How do I pay?<ChevronDown size={18} /></summary>
@@ -462,7 +583,7 @@ function Store() {
                   <ShoppingBag size={18} />
                 </button>
               </div>
-              <div className="detail-delivery"><MapPin size={17} /><span>Free event pickup or shipping, chosen in your bag.</span></div>
+              <div className="detail-delivery"><MapPin size={17} /><span>Free event or store pickup, or shipping, chosen in your bag.</span></div>
               <details className="size-info">
                 <summary>Size &amp; preorder information <ChevronDown size={16} /></summary>
                 <p>Youth tees: XS–XL. Youth crewnecks: S–XL. Adults: S–2XL. {closesOn ? `Preorders close ${closesOn}; ` : ""}ARK prints the whole run after preorders close.</p>
@@ -486,7 +607,7 @@ function Store() {
             <CircleCheck size={54} />
             <span className="confirmation-label">ORDER CONFIRMED{confirmation.ref ? ` · ORDER ${confirmation.ref}` : ""}</span>
             <h3>A little team spirit,<br />coming right up.</h3>
-            <p>Thank you! Stripe is emailing your receipt. ARK prints the collection after preorders close{closesOn ? ` on ${closesOn}` : ""}, and we'll email you when your order is {confirmation.delivery === "ship" ? "on its way" : "ready for pickup"}.</p>
+            <p>Thank you! Stripe is emailing your receipt. ARK prints the collection after preorders close{closesOn ? ` on ${closesOn}` : ""}, and we'll email you when your order is {confirmation.delivery === "ship" ? "on its way" : confirmation.delivery === "store" ? `ready for pickup at ${DELIVERY.store.short}` : confirmation.delivery ? "ready for pickup" : "ready"}.</p>
             {confirmation.cart.length > 0 && (
               <div className="confirmation-summary">
                 {confirmation.cart.map((line) => (
@@ -496,8 +617,8 @@ function Store() {
                   </div>
                 ))}
                 <div>
-                  <span>{confirmation.delivery === "pickup" ? STORE.pickup.label : "Shipping"}</span>
-                  <b>{confirmation.delivery === "pickup" ? "Free" : money(confirmationTotals.shipping)}</b>
+                  <span>{deliveryCostLabel(confirmation.delivery)}</span>
+                  <b>{confirmation.delivery === "ship" ? money(confirmationTotals.shipping) : "Free"}</b>
                 </div>
                 <div className="confirmation-total"><span>Total before sales tax</span><b>{money(confirmationTotals.total)}</b></div>
               </div>
@@ -531,27 +652,31 @@ function Store() {
             </div>
             <div className="cart-delivery">
               <h3>How would you like to get it?</h3>
-              {["pickup", "ship"].map((option) => (
+              {Object.keys(DELIVERY).map((option) => (
                 <button key={option} className={`delivery-option ${delivery === option ? "active" : ""}`} onClick={() => setDelivery(option)}>
                   <DeliveryIcon name={option} />
                   <span>
-                    <b>{option === "pickup" ? STORE.pickup.label : "Ship to my door"}</b>
-                    <small>{option === "pickup" ? STORE.pickup.short : SHIPPING_RULE_SHORT}</small>
+                    <b>{DELIVERY[option].label}</b>
+                    <small>{DELIVERY[option].short}</small>
                   </span>
-                  <strong>{option === "pickup" ? "Free" : money(bagTotals(cart, "ship").shipping)}</strong>
+                  <strong>{option === "ship" ? money(bagTotals(cart, "ship").shipping) : "Free"}</strong>
                   <span className="radio-dot" />
                 </button>
               ))}
             </div>
             <div className="cart-summary">
               <div><span>Subtotal</span><b>{money(totals.subtotal)}</b></div>
-              <div><span>{delivery === "pickup" ? STORE.pickup.label : "Shipping"}</span><b>{money(totals.shipping)}</b></div>
+              <div><span>{deliveryCostLabel(delivery)}</span><b>{money(totals.shipping)}</b></div>
               <div className="cart-total"><span>Total before tax</span><b>{money(totals.total)}</b></div>
               <p>Sales tax is added at checkout.</p>
               {checkoutError && <p className="checkout-error" role="alert">{checkoutError}</p>}
-              <button className="button button-dark" onClick={checkout} disabled={checkingOut || closed}>
-                {closed ? "Preorders are closed" : checkingOut ? "Opening secure checkout…" : "Checkout"} <ArrowRight size={18} />
-              </button>
+              {handoff ? (
+                <a className="button button-dark" href={handoff} target="_top">Continue to secure checkout <ArrowRight size={18} /></a>
+              ) : (
+                <button className="button button-dark" onClick={checkout} disabled={checkingOut || closed}>
+                  {closed ? "Preorders are closed" : checkingOut ? "Opening secure checkout…" : "Checkout"} <ArrowRight size={18} />
+                </button>
+              )}
               <div className="cart-security"><CircleCheck size={14} /> Secure checkout by Stripe</div>
             </div>
           </>

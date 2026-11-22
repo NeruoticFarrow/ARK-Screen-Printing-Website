@@ -18,6 +18,8 @@ import { renderPpc, renderService } from "./pages/service.mjs";
 import { blogSitemap, loadPosts, renderBlogIndex, renderBlogPost } from "./pages/blog.mjs";
 import { renderAbout, renderFaq, renderGallery, renderQuote, renderServiceAreas, renderTestimonials, renderThankYou } from "./pages/simple.mjs";
 import { buildRmpcStore } from "./stores/rmpc/build.mjs";
+import { buildBotsStore } from "./stores/bots/build.mjs";
+import { STORE as RMPC_STORE } from "./stores/rmpc/catalog.mjs";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..");
 const SITE_DIR = path.join(ROOT, "ark-site-review");
@@ -100,10 +102,18 @@ count += 1 + posts.length;
 const store = await buildRmpcStore(path.join(SITE_DIR, "rmpc.html"));
 count++;
 
+// The Best of the Springs store: a sample for The Gazette to review
+// (site-src/stores/bots). Self-contained like the RMPC store, but with no
+// checkout yet, so it may make no requests at all.
+const botsStore = await buildBotsStore(path.join(SITE_DIR, "bos.html"));
+count++;
+
 // ── Long cache for fingerprinted assets, fonts and optimised images. The
-// store page may only talk to its own origin (the checkout function) and
-// can't be framed or indexed; Stripe's page opens by navigation.
-const RMPC_CSP = "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'self'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'";
+// store page may only talk to its own origin (the checkout function), isn't
+// indexed, and can be framed only by the sites in its STORE.embedOn (RMPC's
+// own site); Stripe's page opens by navigating the whole tab.
+const RMPC_CSP = `default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'self'; form-action 'none'; base-uri 'none'; frame-ancestors 'self' ${RMPC_STORE.embedOn.join(" ")}`;
+const BOTS_CSP = "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'self'";
 fs.writeFileSync(path.join(SITE_DIR, "_headers"), `# Written by site-src/build.mjs.
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
@@ -117,6 +127,14 @@ fs.writeFileSync(path.join(SITE_DIR, "_headers"), `# Written by site-src/build.m
   X-Robots-Tag: noindex, nofollow
   Cache-Control: public, max-age=0, must-revalidate
   Content-Security-Policy: ${RMPC_CSP}
+/bos
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: public, max-age=0, must-revalidate
+  Content-Security-Policy: ${BOTS_CSP}
+/bos.html
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: public, max-age=0, must-revalidate
+  Content-Security-Policy: ${BOTS_CSP}
 `);
 
-console.log(`built ${count} pages (${posts.length} blog posts) · css ${(css.length / 1024).toFixed(1)} KB · js ${(js.length / 1024).toFixed(1)} KB · v=${version} · areas ${close.length} close + ${towns.length} towns · rmpc store ${(store.bytes / 1024).toFixed(0)} KB`);
+console.log(`built ${count} pages (${posts.length} blog posts) · css ${(css.length / 1024).toFixed(1)} KB · js ${(js.length / 1024).toFixed(1)} KB · v=${version} · areas ${close.length} close + ${towns.length} towns · rmpc store ${(store.bytes / 1024).toFixed(0)} KB · bots store ${(botsStore.bytes / 1024).toFixed(0)} KB`);

@@ -157,11 +157,38 @@ else {
   const headers = fs.readFileSync(path.join(SITE, "_headers"), "utf8");
   for (const route of ["/rmpc", "/rmpc.html"]) {
     const block = headers.split("\n").slice(headers.split("\n").indexOf(route) + 1).filter((line, i, lines) => !lines.slice(0, i + 1).some((s) => s && !s.startsWith("  "))).join("\n");
-    if (!headers.split("\n").includes(route) || !block.includes("X-Robots-Tag: noindex, nofollow") || !block.includes("connect-src 'self';") || !block.includes("form-action 'none'") || !block.includes("frame-ancestors 'none'")) fail("rmpc.html", `unsafe store headers for ${route}`);
+    // Framing: only named https sites, never every site (*) or every https one.
+    const framers = block.match(/frame-ancestors ([^;\n]+)/)?.[1].trim().split(/\s+/) ?? [];
+    const framersNamed = framers.length > 0 && framers.every((src) => src === "'self'" || src === "'none'" || /^https:\/\/(\*\.)?[a-z0-9-]+(\.[a-z0-9-]+)+$/.test(src));
+    if (!headers.split("\n").includes(route) || !block.includes("X-Robots-Tag: noindex, nofollow") || !block.includes("connect-src 'self';") || !block.includes("form-action 'none'") || !framersNamed) fail("rmpc.html", `unsafe store headers for ${route}`);
   }
   for (const fn of ["rmpc-checkout.mjs", "rmpc-orders.mjs", "stripe-webhook.mjs"]) {
     if (!fs.existsSync(path.join(ROOT, "netlify/functions", fn))) fail("rmpc.html", `netlify/functions/${fn} missing`);
   }
+}
+
+// The Best of the Springs sample store: unlisted and self-contained like the
+// RMPC store, and with no checkout yet it may talk to nothing at all.
+const botsPath = path.join(SITE, "bos.html");
+if (!fs.existsSync(botsPath)) fail("bos.html", "Best of the Springs store page missing");
+else {
+  const store = fs.readFileSync(botsPath, "utf8");
+  const file = "bos.html";
+  if (!store.includes('name="robots" content="noindex, nofollow"')) fail(file, "must stay noindex");
+  if (!store.includes('rel="canonical" href="https://arkscreenprinting.com/bos"')) fail(file, "wrong canonical slug");
+  if ((store.match(/data:image\/webp;base64,/g) ?? []).length < 16) fail(file, "garment templates or artwork are not embedded");
+  if ((store.match(/data:font\/woff2;base64,/g) ?? []).length < 7) fail(file, "fonts are not embedded");
+  if (/googletagmanager\.com|gtag\(|fbq\(/.test(store)) fail(file, "the store must not load analytics or send conversions");
+  if (/(src|href)="(https?:)?\/\//.test(store.replace(/<link rel="canonical"[^>]*>/, ""))) fail(file, "loads something from another origin");
+  const headers = fs.readFileSync(path.join(SITE, "_headers"), "utf8");
+  for (const route of ["/bos", "/bos.html"]) {
+    const lines = headers.split("\n");
+    const at = lines.indexOf(route);
+    const end = lines.findIndex((line, i) => i > at && line && !line.startsWith("  "));
+    const block = at < 0 ? "" : lines.slice(at + 1, end < 0 ? undefined : end).join("\n");
+    if (at < 0 || !block.includes("X-Robots-Tag: noindex, nofollow") || !block.includes("connect-src 'none';") || !block.includes("form-action 'none'") || !/frame-ancestors 'self'$/m.test(block)) fail(file, `unsafe store headers for ${route}`);
+  }
+  if (!/^\/bos\s+\/bos\.html\s+200$/m.test(fs.readFileSync(path.join(SITE, "_redirects"), "utf8"))) fail(file, "_redirects must serve the store at /bos");
 }
 
 if (problems.length) {

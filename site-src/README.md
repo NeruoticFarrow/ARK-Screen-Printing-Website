@@ -56,9 +56,10 @@ npm run images     # after adding a photo: WebP sizes + content/image-manifest.j
 `https://arkscreenprinting.com/rmpc` is RMPC's 2027 season store, and it takes real orders. Its source is `stores/rmpc/` (see the README there); the build bundles it into `ark-site-review/rmpc.html`, and `_redirects` serves it at `/rmpc`.
 
 - **Prices:** `stores/rmpc/catalog.mjs`. Tees $29.99, crewnecks $59.99, every size the same.
+- **Delivery:** free event pickup, free store pickup at 4852 Saddle Ridge Dr, or shipping. Shipping follows the rule every client store uses (`stores/rules.mjs`, see `stores/README.md`): a $4.50 handling fee plus $8 for the first garment and $3 for each additional one, with the shipping part capped at $35.
 - **Checkout:** the bag posts to `/api/rmpc/checkout` (`netlify/functions/rmpc-checkout.mjs`), which re-prices every line from the catalogue and opens Stripe Checkout in ARK's Stripe account. Stripe collects the buyer's details, sales tax (Stripe Tax) and the payment.
 - **Orders:** `/api/rmpc/orders` (`netlify/functions/rmpc-orders.mjs`), password-protected: paid orders, the money, and the garments to print, with CSV downloads.
-- **Order emails:** a Stripe webhook (`netlify/functions/stripe-webhook.mjs`, `/api/stripe-webhook`) emails the client each paid order through Resend.
+- **Order emails:** a Stripe webhook (`netlify/functions/stripe-webhook.mjs`, `/api/stripe-webhook`) emails each paid order through Resend, one email per address in `RMPC_ORDER_NOTIFICATION_EMAIL`. A GET on it shows which of its settings the live deploy has.
 - **Netlify environment variables:** `STRIPE_SECRET_KEY` (ARK's Stripe key, not RMPC-only), `RMPC_ORDERS_PASSWORD`, and for the order emails `STRIPE_WEBHOOK_SECRET`, `RESEND_API_KEY` and `RMPC_ORDER_NOTIFICATION_EMAIL` (optionally `RMPC_AUTOMATIC_TAX=off`).
 - **What it doesn't do:** it inherits none of the site's analytics or quote conversion events, stays `noindex`, and its headers let it talk only to its own checkout.
 - **Tests:** `npm test` (prices, checkout and the export).

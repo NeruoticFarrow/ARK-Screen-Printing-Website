@@ -33,7 +33,7 @@ test("checkout creates a Stripe session priced from the catalogue", async () => 
   const handler = createCheckoutHandler({ env: { STRIPE_SECRET_KEY: KEY }, fetchImpl: stripe.fetchImpl });
   const res = await handler(checkoutRequest({ ...BAG, lines: [{ ...BAG.lines[0], unitCents: 1 }] }));
   assert.equal(res.status, 200);
-  assert.deepEqual(await res.json(), { url: "https://checkout.stripe.com/c/pay/cs_test_123" });
+  assert.deepEqual(await res.json(), { url: "https://checkout.stripe.com/c/pay/cs_test_123", id: "cs_test_123" }, "the id lets the page look the checkout up later");
   assert.equal(stripe.calls.length, 1);
   const { url, init, form } = stripe.calls[0];
   assert.equal(url, "https://api.stripe.com/v1/checkout/sessions");
@@ -57,23 +57,100 @@ test("checkout creates a Stripe session priced from the catalogue", async () => 
   assert.equal(form.get("cancel_url"), `${ORIGIN}/rmpc?checkout=cancelled`);
 });
 
-test("shipped orders collect a U.S. address and pay the shipping rule", async () => {
+test("shipped orders collect a U.S. address and pay $4.50 handling plus the shipping rule", async () => {
   const stripe = fakeStripe();
   const handler = createCheckoutHandler({ env: { STRIPE_SECRET_KEY: KEY, RMPC_AUTOMATIC_TAX: "off" }, fetchImpl: stripe.fetchImpl });
   const res = await handler(checkoutRequest({ ...BAG, delivery: "ship" }));
   assert.equal(res.status, 200);
   const { form } = stripe.calls[0];
   assert.equal(form.get("shipping_address_collection[allowed_countries][0]"), "US");
-  assert.equal(form.get("shipping_options[0][shipping_rate_data][fixed_amount][amount]"), "1400");
+  assert.equal(form.get("shipping_options[0][shipping_rate_data][fixed_amount][amount]"), "1850", "3 garments: $4.50 + $8 + $3 + $3");
+  assert.equal(form.get("shipping_options[0][shipping_rate_data][display_name]"), "Shipping & handling");
+  assert.match(form.get("custom_text[shipping_address][message]"), /\$4\.50 handling fee/);
   assert.equal(form.get("billing_address_collection"), "auto");
   assert.equal(form.get("automatic_tax[enabled]"), "false");
+});
+
+test("store pickup is free at Saddle Ridge Dr, and records itself on the order", async () => {
+  const stripe = fakeStripe();
+  const handler = createCheckoutHandler({ env: { STRIPE_SECRET_KEY: KEY }, fetchImpl: stripe.fetchImpl });
+  assert.equal((await handler(checkoutRequest({ ...BAG, delivery: "store" }))).status, 200);
+  const { form } = stripe.calls[0];
+  assert.equal(form.get("metadata[delivery]"), "store");
+  assert.equal(form.get("payment_intent_data[metadata][delivery]"), "store");
+  assert.equal(form.get("shipping_options[0][shipping_rate_data][fixed_amount][amount]"), null, "no shipping or handling");
+  assert.equal(form.get("shipping_address_collection[allowed_countries][0]"), null);
+  assert.equal(form.get("billing_address_collection"), "required", "Stripe Tax still needs an address");
+  assert.match(form.get("custom_text[submit][message]"), /Pick up your order free at ARK Screen Printing, 4852 Saddle Ridge Dr, Colorado Springs, CO 80922/);
+});
+
+test("from the store embedded on RMPC's site, Stripe shows no back link", async () => {
+  const stripe = fakeStripe();
+  const handler = createCheckoutHandler({ env: { STRIPE_SECRET_KEY: KEY }, fetchImpl: stripe.fetchImpl });
+  assert.equal((await handler(checkoutRequest({ ...BAG, embedded: true }))).status, 200);
+  const { form } = stripe.calls[0];
+  assert.equal(form.get("cancel_url"), null, "the browser's Back button returns to RMPC's page, where the bag is");
+  assert.equal(form.get("success_url"), `${ORIGIN}/rmpc?checkout=success&session_id={CHECKOUT_SESSION_ID}`);
+  assert.equal(form.get("line_items[0][price_data][unit_amount]"), "2999");
+});
+
+function lookup(id) {
+  return new Request(`${ORIGIN}/api/rmpc/checkout${id === undefined ? "" : `?session_id=${encodeURIComponent(id)}`}`);
+}
+
+const PAID = {
+  id: "cs_live_aaaaaaaaaaaaZZZZ1234",
+  object: "checkout.session",
+  status: "complete",
+  payment_status: "paid",
+  metadata: { channel: "rmpc-store", delivery: "ship", garments: "3", ...encodeItems([{ productId: "wordmark-tee", variant: "gildan-youth", size: "M", quantity: 2, unitCents: 2999 }, { productId: "athlete-crew", variant: "independent-adult", size: "2XL", quantity: 1, unitCents: 5999 }]) },
+  customer_details: { name: "Sam Taylor", email: "sam@example.com", phone: "+17195550100", address: { line1: "1 Main St" } },
+  amount_total: 14353,
+};
+
+test("a checkout the page started can be looked up: where it stands and its garments, never the buyer", async () => {
+  const stripe = fakeStripe(PAID);
+  const handler = createCheckoutHandler({ env: { STRIPE_SECRET_KEY: KEY }, fetchImpl: stripe.fetchImpl });
+  const res = await handler(lookup(PAID.id));
+  assert.equal(res.status, 200);
+  assert.equal(res.headers.get("cache-control"), "no-store");
+  const body = await res.json();
+  assert.deepEqual(body, {
+    status: "complete",
+    paid: true,
+    ref: "ZZZZ1234",
+    delivery: "ship",
+    lines: [
+      { productId: "wordmark-tee", variant: "gildan-youth", size: "M", quantity: 2 },
+      { productId: "athlete-crew", variant: "independent-adult", size: "2XL", quantity: 1 },
+    ],
+  });
+  assert.doesNotMatch(JSON.stringify(body), /Sam|example\.com|Main St|1719/);
+  assert.equal(stripe.calls.length, 1);
+  assert.equal(stripe.calls[0].url, `https://api.stripe.com/v1/checkout/sessions/${PAID.id}`);
+  assert.equal(stripe.calls[0].init.method, "GET");
+});
+
+test("lookups answer only for this store's checkouts", async () => {
+  const stripe = fakeStripe(PAID);
+  const handler = createCheckoutHandler({ env: { STRIPE_SECRET_KEY: KEY }, fetchImpl: stripe.fetchImpl });
+  for (const id of [undefined, "", "pi_123", "cs_live_short", "cs_live_aaaaaaaaaaaa/../../v1/customers", "cs_live_aaaaaaaaaaaa?expand[]=customer"]) {
+    assert.equal((await handler(lookup(id))).status, 400, `refused before Stripe: ${id}`);
+  }
+  assert.equal(stripe.calls.length, 0);
+
+  const designer = createCheckoutHandler({ env: { STRIPE_SECRET_KEY: KEY }, fetchImpl: fakeStripe({ ...PAID, metadata: {} }).fetchImpl });
+  assert.equal((await designer(lookup(PAID.id))).status, 404, "the ARK designer's checkouts aren't described");
+  const missing = createCheckoutHandler({ env: { STRIPE_SECRET_KEY: KEY }, fetchImpl: fakeStripe({ error: { message: "No such checkout.session" } }, 404).fetchImpl });
+  assert.equal((await missing(lookup(PAID.id))).status, 404);
+  assert.equal((await createCheckoutHandler({ env: {}, fetchImpl: stripe.fetchImpl })(lookup(PAID.id))).status, 503);
 });
 
 test("checkout refuses politely when it can't take the order", async () => {
   const stripe = fakeStripe();
   const live = createCheckoutHandler({ env: { STRIPE_SECRET_KEY: KEY }, fetchImpl: stripe.fetchImpl });
   assert.equal((await createCheckoutHandler({ env: {}, fetchImpl: stripe.fetchImpl })(checkoutRequest(BAG))).status, 503, "no key yet");
-  assert.equal((await live(new Request(`${ORIGIN}/api/rmpc/checkout`))).status, 405);
+  assert.equal((await live(new Request(`${ORIGIN}/api/rmpc/checkout`, { method: "PUT", body: "{}" }))).status, 405);
   assert.equal((await live(checkoutRequest(BAG, { "Content-Type": "text/plain" }))).status, 415);
   assert.equal((await live(checkoutRequest("{not json"))).status, 400);
   const bad = await live(checkoutRequest({ delivery: "pickup", lines: [{ productId: "wordmark-tee", variant: "gildan-adult", size: "5XL", quantity: 1 }] }));
@@ -113,6 +190,15 @@ function session(overrides = {}) {
     ...overrides,
   };
 }
+
+test("the export names each delivery: Ship, Event pickup or Store pickup", () => {
+  assert.equal(toOrder(session()).delivery, "Ship");
+  assert.equal(toOrder(session({ metadata: { ...session().metadata, delivery: "pickup" } })).delivery, "Event pickup");
+  const store = toOrder(session({ metadata: { ...session().metadata, delivery: "store" } }));
+  assert.equal(store.delivery, "Store pickup");
+  assert.equal(store.shipTo, "", "nothing to ship to");
+  assert.match(ordersCsv([store]).split("\r\n")[0], /,Shipping & handling,/);
+});
 
 test("the export reads orders, buyers and garments from the sessions", () => {
   const order = toOrder(session());
