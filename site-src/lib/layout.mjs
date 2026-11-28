@@ -123,6 +123,7 @@ function footer(o) {
           <li><a href="/about">About ARK</a></li>
           <li><a href="/faq">FAQ</a></li>
           <li><a href="/service-areas">Service areas</a></li>
+          <li><a href="/blog">Blog</a></li>
           <li><a href="${APP.artwork}">Artwork guidelines (PDF)</a></li>
           <li><a href="/print-on-demand">Sell merch online</a></li>
         </ul>
@@ -147,7 +148,7 @@ function footer(o) {
 
 /**
  * @param {{title: string, description: string|null, canonical: string|null, robots?: string|null,
- *   ogImage?: string|null, chrome: "full"|"minimal", current: string, hasQuote?: boolean,
+ *   ogImage?: string|null, ogType?: string, chrome: "full"|"minimal", current: string, hasQuote?: boolean,
  *   jsonLd?: string, main: string, sticky?: boolean, head?: string, css: string, page: string}} o
  */
 export function shell(o) {
@@ -170,7 +171,7 @@ ${o.canonical ? `<link rel="canonical" href="${esc(o.canonical)}">` : ""}
 ${o.robots ? `<meta name="robots" content="${esc(o.robots)}">` : ""}
 <meta name="generator" content="ark-site-src">
 <meta name="theme-color" content="#f5eedf">
-<meta property="og:type" content="website">
+<meta property="og:type" content="${esc(o.ogType ?? "website")}">
 <meta property="og:site_name" content="${esc(SHOP.name)}">
 <meta property="og:locale" content="en_US">
 <meta property="og:title" content="${esc(o.title)}">
