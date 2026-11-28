@@ -30,10 +30,11 @@
 // Quantity tiers are Alex's (2026-11-28): 1–23, 24–49, 50–100, each priced at
 // both ends and shown at its top end.
 //
-// Prints the Markdown table (for the store's README and the PR). With an out
-// folder it also writes pricing.csv and pricing.pdf (internal, with ARK's
-// margin) and client-pricing.csv and client-pricing.pdf (no margin or blank
-// cost: the copy the prospect reply attaches) there. Needs Playwright's
+// Prints the Markdown table (for the store's README and the PR), without ARK's
+// margin or blank costs because this repo is public. With an out folder it
+// also writes pricing.csv and pricing.pdf (internal, with ARK's margin;
+// git-ignored, never committed) and client-pricing.csv and client-pricing.pdf
+// (no margin or blank cost: the copy the prospect reply attaches) there. Needs Playwright's
 // Chromium (not a dependency of this repo: run where it's installed).
 import fs from "node:fs";
 import path from "node:path";
@@ -179,15 +180,17 @@ const keeps = (g, t) => money(g.retail - avg(t, "price"));
 const blank = (g) => `${g.label}, ${money(g.cost)}`;
 
 // Markdown, one row per product and quantity tier, Premium then Standard.
+// This repo is public, so the printed table (for the README and the PR) has
+// no ARK margin or blank cost: those stay in the git-ignored pricing.csv/.pdf.
 const md = [
-  "| Product | Ink colors | Qty | Premium: method | ARK price | ARK margin | Org keeps | Standard: method | ARK price | ARK margin | Org keeps |",
-  "|---|---|---|---|---|---|---|---|---|---|---|",
+  "| Product | Ink colors | Qty | Premium: method | ARK price | Org keeps | Standard: method | ARK price | Org keeps |",
+  "|---|---|---|---|---|---|---|---|---|",
 ];
 for (const r of rows) {
   r.premium.tiers.forEach((t, i) => {
     const s = r.standard.tiers[i];
-    const name = i === 0 ? `${r.product}<br>Premium ${blank(r.premium)}, retail ${money(r.premium.retail)}<br>Standard ${blank(r.standard)}, retail ${money(r.standard.retail)}` : "";
-    md.push(`| ${name} | ${r.inks} | ${t.label} | ${method(t)} | ${price(t)} | ${margin(t)} | ${keeps(r.premium, t)} | ${method(s)} | ${price(s)} | ${margin(s)} | ${keeps(r.standard, s)} |`);
+    const name = i === 0 ? `${r.product}<br>Premium ${r.premium.label}, retail ${money(r.premium.retail)}<br>Standard ${r.standard.label}, retail ${money(r.standard.retail)}` : "";
+    md.push(`| ${name} | ${r.inks} | ${t.label} | ${method(t)} | ${price(t)} | ${keeps(r.premium, t)} | ${method(s)} | ${price(s)} | ${keeps(r.standard, s)} |`);
   });
 }
 console.log(md.join("\n"));
