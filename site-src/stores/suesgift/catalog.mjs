@@ -69,33 +69,14 @@ export const CARRIE_COLOURS = colours([
   ["Navy", "#1E202C"], ["Coal", "#323031"], ["Black", "#000000"],
 ]);
 
-/** Port & Company Core Fleece Pullover Hood PC78H: all 74 colours, with the
- *  names and swatch colours in ARK's product catalogue (ark-designer
- *  client/src/lib/products.ts, 2026-11-28). */
+/** AS Colour Stencil Hood 5102: all 15 colours, with the names and swatch
+ *  colours in ARK's product catalogue (ark-designer client/src/lib/products.ts,
+ *  2026-11-28). */
 export const HOOD_COLOURS = colours([
-  ["Aquatic Blue", "#7FBDE0"], ["Ash", "#C8C9C7"], ["Athletic Heather", "#97999B", { heather: true }],
-  ["Black Heather", "#3E4040", { heather: true }], ["Bright Aqua", "#009CA6"], ["Candy Pink", "#F4A6B0"],
-  ["Cardinal", "#9D2235"], ["Carolina Blue", "#7BA7C7"], ["Charcoal", "#54565A"], ["Cherry Blossom", "#F2B8C6"],
-  ["Clover Green", "#009A44"], ["Coal Grey", "#53575A"], ["Coyote Brown", "#A07850"], ["Creme", "#EFE5C8"],
-  ["Dark Chocolate Brown", "#3D211E"], ["Dark Green", "#1B4332"], ["Dark Heather Grey", "#636569", { heather: true }],
-  ["Duck Brown", "#B07848"], ["Flush Pink", "#C13869"], ["Forest Green Heather", "#2B5B45", { heather: true }],
-  ["Gold", "#FFA300"], ["Graphite Heather", "#63666A", { heather: true }],
-  ["Heather Athletic Maroon", "#7B2D42", { heather: true }],
-  ["Heather Dark Chocolate Brown", "#4A3930", { heather: true }], ["Heather Navy", "#253F6A", { heather: true }],
-  ["Heather Purple", "#725B8E", { heather: true }], ["Heather Red", "#A8323C", { heather: true }],
-  ["Heather Royal", "#3D6EB4", { heather: true }], ["Heather Sangria", "#7E2358", { heather: true }],
-  ["Ivory", "#F5F0DC"], ["Jet Black", "#1A1A1A"], ["Kelly", "#00A14B"], ["Laurel Green", "#8A9872"],
-  ["Lavender", "#B49FCC"], ["Light Blue", "#8BB8E8"], ["Light Sand", "#D4C4A0"], ["Lime", "#78BE20"],
-  ["Maroon", "#692635"], ["Medium Grey", "#939597"], ["Natural", "#E8DDD0"], ["Navy", "#1B2D5B"],
-  ["Neon Blue", "#009EE0"], ["Neon Green", "#C6E03C"], ["Neon Orange", "#FF5500"], ["Neon Pink", "#FF3EB5"],
-  ["Neon Yellow", "#EEFF00"], ["Neptune Blue", "#4D7FB5"], ["Oatmeal Heather", "#C5B898", { heather: true }],
-  ["Olive", "#585E3C"], ["Olive Drab Green", "#6A6B3A"], ["Olive Drab Green Heather", "#7B7855", { heather: true }],
-  ["Orange", "#F4622A"], ["Pale Blush", "#EBD8D0"], ["Purple", "#7B5EA7"], ["Red", "#BA0C2F"], ["Royal", "#2B4DA0"],
-  ["S. Green", "#00A550"], ["S. Orange", "#F0830A"], ["Sand", "#C9AD84"], ["Sangria", "#8D1A4A"],
-  ["Sapphire", "#003087"], ["Silver", "#B1B3B6"], ["Steel Blue", "#3D6880"], ["Stonewashed Blue", "#6A8FA8"],
-  ["Teal", "#007A78"], ["Team Purple", "#3D2B78"], ["Tennessee Orange", "#E35205"], ["True Celadon", "#85C2B1"],
-  ["True Navy", "#162040"], ["True Royal", "#1A3F8F"], ["Tundra Blue", "#80A8C8"], ["White", "#FFFFFF"],
-  ["Woodland Brown", "#735245"], ["Yellow", "#F5CC00"],
+  ["White", "#FFFFFF"], ["Ecru", "#E4E0D4"], ["Bone", "#D1CDCA"], ["White Heather", "#E4E4E6", { heather: true }],
+  ["Sand", "#B7B09D"], ["Athletic Heather", "#A4A4A2", { heather: true }], ["Camel", "#A67A3F"], ["Walnut", "#6B5A4A"],
+  ["Army", "#4E4A36"], ["Pine Green", "#1D342A"], ["Petrol Blue", "#404A53"], ["Cobalt", "#212B51"], ["Navy", "#1E202C"],
+  ["Coal", "#323031"], ["Black", "#000000"],
 ]);
 
 const relativeLuminance = (hex) => {
@@ -118,7 +99,7 @@ export function isLightGarment(hex) {
 // ── Garments and products ──────────────────────────────────────────────────
 
 export const TEE_SIZES = ["XS", "S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL"];
-export const HOOD_SIZES = ["S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL"];
+export const HOOD_SIZES = ["XS", "S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL"];
 export const ONE_SIZE = "One size";
 
 export const GARMENTS = {
@@ -132,10 +113,10 @@ export const GARMENTS = {
     views: { front: "tee-front", back: "tee-back" },
   },
   hood: {
-    label: "Port & Company Core Fleece Hoodie",
-    style: "PC78H",
+    label: "AS Colour Stencil Hood",
+    style: "5102",
     kind: "hoodie",
-    facts: ["7.8 oz, 50/50 cotton/poly fleece", "Two-ply hood, front pouch pocket", "Air jet yarn for a soft hand"],
+    facts: ["Regular fit, cotton-rich anti-pill fleece", "Lined hood, kangaroo pocket", "Ribbed cuffs and hem, preshrunk"],
     sizes: HOOD_SIZES,
     colours: HOOD_COLOURS,
     views: { front: "hood-front", back: "hood-back" },
@@ -153,10 +134,10 @@ export const GARMENTS = {
 
 /** What a buyer pays, before sales tax. Samples use flat retail prices that
  *  stand in for the nonprofit's own markup (Alex, 2026-11-28): tees $29.99,
- *  hoodies $59.99, totes $24.99. The tote prints on the front only: a second
+ *  hoodies $79.99, totes $24.99. The tote prints on the front only: a second
  *  print would leave Sue's Gift 39¢ an item. ARK's price behind each is in
  *  the README. */
-export const PRICE_CENTS = { tee: 2999, hood: 5999, carrie: 2499 };
+export const PRICE_CENTS = { tee: 2999, hood: 7999, carrie: 2499 };
 
 /** Added to a tee's or hoodie's price for its size (the bigger blanks cost
  *  more). */
@@ -164,7 +145,9 @@ export const SIZE_UPCHARGE_CENTS = { "2XL": 300, "3XL": 300, "4XL": 500, "5XL": 
 
 /** Where each print sits. `box` is [left, top, width] on the garment's
  *  1000px canvas (its height follows the artwork); the tee is about 26px to
- *  the inch, the hoodie about 19, the tote about 33. `size` is the print size that works out to.
+ *  the inch, the Stencil Hood about 18.4, the tote about 33. `size` is the print size that works out to.
+ *  `spotColours` is a full-color print's count if redrawn in flat spot colors
+ *  (for the internal pricing table's screen-print prices only).
  *  `art` names a design in images/art/ (tools/art.py); each has a white
  *  version for dark garments. Designs use only words Sue's Gift publishes
  *  (suesgift.org, 2026-11-27). */
@@ -191,8 +174,8 @@ export const PRODUCTS = [
     cardView: "front",
     blurb: "For the 19th annual 5K run + 3K walk, with the race's own line across the back.",
     prints: {
-      front: { art: "boa-front", box: [343, 230, 314], place: "Full front", size: "12″ × 6.7″" },
-      back: { art: "boa-back", box: [330, 200, 340], place: "Upper back", size: "13″ × 5.1″" },
+      front: { art: "boa-front", box: [343, 230, 314], place: "Full front", size: "12″ × 6.7″", spotColours: 1 },
+      back: { art: "boa-back", box: [330, 200, 340], place: "Upper back", size: "13″ × 5.1″", spotColours: 1 },
     },
   },
   {
@@ -204,8 +187,8 @@ export const PRODUCTS = [
     cardView: "front",
     blurb: "The full Sue's Gift logo across the chest and the round mark at the back of the neck.",
     prints: {
-      front: { art: "logo", box: [358, 236, 284], place: "Center chest", size: "11″ × 4.4″" },
-      back: { art: "badge", box: [462, 150, 76], place: "Back neck", size: "2.9″ × 2.9″" },
+      front: { art: "logo", box: [358, 236, 284], place: "Center chest", size: "11″ × 4.4″", spotColours: 3 },
+      back: { art: "badge", box: [462, 150, 76], place: "Back neck", size: "2.9″ × 2.9″", spotColours: 3 },
     },
   },
   {
@@ -230,8 +213,8 @@ export const PRODUCTS = [
     cardView: "front",
     blurb: "For A Toast to TEAL, the spring survivorship celebration.",
     prints: {
-      front: { art: "toast", box: [348, 250, 304], place: "Full front", size: "11.7″ × 3.6″" },
-      back: { art: "badge", box: [462, 150, 76], place: "Back neck", size: "2.9″ × 2.9″" },
+      front: { art: "toast", box: [348, 250, 304], place: "Full front", size: "11.7″ × 3.6″", spotColours: 2 },
+      back: { art: "badge", box: [462, 150, 76], place: "Back neck", size: "2.9″ × 2.9″", spotColours: 3 },
     },
   },
   {
@@ -239,12 +222,12 @@ export const PRODUCTS = [
     name: "You're Not Alone Hoodie",
     garment: "hood",
     collection: "everyday",
-    colour: "teal",
+    colour: "petrol-blue",
     cardView: "back",
-    blurb: "Midweight fleece with the heart on the chest and \u201cYou\u2019re not alone.\u201d across the back.",
+    blurb: "Cotton-rich fleece with the heart on the chest and \u201cYou\u2019re not alone.\u201d across the back.",
     prints: {
-      front: { art: "heart", box: [560, 300, 92], place: "Left chest", size: "4.8″ × 2.7″" },
-      back: { art: "not-alone", box: [380, 360, 240], place: "Upper back", size: "12.6″ × 3.7″" },
+      front: { art: "heart", box: [565, 430, 88], place: "Left chest", size: "4.8″ × 2.7″" },
+      back: { art: "not-alone", box: [384, 380, 232], place: "Upper back", size: "12.6″ × 3.7″" },
     },
   },
   {
@@ -252,12 +235,12 @@ export const PRODUCTS = [
     name: "Sue's Gift Logo Hoodie",
     garment: "hood",
     collection: "everyday",
-    colour: "creme",
+    colour: "ecru",
     cardView: "front",
     blurb: "The full Sue's Gift logo across the chest and the round mark below the hood.",
     prints: {
-      front: { art: "logo", box: [395, 330, 210], place: "Center chest", size: "11″ × 4.4″" },
-      back: { art: "badge", box: [468, 330, 64], place: "Below the hood", size: "3.4″ × 3.4″" },
+      front: { art: "logo", box: [399, 400, 202], place: "Center chest", size: "11″ × 4.4″", spotColours: 3 },
+      back: { art: "badge", box: [469, 330, 63], place: "Below the hood", size: "3.4″ × 3.4″", spotColours: 3 },
     },
   },
   {
@@ -265,12 +248,12 @@ export const PRODUCTS = [
     name: "Be Ovary Aware 2027 Hoodie",
     garment: "hood",
     collection: "events",
-    colour: "jet-black",
+    colour: "black",
     cardView: "front",
-    blurb: "The 2027 race design on midweight fleece, front and back.",
+    blurb: "The 2027 race design on cotton-rich fleece, front and back.",
     prints: {
-      front: { art: "boa-front", box: [390, 320, 220], place: "Center chest", size: "11.6″ × 6.5″" },
-      back: { art: "boa-back", box: [380, 360, 240], place: "Upper back", size: "12.6″ × 4.9″" },
+      front: { art: "boa-front", box: [394, 390, 213], place: "Center chest", size: "11.6″ × 6.5″", spotColours: 1 },
+      back: { art: "boa-back", box: [384, 380, 232], place: "Upper back", size: "12.6″ × 4.9″", spotColours: 1 },
     },
   },
   {
@@ -282,7 +265,7 @@ export const PRODUCTS = [
     cardView: "front",
     blurb: "Heavyweight canvas with the round mark and wordmark on the front.",
     prints: {
-      front: { art: "tote", box: [350, 540, 300], place: "Front", size: "9.1″ × 5.7″" },
+      front: { art: "tote", box: [350, 540, 300], place: "Front", size: "9.1″ × 5.7″", spotColours: 4 },
     },
   },
 ];

@@ -4,3 +4,8 @@ node_modules/
 site-src/.cache/
 ark-site-review/images/gbp/
 ark-site-review/assets/img/gbp/
+
+# Internal store pricing with ARK's margin: this repo is public, so never commit it
+# (site-src/stores/tools/cost-table.mjs; the client-pricing.* copies are fine).
+site-src/stores/*/pricing/pricing.csv
+site-src/stores/*/pricing/pricing.pdf
