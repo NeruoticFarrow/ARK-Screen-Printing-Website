@@ -11,6 +11,7 @@ import path from "node:path";
 import { parseHTML } from "linkedom";
 import { PPC_PAGES } from "./content/services.mjs";
 import { PPC_LINE, SHOP } from "./lib/facts.mjs";
+import { ROBOTS as RMPC_ROBOTS, STORE as RMPC_STORE } from "./stores/rmpc/catalog.mjs";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..");
 const SITE = path.join(ROOT, "ark-site-review");
@@ -104,13 +105,16 @@ for (const genFile of generated) {
 }
 
 // The RMPC client store is not a marketing template and must not inherit
-// analytics or quote conversion tracking. It stays unlisted, self-contained,
+// analytics or quote conversion tracking. It's indexed only when live
+// (STORE.indexable), stays self-contained,
 // and able to talk only to its own checkout function.
 const storePath = path.join(SITE, "rmpc.html");
 if (!fs.existsSync(storePath)) fail("rmpc.html", "RMPC store page missing");
 else {
   const store = fs.readFileSync(storePath, "utf8");
-  if (!store.includes('name="robots" content="noindex, nofollow"')) fail("rmpc.html", "must stay noindex");
+  if (!store.includes(`name="robots" content="${RMPC_ROBOTS}"`)) fail("rmpc.html", `robots must be ${RMPC_ROBOTS}`);
+  if (!store.includes(RMPC_STORE.credit.text) || !store.includes('"https://arkscreenprinting.com"')) fail("rmpc.html", "missing the ARK footer credit");
+  if (RMPC_STORE.indexable && !/<loc>https:\/\/arkscreenprinting\.com\/rmpc<\/loc>/.test(fs.readFileSync(path.join(SITE, "sitemap.xml"), "utf8"))) fail("rmpc.html", "an indexable store must be in sitemap.xml");
   if (!store.includes('rel="canonical" href="https://arkscreenprinting.com/rmpc"')) fail("rmpc.html", "wrong canonical slug");
   if ((store.match(/data:image\/webp;base64,/g) ?? []).length < 7) fail("rmpc.html", "product images are not embedded");
   if (!store.includes("data:image/png;base64,")) fail("rmpc.html", "the RMPC crown is not embedded");
@@ -124,7 +128,7 @@ else {
     // Framing: only named https sites, never every site (*) or every https one.
     const framers = block.match(/frame-ancestors ([^;\n]+)/)?.[1].trim().split(/\s+/) ?? [];
     const framersNamed = framers.length > 0 && framers.every((src) => src === "'self'" || src === "'none'" || /^https:\/\/(\*\.)?[a-z0-9-]+(\.[a-z0-9-]+)+$/.test(src));
-    if (!headers.split("\n").includes(route) || !block.includes("X-Robots-Tag: noindex, nofollow") || !block.includes("connect-src 'self';") || !block.includes("form-action 'none'") || !framersNamed) fail("rmpc.html", `unsafe store headers for ${route}`);
+    if (!headers.split("\n").includes(route) || !block.includes(`X-Robots-Tag: ${RMPC_ROBOTS}`) || !block.includes("connect-src 'self';") || !block.includes("form-action 'none'") || !framersNamed) fail("rmpc.html", `unsafe store headers for ${route}`);
   }
   for (const fn of ["rmpc-checkout.mjs", "rmpc-orders.mjs", "stripe-webhook.mjs"]) {
     if (!fs.existsSync(path.join(ROOT, "netlify/functions", fn))) fail("rmpc.html", `netlify/functions/${fn} missing`);

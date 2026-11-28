@@ -19,6 +19,11 @@ export const STORE = {
   /** The payment's description in the Stripe dashboard. */
   orderDescription: "RMPC 2027 Season Store order",
   path: "/rmpc",
+  /** Whether search engines may index the page. RMPC's store is live, so it
+   *  is (Alex, 2026-11-28). A sample stays false until the store goes live. */
+  indexable: true,
+  /** The footer credit every store carries, linking to ARK's homepage. */
+  credit: { text: "Fundraising store by ARK Screen Printing", href: "https://arkscreenprinting.com" },
   /** Sites that may show the store in an iframe. They go into the
    *  frame-ancestors of /rmpc's Content-Security-Policy, which
    *  site-src/build.mjs writes. Today that's RMPC's own Squarespace site, plus
@@ -272,3 +277,6 @@ export function decodeItems(metadata) {
     return { productId, variant, size, quantity: Number(quantity), unitCents: Number(unitCents) };
   });
 }
+
+/** The robots directive for the page and its headers. */
+export const ROBOTS = STORE.indexable ? "index, follow" : "noindex, nofollow";
