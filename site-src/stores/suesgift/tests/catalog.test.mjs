@@ -69,10 +69,10 @@ test("teal print on light garments, one-colour white on dark ones", () => {
   assert.equal(garmentLook(tee, "black", "back").prints[0].art, "not-alone-white");
 });
 
-test("flat sample prices: tees $29.99, hoodies $59.99 (2XL–3XL +$3, 4XL–5XL +$5), Carrie $24.99", () => {
-  assert.deepEqual(PRICE_CENTS, { tee: 2999, hood: 5999, carrie: 2499 });
+test("flat sample prices: tees $29.99, hoodies $79.99 (2XL–3XL +$3, 4XL–5XL +$5), Carrie $24.99", () => {
+  assert.deepEqual(PRICE_CENTS, { tee: 2999, hood: 7999, carrie: 2499 });
   const hoodie = productById("logo-hoodie");
-  assert.deepEqual(HOOD_SIZES.map((s) => unitPriceCents(hoodie, s)), [5999, 5999, 5999, 5999, 6299, 6299, 6499, 6499]);
+  assert.deepEqual(HOOD_SIZES.map((s) => unitPriceCents(hoodie, s)), [7999, 7999, 7999, 7999, 8299, 8299, 8499, 8499]);
   const tee = productById("logo-tee");
   assert.deepEqual(TEE_SIZES.map((s) => unitPriceCents(tee, s)), [2999, 2999, 2999, 2999, 2999, 3299, 3299, 3499, 3499]);
   assert.deepEqual(priceRange(productById("carrie-tote")), { min: 2499, max: 2499 });
