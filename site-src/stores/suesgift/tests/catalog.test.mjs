@@ -21,9 +21,9 @@ test("a sample stays out of search and credits ARK in the footer", () => {
   assert.equal(STORE.credit.href, "https://arkscreenprinting.com");
 });
 
-test("every colour each blank comes in: 75 Staple Tee, 74 PC78H hoodie, 23 Carrie Tote", () => {
+test("every colour each blank comes in: 75 Staple Tee, 15 Stencil Hood, 23 Carrie Tote", () => {
   assert.equal(TEE_COLOURS.length, 75);
-  assert.equal(HOOD_COLOURS.length, 74);
+  assert.equal(HOOD_COLOURS.length, 15);
   assert.equal(CARRIE_COLOURS.length, 23);
   for (const list of [TEE_COLOURS, HOOD_COLOURS, CARRIE_COLOURS]) {
     assert.equal(new Set(list.map((c) => c.id)).size, list.length, "colour ids are unique");
@@ -72,7 +72,7 @@ test("teal print on light garments, one-colour white on dark ones", () => {
 test("flat sample prices: tees $29.99, hoodies $79.99 (2XL–3XL +$3, 4XL–5XL +$5), Carrie $24.99", () => {
   assert.deepEqual(PRICE_CENTS, { tee: 2999, hood: 7999, carrie: 2499 });
   const hoodie = productById("logo-hoodie");
-  assert.deepEqual(HOOD_SIZES.map((s) => unitPriceCents(hoodie, s)), [7999, 7999, 7999, 7999, 8299, 8299, 8499, 8499]);
+  assert.deepEqual(HOOD_SIZES.map((s) => unitPriceCents(hoodie, s)), [7999, 7999, 7999, 7999, 7999, 8299, 8299, 8499, 8499]);
   const tee = productById("logo-tee");
   assert.deepEqual(TEE_SIZES.map((s) => unitPriceCents(tee, s)), [2999, 2999, 2999, 2999, 2999, 3299, 3299, 3499, 3499]);
   assert.deepEqual(priceRange(productById("carrie-tote")), { min: 2499, max: 2499 });

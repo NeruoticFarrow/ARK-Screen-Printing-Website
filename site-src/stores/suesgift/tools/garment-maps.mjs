@@ -50,13 +50,11 @@ const JOBS = [
   // Two-Tone Carrie Tote 1008: cream with black straps, and black with cream
   // straps, so every pixel has a light and a dark photo, and the straps are
   // where the two disagree.
-  // Port & Company Core Fleece Pullover Hood PC78H: creme and jet black, front
-  // and back (ARK's product catalogue photos, 667 × 1000 on a transparent
-  // backdrop, laid on white and scaled into the 1000 px square by
-  // tools/hoodie-photos.py). Every PC78H colour is the same shot, so the pair
-  // lines up pixel for pixel.
-  { view: "hood-front", light: "PC78H_CREME_FRONT.jpg", dark: "PC78H_JET_BLACK_FRONT.jpg", flat: [540, 400, 660, 520] },
-  { view: "hood-back", light: "PC78H_CREME_BACK.jpg", dark: "PC78H_JET_BLACK_BACK.jpg", flat: [420, 380, 580, 520] },
+  // AS Colour Stencil Hood 5102: the white and black hood, front and back
+  // (AS Colour's 1280 px product photos, scaled to 1000 px). The front patch
+  // sits right of the drawcords.
+  { view: "hood-front", light: "5102_STENCIL_HOOD_WHITE.jpg", dark: "5102_STENCIL_HOOD_BLACK.jpg", flat: [560, 420, 680, 540] },
+  { view: "hood-back", light: "5102_STENCIL_HOOD_WHITE_BACK.jpg", dark: "5102_STENCIL_HOOD_BLACK_BACK.jpg", flat: [420, 400, 580, 540] },
   { view: "two-tone", swap: ["1008_2-TONE_CARRIE_TOTE_CREAM_BLACK.jpg", "1008_2-TONE_CARRIE_TOTE_BLACK_CREAM.jpg"], flat: [430, 550, 560, 750] },
 ];
 

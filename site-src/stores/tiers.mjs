@@ -2,7 +2,8 @@
 // stores show the Premium blanks; the internal pricing table
 // (tools/cost-table.mjs) prices every product on both tiers so the nonprofit
 // can choose. Styles are ark-designer product ids (client/src/lib/products.ts),
-// where the wholesale cost comes from.
+// where the wholesale cost comes from. `key` is the quote form's style key,
+// for the garments it prices at a fixed price (shared/creatorPricing.ts).
 //
 // Standard is ark-designer's "Mid-Range" tier (Next Level, Independent
 // Trading Co., Liberty Bags here). Notes on the picks:
@@ -17,15 +18,15 @@
 export const TIERS = {
   tee: {
     premium: { style: "5001", label: "AS Colour Staple Tee" },
-    standard: { style: "00618", label: "Next Level 3600", retailCents: 2699 },
+    standard: { style: "00618", key: "ss_activewear/3600", label: "Next Level 3600", retailCents: 2699 },
   },
   longsleeve: {
     premium: { style: "5020", label: "AS Colour Staple L/S Tee" },
-    standard: { style: "05618", label: "Next Level 3601", retailCents: 2999 },
+    standard: { style: "05618", key: "ss_activewear/3601", label: "Next Level 3601", retailCents: 2999 },
   },
   hoodie: {
     premium: { style: "5102", label: "AS Colour Stencil Hood" },
-    standard: { style: "05176", label: "Independent Trading IND4000", retailCents: 6899 },
+    standard: { style: "05176", key: "ss_activewear/IND4000", label: "Independent Trading IND4000", retailCents: 6899 },
   },
   crew: {
     premium: { style: "5103", label: "AS Colour Stencil Crew" },

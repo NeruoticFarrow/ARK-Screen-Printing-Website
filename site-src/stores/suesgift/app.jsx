@@ -47,7 +47,7 @@ const THUMB_SIZE = 200;
 /** The swatches a card shows before "+N": its own colour first, then these. */
 const CARD_COLOURS = {
   tee: ["charlotte", "white", "natural", "seafoam", "atlantic", "black", "topaz", "bone", "pale-blue"],
-  hood: ["teal", "creme", "jet-black", "bright-aqua", "heather-navy", "ash", "true-celadon", "maroon", "oatmeal-heather"],
+  hood: ["petrol-blue", "ecru", "black", "bone", "white-heather", "sand", "pine-green", "navy", "athletic-heather"],
   carrie: ["cream", "black", "bone", "navy", "pine-green", "charity-pink", "khaki"],
 };
 const CARD_SWATCHES = 7;
@@ -511,7 +511,7 @@ function Store() {
                 ],
                 [
                   "What sizes do the hoodies come in?",
-                  "S to 5XL in the Port & Company Core Fleece Pullover Hoodie, a midweight 7.8 oz cotton/poly fleece with a two-ply hood and a pouch pocket. 2XL and up cost a little more, the same as the tees.",
+                  "XS to 5XL in the AS Colour Stencil Hood, a regular-fit, cotton-rich anti-pill fleece with a lined hood and a kangaroo pocket. 2XL and up cost a little more, the same as the tees.",
                 ],
                 ["How big is the tote?", "The Carrie Tote is 16.5″ square with a 3.7″ gusset, in heavyweight 9.4 oz cotton canvas."],
                 ["Can we change the designs?", "Yes. These are first drafts made from the Sue's Gift logo and the events on suesgift.org. ARK will revise the art, colors and garments with you before anything goes live."],
