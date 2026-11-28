@@ -43,39 +43,39 @@ Event names (A Toast to TEAL, TEAL Tee-Off, Be Ovary Aware 5K) and every phrase 
 
 Samples use flat retail prices that stand in for the nonprofit's own markup (Alex, 2026-11-28): tees $29.99, hoodies $79.99 (2XL–3XL +$3, 4XL–5XL +$5 on both) and totes $24.99. The tote prints on the front only: with a second print, $24.99 left Sue's Gift 39¢ an item.
 
-ARK's price behind each item by order quantity, from `node site-src/stores/tools/cost-table.mjs <ark-designer> site-src/stores/suesgift site-src/stores/suesgift/pricing` (2026-11-28; also in `pricing/pricing.csv` and `pricing/pricing.pdf`). It is for Alex only and never goes on the page or to the client: the client's copy, without ARK's margin, is `pricing/client-pricing.pdf` and `.csv`. Prices use the quote form's rules as ark-designer carries them (`shared/creatorPricing.ts`, `PRICE_RULES_V2`): digital is DTF film at the gang-sheet rate, 1–23 pieces is digital, and from 24 pieces the table uses screen print wherever it's allowed, even where digital would be cheaper. Alex's color limit sits on top of the quote form's: at most 3 colors in total (all locations) up to 40 pieces, 4 for 41–49, 6 a location from 50. Margins show as dollars and percent of ARK's price. ARK margin is that price less the blank's wholesale cost plus, for digital, the film's raw cost, or, for screen print, press labor per impression: $25 an hour ÷ (100 impressions an hour × 30% of the hour on press) ≈ $0.83 (Alex's shop model, 2026-11-28; set-up sits inside the other 70%). Ink, emulsion, digital press time and shop overhead aren't costed yet. Tiers are 1–23 (digital), 24–49 and 50–100 (screen print), each shown at its top end: the price at 23, 49 and 100 pieces (Alex, 2026-11-28; the CSV also has the bottom end). A print the designer's color detection reads as full color (the Sue's Gift mark's shaded heart and ring) shows its `spotColours` count, "redrawn": the colors it would take redrawn in flat spot colors, for screen print.
+ARK's price behind each item by order quantity, from `node site-src/stores/tools/cost-table.mjs <ark-designer> site-src/stores/suesgift site-src/stores/suesgift/pricing` (2026-11-28; also in `pricing/pricing.csv` and `pricing/pricing.pdf`). It is for Alex only and never goes on the page or to the client: the client's copy, without ARK's margin, is `pricing/client-pricing.pdf` and `.csv`. Prices use the quote form's rules as ark-designer carries them (`shared/creatorPricing.ts`, `PRICE_RULES_V2`): digital is DTF film at the gang-sheet rate, 1–23 pieces is digital, and from 24 pieces the table uses screen print wherever it's allowed, even where digital would be cheaper. Alex's color limit sits on top of the quote form's: at most 3 colors in total (all locations) up to 40 pieces, 4 for 41–49, 6 a location from 50. Margins show as dollars and percent of ARK's price. ARK margin is that price less the blank's landed cost (wholesale + $0.50 for ink, emulsion and the like) plus, for digital, the film's raw cost, or, for screen print, press labor per impression: $25 an hour ÷ (100 impressions an hour × 30% of the hour on press) ≈ $0.83 (Alex's shop model, 2026-11-28; set-up sits inside the other 70%). Digital press time and shop overhead aren't costed. Tiers are 1–23 (digital), 24–49 and 50–100 (screen print), each shown at its top end: the price at 23, 49 and 100 pieces (Alex, 2026-11-28; the CSV also has the bottom end). A print the designer's color detection reads as full color (the Sue's Gift mark's shaded heart and ring) shows its `spotColours` count, "redrawn": the colors it would take redrawn in flat spot colors, for screen print.
 
 Every product is priced on two garment tiers (`site-src/stores/tiers.mjs`): Premium, the AS Colour blank the store shows, and Standard, ARK's mid-range blank at a lower suggested retail set so Sue's Gift keeps about the same per item.
 
 | Product | Ink colors | Qty | Premium: method | ARK price | ARK margin | Org keeps | Standard: method | ARK price | ARK margin | Org keeps |
 |---|---|---|---|---|---|---|---|---|---|---|
-| You're Not Alone Tee<br>Premium AS Colour Staple Tee, $5.65, retail $29.99<br>Standard Next Level 3600, $4.20, retail $26.99 | 1 + 1 | 1–23 | digital | $22.08 | $14.54 (66%) | $7.91 | digital | $18.98 | $12.89 (68%) | $8.01 |
-|  | 1 + 1 | 24–49 | screen | $19.06 | $11.74 (62%) | $10.93 | screen | $15.96 | $10.09 (63%) | $11.03 |
-|  | 1 + 1 | 50–100 | screen | $18.09 | $10.77 (60%) | $11.90 | screen | $14.99 | $9.12 (61%) | $12.00 |
-| Be Ovary Aware 2027 Tee<br>Premium AS Colour Staple Tee, $5.65, retail $29.99<br>Standard Next Level 3600, $4.20, retail $26.99 | 1 (redrawn) + 1 (redrawn) | 1–23 | digital | $26.86 | $16.93 (63%) | $3.13 | digital | $23.76 | $15.28 (64%) | $3.23 |
-|  | 1 (redrawn) + 1 (redrawn) | 24–49 | screen | $19.06 | $11.74 (62%) | $10.93 | screen | $15.96 | $10.09 (63%) | $11.03 |
-|  | 1 (redrawn) + 1 (redrawn) | 50–100 | screen | $18.09 | $10.77 (60%) | $11.90 | screen | $14.99 | $9.12 (61%) | $12.00 |
-| Sue's Gift Logo Tee<br>Premium AS Colour Staple Tee, $5.65, retail $29.99<br>Standard Next Level 3600, $4.20, retail $26.99 | 3 (redrawn) + 3 (redrawn) | 1–23 | digital | $21.38 | $14.19 (66%) | $8.61 | digital | $18.28 | $12.54 (69%) | $8.71 |
-|  | 3 (redrawn) + 3 (redrawn) | 24–49 | digital | $21.38 | $14.19 (66%) | $8.61 | digital | $18.28 | $12.54 (69%) | $8.71 |
-|  | 3 (redrawn) + 3 (redrawn) | 50–100 | screen | $23.62 | $12.97 (55%) | $6.37 | screen | $20.52 | $11.32 (55%) | $6.47 |
-| TEAL Tee-Off Tee<br>Premium AS Colour Staple Tee, $5.65, retail $29.99<br>Standard Next Level 3600, $4.20, retail $26.99 | 1 + 2 | 1–23 | digital | $24.06 | $15.53 (65%) | $5.93 | digital | $20.96 | $13.88 (66%) | $6.03 |
-|  | 1 + 2 | 24–49 | screen | $21.20 | $13.05 (62%) | $8.79 | screen | $18.10 | $11.40 (63%) | $8.89 |
-|  | 1 + 2 | 50–100 | screen | $19.87 | $11.72 (59%) | $10.12 | screen | $16.77 | $10.07 (60%) | $10.22 |
-| Cheers to You Tee<br>Premium AS Colour Staple Tee, $5.65, retail $29.99<br>Standard Next Level 3600, $4.20, retail $26.99 | 2 (redrawn) + 3 (redrawn) | 1–23 | digital | $21.12 | $14.06 (67%) | $8.87 | digital | $18.02 | $12.41 (69%) | $8.97 |
-|  | 2 (redrawn) + 3 (redrawn) | 24–49 | digital | $21.12 | $14.06 (67%) | $8.87 | digital | $18.02 | $12.41 (69%) | $8.97 |
-|  | 2 (redrawn) + 3 (redrawn) | 50–100 | screen | $22.37 | $12.55 (56%) | $7.62 | screen | $19.27 | $10.90 (57%) | $7.72 |
-| You're Not Alone Hoodie<br>Premium AS Colour Stencil Hood, $23.00, retail $79.99<br>Standard Independent Trading IND4000, $17.35, retail $68.99 | 1 + 1 | 1–23 | digital | $56.29 | $31.64 (56%) | $23.70 | digital | $45.29 | $26.29 (58%) | $23.70 |
-|  | 1 + 1 | 24–49 | screen | $53.76 | $29.09 (54%) | $26.23 | screen | $42.76 | $23.74 (56%) | $26.23 |
-|  | 1 + 1 | 50–100 | screen | $52.79 | $28.12 (53%) | $27.20 | screen | $41.79 | $22.77 (54%) | $27.20 |
-| Sue's Gift Logo Hoodie<br>Premium AS Colour Stencil Hood, $23.00, retail $79.99<br>Standard Independent Trading IND4000, $17.35, retail $68.99 | 3 (redrawn) + 3 (redrawn) | 1–23 | digital | $56.26 | $31.63 (56%) | $23.73 | digital | $45.26 | $26.28 (58%) | $23.73 |
-|  | 3 (redrawn) + 3 (redrawn) | 24–49 | digital | $56.26 | $31.63 (56%) | $23.73 | digital | $45.26 | $26.28 (58%) | $23.73 |
-|  | 3 (redrawn) + 3 (redrawn) | 50–100 | screen | $58.32 | $30.32 (52%) | $21.67 | screen | $47.32 | $24.97 (53%) | $21.67 |
-| Be Ovary Aware 2027 Hoodie<br>Premium AS Colour Stencil Hood, $23.00, retail $79.99<br>Standard Independent Trading IND4000, $17.35, retail $68.99 | 1 + 1 | 1–23 | digital | $61.56 | $34.28 (56%) | $18.43 | digital | $50.56 | $28.93 (57%) | $18.43 |
-|  | 1 + 1 | 24–49 | screen | $53.76 | $29.09 (54%) | $26.23 | screen | $42.76 | $23.74 (56%) | $26.23 |
-|  | 1 + 1 | 50–100 | screen | $52.79 | $28.12 (53%) | $27.20 | screen | $41.79 | $22.77 (54%) | $27.20 |
-| Sue's Gift Carrie Tote<br>Premium AS Colour Carrie Tote, $6.90, retail $24.99<br>Standard Liberty Bags 8501 Katelyn, $3.21, retail $17.99 | 4 (redrawn) | 1–23 | digital | $19.13 | $10.56 (55%) | $5.86 | digital | $11.75 | $6.87 (58%) | $6.24 |
-|  | 4 (redrawn) | 24–49 | screen | $22.32 | $12.09 (54%) | $2.67 | screen | $14.94 | $8.40 (56%) | $3.05 |
-|  | 4 (redrawn) | 50–100 | screen | $20.62 | $10.39 (50%) | $4.37 | screen | $13.24 | $6.70 (51%) | $4.75 |
+| You're Not Alone Tee<br>Premium AS Colour Staple Tee, $5.65, retail $29.99<br>Standard Next Level 3600, $4.20, retail $26.99 | 1 + 1 | 1–23 | digital | $22.08 | $14.04 (64%) | $7.91 | digital | $18.98 | $12.39 (65%) | $8.01 |
+|  | 1 + 1 | 24–49 | screen | $19.06 | $11.24 (59%) | $10.93 | screen | $15.96 | $9.59 (60%) | $11.03 |
+|  | 1 + 1 | 50–100 | screen | $18.09 | $10.27 (57%) | $11.90 | screen | $14.99 | $8.62 (58%) | $12.00 |
+| Be Ovary Aware 2027 Tee<br>Premium AS Colour Staple Tee, $5.65, retail $29.99<br>Standard Next Level 3600, $4.20, retail $26.99 | 1 (redrawn) + 1 (redrawn) | 1–23 | digital | $26.86 | $16.43 (61%) | $3.13 | digital | $23.76 | $14.78 (62%) | $3.23 |
+|  | 1 (redrawn) + 1 (redrawn) | 24–49 | screen | $19.06 | $11.24 (59%) | $10.93 | screen | $15.96 | $9.59 (60%) | $11.03 |
+|  | 1 (redrawn) + 1 (redrawn) | 50–100 | screen | $18.09 | $10.27 (57%) | $11.90 | screen | $14.99 | $8.62 (58%) | $12.00 |
+| Sue's Gift Logo Tee<br>Premium AS Colour Staple Tee, $5.65, retail $29.99<br>Standard Next Level 3600, $4.20, retail $26.99 | 3 (redrawn) + 3 (redrawn) | 1–23 | digital | $21.38 | $13.69 (64%) | $8.61 | digital | $18.28 | $12.04 (66%) | $8.71 |
+|  | 3 (redrawn) + 3 (redrawn) | 24–49 | digital | $21.38 | $13.69 (64%) | $8.61 | digital | $18.28 | $12.04 (66%) | $8.71 |
+|  | 3 (redrawn) + 3 (redrawn) | 50–100 | screen | $23.62 | $12.47 (53%) | $6.37 | screen | $20.52 | $10.82 (53%) | $6.47 |
+| TEAL Tee-Off Tee<br>Premium AS Colour Staple Tee, $5.65, retail $29.99<br>Standard Next Level 3600, $4.20, retail $26.99 | 1 + 2 | 1–23 | digital | $24.06 | $15.03 (62%) | $5.93 | digital | $20.96 | $13.38 (64%) | $6.03 |
+|  | 1 + 2 | 24–49 | screen | $21.20 | $12.55 (59%) | $8.79 | screen | $18.10 | $10.90 (60%) | $8.89 |
+|  | 1 + 2 | 50–100 | screen | $19.87 | $11.22 (56%) | $10.12 | screen | $16.77 | $9.57 (57%) | $10.22 |
+| Cheers to You Tee<br>Premium AS Colour Staple Tee, $5.65, retail $29.99<br>Standard Next Level 3600, $4.20, retail $26.99 | 2 (redrawn) + 3 (redrawn) | 1–23 | digital | $21.12 | $13.56 (64%) | $8.87 | digital | $18.02 | $11.91 (66%) | $8.97 |
+|  | 2 (redrawn) + 3 (redrawn) | 24–49 | digital | $21.12 | $13.56 (64%) | $8.87 | digital | $18.02 | $11.91 (66%) | $8.97 |
+|  | 2 (redrawn) + 3 (redrawn) | 50–100 | screen | $22.37 | $12.05 (54%) | $7.62 | screen | $19.27 | $10.40 (54%) | $7.72 |
+| You're Not Alone Hoodie<br>Premium AS Colour Stencil Hood, $23.00, retail $79.99<br>Standard Independent Trading IND4000, $17.35, retail $68.99 | 1 + 1 | 1–23 | digital | $56.29 | $31.14 (55%) | $23.70 | digital | $45.29 | $25.79 (57%) | $23.70 |
+|  | 1 + 1 | 24–49 | screen | $53.76 | $28.59 (53%) | $26.23 | screen | $42.76 | $23.24 (54%) | $26.23 |
+|  | 1 + 1 | 50–100 | screen | $52.79 | $27.62 (52%) | $27.20 | screen | $41.79 | $22.27 (53%) | $27.20 |
+| Sue's Gift Logo Hoodie<br>Premium AS Colour Stencil Hood, $23.00, retail $79.99<br>Standard Independent Trading IND4000, $17.35, retail $68.99 | 3 (redrawn) + 3 (redrawn) | 1–23 | digital | $56.26 | $31.13 (55%) | $23.73 | digital | $45.26 | $25.78 (57%) | $23.73 |
+|  | 3 (redrawn) + 3 (redrawn) | 24–49 | digital | $56.26 | $31.13 (55%) | $23.73 | digital | $45.26 | $25.78 (57%) | $23.73 |
+|  | 3 (redrawn) + 3 (redrawn) | 50–100 | screen | $58.32 | $29.82 (51%) | $21.67 | screen | $47.32 | $24.47 (52%) | $21.67 |
+| Be Ovary Aware 2027 Hoodie<br>Premium AS Colour Stencil Hood, $23.00, retail $79.99<br>Standard Independent Trading IND4000, $17.35, retail $68.99 | 1 + 1 | 1–23 | digital | $61.56 | $33.78 (55%) | $18.43 | digital | $50.56 | $28.43 (56%) | $18.43 |
+|  | 1 + 1 | 24–49 | screen | $53.76 | $28.59 (53%) | $26.23 | screen | $42.76 | $23.24 (54%) | $26.23 |
+|  | 1 + 1 | 50–100 | screen | $52.79 | $27.62 (52%) | $27.20 | screen | $41.79 | $22.27 (53%) | $27.20 |
+| Sue's Gift Carrie Tote<br>Premium AS Colour Carrie Tote, $6.90, retail $24.99<br>Standard Liberty Bags 8501 Katelyn, $3.21, retail $17.99 | 4 (redrawn) | 1–23 | digital | $19.13 | $10.06 (53%) | $5.86 | digital | $11.75 | $6.37 (54%) | $6.24 |
+|  | 4 (redrawn) | 24–49 | screen | $22.32 | $11.59 (52%) | $2.67 | screen | $14.94 | $7.90 (53%) | $3.05 |
+|  | 4 (redrawn) | 50–100 | screen | $20.62 | $9.89 (48%) | $4.37 | screen | $13.24 | $6.20 (47%) | $4.75 |
 
 ## Delivery
 
