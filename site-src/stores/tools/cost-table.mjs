@@ -13,9 +13,10 @@
 // full color can carry `spotColours` in the catalog: the count if the art is
 // redrawn in flat spot colors, used for screen print and marked "redrawn".
 //
-// From 24 pieces the table uses screen print wherever the rules allow it (3
-// colors a location from 24, 6 from 40), even where digital would be cheaper
-// (Alex, 2026-11-28); below that, or for full-color art, it's digital. ARK margin is
+// The 1–24 tier is digital. From 25 pieces the table uses screen print
+// wherever the rules allow it (3 colors a location from 24, 6 from 40), even
+// where digital would be cheaper (Alex, 2026-11-28); full-color art stays
+// digital. ARK margin is
 // ARK's price less the costs the formula itself names: the blank's wholesale
 // cost and the gang-sheet film's raw cost. Press, impression, screen and admin
 // fees count as margin, since the formula carries no cost for them (labor and
@@ -120,7 +121,8 @@ for (const p of PRODUCTS) {
         const dtf = P.dtfBase(R, cost, L, undefined, key);
         const screenOk = P.screenEligibility(R, qty, L, simulated) === null;
         const screen = screenOk ? P.screenBase(R, cost, qty, L, undefined, key) : null;
-        const useScreen = screen !== null;
+        // The 1–24 tier stays digital; screen print from 25 pieces (Alex, 2026-11-28).
+        const useScreen = screen !== null && qty > 24;
         const price = useScreen ? screen : dtf;
         const hard = cost + (useScreen ? 0 : film);
         return { qty, method: useScreen ? "screen_print" : "dtf", price, dtf, screen, hard, margin: price - hard };
@@ -190,7 +192,7 @@ tr.head th{background:#e2f1f0;font-size:12px;padding-top:9px}tr.head span{font-w
 tr.sub td{color:#5c6a6b;font-size:10px}td.std{border-left:2px solid #dbe2df}
 thead th{font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;color:#5c6a6b}
 </style><h1>${esc(STORE.client ?? STORE.name)} · pricing by quantity and garment tier</h1>
-<p>Internal, for ARK only: not for the client. Premium is the AS Colour blank the sample store shows; Standard is ARK's mid-range blank at a lower suggested retail. ARK's price uses the quote form's rules (gang-sheet digital, screen print from 24) and uses screen print from 24 pieces wherever it's allowed; each quantity tier shows the price at its largest order (24, 49, 100). ARK margin is that price less the blank's wholesale cost and the film's raw gang-sheet cost; press, impression, screen and admin fees count as margin. Generated ${new Date().toISOString().slice(0, 10)}.</p>
+<p>Internal, for ARK only: not for the client. Premium is the AS Colour blank the sample store shows; Standard is ARK's mid-range blank at a lower suggested retail. ARK's price uses the quote form's rules (gang-sheet digital, screen print from 24) prices 1–24 as digital and uses screen print from 25 pieces wherever it's allowed; each quantity tier shows the price at its largest order (24, 49, 100). ARK margin is that price less the blank's wholesale cost and the film's raw gang-sheet cost; press, impression, screen and admin fees count as margin. Generated ${new Date().toISOString().slice(0, 10)}.</p>
 <table><thead><tr><th>Qty</th><th>Premium: method</th><th>ARK price</th><th>ARK margin</th><th>Org keeps</th><th>Standard: method</th><th>ARK price</th><th>ARK margin</th><th>Org keeps</th></tr></thead><tbody>${body}</tbody></table>`;
   // The client's copy: no ARK margin or blank cost (Alex, 2026-11-28: the
   // margin is for ARK only). This is the table the prospect reply attaches.
