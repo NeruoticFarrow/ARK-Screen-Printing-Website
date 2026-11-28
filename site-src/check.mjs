@@ -11,6 +11,8 @@ import path from "node:path";
 import { parseHTML } from "linkedom";
 import { PPC_PAGES } from "./content/services.mjs";
 import { PPC_LINE, SHOP } from "./lib/facts.mjs";
+import { ROBOTS as RMPC_ROBOTS, STORE as RMPC_STORE } from "./stores/rmpc/catalog.mjs";
+import { ROBOTS as SUESGIFT_ROBOTS, STORE as SUESGIFT_STORE } from "./stores/suesgift/catalog.mjs";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..");
 const SITE = path.join(ROOT, "ark-site-review");
@@ -140,13 +142,16 @@ for (const name of fs.existsSync(BLOG) ? fs.readdirSync(BLOG).filter((f) => f.en
 if (warnings.length) console.warn(warnings.map((w) => `warning: ${w}`).join("\n"));
 
 // The RMPC client store is not a marketing template and must not inherit
-// analytics or quote conversion tracking. It stays unlisted, self-contained,
+// analytics or quote conversion tracking. It's indexed only when live
+// (STORE.indexable), stays self-contained,
 // and able to talk only to its own checkout function.
 const storePath = path.join(SITE, "rmpc.html");
 if (!fs.existsSync(storePath)) fail("rmpc.html", "RMPC store page missing");
 else {
   const store = fs.readFileSync(storePath, "utf8");
-  if (!store.includes('name="robots" content="noindex, nofollow"')) fail("rmpc.html", "must stay noindex");
+  if (!store.includes(`name="robots" content="${RMPC_ROBOTS}"`)) fail("rmpc.html", `robots must be ${RMPC_ROBOTS}`);
+  if (!store.includes(RMPC_STORE.credit.text) || !store.includes('"https://arkscreenprinting.com"')) fail("rmpc.html", "missing the ARK footer credit");
+  if (RMPC_STORE.indexable && !/<loc>https:\/\/arkscreenprinting\.com\/rmpc<\/loc>/.test(fs.readFileSync(path.join(SITE, "sitemap.xml"), "utf8"))) fail("rmpc.html", "an indexable store must be in sitemap.xml");
   if (!store.includes('rel="canonical" href="https://arkscreenprinting.com/rmpc"')) fail("rmpc.html", "wrong canonical slug");
   if ((store.match(/data:image\/webp;base64,/g) ?? []).length < 7) fail("rmpc.html", "product images are not embedded");
   if (!store.includes("data:image/png;base64,")) fail("rmpc.html", "the RMPC crown is not embedded");
@@ -160,7 +165,7 @@ else {
     // Framing: only named https sites, never every site (*) or every https one.
     const framers = block.match(/frame-ancestors ([^;\n]+)/)?.[1].trim().split(/\s+/) ?? [];
     const framersNamed = framers.length > 0 && framers.every((src) => src === "'self'" || src === "'none'" || /^https:\/\/(\*\.)?[a-z0-9-]+(\.[a-z0-9-]+)+$/.test(src));
-    if (!headers.split("\n").includes(route) || !block.includes("X-Robots-Tag: noindex, nofollow") || !block.includes("connect-src 'self';") || !block.includes("form-action 'none'") || !framersNamed) fail("rmpc.html", `unsafe store headers for ${route}`);
+    if (!headers.split("\n").includes(route) || !block.includes(`X-Robots-Tag: ${RMPC_ROBOTS}`) || !block.includes("connect-src 'self';") || !block.includes("form-action 'none'") || !framersNamed) fail("rmpc.html", `unsafe store headers for ${route}`);
   }
   for (const fn of ["rmpc-checkout.mjs", "rmpc-orders.mjs", "stripe-webhook.mjs"]) {
     if (!fs.existsSync(path.join(ROOT, "netlify/functions", fn))) fail("rmpc.html", `netlify/functions/${fn} missing`);
@@ -189,6 +194,31 @@ else {
     if (at < 0 || !block.includes("X-Robots-Tag: noindex, nofollow") || !block.includes("connect-src 'none';") || !block.includes("form-action 'none'") || !/frame-ancestors 'self'$/m.test(block)) fail(file, `unsafe store headers for ${route}`);
   }
   if (!/^\/bos\s+\/bos\.html\s+200$/m.test(fs.readFileSync(path.join(SITE, "_redirects"), "utf8"))) fail(file, "_redirects must serve the store at /bos");
+}
+
+// The Sue's Gift sample store: checked the same way as Best of the Springs.
+const suesGiftPath = path.join(SITE, "suesgift.html");
+if (!fs.existsSync(suesGiftPath)) fail("suesgift.html", "Sue's Gift store page missing");
+else {
+  const store = fs.readFileSync(suesGiftPath, "utf8");
+  const file = "suesgift.html";
+  if (!store.includes(`name="robots" content="${SUESGIFT_ROBOTS}"`)) fail(file, `robots must be ${SUESGIFT_ROBOTS}`);
+  if (SUESGIFT_STORE.sample && SUESGIFT_ROBOTS !== "noindex, nofollow") fail(file, "a sample store must stay noindex");
+  if (!store.includes(SUESGIFT_STORE.credit.text) || !store.includes('"https://arkscreenprinting.com"')) fail(file, "missing the ARK footer credit");
+  if (!store.includes('rel="canonical" href="https://arkscreenprinting.com/suesgift"')) fail(file, "wrong canonical slug");
+  if ((store.match(/data:image\/webp;base64,/g) ?? []).length < 16) fail(file, "garment templates or artwork are not embedded");
+  if ((store.match(/data:font\/woff2;base64,/g) ?? []).length < 3) fail(file, "fonts are not embedded");
+  if (/googletagmanager\.com|gtag\(|fbq\(/.test(store)) fail(file, "the store must not load analytics or send conversions");
+  if (/(src|href)="(https?:)?\/\//.test(store.replace(/<link rel="canonical"[^>]*>/, ""))) fail(file, "loads something from another origin");
+  const headers = fs.readFileSync(path.join(SITE, "_headers"), "utf8");
+  for (const route of ["/suesgift", "/suesgift.html"]) {
+    const lines = headers.split("\n");
+    const at = lines.indexOf(route);
+    const end = lines.findIndex((line, i) => i > at && line && !line.startsWith("  "));
+    const block = at < 0 ? "" : lines.slice(at + 1, end < 0 ? undefined : end).join("\n");
+    if (at < 0 || !block.includes(`X-Robots-Tag: ${SUESGIFT_ROBOTS}`) || !block.includes("connect-src 'none';") || !block.includes("form-action 'none'") || !/frame-ancestors 'self'$/m.test(block)) fail(file, `unsafe store headers for ${route}`);
+  }
+  if (!/^\/suesgift\s+\/suesgift\.html\s+200$/m.test(fs.readFileSync(path.join(SITE, "_redirects"), "utf8"))) fail(file, "_redirects must serve the store at /suesgift");
 }
 
 if (problems.length) {

@@ -4,11 +4,11 @@
 /fonts/gf/*
   Cache-Control: public, max-age=31536000, immutable
 /rmpc
-  X-Robots-Tag: noindex, nofollow
+  X-Robots-Tag: index, follow
   Cache-Control: public, max-age=0, must-revalidate
   Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'self'; form-action 'none'; base-uri 'none'; frame-ancestors 'self' https://rmparkour.com https://www.rmparkour.com https://*.squarespace.com
 /rmpc.html
-  X-Robots-Tag: noindex, nofollow
+  X-Robots-Tag: index, follow
   Cache-Control: public, max-age=0, must-revalidate
   Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'self'; form-action 'none'; base-uri 'none'; frame-ancestors 'self' https://rmparkour.com https://www.rmparkour.com https://*.squarespace.com
 /bos
@@ -16,6 +16,14 @@
   Cache-Control: public, max-age=0, must-revalidate
   Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'self'
 /bos.html
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: public, max-age=0, must-revalidate
+  Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'self'
+/suesgift
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: public, max-age=0, must-revalidate
+  Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'self'
+/suesgift.html
   X-Robots-Tag: noindex, nofollow
   Cache-Control: public, max-age=0, must-revalidate
   Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'self'

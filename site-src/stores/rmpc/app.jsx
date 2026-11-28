@@ -504,7 +504,7 @@ function Store() {
             <img src={crown} alt="" />
             <span>RMPC<span className="brand-small">ROCKY MOUNTAIN PARKOUR CHAMPIONSHIPS</span></span>
           </a>
-          <div>Made for our community.<br /><span>Printed by ARK Screen Printing · Colorado Springs</span></div>
+          <div>Made for our community.<br /><span><a href={STORE.credit.href}>{STORE.credit.text}</a> · Colorado Springs</span></div>
           <button className="text-button" onClick={share}><Copy size={15} /> Share this store</button>
         </div>
         <div className="footer-bottom">
