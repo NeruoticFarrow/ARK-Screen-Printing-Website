@@ -26,7 +26,9 @@
 // both ends and shown as the average of the two.
 //
 // Prints the Markdown table (for the store's README and the PR). With an out
-// folder it also writes pricing.csv and pricing.pdf there. Needs Playwright's
+// folder it also writes pricing.csv and pricing.pdf (internal, with ARK's
+// margin) and client-pricing.csv and client-pricing.pdf (no margin or blank
+// cost: the copy the prospect reply attaches) there. Needs Playwright's
 // Chromium (not a dependency of this repo: run where it's installed).
 import fs from "node:fs";
 import path from "node:path";
@@ -188,9 +190,32 @@ thead th{font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;color:#5c
 </style><h1>${esc(STORE.client ?? STORE.name)} · pricing by quantity and garment tier</h1>
 <p>Internal, for ARK only: not for the client. Premium is the AS Colour blank the sample store shows; Standard is ARK's mid-range blank at a lower suggested retail. ARK's price uses the quote form's rules (gang-sheet digital, screen print from 24) and takes the cheaper method at each quantity; each quantity tier shows the average of its smallest and largest order. ARK margin is that price less the blank's wholesale cost and the film's raw gang-sheet cost; press, impression, screen and admin fees count as margin. Generated ${new Date().toISOString().slice(0, 10)}.</p>
 <table><thead><tr><th>Qty</th><th>Premium: method</th><th>ARK price</th><th>ARK margin</th><th>Org keeps</th><th>Standard: method</th><th>ARK price</th><th>ARK margin</th><th>Org keeps</th></tr></thead><tbody>${body}</tbody></table>`;
+  // The client's copy: no ARK margin or blank cost (Alex, 2026-11-28: the
+  // margin is for ARK only). This is the table the prospect reply attaches.
+  const clientCsv = [["product", "garment", "quantity", "our_price_per_item", "suggested_retail", "you_keep_per_item"]];
+  for (const r of rows) {
+    for (const tierName of ["premium", "standard"]) {
+      const g = r[tierName];
+      for (const t of g.tiers) clientCsv.push([r.product, `${tierName === "premium" ? "Premium" : "Standard"} (${g.label})`, t.label, c(avg(t, "price")), c(g.retail), c(g.retail - avg(t, "price"))]);
+    }
+  }
+  fs.writeFileSync(path.join(outDir, "client-pricing.csv"), clientCsv.map((row) => row.map(csvCell).join(",")).join("\n") + "\n");
+  const clientBody = rows
+    .map((r) => `<tr class="head"><th colspan="7">${esc(r.product)}</th></tr>` +
+      `<tr class="sub"><td></td><td colspan="3">Premium · ${esc(r.premium.label)} · suggested ${money(r.premium.retail)}</td><td colspan="3">Standard · ${esc(r.standard.label)} · suggested ${money(r.standard.retail)}</td></tr>` +
+      r.premium.tiers.map((t, i) => {
+        const s = r.standard.tiers[i];
+        return `<tr><td>${t.label}</td><td>${price(t)}</td><td>${money(r.premium.retail)}</td><td>${keeps(r.premium, t)}</td><td class="std">${price(s)}</td><td>${money(r.standard.retail)}</td><td>${keeps(r.standard, s)}</td></tr>`;
+      }).join(""))
+    .join("");
+  const clientHtml = html.replace(/<h1>[\s\S]*$/, "") + `<h1>${esc(STORE.client ?? STORE.name)} · pricing</h1>
+<p>Our price per item by order quantity, for the designs in your sample store. You set the retail price and keep the difference. Premium is the AS Colour garment shown in the store; Standard is a lower-cost garment at a lower suggested price. Prices are before sales tax and shipping, which supporters pay at checkout.</p>
+<table><thead><tr><th>Qty</th><th>Premium: our price</th><th>Suggested retail</th><th>You keep</th><th>Standard: our price</th><th>Suggested retail</th><th>You keep</th></tr></thead><tbody>${clientBody}</tbody></table>`;
   const pdfBrowser = await chromium.launch();
   const pdfPage = await pdfBrowser.newPage();
   await pdfPage.setContent(html);
   await pdfPage.pdf({ path: path.join(outDir, "pricing.pdf"), format: "Letter", landscape: true, margin: { top: "0.4in", bottom: "0.4in", left: "0.4in", right: "0.4in" } });
+  await pdfPage.setContent(clientHtml);
+  await pdfPage.pdf({ path: path.join(outDir, "client-pricing.pdf"), format: "Letter", landscape: true, margin: { top: "0.4in", bottom: "0.4in", left: "0.4in", right: "0.4in" } });
   await pdfBrowser.close();
 }
