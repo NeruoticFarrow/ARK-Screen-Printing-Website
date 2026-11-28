@@ -23,7 +23,7 @@ Each store ARK builds for a client lives in its own folder here:
 
 - **Tees, hoodies and a tote.** A new sample starts from `stores/suesgift/` and keeps all three garments (Alex, 2026-11-28): the AS Colour Staple Tee 5001, the Port & Company Core Fleece Hoodie PC78H and the AS Colour Carrie Tote 1001, each recolorable in every colour the blank comes in.
 - **Flat retail prices.** The page shows prices that stand in for the nonprofit's own markup: tees $29.99, hoodies $59.99, totes $24.99 (front print only, so the nonprofit keeps about $6.50), with the same size upcharges.
-- **ARK's cost table, for Alex only.** Run `node tools/cost-table.mjs <ark-designer repo> stores/<slug>` and put the table in the store's README and the PR. It uses ark-designer's own color detection and quote math (`colourDetection.ts`, `pricing.ts`) and the blanks' wholesale costs (`products.ts`), and shows what the nonprofit keeps per item at the retail price. It never goes on the public page.
+- **ARK's pricing table, for Alex only.** Run `node tools/cost-table.mjs <ark-designer repo> stores/<slug> stores/<slug>/pricing` and put the table in the store's README and the PR; it also writes `pricing.csv` and `pricing.pdf`. It uses ark-designer's own color detection and quote math (`colourDetection.ts`, `pricing.ts`) and the blanks' wholesale costs (`products.ts`), and shows, for the 1–24, 25–49 and 50–100 tiers, ARK's price per item, the method (digital below 24, screen print where the colors allow) and what the nonprofit keeps per item and across the tier. It never goes on the public page.
 
 ## Going live
 
