@@ -69,6 +69,35 @@ export const CARRIE_COLOURS = colours([
   ["Navy", "#1E202C"], ["Coal", "#323031"], ["Black", "#000000"],
 ]);
 
+/** Port & Company Core Fleece Pullover Hood PC78H: all 74 colours, with the
+ *  names and swatch colours in ARK's product catalogue (ark-designer
+ *  client/src/lib/products.ts, 2026-11-28). */
+export const HOOD_COLOURS = colours([
+  ["Aquatic Blue", "#7FBDE0"], ["Ash", "#C8C9C7"], ["Athletic Heather", "#97999B", { heather: true }],
+  ["Black Heather", "#3E4040", { heather: true }], ["Bright Aqua", "#009CA6"], ["Candy Pink", "#F4A6B0"],
+  ["Cardinal", "#9D2235"], ["Carolina Blue", "#7BA7C7"], ["Charcoal", "#54565A"], ["Cherry Blossom", "#F2B8C6"],
+  ["Clover Green", "#009A44"], ["Coal Grey", "#53575A"], ["Coyote Brown", "#A07850"], ["Creme", "#EFE5C8"],
+  ["Dark Chocolate Brown", "#3D211E"], ["Dark Green", "#1B4332"], ["Dark Heather Grey", "#636569", { heather: true }],
+  ["Duck Brown", "#B07848"], ["Flush Pink", "#C13869"], ["Forest Green Heather", "#2B5B45", { heather: true }],
+  ["Gold", "#FFA300"], ["Graphite Heather", "#63666A", { heather: true }],
+  ["Heather Athletic Maroon", "#7B2D42", { heather: true }],
+  ["Heather Dark Chocolate Brown", "#4A3930", { heather: true }], ["Heather Navy", "#253F6A", { heather: true }],
+  ["Heather Purple", "#725B8E", { heather: true }], ["Heather Red", "#A8323C", { heather: true }],
+  ["Heather Royal", "#3D6EB4", { heather: true }], ["Heather Sangria", "#7E2358", { heather: true }],
+  ["Ivory", "#F5F0DC"], ["Jet Black", "#1A1A1A"], ["Kelly", "#00A14B"], ["Laurel Green", "#8A9872"],
+  ["Lavender", "#B49FCC"], ["Light Blue", "#8BB8E8"], ["Light Sand", "#D4C4A0"], ["Lime", "#78BE20"],
+  ["Maroon", "#692635"], ["Medium Grey", "#939597"], ["Natural", "#E8DDD0"], ["Navy", "#1B2D5B"],
+  ["Neon Blue", "#009EE0"], ["Neon Green", "#C6E03C"], ["Neon Orange", "#FF5500"], ["Neon Pink", "#FF3EB5"],
+  ["Neon Yellow", "#EEFF00"], ["Neptune Blue", "#4D7FB5"], ["Oatmeal Heather", "#C5B898", { heather: true }],
+  ["Olive", "#585E3C"], ["Olive Drab Green", "#6A6B3A"], ["Olive Drab Green Heather", "#7B7855", { heather: true }],
+  ["Orange", "#F4622A"], ["Pale Blush", "#EBD8D0"], ["Purple", "#7B5EA7"], ["Red", "#BA0C2F"], ["Royal", "#2B4DA0"],
+  ["S. Green", "#00A550"], ["S. Orange", "#F0830A"], ["Sand", "#C9AD84"], ["Sangria", "#8D1A4A"],
+  ["Sapphire", "#003087"], ["Silver", "#B1B3B6"], ["Steel Blue", "#3D6880"], ["Stonewashed Blue", "#6A8FA8"],
+  ["Teal", "#007A78"], ["Team Purple", "#3D2B78"], ["Tennessee Orange", "#E35205"], ["True Celadon", "#85C2B1"],
+  ["True Navy", "#162040"], ["True Royal", "#1A3F8F"], ["Tundra Blue", "#80A8C8"], ["White", "#FFFFFF"],
+  ["Woodland Brown", "#735245"], ["Yellow", "#F5CC00"],
+]);
+
 const relativeLuminance = (hex) => {
   const channel = (i) => {
     const c = parseInt(hex.slice(i, i + 2), 16) / 255;
@@ -89,6 +118,7 @@ export function isLightGarment(hex) {
 // ── Garments and products ──────────────────────────────────────────────────
 
 export const TEE_SIZES = ["XS", "S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL"];
+export const HOOD_SIZES = ["S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL"];
 export const ONE_SIZE = "One size";
 
 export const GARMENTS = {
@@ -101,6 +131,15 @@ export const GARMENTS = {
     colours: TEE_COLOURS,
     views: { front: "tee-front", back: "tee-back" },
   },
+  hood: {
+    label: "Port & Company Core Fleece Hoodie",
+    style: "PC78H",
+    kind: "hoodie",
+    facts: ["7.8 oz, 50/50 cotton/poly fleece", "Two-ply hood, front pouch pocket", "Air jet yarn for a soft hand"],
+    sizes: HOOD_SIZES,
+    colours: HOOD_COLOURS,
+    views: { front: "hood-front", back: "hood-back" },
+  },
   carrie: {
     label: "AS Colour Carrie Tote",
     style: "1001",
@@ -112,16 +151,20 @@ export const GARMENTS = {
   },
 };
 
-/** What a buyer pays, before sales tax. Sample prices, the same as the
- *  Best of the Springs sample's, for Alex and Sue's Gift to confirm. */
-export const PRICE_CENTS = { tee: 2999, carrie: 2499 };
+/** What a buyer pays, before sales tax. Samples use flat retail prices that
+ *  stand in for the nonprofit's own markup (Alex, 2026-11-28): tees $29.99,
+ *  hoodies $59.99, totes $24.99. The tote prints on the front only: a second
+ *  print would leave Sue's Gift 39¢ an item. ARK's price behind each is in
+ *  the README. */
+export const PRICE_CENTS = { tee: 2999, hood: 5999, carrie: 2499 };
 
-/** Added to a tee's price for its size (the bigger blanks cost more). */
+/** Added to a tee's or hoodie's price for its size (the bigger blanks cost
+ *  more). */
 export const SIZE_UPCHARGE_CENTS = { "2XL": 300, "3XL": 300, "4XL": 500, "5XL": 500 };
 
 /** Where each print sits. `box` is [left, top, width] on the garment's
  *  1000px canvas (its height follows the artwork); the tee is about 26px to
- *  the inch, the tote about 33. `size` is the print size that works out to.
+ *  the inch, the hoodie about 19, the tote about 33. `size` is the print size that works out to.
  *  `art` names a design in images/art/ (tools/art.py); each has a white
  *  version for dark garments. Designs use only words Sue's Gift publishes
  *  (suesgift.org, 2026-11-27). */
@@ -192,16 +235,54 @@ export const PRODUCTS = [
     },
   },
   {
+    id: "not-alone-hoodie",
+    name: "You're Not Alone Hoodie",
+    garment: "hood",
+    collection: "everyday",
+    colour: "teal",
+    cardView: "back",
+    blurb: "Midweight fleece with the heart on the chest and \u201cYou\u2019re not alone.\u201d across the back.",
+    prints: {
+      front: { art: "heart", box: [560, 300, 92], place: "Left chest", size: "4.8″ × 2.7″" },
+      back: { art: "not-alone", box: [380, 360, 240], place: "Upper back", size: "12.6″ × 3.7″" },
+    },
+  },
+  {
+    id: "logo-hoodie",
+    name: "Sue's Gift Logo Hoodie",
+    garment: "hood",
+    collection: "everyday",
+    colour: "creme",
+    cardView: "front",
+    blurb: "The full Sue's Gift logo across the chest and the round mark below the hood.",
+    prints: {
+      front: { art: "logo", box: [395, 330, 210], place: "Center chest", size: "11″ × 4.4″" },
+      back: { art: "badge", box: [468, 330, 64], place: "Below the hood", size: "3.4″ × 3.4″" },
+    },
+  },
+  {
+    id: "boa-2027-hoodie",
+    name: "Be Ovary Aware 2027 Hoodie",
+    garment: "hood",
+    collection: "events",
+    colour: "jet-black",
+    cardView: "front",
+    blurb: "The 2027 race design on midweight fleece, front and back.",
+    prints: {
+      front: { art: "boa-front", box: [390, 320, 220], place: "Center chest", size: "11.6″ × 6.5″" },
+      back: { art: "boa-back", box: [380, 360, 240], place: "Upper back", size: "12.6″ × 4.9″" },
+    },
+  },
+  {
     id: "carrie-tote",
     name: "Sue's Gift Carrie Tote",
     garment: "carrie",
     collection: "everyday",
     colour: "cream",
     cardView: "front",
-    blurb: "Heavyweight canvas with the round mark and wordmark on the front, the heart on the back.",
+    blurb: "Heavyweight canvas with the round mark and wordmark on the front.",
     prints: {
       front: { art: "tote", box: [350, 540, 300], place: "Front", size: "9.1″ × 5.7″" },
-      back: { art: "heart", box: [400, 600, 200], place: "Back", size: "6.1″ × 3.5″" },
     },
   },
 ];
@@ -224,13 +305,15 @@ export function garmentLook(product, colourId, side) {
 
 export const COLLECTIONS = {
   all: "Everything",
-  events: "Event shirts",
+  events: "Event wear",
   tees: "Tees",
+  hoodies: "Hoodies",
   totes: "Totes",
 };
 
 export function productsIn(collection) {
   if (collection === "tees") return PRODUCTS.filter((p) => GARMENTS[p.garment].kind === "tee");
+  if (collection === "hoodies") return PRODUCTS.filter((p) => GARMENTS[p.garment].kind === "hoodie");
   if (collection === "totes") return PRODUCTS.filter((p) => GARMENTS[p.garment].kind === "tote");
   if (collection === "events") return PRODUCTS.filter((p) => p.collection === "events");
   return PRODUCTS;
@@ -256,7 +339,7 @@ export const MAX_LINES = 30;
 export function unitPriceCents(product, size = "") {
   const base = PRICE_CENTS[product.garment];
   if (base === undefined) throw new Error(`no price for ${product.garment}`);
-  return base + (garmentOf(product).kind === "tee" ? SIZE_UPCHARGE_CENTS[size] ?? 0 : 0);
+  return base + (["tee", "hoodie"].includes(garmentOf(product).kind) ? SIZE_UPCHARGE_CENTS[size] ?? 0 : 0);
 }
 
 /** Lowest and highest price a product sells at, across its sizes. */

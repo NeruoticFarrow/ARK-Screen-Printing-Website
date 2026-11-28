@@ -14,7 +14,7 @@ const HERE = path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z
 
 export const STORE_HEAD = {
   title: "Sue's Gift Shop · Sample store",
-  description: "A sample fundraising store for Sue's Gift Gynecologic Cancer Support: tees and totes in every AS Colour color, printed in Colorado Springs by ARK Screen Printing.",
+  description: "A sample fundraising store for Sue's Gift Gynecologic Cancer Support: tees, hoodies and totes in every color their blanks come in, printed in Colorado Springs by ARK Screen Printing.",
   canonical: `https://arkscreenprinting.com${STORE.path}`,
 };
 
