@@ -8,3 +8,8 @@ ark-site-review/assets/img/gbp/
 # webhook commits only the article, so committed pages would always be behind).
 ark-site-review/blog/
 ark-site-review/sitemap-blog.xml
+
+# Internal store pricing with ARK's margin: this repo is public, so never commit it
+# (site-src/stores/tools/cost-table.mjs; the client-pricing.* copies are fine).
+site-src/stores/*/pricing/pricing.csv
+site-src/stores/*/pricing/pricing.pdf

@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import {
-  CARRIE_COLOURS, DELIVERY, GARMENTS, PRICE_CENTS, PRODUCTS, ROBOTS, STORE, TEE_COLOURS, TEE_SIZES, bagTotals,
+  CARRIE_COLOURS, DELIVERY, HOOD_COLOURS, HOOD_SIZES, GARMENTS, PRICE_CENTS, PRODUCTS, ROBOTS, STORE, TEE_COLOURS, TEE_SIZES, bagTotals,
   colourOf, deliveryKey, garmentLook, isLightGarment, normaliseLine, priceRange, productById, productsIn, unitPriceCents,
 } from "../catalog.mjs";
 
@@ -21,29 +21,36 @@ test("a sample stays out of search and credits ARK in the footer", () => {
   assert.equal(STORE.credit.href, "https://arkscreenprinting.com");
 });
 
-test("every AS Colour colour: 75 Staple Tee, 23 Carrie Tote", () => {
+test("every colour each blank comes in: 75 Staple Tee, 15 Stencil Hood, 23 Carrie Tote", () => {
   assert.equal(TEE_COLOURS.length, 75);
+  assert.equal(HOOD_COLOURS.length, 15);
   assert.equal(CARRIE_COLOURS.length, 23);
+  for (const list of [TEE_COLOURS, HOOD_COLOURS, CARRIE_COLOURS]) {
+    assert.equal(new Set(list.map((c) => c.id)).size, list.length, "colour ids are unique");
+    for (const c of list) assert.match(c.hex, /^#[0-9A-F]{6}$/, c.name);
+  }
 });
 
-test("six products, each in a colour its garment comes in, with both art versions on disk", () => {
-  assert.equal(PRODUCTS.length, 6);
-  assert.equal(new Set(PRODUCTS.map((p) => p.id)).size, 6);
+test("nine products, each in a colour its garment comes in, with both art versions on disk", () => {
+  assert.equal(PRODUCTS.length, 9);
+  assert.equal(new Set(PRODUCTS.map((p) => p.id)).size, 9);
   for (const p of PRODUCTS) {
     assert.ok(GARMENTS[p.garment], p.id);
     assert.ok(colourOf(p, p.colour), `${p.id} default colour`);
-    for (const side of ["front", "back"]) {
+    assert.ok(p.prints.front, `${p.id} front`);
+    if (GARMENTS[p.garment].kind !== "tote") assert.ok(p.prints.back, `${p.id} back`);
+    for (const side of Object.keys(p.prints)) {
       const print = p.prints[side];
-      assert.ok(print, `${p.id} ${side}`);
       const [left, top, width] = print.box;
       assert.ok(left >= 0 && top >= 0 && width > 0 && left + width <= 1000, `${p.id} ${side} box`);
       for (const name of [print.art, `${print.art}-white`]) assert.ok(fs.existsSync(path.join(IMAGES, "art", `${name}.webp`)), `${name}.webp`);
     }
   }
   assert.equal(productsIn("tees").length, 5);
+  assert.equal(productsIn("hoodies").length, 3);
   assert.equal(productsIn("totes").length, 1);
-  assert.equal(productsIn("events").length, 3);
-  assert.equal(productsIn("all").length, 6);
+  assert.equal(productsIn("events").length, 4);
+  assert.equal(productsIn("all").length, 9);
 });
 
 test("every garment template the products use is there", () => {
@@ -62,8 +69,10 @@ test("teal print on light garments, one-colour white on dark ones", () => {
   assert.equal(garmentLook(tee, "black", "back").prints[0].art, "not-alone-white");
 });
 
-test("sample prices: tees $29.99 (2XL–3XL +$3, 4XL–5XL +$5), Carrie $24.99", () => {
-  assert.deepEqual(PRICE_CENTS, { tee: 2999, carrie: 2499 });
+test("flat sample prices: tees $29.99, hoodies $79.99 (2XL–3XL +$3, 4XL–5XL +$5), Carrie $24.99", () => {
+  assert.deepEqual(PRICE_CENTS, { tee: 2999, hood: 7999, carrie: 2499 });
+  const hoodie = productById("logo-hoodie");
+  assert.deepEqual(HOOD_SIZES.map((s) => unitPriceCents(hoodie, s)), [7999, 7999, 7999, 7999, 7999, 8299, 8299, 8499, 8499]);
   const tee = productById("logo-tee");
   assert.deepEqual(TEE_SIZES.map((s) => unitPriceCents(tee, s)), [2999, 2999, 2999, 2999, 2999, 3299, 3299, 3499, 3499]);
   assert.deepEqual(priceRange(productById("carrie-tote")), { min: 2499, max: 2499 });

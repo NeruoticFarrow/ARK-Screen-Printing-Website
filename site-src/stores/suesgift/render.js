@@ -12,6 +12,10 @@ import teeFrontShade from "./images/garments/tee-front-shade.webp";
 import teeFrontSheen from "./images/garments/tee-front-sheen.webp";
 import teeBackShade from "./images/garments/tee-back-shade.webp";
 import teeBackSheen from "./images/garments/tee-back-sheen.webp";
+import hoodFrontShade from "./images/garments/hood-front-shade.webp";
+import hoodFrontSheen from "./images/garments/hood-front-sheen.webp";
+import hoodBackShade from "./images/garments/hood-back-shade.webp";
+import hoodBackSheen from "./images/garments/hood-back-sheen.webp";
 import carrieShade from "./images/garments/carrie-shade.webp";
 import carrieSheen from "./images/garments/carrie-sheen.webp";
 import neckLabel from "./images/garments/label.webp";
@@ -45,6 +49,8 @@ const SHEEN_OFFSET = 32;
 const TEMPLATES = {
   "tee-front": { shade: teeFrontShade, sheen: teeFrontSheen, label: { src: neckLabel, x: 493, y: 124, w: 21, h: 45 } },
   "tee-back": { shade: teeBackShade, sheen: teeBackSheen },
+  "hood-front": { shade: hoodFrontShade, sheen: hoodFrontSheen },
+  "hood-back": { shade: hoodBackShade, sheen: hoodBackSheen },
   carrie: { shade: carrieShade, sheen: carrieSheen },
 };
 

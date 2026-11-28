@@ -47,6 +47,7 @@ const THUMB_SIZE = 200;
 /** The swatches a card shows before "+N": its own colour first, then these. */
 const CARD_COLOURS = {
   tee: ["charlotte", "white", "natural", "seafoam", "atlantic", "black", "topaz", "bone", "pale-blue"],
+  hood: ["petrol-blue", "ecru", "black", "bone", "white-heather", "sand", "pine-green", "navy", "athletic-heather"],
   carrie: ["cream", "black", "bone", "navy", "pine-green", "charity-pink", "khaki"],
 };
 const CARD_SWATCHES = 7;
@@ -177,7 +178,7 @@ function ProductCard({ product, colour, onColour, onOpen, onQuickAdd }) {
         aria-label={`${product.name} in ${current.name}: see colors${oneSize ? "" : " and sizes"}`}
       >
         <Garment product={product} colour={colour} side={side} size={CARD_SIZE} label={`${product.name}, ${current.name}, ${side}`} />
-        <span className={`flag${product.collection === "events" ? " flag-winner" : ""}`}>{product.collection === "events" ? "Event shirt" : "Everyday"}</span>
+        <span className={`flag${product.collection === "events" ? " flag-winner" : ""}`}>{product.collection === "events" ? "Event wear" : "Everyday"}</span>
         <span className="card-side">{SIDE_LABEL[side]}</span>
       </button>
       <div className="card-body">
@@ -379,7 +380,7 @@ function Store() {
               <div>
                 <h1>You're not alone.</h1>
                 <p className="lede">
-                  Sue's Gift helps Colorado women through gynecologic cancer with grants for bills, survivor mentors and support groups. Wear the heart, and every tee and tote
+                  Sue's Gift helps Colorado women through gynecologic cancer with grants for bills, survivor mentors and support groups. Wear the heart, and every tee, hoodie and tote
                   you buy helps keep that support going.
                 </p>
                 <div className="hero-actions">
@@ -387,10 +388,10 @@ function Store() {
                     Shop the collection <ArrowRight size={18} aria-hidden="true" />
                   </button>
                   <button type="button" className="btn btn-ghost btn-lg" onClick={() => shopCollection("events")}>
-                    See event shirts
+                    See event wear
                   </button>
                 </div>
-                <p className="hero-facts">75 tee colors · Printed in Colorado Springs · Shipped to your door</p>
+                <p className="hero-facts">Tees, hoodies and totes · Printed in Colorado Springs · Shipped to your door</p>
               </div>
             </div>
             <div className="hero-art" aria-hidden="true">
@@ -415,7 +416,7 @@ function Store() {
               <div>
                 <p className="eyebrow">The 2027 collection</p>
                 <h2 id="shop-title">Shop Sue's Gift</h2>
-                <p className="section-lede">Pick any color AS Colour makes. Each one shows the print as it comes out on that color.</p>
+                <p className="section-lede">Pick any color the garment comes in. Each one shows the print as it comes out on that color.</p>
               </div>
               <div className="chips" role="group" aria-label="Show">
                 {Object.entries(COLLECTIONS).map(([key, label]) => (
@@ -446,7 +447,7 @@ function Store() {
                 <a href={STORE.contact.phoneHref}>{STORE.contact.phoneDisplay}</a> for a bulk order.
               </p>
               <button type="button" className="btn btn-gold" onClick={() => shopCollection("events")}>
-                Shop event shirts <ArrowRight size={16} aria-hidden="true" />
+                Shop event wear <ArrowRight size={16} aria-hidden="true" />
               </button>
             </div>
           </div>
@@ -507,6 +508,10 @@ function Store() {
                 [
                   "What sizes do the tees come in?",
                   `XS to 5XL in the AS Colour Staple Tee, a regular fit in 5.3 oz combed cotton. ${upcharges.map((g) => `${g.sizes[0]}–${g.sizes[g.sizes.length - 1]} are ${usd(g.cents)} more`).join(", and ")}.`,
+                ],
+                [
+                  "What sizes do the hoodies come in?",
+                  "XS to 5XL in the AS Colour Stencil Hood, a regular-fit, cotton-rich anti-pill fleece with a lined hood and a kangaroo pocket. 2XL and up cost a little more, the same as the tees.",
                 ],
                 ["How big is the tote?", "The Carrie Tote is 16.5″ square with a 3.7″ gusset, in heavyweight 9.4 oz cotton canvas."],
                 ["Can we change the designs?", "Yes. These are first drafts made from the Sue's Gift logo and the events on suesgift.org. ARK will revise the art, colors and garments with you before anything goes live."],
@@ -703,19 +708,21 @@ function Store() {
 
               <fieldset className="delivery">
                 <legend>How you'll get it</legend>
-                {Object.entries(DELIVERY).map(([key, d]) => (
-                  <label className="delivery-opt" key={key}>
-                    <input type="radio" name="delivery" value={key} checked={delivery === key} onChange={() => setDelivery(key)} />
-                    <span className="delivery-opt-icon">
-                      <DeliveryIcon name={key} />
-                    </span>
-                    <span className="delivery-opt-text">
-                      <strong>{d.label}</strong>
-                      <small>{d.short}</small>
-                    </span>
-                    <span className="delivery-opt-cost">{key === "ship" ? money(shippingCents(totals.count)) : "Free"}</span>
-                  </label>
-                ))}
+                <div className="delivery-opts">
+                  {Object.entries(DELIVERY).map(([key, d]) => (
+                    <label className="delivery-opt" key={key}>
+                      <input type="radio" name="delivery" value={key} checked={delivery === key} onChange={() => setDelivery(key)} />
+                      <span className="delivery-opt-icon">
+                        <DeliveryIcon name={key} />
+                      </span>
+                      <span className="delivery-opt-text">
+                        <strong>{d.label}</strong>
+                        <small>{d.short}</small>
+                      </span>
+                      <span className="delivery-opt-cost">{key === "ship" ? money(shippingCents(totals.count)) : "Free"}</span>
+                    </label>
+                  ))}
+                </div>
                 <p className="delivery-sentence">{DELIVERY[delivery].sentence}</p>
               </fieldset>
 
