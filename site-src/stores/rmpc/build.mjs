@@ -8,6 +8,8 @@ import fs from "node:fs";
 import path from "node:path";
 import * as esbuild from "esbuild";
 
+import { ROBOTS } from "./catalog.mjs";
+
 const HERE = path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
 
 export const STORE_HEAD = {
@@ -44,7 +46,7 @@ export async function buildRmpcStore(outFile) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex, nofollow" />
+    <meta name="robots" content="${ROBOTS}" />
     <meta name="description" content="${escapeAttr(STORE_HEAD.description)}" />
     <meta name="theme-color" content="#101b28" />
     <title>${STORE_HEAD.title}</title>
