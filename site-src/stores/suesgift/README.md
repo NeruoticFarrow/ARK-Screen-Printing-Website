@@ -28,7 +28,7 @@ It's built on the Best of the Springs template (`../bots`), so the files have th
 | You're Not Alone Hoodie | Port & Company PC78H, Teal | Heart, left chest | "You're not alone." |
 | Sue's Gift Logo Hoodie | PC78H, Creme | Full logo | Round mark, below the hood |
 | Be Ovary Aware 2027 Hoodie (event) | PC78H, Jet Black | Race graphic | Race line |
-| Sue's Gift Carrie Tote | Carrie Tote 1001, Cream | Round mark and wordmark | Heart |
+| Sue's Gift Carrie Tote | Carrie Tote 1001, Cream | Round mark and wordmark | None |
 
 Every product comes in every colour its garment does. On light garments the print is teal; on dark ones (below `LIGHT_GARMENT_CONTRAST`) it switches to the one-colour white version (`<name>-white.webp`).
 
@@ -41,7 +41,7 @@ Event names (A Toast to TEAL, TEAL Tee-Off, Be Ovary Aware 5K) and every phrase 
 
 ## Prices
 
-Samples use flat retail prices that stand in for the nonprofit's own markup (Alex, 2026-11-28): tees $29.99, hoodies $59.99 (2XL–3XL +$3, 4XL–5XL +$5 on both) and totes $29.99. At $24.99 the two-sided tote left Sue's Gift 39¢ an item.
+Samples use flat retail prices that stand in for the nonprofit's own markup (Alex, 2026-11-28): tees $29.99, hoodies $59.99 (2XL–3XL +$3, 4XL–5XL +$5 on both) and totes $24.99. The tote prints on the front only: with a second print, $24.99 left Sue's Gift 39¢ an item.
 
 ARK's price behind each item, from `node site-src/stores/tools/cost-table.mjs <ark-designer> site-src/stores/suesgift` (2026-11-28). It is for Alex only and never goes on the page. "(sim)" means the designer's color detection reads the print as full-color (the Sue's Gift mark's shaded silver ring), so it prints digitally until the mark is redrawn in spot colors.
 
@@ -55,7 +55,7 @@ ARK's price behind each item, from `node site-src/stores/tools/cost-table.mjs <a
 | You're Not Alone Hoodie | PC78H, $10.00 | 1 + 1 | $30.09 | $28.78 | $27.32 | $26.84 | $59.99 | $29.90 to $33.15 |
 | Sue's Gift Logo Hoodie | PC78H, $10.00 | 6 (sim) + 6 (sim) | $30.11 | n/a | n/a | n/a | $59.99 | $29.88 |
 | Be Ovary Aware 2027 Hoodie | PC78H, $10.00 | 1 + 1 | $34.11 | $28.78 | $27.32 | $26.84 | $59.99 | $25.88 to $33.15 |
-| Sue's Gift Carrie Tote | 1001, $6.90 | 6 (sim) + 1 | $24.60 | n/a | n/a | n/a | $29.99 | $5.39 |
+| Sue's Gift Carrie Tote | 1001, $6.90 | 6 (sim) | $18.49 | n/a | n/a | n/a | $24.99 | $6.50 |
 
 ## Delivery
 

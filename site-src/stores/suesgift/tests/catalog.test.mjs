@@ -37,9 +37,10 @@ test("nine products, each in a colour its garment comes in, with both art versio
   for (const p of PRODUCTS) {
     assert.ok(GARMENTS[p.garment], p.id);
     assert.ok(colourOf(p, p.colour), `${p.id} default colour`);
-    for (const side of ["front", "back"]) {
+    assert.ok(p.prints.front, `${p.id} front`);
+    if (GARMENTS[p.garment].kind !== "tote") assert.ok(p.prints.back, `${p.id} back`);
+    for (const side of Object.keys(p.prints)) {
       const print = p.prints[side];
-      assert.ok(print, `${p.id} ${side}`);
       const [left, top, width] = print.box;
       assert.ok(left >= 0 && top >= 0 && width > 0 && left + width <= 1000, `${p.id} ${side} box`);
       for (const name of [print.art, `${print.art}-white`]) assert.ok(fs.existsSync(path.join(IMAGES, "art", `${name}.webp`)), `${name}.webp`);
@@ -68,13 +69,13 @@ test("teal print on light garments, one-colour white on dark ones", () => {
   assert.equal(garmentLook(tee, "black", "back").prints[0].art, "not-alone-white");
 });
 
-test("flat sample prices: tees $29.99, hoodies $59.99 (2XL–3XL +$3, 4XL–5XL +$5), Carrie $29.99", () => {
-  assert.deepEqual(PRICE_CENTS, { tee: 2999, hood: 5999, carrie: 2999 });
+test("flat sample prices: tees $29.99, hoodies $59.99 (2XL–3XL +$3, 4XL–5XL +$5), Carrie $24.99", () => {
+  assert.deepEqual(PRICE_CENTS, { tee: 2999, hood: 5999, carrie: 2499 });
   const hoodie = productById("logo-hoodie");
   assert.deepEqual(HOOD_SIZES.map((s) => unitPriceCents(hoodie, s)), [5999, 5999, 5999, 5999, 6299, 6299, 6499, 6499]);
   const tee = productById("logo-tee");
   assert.deepEqual(TEE_SIZES.map((s) => unitPriceCents(tee, s)), [2999, 2999, 2999, 2999, 2999, 3299, 3299, 3499, 3499]);
-  assert.deepEqual(priceRange(productById("carrie-tote")), { min: 2999, max: 2999 });
+  assert.deepEqual(priceRange(productById("carrie-tote")), { min: 2499, max: 2499 });
 });
 
 test("samples ship to the door only: no store or event pickup", () => {
@@ -92,5 +93,5 @@ test("a bag line must be something the store sells, and shipping is added", () =
   assert.equal(normaliseLine({ ...ok, size: "6XL" }), null);
   assert.equal(normaliseLine({ ...ok, quantity: 0 }), null);
   const lines = [ok, { productId: "carrie-tote", colour: "cream", size: "One size", quantity: 1 }];
-  assert.deepEqual(bagTotals(lines, "ship"), { count: 3, subtotal: 3 * 2999, shipping: 450 + 800 + 2 * 300, total: 8997 + 1850 });
+  assert.deepEqual(bagTotals(lines, "ship"), { count: 3, subtotal: 2 * 2999 + 2499, shipping: 450 + 800 + 2 * 300, total: 8497 + 1850 });
 });

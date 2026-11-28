@@ -153,9 +153,10 @@ export const GARMENTS = {
 
 /** What a buyer pays, before sales tax. Samples use flat retail prices that
  *  stand in for the nonprofit's own markup (Alex, 2026-11-28): tees $29.99,
- *  hoodies $59.99. Totes are $29.99 too: at $24.99 a two-sided tote left
- *  Sue's Gift 39¢. ARK's price behind each is in the README. */
-export const PRICE_CENTS = { tee: 2999, hood: 5999, carrie: 2999 };
+ *  hoodies $59.99, totes $24.99. The tote prints on the front only: a second
+ *  print would leave Sue's Gift 39¢ an item. ARK's price behind each is in
+ *  the README. */
+export const PRICE_CENTS = { tee: 2999, hood: 5999, carrie: 2499 };
 
 /** Added to a tee's or hoodie's price for its size (the bigger blanks cost
  *  more). */
@@ -279,10 +280,9 @@ export const PRODUCTS = [
     collection: "everyday",
     colour: "cream",
     cardView: "front",
-    blurb: "Heavyweight canvas with the round mark and wordmark on the front, the heart on the back.",
+    blurb: "Heavyweight canvas with the round mark and wordmark on the front.",
     prints: {
       front: { art: "tote", box: [350, 540, 300], place: "Front", size: "9.1″ × 5.7″" },
-      back: { art: "heart", box: [400, 600, 200], place: "Back", size: "6.1″ × 3.5″" },
     },
   },
 ];
