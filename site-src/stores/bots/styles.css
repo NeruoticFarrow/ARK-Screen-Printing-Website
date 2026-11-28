@@ -1262,14 +1262,29 @@ p {
   font-weight: 700;
   font-size: 15px;
 }
+/* The bag scrolls inside its sheet: nothing in it may shrink to fit, or
+ * WebKit squeezes the delivery fieldset and its options spill over the
+ * totals. The fieldset stays a plain block (fieldsets as grid or flex
+ * containers lay out differently across engines); its options sit in their
+ * own grid. */
+.bag > * {
+  flex-shrink: 0;
+}
 .delivery {
   border: 0;
   margin: 18px 0 0;
   padding: 0;
+  min-width: 0;
+  display: block;
+}
+.delivery-opts {
+  clear: both;
   display: grid;
   gap: 8px;
 }
 .delivery legend {
+  float: left;
+  width: 100%;
   padding: 0;
   margin-bottom: 10px;
   font-family: var(--ui);
@@ -1325,7 +1340,7 @@ p {
 .delivery-sentence {
   font-size: 14px;
   color: var(--muted);
-  margin-top: 4px;
+  margin-top: 10px;
 }
 .totals {
   margin: 18px 0 0;

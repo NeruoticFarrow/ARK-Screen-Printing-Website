@@ -686,19 +686,21 @@ function Store() {
 
               <fieldset className="delivery">
                 <legend>How you'll get it</legend>
-                {Object.entries(DELIVERY).map(([key, d]) => (
-                  <label className="delivery-opt" key={key}>
-                    <input type="radio" name="delivery" value={key} checked={delivery === key} onChange={() => setDelivery(key)} />
-                    <span className="delivery-opt-icon">
-                      <DeliveryIcon name={key} />
-                    </span>
-                    <span className="delivery-opt-text">
-                      <strong>{d.label}</strong>
-                      <small>{d.short}</small>
-                    </span>
-                    <span className="delivery-opt-cost">{key === "ship" ? money(shippingCents(totals.count)) : "Free"}</span>
-                  </label>
-                ))}
+                <div className="delivery-opts">
+                  {Object.entries(DELIVERY).map(([key, d]) => (
+                    <label className="delivery-opt" key={key}>
+                      <input type="radio" name="delivery" value={key} checked={delivery === key} onChange={() => setDelivery(key)} />
+                      <span className="delivery-opt-icon">
+                        <DeliveryIcon name={key} />
+                      </span>
+                      <span className="delivery-opt-text">
+                        <strong>{d.label}</strong>
+                        <small>{d.short}</small>
+                      </span>
+                      <span className="delivery-opt-cost">{key === "ship" ? money(shippingCents(totals.count)) : "Free"}</span>
+                    </label>
+                  ))}
+                </div>
                 <p className="delivery-sentence">{DELIVERY[delivery].sentence}</p>
               </fieldset>
 
