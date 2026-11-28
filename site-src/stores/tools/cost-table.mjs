@@ -24,7 +24,7 @@
 // Every product is priced on both garment tiers in ../tiers.mjs: Premium
 // (AS Colour, what the sample shows) and Standard (mid-range, lower retail).
 // Quantity tiers are Alex's (2026-11-28): 1–24, 25–49, 50–100, each priced at
-// both ends and shown as the average of the two.
+// both ends and shown at its top end.
 //
 // Prints the Markdown table (for the store's README and the PR). With an out
 // folder it also writes pricing.csv and pricing.pdf (internal, with ARK's
@@ -135,9 +135,10 @@ for (const p of PRODUCTS) {
 await browser.close();
 
 const METHOD = { dtf: "digital", screen_print: "screen" };
-const method = (t) => (t.low.method === t.high.method ? METHOD[t.low.method] : `${METHOD[t.low.method]}→${METHOD[t.high.method]}`);
-// One flat number per tier (Alex, 2026-11-28): the average of its two ends.
-const avg = (t, k) => (t.low[k] + t.high[k]) / 2;
+const method = (t) => METHOD[t.high.method];
+// One flat number per tier (Alex, 2026-11-28): the price at its top end
+// (24, 49, 100 pieces).
+const avg = (t, k) => t.high[k];
 const price = (t) => money(avg(t, "price"));
 const margin = (t) => money(avg(t, "margin"));
 const keeps = (g, t) => money(g.retail - avg(t, "price"));
@@ -189,7 +190,7 @@ tr.head th{background:#e2f1f0;font-size:12px;padding-top:9px}tr.head span{font-w
 tr.sub td{color:#5c6a6b;font-size:10px}td.std{border-left:2px solid #dbe2df}
 thead th{font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;color:#5c6a6b}
 </style><h1>${esc(STORE.client ?? STORE.name)} · pricing by quantity and garment tier</h1>
-<p>Internal, for ARK only: not for the client. Premium is the AS Colour blank the sample store shows; Standard is ARK's mid-range blank at a lower suggested retail. ARK's price uses the quote form's rules (gang-sheet digital, screen print from 24) and uses screen print from 24 pieces wherever it's allowed; each quantity tier shows the average of its smallest and largest order. ARK margin is that price less the blank's wholesale cost and the film's raw gang-sheet cost; press, impression, screen and admin fees count as margin. Generated ${new Date().toISOString().slice(0, 10)}.</p>
+<p>Internal, for ARK only: not for the client. Premium is the AS Colour blank the sample store shows; Standard is ARK's mid-range blank at a lower suggested retail. ARK's price uses the quote form's rules (gang-sheet digital, screen print from 24) and uses screen print from 24 pieces wherever it's allowed; each quantity tier shows the price at its largest order (24, 49, 100). ARK margin is that price less the blank's wholesale cost and the film's raw gang-sheet cost; press, impression, screen and admin fees count as margin. Generated ${new Date().toISOString().slice(0, 10)}.</p>
 <table><thead><tr><th>Qty</th><th>Premium: method</th><th>ARK price</th><th>ARK margin</th><th>Org keeps</th><th>Standard: method</th><th>ARK price</th><th>ARK margin</th><th>Org keeps</th></tr></thead><tbody>${body}</tbody></table>`;
   // The client's copy: no ARK margin or blank cost (Alex, 2026-11-28: the
   // margin is for ARK only). This is the table the prospect reply attaches.
