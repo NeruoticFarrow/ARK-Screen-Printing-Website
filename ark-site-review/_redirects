@@ -68,3 +68,8 @@
 # had forwards there.
 /bos                                    /bos.html    200
 /best-of-the-springs                    /bos    301
+
+# ─── Unlisted Sue's Gift sample store ────────────────────────────────────────
+# A sample for Sue's Gift Gynecologic Cancer Support to review
+# (site-src/stores/suesgift): no checkout yet, ships to the door only.
+/suesgift                               /suesgift.html    200

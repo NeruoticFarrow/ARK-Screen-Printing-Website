@@ -155,6 +155,29 @@ else {
   if (!/^\/bos\s+\/bos\.html\s+200$/m.test(fs.readFileSync(path.join(SITE, "_redirects"), "utf8"))) fail(file, "_redirects must serve the store at /bos");
 }
 
+// The Sue's Gift sample store: checked the same way as Best of the Springs.
+const suesGiftPath = path.join(SITE, "suesgift.html");
+if (!fs.existsSync(suesGiftPath)) fail("suesgift.html", "Sue's Gift store page missing");
+else {
+  const store = fs.readFileSync(suesGiftPath, "utf8");
+  const file = "suesgift.html";
+  if (!store.includes('name="robots" content="noindex, nofollow"')) fail(file, "must stay noindex");
+  if (!store.includes('rel="canonical" href="https://arkscreenprinting.com/suesgift"')) fail(file, "wrong canonical slug");
+  if ((store.match(/data:image\/webp;base64,/g) ?? []).length < 16) fail(file, "garment templates or artwork are not embedded");
+  if ((store.match(/data:font\/woff2;base64,/g) ?? []).length < 3) fail(file, "fonts are not embedded");
+  if (/googletagmanager\.com|gtag\(|fbq\(/.test(store)) fail(file, "the store must not load analytics or send conversions");
+  if (/(src|href)="(https?:)?\/\//.test(store.replace(/<link rel="canonical"[^>]*>/, ""))) fail(file, "loads something from another origin");
+  const headers = fs.readFileSync(path.join(SITE, "_headers"), "utf8");
+  for (const route of ["/suesgift", "/suesgift.html"]) {
+    const lines = headers.split("\n");
+    const at = lines.indexOf(route);
+    const end = lines.findIndex((line, i) => i > at && line && !line.startsWith("  "));
+    const block = at < 0 ? "" : lines.slice(at + 1, end < 0 ? undefined : end).join("\n");
+    if (at < 0 || !block.includes("X-Robots-Tag: noindex, nofollow") || !block.includes("connect-src 'none';") || !block.includes("form-action 'none'") || !/frame-ancestors 'self'$/m.test(block)) fail(file, `unsafe store headers for ${route}`);
+  }
+  if (!/^\/suesgift\s+\/suesgift\.html\s+200$/m.test(fs.readFileSync(path.join(SITE, "_redirects"), "utf8"))) fail(file, "_redirects must serve the store at /suesgift");
+}
+
 if (problems.length) {
   console.error(problems.join("\n"));
   console.error(`\n${problems.length} problem(s) across ${checked} pages`);

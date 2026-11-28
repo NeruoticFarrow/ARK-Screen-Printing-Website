@@ -18,6 +18,7 @@ import { renderPpc, renderService } from "./pages/service.mjs";
 import { renderAbout, renderFaq, renderGallery, renderQuote, renderServiceAreas, renderTestimonials, renderThankYou } from "./pages/simple.mjs";
 import { buildRmpcStore } from "./stores/rmpc/build.mjs";
 import { buildBotsStore } from "./stores/bots/build.mjs";
+import { buildSuesGiftStore } from "./stores/suesgift/build.mjs";
 import { STORE as RMPC_STORE } from "./stores/rmpc/catalog.mjs";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..");
@@ -96,6 +97,11 @@ count++;
 const botsStore = await buildBotsStore(path.join(SITE_DIR, "bos.html"));
 count++;
 
+// The Sue's Gift store: a sample ARK made for Sue's Gift to review
+// (site-src/stores/suesgift), built like the Best of the Springs one.
+const suesGiftStore = await buildSuesGiftStore(path.join(SITE_DIR, "suesgift.html"));
+count++;
+
 // ── Long cache for fingerprinted assets, fonts and optimised images. The
 // store page may only talk to its own origin (the checkout function), isn't
 // indexed, and can be framed only by the sites in its STORE.embedOn (RMPC's
@@ -123,6 +129,14 @@ fs.writeFileSync(path.join(SITE_DIR, "_headers"), `# Written by site-src/build.m
   X-Robots-Tag: noindex, nofollow
   Cache-Control: public, max-age=0, must-revalidate
   Content-Security-Policy: ${BOTS_CSP}
+/suesgift
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: public, max-age=0, must-revalidate
+  Content-Security-Policy: ${BOTS_CSP}
+/suesgift.html
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: public, max-age=0, must-revalidate
+  Content-Security-Policy: ${BOTS_CSP}
 `);
 
-console.log(`built ${count} pages · css ${(css.length / 1024).toFixed(1)} KB · js ${(js.length / 1024).toFixed(1)} KB · v=${version} · areas ${close.length} close + ${towns.length} towns · rmpc store ${(store.bytes / 1024).toFixed(0)} KB · bots store ${(botsStore.bytes / 1024).toFixed(0)} KB`);
+console.log(`built ${count} pages · css ${(css.length / 1024).toFixed(1)} KB · js ${(js.length / 1024).toFixed(1)} KB · v=${version} · areas ${close.length} close + ${towns.length} towns · rmpc store ${(store.bytes / 1024).toFixed(0)} KB · bots store ${(botsStore.bytes / 1024).toFixed(0)} KB · suesgift store ${(suesGiftStore.bytes / 1024).toFixed(0)} KB`);
