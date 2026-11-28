@@ -20,6 +20,7 @@ import { buildRmpcStore } from "./stores/rmpc/build.mjs";
 import { buildBotsStore } from "./stores/bots/build.mjs";
 import { buildSuesGiftStore } from "./stores/suesgift/build.mjs";
 import { STORE as RMPC_STORE } from "./stores/rmpc/catalog.mjs";
+import { ROBOTS as SUESGIFT_ROBOTS } from "./stores/suesgift/catalog.mjs";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..");
 const SITE_DIR = path.join(ROOT, "ark-site-review");
@@ -130,11 +131,11 @@ fs.writeFileSync(path.join(SITE_DIR, "_headers"), `# Written by site-src/build.m
   Cache-Control: public, max-age=0, must-revalidate
   Content-Security-Policy: ${BOTS_CSP}
 /suesgift
-  X-Robots-Tag: noindex, nofollow
+  X-Robots-Tag: ${SUESGIFT_ROBOTS}
   Cache-Control: public, max-age=0, must-revalidate
   Content-Security-Policy: ${BOTS_CSP}
 /suesgift.html
-  X-Robots-Tag: noindex, nofollow
+  X-Robots-Tag: ${SUESGIFT_ROBOTS}
   Cache-Control: public, max-age=0, must-revalidate
   Content-Security-Policy: ${BOTS_CSP}
 `);

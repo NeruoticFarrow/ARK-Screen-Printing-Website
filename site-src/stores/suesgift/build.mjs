@@ -8,7 +8,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import * as esbuild from "esbuild";
-import { STORE } from "./catalog.mjs";
+import { ROBOTS, STORE } from "./catalog.mjs";
 
 const HERE = path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
 
@@ -47,7 +47,7 @@ export async function buildSuesGiftStore(outFile) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex, nofollow" />
+    <meta name="robots" content="${ROBOTS}" />
     <meta name="description" content="${escapeAttr(STORE_HEAD.description)}" />
     <meta name="theme-color" content="#00666d" />
     <title>${escapeText(STORE_HEAD.title)}</title>

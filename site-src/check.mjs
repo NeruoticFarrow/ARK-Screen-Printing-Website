@@ -11,6 +11,7 @@ import path from "node:path";
 import { parseHTML } from "linkedom";
 import { PPC_PAGES } from "./content/services.mjs";
 import { PPC_LINE, SHOP } from "./lib/facts.mjs";
+import { ROBOTS as SUESGIFT_ROBOTS, STORE as SUESGIFT_STORE } from "./stores/suesgift/catalog.mjs";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..");
 const SITE = path.join(ROOT, "ark-site-review");
@@ -161,7 +162,9 @@ if (!fs.existsSync(suesGiftPath)) fail("suesgift.html", "Sue's Gift store page m
 else {
   const store = fs.readFileSync(suesGiftPath, "utf8");
   const file = "suesgift.html";
-  if (!store.includes('name="robots" content="noindex, nofollow"')) fail(file, "must stay noindex");
+  if (!store.includes(`name="robots" content="${SUESGIFT_ROBOTS}"`)) fail(file, `robots must be ${SUESGIFT_ROBOTS}`);
+  if (SUESGIFT_STORE.sample && SUESGIFT_ROBOTS !== "noindex, nofollow") fail(file, "a sample store must stay noindex");
+  if (!store.includes(SUESGIFT_STORE.credit.text) || !store.includes('"https://arkscreenprinting.com"')) fail(file, "missing the ARK footer credit");
   if (!store.includes('rel="canonical" href="https://arkscreenprinting.com/suesgift"')) fail(file, "wrong canonical slug");
   if ((store.match(/data:image\/webp;base64,/g) ?? []).length < 16) fail(file, "garment templates or artwork are not embedded");
   if ((store.match(/data:font\/woff2;base64,/g) ?? []).length < 3) fail(file, "fonts are not embedded");
@@ -173,7 +176,7 @@ else {
     const at = lines.indexOf(route);
     const end = lines.findIndex((line, i) => i > at && line && !line.startsWith("  "));
     const block = at < 0 ? "" : lines.slice(at + 1, end < 0 ? undefined : end).join("\n");
-    if (at < 0 || !block.includes("X-Robots-Tag: noindex, nofollow") || !block.includes("connect-src 'none';") || !block.includes("form-action 'none'") || !/frame-ancestors 'self'$/m.test(block)) fail(file, `unsafe store headers for ${route}`);
+    if (at < 0 || !block.includes(`X-Robots-Tag: ${SUESGIFT_ROBOTS}`) || !block.includes("connect-src 'none';") || !block.includes("form-action 'none'") || !/frame-ancestors 'self'$/m.test(block)) fail(file, `unsafe store headers for ${route}`);
   }
   if (!/^\/suesgift\s+\/suesgift\.html\s+200$/m.test(fs.readFileSync(path.join(SITE, "_redirects"), "utf8"))) fail(file, "_redirects must serve the store at /suesgift");
 }

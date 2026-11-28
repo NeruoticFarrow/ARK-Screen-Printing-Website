@@ -531,7 +531,7 @@ function Store() {
           <p>
             Sue's Gift and its logo belong to Sue's Gift Gynecologic Cancer Support, Colorado Springs.
             <br />
-            Store and printing by ARK Screen Printing Studio · <a href={STORE.contact.phoneHref}>{STORE.contact.phoneDisplay}</a>
+            <a href={STORE.credit.href}>{STORE.credit.text}</a> · <a href={STORE.contact.phoneHref}>{STORE.contact.phoneDisplay}</a>
           </p>
         </div>
       </footer>

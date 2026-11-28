@@ -19,6 +19,12 @@ export const STORE = {
   path: "/suesgift",
   /** A sample: the page says so, and the bag has no checkout. */
   sample: true,
+  /** Whether search engines may index the page. Samples never are: they
+   *  carry the nonprofit's logo before it has agreed to a store, and can't
+   *  sell anything. Flip to true when the store goes live. */
+  indexable: false,
+  /** The footer credit every store carries, linking to ARK's homepage. */
+  credit: { text: "Fundraising store by ARK Screen Printing", href: "https://arkscreenprinting.com" },
   currency: "usd",
   /** Shipped orders: every store's handling fee and shipping rule
    *  (../rules.mjs): $4.50 handling, plus $8 for the first item and $3 for
@@ -320,3 +326,7 @@ export function bagTotals(lines, delivery) {
   const shipping = delivery === "ship" ? shippingCents(count) : 0;
   return { count, subtotal, shipping, total: subtotal + shipping };
 }
+
+/** The robots directive for the page and its headers. */
+export const ROBOTS = STORE.indexable ? "index, follow" : "noindex, nofollow";
+if (STORE.sample && STORE.indexable) throw new Error("a sample store must stay noindex");

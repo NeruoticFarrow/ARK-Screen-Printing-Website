@@ -31,6 +31,11 @@ Every product comes in every colour its garment does. On light garments the prin
 
 Event names (A Toast to TEAL, TEAL Tee-Off, Be Ovary Aware 5K) and every phrase on the shirts come from Sue's Gift's own site. Nothing is invented.
 
+## Indexing and the footer credit
+
+- `STORE.indexable` decides whether search engines may index the page. It sets both the `<meta name="robots">` tag and the `X-Robots-Tag` header. Samples stay `false` (noindex): they show the nonprofit's logo before it has agreed to a store, and nothing can be bought. Set it to `true` when the store goes live. The build refuses `sample: true` with `indexable: true`.
+- `STORE.credit` is the footer credit every store carries: "Fundraising store by ARK Screen Printing", linking to https://arkscreenprinting.com for now. Change the `href` when there's a dedicated fundraising page.
+
 ## To confirm with Alex
 
 - Prices are the bots sample prices: tees $29.99 (2XL–3XL +$3, 4XL–5XL +$5), tote $24.99.

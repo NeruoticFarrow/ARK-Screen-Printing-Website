@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import {
-  CARRIE_COLOURS, DELIVERY, GARMENTS, PRICE_CENTS, PRODUCTS, STORE, TEE_COLOURS, TEE_SIZES, bagTotals,
+  CARRIE_COLOURS, DELIVERY, GARMENTS, PRICE_CENTS, PRODUCTS, ROBOTS, STORE, TEE_COLOURS, TEE_SIZES, bagTotals,
   colourOf, deliveryKey, garmentLook, isLightGarment, normaliseLine, priceRange, productById, productsIn, unitPriceCents,
 } from "../catalog.mjs";
 
@@ -13,6 +13,12 @@ const IMAGES = path.join(HERE, "..", "images");
 test("it's a sample at /suesgift", () => {
   assert.equal(STORE.sample, true);
   assert.equal(STORE.path, "/suesgift");
+});
+
+test("a sample stays out of search and credits ARK in the footer", () => {
+  assert.equal(STORE.indexable, false);
+  assert.equal(ROBOTS, "noindex, nofollow");
+  assert.equal(STORE.credit.href, "https://arkscreenprinting.com");
 });
 
 test("every AS Colour colour: 75 Staple Tee, 23 Carrie Tote", () => {
