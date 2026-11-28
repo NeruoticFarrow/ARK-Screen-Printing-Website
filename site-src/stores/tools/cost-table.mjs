@@ -120,7 +120,12 @@ for (const p of PRODUCTS) {
       const simulated = locs.some((l) => l.simulated);
       const at = (qty) => {
         const dtf = P.dtfBase(R, cost, L, undefined, key);
-        const screenOk = P.screenEligibility(R, qty, L, simulated) === null;
+        // Alex's limit (2026-11-28) on top of the quote form's: total colors
+        // across all locations, at most 3 up to 40 pieces, 4 for 41-49, 6 a
+        // location from 50.
+        const total = L.reduce((n, l) => n + l.colours, 0);
+        const alexOk = qty >= 50 || total <= (qty <= 40 ? 3 : 4);
+        const screenOk = P.screenEligibility(R, qty, L, simulated) === null && alexOk;
         const screen = screenOk ? P.screenBase(R, cost, qty, L, undefined, key) : null;
         const useScreen = screen !== null;
         const price = useScreen ? screen : dtf;
@@ -142,7 +147,7 @@ const method = (t) => METHOD[t.high.method];
 // (23, 49, 100 pieces).
 const avg = (t, k) => t.high[k];
 const price = (t) => money(avg(t, "price"));
-const margin = (t) => money(avg(t, "margin"));
+const margin = (t) => `${money(avg(t, "margin"))} (${Math.round((avg(t, "margin") / avg(t, "price")) * 100)}%)`;
 const keeps = (g, t) => money(g.retail - avg(t, "price"));
 const blank = (g) => `${g.label}, ${money(g.cost)}`;
 
