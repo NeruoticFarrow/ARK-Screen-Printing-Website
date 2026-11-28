@@ -7,7 +7,8 @@
 // (shared/creatorPricing.ts, PRICE_RULES_V2): garment = blank × 2 (or the
 // form's fixed price), digital = DTF film at the gang-sheet rate + $2 press a
 // location + $3 each extra location, screen = impressions + (screens × $35 +
-// $23 admin) ÷ run + $3 each extra location. Colors per print come from the
+// $23 admin) ÷ run + $3 each extra location; the table prices screen print
+// off cost instead (SCREEN_MARKUP below). Colors per print come from the
 // designer's own detection (client/src/lib/colourDetection.ts) on the print as
 // it sits on the product's default colour. A print the detection reads as
 // full color can carry `spotColours` in the catalog: the count if the art is
@@ -21,8 +22,8 @@
 // ARK's price less its costs: the blank's landed cost (wholesale + $0.50 for
 // ink, emulsion and the like), plus the gang-sheet film's raw cost for
 // digital, or press labor per impression (SCREEN_LABOR) for screen print.
-// Screen print never prices below SCREEN_MARGIN_FLOOR. Digital press time
-// isn't costed yet.
+// Screen print is that cost × 2 (SCREEN_MARKUP). Digital press time isn't
+// costed yet.
 //
 // Every product is priced on both garment tiers in ../tiers.mjs: Premium
 // (AS Colour, what the sample shows) and Standard (mid-range, lower retail).
@@ -55,10 +56,11 @@ const IMPRESSION_LABOR = SCREEN_LABOR.hourlyRate / (SCREEN_LABOR.impressionsPerH
 // Added to each blank's wholesale cost for its landed cost: ink, emulsion and
 // the like, on every garment whichever way it prints (Alex, 2026-11-28).
 const LANDED_EXTRA = 0.5;
-// Screen print never prices below this margin over its costs (Alex,
-// 2026-11-28): the price is the quote form's or cost ÷ (1 − floor), whichever
-// is higher. Digital stays at the quote form's price.
-export const SCREEN_MARGIN_FLOOR = 0.6;
+// Screen print is priced off cost (Alex, 2026-11-28): landed blank + press
+// labor, marked up 100%, so a 50% margin on every order. The quote form's
+// impression, screen, admin and extra-location fees don't apply. Digital
+// stays at the quote form's price.
+export const SCREEN_MARKUP = 1;
 
 export const QTY_TIERS = [
   { label: "1–23", from: 1, to: 23 },
@@ -128,7 +130,7 @@ for (const p of PRODUCTS) {
   const priced = {};
   for (const [name, blank] of Object.entries(ends)) {
     const cost = blankCost(blank.style);
-    const tiers = await page.evaluate(([locs, cost, key, tiers, labor, extra, floor]) => {
+    const tiers = await page.evaluate(([locs, cost, key, tiers, labor, extra, markup]) => {
       const { P } = window.ARK;
       const R = P.PRICE_RULES_V2;
       const L = locs.map(({ widthIn, heightIn, colours }) => ({ widthIn, heightIn, colours }));
@@ -145,14 +147,14 @@ for (const p of PRODUCTS) {
         const screens = L.reduce((n, l) => n + Math.min(Math.max(1, l.colours), R.screen.maxColours), 0);
         const screenCost = cost + extra + screens * labor;
         const formula = screenOk ? P.screenBase(R, cost, qty, L, undefined, key) : null;
-        const screen = formula === null ? null : Math.max(formula, screenCost / (1 - floor));
+        const screen = formula === null ? null : screenCost * (1 + markup);
         const useScreen = screen !== null;
         const price = useScreen ? screen : dtf;
         const hard = useScreen ? screenCost : cost + extra + film;
-        return { qty, method: useScreen ? "screen_print" : "dtf", price, dtf, screen, formula, floored: useScreen && screen > formula, hard, margin: price - hard };
+        return { qty, method: useScreen ? "screen_print" : "dtf", price, dtf, screen, formula, hard, margin: price - hard };
       };
       return tiers.map((t) => ({ ...t, low: at(t.from), high: at(t.to) }));
-    }, [locations, cost, blank.key ?? null, QTY_TIERS, IMPRESSION_LABOR, LANDED_EXTRA, SCREEN_MARGIN_FLOOR]);
+    }, [locations, cost, blank.key ?? null, QTY_TIERS, IMPRESSION_LABOR, LANDED_EXTRA, SCREEN_MARKUP]);
     priced[name] = { label: blank.label, style: blank.style, cost, retail: blank.retail, tiers };
   }
   const inks = locations.map((l) => (l.simulated ? "full color" : `${l.colours}${l.redrawn ? " (redrawn)" : ""}`)).join(" + ");
@@ -216,7 +218,7 @@ tr.head th{background:#e2f1f0;font-size:12px;padding-top:9px}tr.head span{font-w
 tr.sub td{color:#5c6a6b;font-size:10px}td.std{border-left:2px solid #dbe2df}
 thead th{font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;color:#5c6a6b}
 </style><h1>${esc(STORE.client ?? STORE.name)} · pricing by quantity and garment tier</h1>
-<p>Internal, for ARK only: not for the client. Premium is the AS Colour blank the sample store shows; Standard is ARK's mid-range blank at a lower suggested retail. ARK's price uses the quote form's rules (gang-sheet digital, screen print from 24) prices 1–23 as digital and uses screen print from 24 pieces wherever it's allowed; each quantity tier shows the price at its largest order (23, 49, 100). ARK margin is that price less the blank's landed cost (wholesale + $0.50 for ink, emulsion and the like) plus, for digital, the film's raw gang-sheet cost, or for screen print, press labor at about $0.83 an impression (100 an hour, 30% on press, $25 an hour). Screen print is priced at a 60% margin at least: the quote form's price, or cost ÷ 0.4 where that's higher. Digital press time isn't costed yet. Generated ${new Date().toISOString().slice(0, 10)}.</p>
+<p>Internal, for ARK only: not for the client. Premium is the AS Colour blank the sample store shows; Standard is ARK's mid-range blank at a lower suggested retail. ARK's price uses the quote form's rules (gang-sheet digital, screen print from 24) prices 1–23 as digital and uses screen print from 24 pieces wherever it's allowed; each quantity tier shows the price at its largest order (23, 49, 100). ARK margin is that price less the blank's landed cost (wholesale + $0.50 for ink, emulsion and the like) plus, for digital, the film's raw gang-sheet cost, or for screen print, press labor at about $0.83 an impression (100 an hour, 30% on press, $25 an hour). Screen print is priced off cost: landed blank plus labor, marked up 100% (a 50% margin). Digital press time isn't costed yet. Generated ${new Date().toISOString().slice(0, 10)}.</p>
 <table><thead><tr><th>Qty</th><th>Premium: method</th><th>ARK price</th><th>ARK margin</th><th>Org keeps</th><th>Standard: method</th><th>ARK price</th><th>ARK margin</th><th>Org keeps</th></tr></thead><tbody>${body}</tbody></table>`;
   // The client's copy: no ARK margin or blank cost (Alex, 2026-11-28: the
   // margin is for ARK only). This is the table the prospect reply attaches.
