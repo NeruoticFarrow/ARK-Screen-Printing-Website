@@ -19,6 +19,12 @@ Each store ARK builds for a client lives in its own folder here:
 - **Every store credits ARK in its footer.** `STORE.credit` is "Fundraising store by ARK Screen Printing", linking to https://arkscreenprinting.com for now (Alex, 2026-11-28).
 - **Samples stay out of search; live stores are indexed.** `STORE.indexable` sets both the page's `<meta name="robots">` and the `X-Robots-Tag` header that `site-src/build.mjs` writes. A sample is `false` (noindex): it shows the nonprofit's logo before they've agreed to a store, and nothing can be bought. `check.mjs` fails an indexable store that isn't in `ark-site-review/sitemap.xml`.
 
+## Every sample store
+
+- **Tees, hoodies and a tote.** A new sample starts from `stores/suesgift/` and keeps all three garments (Alex, 2026-11-28): the AS Colour Staple Tee 5001, the Port & Company Core Fleece Hoodie PC78H and the AS Colour Carrie Tote 1001, each recolorable in every colour the blank comes in.
+- **Flat retail prices.** The page shows prices that stand in for the nonprofit's own markup: tees $29.99, hoodies $59.99, totes $29.99, with the same size upcharges.
+- **ARK's cost table, for Alex only.** Run `node tools/cost-table.mjs <ark-designer repo> stores/<slug>` and put the table in the store's README and the PR. It uses ark-designer's own color detection and quote math (`colourDetection.ts`, `pricing.ts`) and the blanks' wholesale costs (`products.ts`), and shows what the nonprofit keeps per item at the retail price. It never goes on the public page.
+
 ## Going live
 
 When Alex says a store is going live, do all of these in one PR:

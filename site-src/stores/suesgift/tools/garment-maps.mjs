@@ -13,7 +13,9 @@
 // draws any AS Colour colour with the same formula, so a colour with no photo
 // still looks like the garment, and the print sits under the same folds.
 //
-//   node site-src/stores/bots/tools/garment-maps.mjs <folder of AS Colour photos>
+//   node site-src/stores/suesgift/tools/garment-maps.mjs <folder of photos> [view,view…]
+//
+// Name views to make only those (e.g. hood-front,hood-back).
 //
 // The folder holds the photos under AS Colour's own file names (listed in
 // JOBS). Writes, per view, <view>-shade.webp (grey = shade / 1.25, alpha = the
@@ -48,6 +50,13 @@ const JOBS = [
   // Two-Tone Carrie Tote 1008: cream with black straps, and black with cream
   // straps, so every pixel has a light and a dark photo, and the straps are
   // where the two disagree.
+  // Port & Company Core Fleece Pullover Hood PC78H: creme and jet black, front
+  // and back (ARK's product catalogue photos, 667 × 1000 on a transparent
+  // backdrop, laid on white and scaled into the 1000 px square by
+  // tools/hoodie-photos.py). Every PC78H colour is the same shot, so the pair
+  // lines up pixel for pixel.
+  { view: "hood-front", light: "PC78H_CREME_FRONT.jpg", dark: "PC78H_JET_BLACK_FRONT.jpg", flat: [540, 400, 660, 520] },
+  { view: "hood-back", light: "PC78H_CREME_BACK.jpg", dark: "PC78H_JET_BLACK_BACK.jpg", flat: [420, 380, 580, 520] },
   { view: "two-tone", swap: ["1008_2-TONE_CARRIE_TOTE_CREAM_BLACK.jpg", "1008_2-TONE_CARRIE_TOTE_BLACK_CREAM.jpg"], flat: [430, 550, 560, 750] },
 ];
 
@@ -341,5 +350,6 @@ function labelBox(img, w) {
 
 fs.mkdirSync(OUT, { recursive: true });
 const report = [];
-for (const job of JOBS) report.push(await run(job));
+const only = process.argv[3]?.split(",");
+for (const job of JOBS) if (!only || only.includes(job.view)) report.push(await run(job));
 console.log(JSON.stringify(report, null, 1));
