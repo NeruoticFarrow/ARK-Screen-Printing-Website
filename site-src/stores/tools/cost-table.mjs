@@ -22,8 +22,8 @@
 // ARK's price less its costs: the blank's landed cost (wholesale + $0.50 for
 // ink, emulsion and the like), plus the gang-sheet film's raw cost for
 // digital, or press labor per impression (SCREEN_LABOR) for screen print.
-// Screen print is that cost × 2 (SCREEN_MARKUP). Digital press time isn't
-// costed yet.
+// Screen print is that cost × 2 (SCREEN_MARKUP) plus the set-up charge.
+// Digital press time isn't costed yet.
 //
 // Every product is priced on both garment tiers in ../tiers.mjs: Premium
 // (AS Colour, what the sample shows) and Standard (mid-range, lower retail).
@@ -57,8 +57,9 @@ const IMPRESSION_LABOR = SCREEN_LABOR.hourlyRate / (SCREEN_LABOR.impressionsPerH
 // the like, on every garment whichever way it prints (Alex, 2026-11-28).
 const LANDED_EXTRA = 0.5;
 // Screen print is priced off cost (Alex, 2026-11-28): landed blank + press
-// labor, marked up 100%, so a 50% margin on every order. The quote form's
-// impression, screen, admin and extra-location fees don't apply. Digital
+// labor, marked up 100%, so a 50% margin, plus the quote form's set-up charge
+// (screens × $35 + $23 admin) spread over the run, so bigger runs cost less a
+// piece. The form's impression and extra-location fees don't apply. Digital
 // stays at the quote form's price.
 export const SCREEN_MARKUP = 1;
 
@@ -147,7 +148,8 @@ for (const p of PRODUCTS) {
         const screens = L.reduce((n, l) => n + Math.min(Math.max(1, l.colours), R.screen.maxColours), 0);
         const screenCost = cost + extra + screens * labor;
         const formula = screenOk ? P.screenBase(R, cost, qty, L, undefined, key) : null;
-        const screen = formula === null ? null : screenCost * (1 + markup);
+        const setUp = (R.screen.screenFeePerScreen * screens + R.screen.adminFeePerRun) / qty;
+        const screen = formula === null ? null : screenCost * (1 + markup) + setUp;
         const useScreen = screen !== null;
         const price = useScreen ? screen : dtf;
         const hard = useScreen ? screenCost : cost + extra + film;
@@ -218,7 +220,7 @@ tr.head th{background:#e2f1f0;font-size:12px;padding-top:9px}tr.head span{font-w
 tr.sub td{color:#5c6a6b;font-size:10px}td.std{border-left:2px solid #dbe2df}
 thead th{font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;color:#5c6a6b}
 </style><h1>${esc(STORE.client ?? STORE.name)} · pricing by quantity and garment tier</h1>
-<p>Internal, for ARK only: not for the client. Premium is the AS Colour blank the sample store shows; Standard is ARK's mid-range blank at a lower suggested retail. ARK's price uses the quote form's rules (gang-sheet digital, screen print from 24) prices 1–23 as digital and uses screen print from 24 pieces wherever it's allowed; each quantity tier shows the price at its largest order (23, 49, 100). ARK margin is that price less the blank's landed cost (wholesale + $0.50 for ink, emulsion and the like) plus, for digital, the film's raw gang-sheet cost, or for screen print, press labor at about $0.83 an impression (100 an hour, 30% on press, $25 an hour). Screen print is priced off cost: landed blank plus labor, marked up 100% (a 50% margin). Digital press time isn't costed yet. Generated ${new Date().toISOString().slice(0, 10)}.</p>
+<p>Internal, for ARK only: not for the client. Premium is the AS Colour blank the sample store shows; Standard is ARK's mid-range blank at a lower suggested retail. ARK's price uses the quote form's rules (gang-sheet digital, screen print from 24) prices 1–23 as digital and uses screen print from 24 pieces wherever it's allowed; each quantity tier shows the price at its largest order (23, 49, 100). ARK margin is that price less the blank's landed cost (wholesale + $0.50 for ink, emulsion and the like) plus, for digital, the film's raw gang-sheet cost, or for screen print, press labor at about $0.83 an impression (100 an hour, 30% on press, $25 an hour). Screen print is priced off cost: landed blank plus labor, marked up 100%, plus the set-up charge ($35 a screen + $23 admin) spread over the run. Digital press time isn't costed yet. Generated ${new Date().toISOString().slice(0, 10)}.</p>
 <table><thead><tr><th>Qty</th><th>Premium: method</th><th>ARK price</th><th>ARK margin</th><th>Org keeps</th><th>Standard: method</th><th>ARK price</th><th>ARK margin</th><th>Org keeps</th></tr></thead><tbody>${body}</tbody></table>`;
   // The client's copy: no ARK margin or blank cost (Alex, 2026-11-28: the
   // margin is for ARK only). This is the table the prospect reply attaches.
